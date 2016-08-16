@@ -158,10 +158,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Wizdraw\Providers\AppServiceProvider::class,
+        Wizdraw\Providers\AuthServiceProvider::class,
+        Wizdraw\Providers\EventServiceProvider::class,
+        Wizdraw\Providers\RouteServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 

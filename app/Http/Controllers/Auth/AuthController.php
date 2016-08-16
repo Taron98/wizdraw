@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Wizdraw\Http\Controllers\Auth;
 
-use App\User;
+use Wizdraw\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Wizdraw\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
