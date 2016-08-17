@@ -163,7 +163,10 @@ return [
         Wizdraw\Providers\EventServiceProvider::class,
         Wizdraw\Providers\RouteServiceProvider::class,
 
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        /*
+         * Vendor plugins
+         */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,      // Utils for the ide
 
     ],
 
