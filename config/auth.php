@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Wizdraw\User::class,
+            'model' => Wizdraw\Models\User::class,
         ],
 
         // 'users' => [

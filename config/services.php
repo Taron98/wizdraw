@@ -34,7 +34,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Wizdraw\User::class,
+        'model' => Wizdraw\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
