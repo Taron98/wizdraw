@@ -14,11 +14,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
+
+            $table->integer('client_id')->unsigned()->unique();
+            $table->string('username', 30)->unique();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('facebook_token', 255)->nullable();
+            $table->string('device_id', 40)->unique();
+            $table->timestamp('last_login_at');
+
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('client_id')
+                ->references('id')->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
