@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('facebook_token', 255)->nullable();
             $table->string('device_id', 40)->unique();
-            $table->boolean('is_pending')->default(false);
+            $table->boolean('is_pending')->default(true);
 
             $table->timestamp('last_login_at')->nullable();
             $table->timestamp('created_at')->useCurrent();
