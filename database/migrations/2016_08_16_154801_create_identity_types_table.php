@@ -17,7 +17,8 @@ class CreateIdentityTypesTable extends Migration
 
             $table->string('type', 15);
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
         });
     }
@@ -29,6 +30,6 @@ class CreateIdentityTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('identity_types');
+        Schema::dropIfExists('identity_types');
     }
 }

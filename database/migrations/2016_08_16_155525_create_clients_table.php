@@ -30,8 +30,9 @@ class CreateClientsTable extends Migration
             $table->string('address', 60);
             $table->string('zip', 10);
 
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
-            $table->timestamps();
 
             $table->foreign('identity_type_id')
                 ->references('id')->on('identity_types')
@@ -47,6 +48,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('clients');
+        Schema::dropIfExists('clients');
     }
 }
