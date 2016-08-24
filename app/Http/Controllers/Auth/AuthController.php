@@ -2,71 +2,42 @@
 
 namespace Wizdraw\Http\Controllers\Auth;
 
-use Wizdraw\User;
-use Validator;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\JWTAuth;
 use Wizdraw\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Wizdraw\Http\Requests\AuthRequest;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    private $jwtAuth;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(JWTAuth $jwtAuth)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->jwtAuth = $jwtAuth;
+        /* TODO: google about that line */
+        $this->middleware('jwt.auth'/*, ['except' => 'authenticate']*/);
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param AuthRequest $request
+     * @return JsonResponse
      */
-    protected function validator(array $data)
+    public function authenticate(AuthRequest $request) : JsonResponse
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+        $credentials = $request->only('username', 'password');
+
+        try {
+            if (!$token = $this->jwtAuth->attempt($credentials)) {
+                return $this->respondWithError('invalid_credentials', Response::HTTP_UNAUTHORIZED);
+            }
+        } catch (JWTException $exception) {
+            return $this->respondWithError('could_not_create_token', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return $this->respond(compact('token'));
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
 }
