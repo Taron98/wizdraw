@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('facebook_token', 255)->nullable();
             $table->string('device_id', 40)->unique();
             $table->timestamp('last_login_at');
+            $table->boolean('is_pending')->default(false);
 
             $table->timestamps();
             $table->softDeletes();
