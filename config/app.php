@@ -168,6 +168,8 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,      // Utils for the ide
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+
 
     ],
 

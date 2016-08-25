@@ -15,4 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/auth/token', 'Auth\AuthController@authenticate');
+Route::group(['prefix' => 'v1/'], function () {
+
+    Route::group(['prefix' => 'auth/'], function () {
+
+        Route::post('login/', [
+            'as' => 'auth.login',
+            'uses' => 'Auth\AuthController@login'
+        ]);
+
+        Route::post('facebook/', [
+            'as' => 'auth.facebook',
+            'uses' => 'Auth\AuthController@loginFacebook'
+        ]);
+
+    });
+
+});

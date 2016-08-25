@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Http\Requests;
 
-class AuthRequest extends Request
+class LoginFacebookRequest extends Request
 {
     protected $redirect = false;
 
@@ -23,9 +23,10 @@ class AuthRequest extends Request
      */
     public function rules()
     {
+        // TODO: add more validation
         return [
-            'email' => 'required|email|max:255|unique:husers',
-            'password' => 'required|min:6|confirmed',
+            'accessToken' => 'required',
+            'expire' => 'required',
         ];
     }
 }
