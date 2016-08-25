@@ -54,6 +54,7 @@ class FacebookService
         /** @var FacebookResponse $response */
         $response = $this->sdk->get(self::BASIC_INFO);
 
+        // TODO: return FacebookUser instead of GraphUser
         return $response->getGraphUser();
     }
 
