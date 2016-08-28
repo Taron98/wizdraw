@@ -22,9 +22,10 @@ class LoginRequest extends Request
      */
     public function rules()
     {
+        // TODO: update rules
         return [
-            'email' => 'required|email|max:255',
-            'password' => 'required|min:6|confirmed',
+            'username' => 'required|max:255',
+            'password' => 'required|min:3',
         ];
     }
 

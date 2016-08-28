@@ -31,7 +31,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request) : JsonResponse
     {
-        $credentials = $request->get('username', 'password');
+        $credentials = $request->only('username', 'password');
 
         return $this->authenticate($credentials);
     }
@@ -45,20 +45,15 @@ class AuthController extends Controller
         $accessToken = $request->get('accessToken');
         $expire = $request->get('expire');
         $longLiveAccessToken = $this->facebookService->getLongLivedAccessToken($accessToken, $expire);
-//        $user = $this->facebookService->getBasicInfo('');
-//
-//        /** @var OAuth2Client $oAuth2Client */
-//        $accessToken = new AccessToken("EAAD8CEOES38BAPJZCs9c5L7slHRXXWKkFz3ldyjm7sD45bZCngWXarATpBXObn9GGJmWtXVneYwhAZBQU6VEqXpmZCS4ZCMh8ah4mIH36EnXm68HuZBL4yt0iKfgpRqHNHBsHjlutxXwBhu0emzc8L00wlM3UroqssqrI2ACgWoys9u1RUQLw4");
-//        $oAuth2Client = $this->facebook->getOAuth2Client();
 
         return new JsonResponse();
     }
 
     /**
-     * @param $credentials
+     * @param array $credentials
      * @return JsonResponse
      */
-    private function authenticate($credentials) : JsonResponse
+    private function authenticate(array $credentials) : JsonResponse
     {
         try {
             if (!$token = $this->jwtAuth->attempt($credentials)) {
