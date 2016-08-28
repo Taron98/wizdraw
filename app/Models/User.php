@@ -6,15 +6,19 @@ use Hash;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Wizdraw\Models\Traits\CamelCaseTrait;
 
 /**
  * Wizdraw\Models\User
  *
  * @property integer $id
  * @property integer $clientId
+ * @property string $email
  * @property string $username
  * @property string $password
+ * @property string $facebookId
  * @property string $facebookToken
+ * @property \Carbon\Carbon $facebookTokenExpire
  * @property string $deviceId
  * @property boolean $isPending
  * @property \Carbon\Carbon $lastLoginAt
@@ -24,9 +28,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Wizdraw\Models\Client $Client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUsername($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookTokenExpire($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeviceId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereIsPending($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereLastLoginAt($value)
@@ -37,7 +44,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use SoftDeletes;
+    use SoftDeletes, CamelCaseTrait;
 
     /**
      * The table associated with the model.
@@ -45,7 +52,6 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -53,14 +59,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'client_id',
+        'email',
         'username',
         'password',
+        'facebook_id',
         'facebook_token',
+        'facebook_token_expire',
         'device_id',
         'last_login_at',
         'is_pending'
     ];
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -69,13 +77,13 @@ class User extends Authenticatable
     protected $casts = [
         'is_pending' => 'boolean'
     ];
-
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = [
+        'facebook_token_expire',
         'created_at',
         'updated_at',
         'deleted_at',

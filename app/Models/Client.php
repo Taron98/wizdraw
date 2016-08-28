@@ -52,7 +52,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Client extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, CamelCaseTrait;
 
     /**
      * The table associated with the model.

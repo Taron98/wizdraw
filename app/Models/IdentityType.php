@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class IdentityType extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, CamelCaseTrait;
 
     /**
      * The table associated with the model.

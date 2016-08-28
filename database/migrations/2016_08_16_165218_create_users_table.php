@@ -19,7 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('email', 255)->unique();
             $table->string('username', 30)->unique();
             $table->string('password');
-            $table->string('facebook_token', 255)->nullable();
+            $table->string('facebook_id', 20)->nullable();
+            $table->string('facebook_token', 300)->nullable();
+            $table->date('facebook_token_expire')->nullable();
             $table->string('device_id', 40)->unique();
             $table->boolean('is_pending')->default(true);
 
