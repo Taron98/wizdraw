@@ -25,9 +25,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $city
  * @property string $address
  * @property string $zip
- * @property string $deletedAt
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\IdentityType $IdentityType
  * @property-read \Wizdraw\Models\User $User
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
@@ -45,9 +45,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereZip($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Client extends Model
@@ -81,6 +81,17 @@ class Client extends Model
         'city',
         'address',
         'zip'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     /**

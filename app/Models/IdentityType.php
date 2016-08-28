@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $type
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
- * @property string $deletedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $Clients
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
@@ -40,6 +40,17 @@ class IdentityType extends Model
      */
     protected $fillable = [
         'type'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     /**
