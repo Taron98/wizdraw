@@ -15,6 +15,8 @@ class ClientsTableSeeder extends Seeder
     {
         Client::truncate();
 
+        // TODO: Use factory
+
         $clients = [
             [
                 'identity_type_id' => 1,
