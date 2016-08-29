@@ -7,7 +7,11 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
 
-class BaseEntity implements Jsonable, JsonSerializable, Arrayable
+/**
+ * Class BaseEntity
+ * @package Wizdraw\Services\Entities
+ */
+abstract class BaseEntity implements Jsonable, JsonSerializable, Arrayable
 {
 
     /**

@@ -16,6 +16,10 @@ use Wizdraw\Models\User;
 use Wizdraw\Services\FacebookService;
 use Wizdraw\Services\UserService;
 
+/**
+ * Class AuthController
+ * @package Wizdraw\Http\Controllers\Auth
+ */
 class AuthController extends BaseController
 {
 

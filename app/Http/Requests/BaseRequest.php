@@ -5,6 +5,10 @@ namespace Wizdraw\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class BaseRequest
+ * @package Wizdraw\Http\Requests
+ */
 abstract class BaseRequest extends FormRequest
 {
     /**

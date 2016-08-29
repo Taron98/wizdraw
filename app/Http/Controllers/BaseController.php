@@ -9,6 +9,10 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class BaseController
+ * @package Wizdraw\Http\Controllers
+ */
 abstract class BaseController extends Controller
 {
 

@@ -9,6 +9,10 @@ use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * Class Handler
+ * @package Wizdraw\Exceptions
+ */
 class Handler extends ExceptionHandler
 {
     /**

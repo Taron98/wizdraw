@@ -4,6 +4,10 @@ namespace Wizdraw\Exceptions;
 
 use Exception;
 
+/**
+ * Class FacebookResponseException
+ * @package Wizdraw\Exceptions
+ */
 class FacebookResponseException extends Exception
 {
 

@@ -4,6 +4,10 @@ namespace Wizdraw\Models\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class CamelCaseTrait
+ * @package Wizdraw\Models\Traits
+ */
 trait CamelCaseTrait
 {
 

@@ -4,6 +4,10 @@ namespace Wizdraw\Exceptions;
 
 use Exception;
 
+/**
+ * Class FacebookInvalidTokenException
+ * @package Wizdraw\Exceptions
+ */
 class FacebookInvalidTokenException extends Exception
 {
 

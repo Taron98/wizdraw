@@ -10,6 +10,10 @@ use Wizdraw\Exceptions\FacebookResponseException;
 use Wizdraw\Services\Entities\BaseEntity;
 use Wizdraw\Services\Entities\FacebookUser;
 
+/**
+ * Class FacebookService
+ * @package Wizdraw\Services
+ */
 class FacebookService
 {
     /** Request for basic user information */

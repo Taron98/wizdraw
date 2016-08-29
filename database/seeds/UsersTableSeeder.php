@@ -4,6 +4,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Wizdraw\Models\User;
 
+/**
+ * Class UsersTableSeeder
+ */
 class UsersTableSeeder extends Seeder
 {
     /**

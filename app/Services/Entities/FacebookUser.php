@@ -2,6 +2,10 @@
 
 namespace Wizdraw\Services\Entities;
 
+/**
+ * Class FacebookUser
+ * @package Wizdraw\Services\Entities
+ */
 class FacebookUser extends BaseEntity
 {
 
