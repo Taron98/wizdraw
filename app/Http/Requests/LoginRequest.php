@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Http\Requests;
 
-class LoginRequest extends Request
+class LoginRequest extends BaseRequest
 {
 
     /**

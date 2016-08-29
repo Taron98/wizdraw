@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Http\Requests;
 
-class LoginFacebookRequest extends Request
+class LoginFacebookRequest extends BaseRequest
 {
     protected $redirect = false;
 
