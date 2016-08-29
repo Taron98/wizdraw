@@ -3,59 +3,93 @@
 namespace Wizdraw\Services;
 
 use Facebook\Authentication\AccessToken;
-use Facebook\Authentication\OAuth2Client;
 use Facebook\Exceptions\FacebookSDKException;
-use Facebook\FacebookResponse;
-use Facebook\GraphNodes\GraphUser;
+use Facebook\GraphNodes\GraphNode;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+use Wizdraw\Services\Entities\FacebookUser;
 
 class FacebookService
 {
+    /** Request for basic user information */
     const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name';
 
-    private $accessToken;
-    private $sdk;
+    /** @var LaravelFacebookSdk */
+    public $sdk;
 
+    /**
+     * FacebookService constructor.
+     *
+     * @param LaravelFacebookSdk $sdk
+     */
     public function __construct(LaravelFacebookSdk $sdk)
     {
         $this->sdk = $sdk;
     }
 
-    public function getLongLivedAccessToken(string $accessToken, int $expire)
+    /**
+     * @param string $token
+     * @param int    $expire
+     */
+    public function setDefaultAccessToken(string $token, int $expire)
     {
-        // TODO: always save access token and expire
-        // TODO: check if access token is valid
-        $objAccessToken = new AccessToken($accessToken, $expire);
+        $accessToken = new AccessToken($token, $expire);
 
-        if (!$objAccessToken->isLongLived()) {
-            /** @var OAuth2Client $oauthClient */
-            $oauthClient = $this->sdk->getOAuth2Client();
-
-            try {
-                $objAccessToken = $oauthClient->getLongLivedAccessToken($objAccessToken);
-            } catch (FacebookSDKException $e) {
-                // TODO: change
-                dd($e->getMessage());
-            }
+        if (!$accessToken->isLongLived()) {
+            $accessToken = $this->getLongLivedAccessToken($accessToken);
         }
 
-        return ($this->accessToken = $objAccessToken);
+        $this->sdk->setDefaultAccessToken($accessToken);
     }
 
     /**
-     * @param string $accessToken
-     * @return GraphUser
+     * @return AccessToken
      */
-    public function getBasicInfo(string $accessToken) : GraphUser
+    public function getDefaultAccessToken() : AccessToken
     {
-        // TODO: remove
-        $this->sdk->setDefaultAccessToken("EAAD8CEOES38BAGtCYN0g7qtHxSWaPQlxdh0qvAZBIwlH2OwET2SkKQlp5j6jfInzyOdA6SRnuo3v9W0oPLJS1dkeGnyaLfXOneZAZBXd2JqI36LJb9VO0JKXqGnt5CjM1Y32KnAd7Wuz2XvFWyUJn9x9AZA7uqqp2ALsezXY5wZDZD");
+        return $this->sdk->getDefaultAccessToken();
+    }
 
-        /** @var FacebookResponse $response */
-        $response = $this->sdk->get(self::BASIC_INFO);
+    /**
+     * @return FacebookUser
+     */
+    public function getBasicInfo() : FacebookUser
+    {
+        $graphUser = $this->get(self::BASIC_INFO);
 
-        // TODO: return FacebookUser instead of GraphUser
-        return $response->getGraphUser();
+        /** @var FacebookUser $facebookUser */
+        $facebookUser = FacebookUser::mapGraphNode($graphUser);
+
+        return $facebookUser;
+    }
+
+    /**
+     * @param string $params
+     *
+     * @return GraphNode
+     */
+    private function get(string $params) : GraphNode
+    {
+        $response = $this->sdk->get($params);
+
+        return $response->getGraphNode();
+    }
+
+    /**
+     * @param AccessToken $accessToken
+     *
+     * @return AccessToken
+     */
+    private function getLongLivedAccessToken(AccessToken $accessToken) : AccessToken
+    {
+        $oauthClient = $this->sdk->getOAuth2Client();
+
+        try {
+            $accessToken = $oauthClient->getLongLivedAccessToken($accessToken);
+        } catch (FacebookSDKException $facebookSDKException) {
+            return null;
+        }
+
+        return $accessToken;
     }
 
 }

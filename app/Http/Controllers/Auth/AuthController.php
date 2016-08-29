@@ -14,14 +14,24 @@ use Wizdraw\Services\FacebookService;
 class AuthController extends Controller
 {
 
+    /** @var JWTAuth */
     private $jwtAuth;
+
+    /** @var FacebookService */
     private $facebookService;
 
+    /**
+     * AuthController constructor.
+     *
+     * @param JWTAuth $jwtAuth
+     * @param FacebookService $facebookService
+     */
     public function __construct(JWTAuth $jwtAuth, FacebookService $facebookService)
     {
         $this->jwtAuth = $jwtAuth;
         $this->facebookService = $facebookService;
 
+        // Don't run the auth middleware on the login routes
         $this->middleware('jwt.auth', ['except' => ['login', 'loginFacebook']]);
     }
 
@@ -31,6 +41,11 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request) : JsonResponse
     {
+        $this->facebookService->setDefaultAccessToken('EAAD8CEOES38BAClFaV0DAEXBsJHDodm4f0wUT1PjD2buEbCDsovLLkWRoLftZCXSV9fOrA8LrkSstmlRMZB9QiHCpPZAW1WZANbbBJz6WxzzAJhZCQAJxlL4hZATfhIm6T8IRMobCZAvIOKbNpYZClHTziODmumbs7mdwUTGEDYhwwZDZD',
+            1472464800);
+        $bla = $this->facebookService->getBasicInfo();
+        $bla2 = $bla->toJson();
+
         $credentials = $request->only('username', 'password');
 
         return $this->authenticate($credentials);
@@ -44,7 +59,7 @@ class AuthController extends Controller
     {
         $accessToken = $request->get('accessToken');
         $expire = $request->get('expire');
-        $longLiveAccessToken = $this->facebookService->getLongLivedAccessToken($accessToken, $expire);
+//        $longLiveAccessToken = $this->facebookService->getLongLivedAccessToken($accessToken, $expire);
 
         return new JsonResponse();
     }
