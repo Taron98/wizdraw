@@ -16,14 +16,14 @@ class IdentityTypesTableSeeder extends Seeder
 
         $identityTypes = [
             [
-                'type' => 'Passport'
+                'type' => 'Passport',
             ],
             [
-                'type' => 'ID Card'
+                'type' => 'ID Card',
             ],
             [
-                'type' => 'Driver License'
-            ]
+                'type' => 'Driver License',
+            ],
         ];
 
         IdentityType::insert($identityTypes);
