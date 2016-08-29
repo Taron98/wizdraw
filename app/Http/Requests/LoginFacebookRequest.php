@@ -7,6 +7,38 @@ class LoginFacebookRequest extends Request
     protected $redirect = false;
 
     /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken(string $token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpire(): int
+    {
+        return $this->expire;
+    }
+
+    /**
+     * @param int $expire
+     */
+    public function setExpire(int $expire)
+    {
+        $this->expire = $expire;
+    }
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,8 +57,8 @@ class LoginFacebookRequest extends Request
     {
         // TODO: add more validation
         return [
-            'accessToken' => 'required',
-            'expire'      => 'required',
+            'token'  => 'required',
+            'expire' => 'required',
         ];
     }
 }

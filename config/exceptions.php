@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Bootstrap CMS.
+ * This file is part of Laravel Exceptions.
  *
  * (c) Graham Campbell <graham@alt-three.com>
  *
@@ -26,7 +26,9 @@ return [
     */
 
     'transformers' => [
+        'GrahamCampbell\Exceptions\Transformers\AuthTransformer',
         'GrahamCampbell\Exceptions\Transformers\CsrfTransformer',
+        'GrahamCampbell\Exceptions\Transformers\ModelTransformer',
     ],
 
     /*
@@ -45,6 +47,7 @@ return [
 
     'displayers' => [
         'GrahamCampbell\Exceptions\Displayers\DebugDisplayer',
+        'GrahamCampbell\Exceptions\Displayers\ViewDisplayer',
         'GrahamCampbell\Exceptions\Displayers\HtmlDisplayer',
         'GrahamCampbell\Exceptions\Displayers\JsonDisplayer',
         'GrahamCampbell\Exceptions\Displayers\JsonApiDisplayer',
@@ -96,10 +99,14 @@ return [
     */
 
     'levels' => [
-        'Illuminate\Session\TokenMismatchException'                     => 'notice',
-        'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface' => 'warning',
-        'Symfony\Component\Debug\Exception\FatalErrorException'         => 'critical',
-        'Exception'                                                     => 'error',
+        'Illuminate\Auth\Access\AuthorizationException'                           => 'warning',
+        'Illuminate\Database\Eloquent\ModelNotFoundException'                     => 'warning',
+        'Illuminate\Session\TokenMismatchException'                               => 'notice',
+        'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'            => 'notice',
+        'Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException' => 'error',
+        'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface'           => 'warning',
+        'Symfony\Component\Debug\Exception\FatalErrorException'                   => 'critical',
+        'Exception'                                                               => 'error',
     ],
 
 ];

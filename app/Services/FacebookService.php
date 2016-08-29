@@ -5,6 +5,8 @@ namespace Wizdraw\Services;
 use Facebook\Authentication\AccessToken;
 use Facebook\Exceptions\FacebookSDKException;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+use Wizdraw\Exceptions\FacebookInvalidTokenException;
+use Wizdraw\Exceptions\FacebookResponseException;
 use Wizdraw\Services\Entities\BaseEntity;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -32,10 +34,16 @@ class FacebookService
      * @param string $params
      *
      * @return BaseEntity
+     * @throws FacebookResponseException
      */
     private function get(string $params) : BaseEntity
     {
-        $graphNode = $this->sdk->get($params)->getGraphNode();
+        try {
+            $graphNode = $this->sdk->get($params)->getGraphNode();
+        } catch (FacebookResponseException $exception) {
+            throw new FacebookResponseException($exception->getMessage());
+        }
+
         $facebookEntity = FacebookUser::mapGraphNode($graphNode);
 
         return $facebookEntity;
@@ -46,7 +54,8 @@ class FacebookService
      *
      * @param AccessToken $accessToken
      *
-     * @return AccessToken
+     * @return AccessToken|null
+     * @throws FacebookInvalidTokenException
      */
     private function getLongLivedAccessToken(AccessToken $accessToken) : AccessToken
     {
@@ -54,8 +63,8 @@ class FacebookService
 
         try {
             $accessToken = $oauthClient->getLongLivedAccessToken($accessToken);
-        } catch (FacebookSDKException $facebookSDKException) {
-            return null;
+        } catch (FacebookSDKException $exception) {
+            throw new FacebookInvalidTokenException($exception->getMessage());
         }
 
         return $accessToken;
