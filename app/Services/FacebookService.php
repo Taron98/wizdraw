@@ -14,7 +14,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * Class FacebookService
  * @package Wizdraw\Services
  */
-class FacebookService
+class FacebookService extends BaseService
 {
     /** Request for basic user information */
     const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name';
