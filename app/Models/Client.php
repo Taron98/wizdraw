@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,7 +50,7 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class Client extends Model
+class Client extends BaseModel
 {
     use SoftDeletes, CamelCaseTrait;
 

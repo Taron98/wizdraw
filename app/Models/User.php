@@ -3,9 +3,14 @@
 namespace Wizdraw\Models;
 
 use Hash;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Wizdraw\Models\Traits\CamelCaseTrait;
 
 /**
@@ -42,9 +47,12 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends BaseModel implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use SoftDeletes, CamelCaseTrait;
+    use SoftDeletes, CamelCaseTrait, Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The table associated with the model.
