@@ -26,7 +26,7 @@ class LoginFacebookRequest extends Request
         // TODO: add more validation
         return [
             'accessToken' => 'required',
-            'expire' => 'required',
+            'expire'      => 'required',
         ];
     }
 }

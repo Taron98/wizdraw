@@ -11,20 +11,20 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
 /**
  * Wizdraw\Models\User
  *
- * @property integer $id
- * @property integer $clientId
- * @property string $email
- * @property string $username
- * @property string $password
- * @property string $facebookId
- * @property string $facebookToken
- * @property \Carbon\Carbon $facebookTokenExpire
- * @property string $deviceId
- * @property boolean $isPending
- * @property \Carbon\Carbon $lastLoginAt
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property integer                     $id
+ * @property integer                     $clientId
+ * @property string                      $email
+ * @property string                      $username
+ * @property string                      $password
+ * @property string                      $facebookId
+ * @property string                      $facebookToken
+ * @property \Carbon\Carbon              $facebookTokenExpire
+ * @property string                      $deviceId
+ * @property boolean                     $isPending
+ * @property \Carbon\Carbon              $lastLoginAt
+ * @property \Carbon\Carbon              $createdAt
+ * @property \Carbon\Carbon              $updatedAt
+ * @property \Carbon\Carbon              $deletedAt
  * @property-read \Wizdraw\Models\Client $Client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
@@ -52,6 +52,7 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -67,16 +68,18 @@ class User extends Authenticatable
         'facebook_token_expire',
         'device_id',
         'last_login_at',
-        'is_pending'
+        'is_pending',
     ];
+
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
-        'is_pending' => 'boolean'
+        'is_pending' => 'boolean',
     ];
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -87,7 +90,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
-        'last_login_at'
+        'last_login_at',
     ];
 
     /**
@@ -107,7 +110,7 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute(string $password)
     {
-        $this->attributes['password'] = Hash::make($password);
+        $this->attributes[ 'password' ] = Hash::make($password);
     }
 
 }

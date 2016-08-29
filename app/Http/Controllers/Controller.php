@@ -16,7 +16,8 @@ class Controller extends BaseController
 
     /**
      * @param string $message
-     * @param int $statusCode
+     * @param int    $statusCode
+     *
      * @return JsonResponse
      */
     protected function respondWithError(string $message, int $statusCode) : JsonResponse
@@ -26,6 +27,7 @@ class Controller extends BaseController
 
     /**
      * @param array $message
+     *
      * @return JsonResponse
      */
     protected function respond(array $message) : JsonResponse

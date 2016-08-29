@@ -23,7 +23,7 @@ class AuthController extends Controller
     /**
      * AuthController constructor.
      *
-     * @param JWTAuth $jwtAuth
+     * @param JWTAuth         $jwtAuth
      * @param FacebookService $facebookService
      */
     public function __construct(JWTAuth $jwtAuth, FacebookService $facebookService)
@@ -37,6 +37,7 @@ class AuthController extends Controller
 
     /**
      * @param LoginRequest $request
+     *
      * @return JsonResponse
      */
     public function login(LoginRequest $request) : JsonResponse
@@ -53,12 +54,14 @@ class AuthController extends Controller
 
     /**
      * @param LoginFacebookRequest $request
+     *
      * @return JsonResponse
      */
     public function loginFacebook(LoginFacebookRequest $request) : JsonResponse
     {
         $accessToken = $request->get('accessToken');
         $expire = $request->get('expire');
+
 //        $longLiveAccessToken = $this->facebookService->getLongLivedAccessToken($accessToken, $expire);
 
         return new JsonResponse();
@@ -66,6 +69,7 @@ class AuthController extends Controller
 
     /**
      * @param array $credentials
+     *
      * @return JsonResponse
      */
     private function authenticate(array $credentials) : JsonResponse

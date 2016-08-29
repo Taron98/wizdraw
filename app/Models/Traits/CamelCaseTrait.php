@@ -11,6 +11,7 @@ trait CamelCaseTrait
      * Enable getting attribute with camelCase
      *
      * @param string $key
+     *
      * @return mixed
      */
     public function getAttribute($key)
@@ -20,8 +21,10 @@ trait CamelCaseTrait
 
     /**
      * Enable setting attribute with camelCase
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return Model
      */
     public function setAttribute($key, $value) : Model

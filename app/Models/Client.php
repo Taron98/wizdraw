@@ -11,26 +11,26 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
 /**
  * Wizdraw\Models\Client
  *
- * @property integer $id
- * @property integer $identityTypeId
- * @property string $identityNumber
- * @property string $identityExpire
- * @property string $firstName
- * @property string $middleName
- * @property string $lastName
- * @property string $birthDate
- * @property string $gender
- * @property string $phone
- * @property integer $residentCountryId
- * @property string $state
- * @property string $city
- * @property string $address
- * @property string $zip
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property integer                           $id
+ * @property integer                           $identityTypeId
+ * @property string                            $identityNumber
+ * @property string                            $identityExpire
+ * @property string                            $firstName
+ * @property string                            $middleName
+ * @property string                            $lastName
+ * @property string                            $birthDate
+ * @property string                            $gender
+ * @property string                            $phone
+ * @property integer                           $residentCountryId
+ * @property string                            $state
+ * @property string                            $city
+ * @property string                            $address
+ * @property string                            $zip
+ * @property \Carbon\Carbon                    $createdAt
+ * @property \Carbon\Carbon                    $updatedAt
+ * @property \Carbon\Carbon                    $deletedAt
  * @property-read \Wizdraw\Models\IdentityType $IdentityType
- * @property-read \Wizdraw\Models\User $User
+ * @property-read \Wizdraw\Models\User         $User
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -81,7 +81,7 @@ class Client extends Model
         'state',
         'city',
         'address',
-        'zip'
+        'zip',
     ];
 
     /**
@@ -92,7 +92,7 @@ class Client extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**

@@ -20,13 +20,13 @@ Route::group(['prefix' => 'v1/'], function () {
     Route::group(['prefix' => 'auth/'], function () {
 
         Route::post('login/', [
-            'as' => 'auth.login',
-            'uses' => 'Auth\AuthController@login'
+            'as'   => 'auth.login',
+            'uses' => 'Auth\AuthController@login',
         ]);
 
         Route::post('facebook/', [
-            'as' => 'auth.facebook',
-            'uses' => 'Auth\AuthController@loginFacebook'
+            'as'   => 'auth.facebook',
+            'uses' => 'Auth\AuthController@loginFacebook',
         ]);
 
     });

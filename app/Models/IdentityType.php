@@ -10,11 +10,11 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
 /**
  * Wizdraw\Models\IdentityType
  *
- * @property integer $id
- * @property string $type
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property integer                                                                $id
+ * @property string                                                                 $type
+ * @property \Carbon\Carbon                                                         $createdAt
+ * @property \Carbon\Carbon                                                         $updatedAt
+ * @property \Carbon\Carbon                                                         $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $Clients
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
@@ -40,7 +40,7 @@ class IdentityType extends Model
      * @var array
      */
     protected $fillable = [
-        'type'
+        'type',
     ];
 
     /**
@@ -51,7 +51,7 @@ class IdentityType extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
