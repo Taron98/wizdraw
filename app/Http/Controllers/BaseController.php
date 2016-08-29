@@ -6,10 +6,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class Controller extends BaseController
+abstract class BaseController extends Controller
 {
 
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;

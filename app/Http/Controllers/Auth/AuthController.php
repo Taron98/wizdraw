@@ -8,6 +8,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\JWTAuth;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Exceptions\FacebookResponseException;
+use Wizdraw\Http\Controllers\BaseController;
 use Wizdraw\Http\Controllers\Controller;
 use Wizdraw\Http\Requests\LoginFacebookRequest;
 use Wizdraw\Http\Requests\LoginRequest;
@@ -15,7 +16,7 @@ use Wizdraw\Models\User;
 use Wizdraw\Services\FacebookService;
 use Wizdraw\Services\UserService;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
 
     /** @var JWTAuth */
