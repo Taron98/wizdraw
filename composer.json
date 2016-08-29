@@ -10,7 +10,8 @@
         "doctrine/dbal": "^2.5",
         "tymon/jwt-auth": "0.5.*",
         "sammyk/laravel-facebook-sdk": "^3.3",
-        "graham-campbell/exceptions": "^9.1"
+        "graham-campbell/exceptions": "^9.1",
+        "bosnadev/repositories": "0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
