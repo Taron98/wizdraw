@@ -46,7 +46,7 @@ class AuthController extends BaseController
         $this->userService = $userService;
 
         // Don't run the auth middleware on the login routes
-        $this->middleware('jwt.auth', ['except' => ['', 'loginFacebook']]);
+        $this->middleware('jwt.auth', ['except' => ['login', 'loginFacebook']]);
     }
 
     /**
