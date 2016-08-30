@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Services\Entities;
 
+use Facebook\Authentication\AccessToken;
+
 /**
  * Class FacebookUser
  * @package Wizdraw\Services\Entities
@@ -29,6 +31,15 @@ class FacebookUser extends BaseEntity
 
     /** @var  string */
     protected $lastName;
+
+    /**
+     * @param AccessToken $accessToken
+     */
+    public function setAccessToken(AccessToken $accessToken)
+    {
+        $this->token = $accessToken->getValue();
+        $this->expire = $accessToken->getExpiresAt()->getTimestamp();
+    }
 
     /**
      * @return string

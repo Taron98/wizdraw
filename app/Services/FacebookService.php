@@ -45,7 +45,7 @@ class FacebookService extends BaseService
         try {
             $graphNode = $this->sdk->get($params)->getGraphNode();
         } catch (FacebookResponseException $exception) {
-            throw new FacebookResponseException($exception->getMessage());
+            throw new FacebookResponseException($exception);
         }
 
         $facebookEntity = FacebookUser::mapGraphNode($graphNode);
@@ -68,7 +68,7 @@ class FacebookService extends BaseService
         try {
             $accessToken = $oauthClient->getLongLivedAccessToken($accessToken);
         } catch (FacebookSDKException $exception) {
-            throw new FacebookInvalidTokenException($exception->getMessage());
+            throw new FacebookInvalidTokenException($exception);
         }
 
         return $accessToken;
@@ -106,7 +106,9 @@ class FacebookService extends BaseService
      */
     public function getBasicInfo() : FacebookUser
     {
+        /** @var FacebookUser $facebookUser */
         $facebookUser = $this->get(self::BASIC_INFO);
+        $facebookUser->setAccessToken($this->getDefaultAccessToken());
 
         return $facebookUser;
     }
