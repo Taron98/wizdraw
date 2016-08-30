@@ -1,14 +1,14 @@
 <?php
 
-namespace Wizdraw\Models\Traits;
+namespace Wizdraw\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class CamelCaseTrait
- * @package Wizdraw\Models\Traits
+ * @package Wizdraw\Traits
  */
-trait CamelCaseTrait
+trait ModelCamelCaseTrait
 {
 
     /**

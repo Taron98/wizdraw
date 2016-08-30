@@ -5,7 +5,7 @@ namespace Wizdraw\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wizdraw\Models\Traits\CamelCaseTrait;
+use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\Client
@@ -52,7 +52,7 @@ use Wizdraw\Models\Traits\CamelCaseTrait;
  */
 class Client extends BaseModel
 {
-    use SoftDeletes, CamelCaseTrait;
+    use SoftDeletes, ModelCamelCaseTrait;
 
     /**
      * The table associated with the model.

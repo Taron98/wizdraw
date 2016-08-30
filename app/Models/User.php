@@ -11,7 +11,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Wizdraw\Models\Traits\CamelCaseTrait;
+use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\User
@@ -52,7 +52,7 @@ class User extends BaseModel implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use SoftDeletes, CamelCaseTrait, Authenticatable, Authorizable, CanResetPassword;
+    use SoftDeletes, ModelCamelCaseTrait, Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The table associated with the model.
