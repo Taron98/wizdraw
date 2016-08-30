@@ -8,7 +8,7 @@ use Wizdraw\Models\IdentityType;
  * Class IdentityTypeRepository
  * @package Wizdraw\Repositories
  */
-class IdentityTypeRepository extends BaseRepository
+class IdentityTypeRepository extends AbstractRepository
 {
 
     /**

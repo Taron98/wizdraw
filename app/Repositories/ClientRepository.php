@@ -8,7 +8,7 @@ use Wizdraw\Models\Client;
  * Class ClientRepository
  * @package Wizdraw\Repositories
  */
-class ClientRepository extends BaseRepository
+class ClientRepository extends AbstractRepository
 {
 
     /**

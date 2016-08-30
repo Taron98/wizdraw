@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Repositories;
 
-use Wizdraw\Models\BaseModel;
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\User;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -10,7 +10,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * Class UserRepository
  * @package Wizdraw\Repositories
  */
-class UserRepository extends BaseRepository
+class UserRepository extends AbstractRepository
 {
 
     /**
@@ -43,9 +43,9 @@ class UserRepository extends BaseRepository
      *
      * @param FacebookUser $facebookUser
      *
-     * @return BaseModel
+     * @return AbstractModel
      */
-    public function updateFacebook(FacebookUser $facebookUser) : BaseModel
+    public function updateFacebook(FacebookUser $facebookUser) : AbstractModel
     {
         $user = $this->fromFacebookUser($facebookUser);
 

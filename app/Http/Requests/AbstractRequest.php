@@ -6,10 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class BaseRequest
+ * Class AbstractRequest
  * @package Wizdraw\Http\Requests
  */
-abstract class BaseRequest extends FormRequest
+abstract class AbstractRequest extends FormRequest
 {
     /**
      * Get the proper failed validation response for the request.

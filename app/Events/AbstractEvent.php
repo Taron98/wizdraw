@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Events;
 
-abstract class Event
+abstract class AbstractEvent
 {
     //
 }

@@ -6,7 +6,7 @@ namespace Wizdraw\Http\Requests;
  * Class LoginRequest
  * @package Wizdraw\Http\Requests
  */
-class LoginRequest extends BaseRequest
+class LoginRequest extends AbstractRequest
 {
 
     /**

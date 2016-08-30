@@ -10,10 +10,10 @@ use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class BaseController
+ * Class AbstractController
  * @package Wizdraw\Http\Controllers
  */
-abstract class BaseController extends Controller
+abstract class AbstractController extends Controller
 {
 
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;

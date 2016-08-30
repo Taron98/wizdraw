@@ -5,7 +5,7 @@ namespace Wizdraw\Http\Controllers\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Wizdraw\Http\Controllers\BaseController;
+use Wizdraw\Http\Controllers\AbstractController;
 use Wizdraw\Http\Requests\LoginFacebookRequest;
 use Wizdraw\Http\Requests\LoginRequest;
 use Wizdraw\Repositories\UserRepository;
@@ -16,7 +16,7 @@ use Wizdraw\Services\FacebookService;
  * Class AuthController
  * @package Wizdraw\Http\Controllers\Auth
  */
-class AuthController extends BaseController
+class AuthController extends AbstractController
 {
 
     /** @var FacebookService */

@@ -8,10 +8,10 @@ use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
 
 /**
- * Class BaseEntity
+ * Class AbstractEntity
  * @package Wizdraw\Services\Entities
  */
-abstract class BaseEntity implements Jsonable, JsonSerializable, Arrayable
+abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
 {
 
     /**
@@ -19,7 +19,7 @@ abstract class BaseEntity implements Jsonable, JsonSerializable, Arrayable
      *
      * @param GraphNode $graphNode
      *
-     * @return BaseEntity
+     * @return AbstractEntity
      */
     public static function mapGraphNode(GraphNode $graphNode) : self
     {

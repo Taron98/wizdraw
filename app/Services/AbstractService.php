@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Services;
 
-abstract class BaseService
+abstract class AbstractService
 {
 
 }

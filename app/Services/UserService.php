@@ -9,7 +9,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * Class UserService
  * @package Wizdraw\Services
  */
-class UserService extends BaseService
+class UserService extends AbstractService
 {
     public function __construct()
     {

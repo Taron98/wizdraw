@@ -8,7 +8,7 @@ use Facebook\Authentication\AccessToken;
  * Class FacebookUser
  * @package Wizdraw\Services\Entities
  */
-class FacebookUser extends BaseEntity
+class FacebookUser extends AbstractEntity
 {
 
     /** @var  string */

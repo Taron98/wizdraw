@@ -9,7 +9,7 @@ use Wizdraw\Models\User;
  * Class AuthService
  * @package Wizdraw\Services
  */
-class AuthService extends BaseService
+class AuthService extends AbstractService
 {
 
     /** @var JWTAuth */

@@ -22,7 +22,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class IdentityType extends BaseModel
+class IdentityType extends AbstractModel
 {
     use SoftDeletes, ModelCamelCaseTrait;
 

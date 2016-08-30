@@ -50,7 +50,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class Client extends BaseModel
+class Client extends AbstractModel
 {
     use SoftDeletes, ModelCamelCaseTrait;
 

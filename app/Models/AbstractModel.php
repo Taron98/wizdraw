@@ -5,11 +5,11 @@ namespace Wizdraw\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Wizdraw\Models\BaseModel
+ * Wizdraw\Models\AbstractModel
  *
  * @mixin \Eloquent
  */
-class BaseModel extends Model
+abstract class AbstractModel extends Model
 {
 
 }

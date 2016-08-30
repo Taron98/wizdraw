@@ -7,14 +7,14 @@ use Facebook\Exceptions\FacebookSDKException;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Exceptions\FacebookResponseException;
-use Wizdraw\Services\Entities\BaseEntity;
+use Wizdraw\Services\Entities\AbstractEntity;
 use Wizdraw\Services\Entities\FacebookUser;
 
 /**
  * Class FacebookService
  * @package Wizdraw\Services
  */
-class FacebookService extends BaseService
+class FacebookService extends AbstractService
 {
     /** Request for basic user information */
     const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name';
@@ -37,10 +37,10 @@ class FacebookService extends BaseService
      *
      * @param string $params
      *
-     * @return BaseEntity
+     * @return AbstractEntity
      * @throws FacebookResponseException
      */
-    private function get(string $params) : BaseEntity
+    private function get(string $params) : AbstractEntity
     {
         try {
             $graphNode = $this->sdk->get($params)->getGraphNode();

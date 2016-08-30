@@ -47,7 +47,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class User extends BaseModel implements
+class User extends AbstractModel implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
