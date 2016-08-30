@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Repositories;
 
-use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\User;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -19,6 +18,16 @@ class UserRepository extends AbstractRepository
     public function model() : string
     {
         return User::class;
+    }
+
+    /**
+     * @param int $facebookId
+     *
+     * @return mixed
+     */
+    public function findByFacebookId(int $facebookId)
+    {
+        return $this->findBy('facebook_id', $facebookId);
     }
 
     /**
@@ -43,9 +52,9 @@ class UserRepository extends AbstractRepository
      *
      * @param FacebookUser $facebookUser
      *
-     * @return AbstractModel
+     * @return bool
      */
-    public function updateFacebook(FacebookUser $facebookUser) : AbstractModel
+    public function updateFacebook(FacebookUser $facebookUser) : bool
     {
         $user = $this->fromFacebookUser($facebookUser);
 

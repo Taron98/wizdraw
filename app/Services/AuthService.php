@@ -3,7 +3,7 @@
 namespace Wizdraw\Services;
 
 use Tymon\JWTAuth\JWTAuth;
-use Wizdraw\Models\User;
+use Wizdraw\Repositories\UserRepository;
 
 /**
  * Class AuthService
@@ -15,14 +15,19 @@ class AuthService extends AbstractService
     /** @var JWTAuth */
     private $jwtAuth;
 
+    /** @var UserRepository */
+    private $userRepository;
+
     /**
      * AuthService constructor.
      *
-     * @param JWTAuth $jwtAuth
+     * @param JWTAuth        $jwtAuth
+     * @param UserRepository $userRepository
      */
-    public function __construct(JWTAuth $jwtAuth)
+    public function __construct(JWTAuth $jwtAuth, UserRepository $userRepository)
     {
         $this->jwtAuth = $jwtAuth;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -44,7 +49,7 @@ class AuthService extends AbstractService
      */
     public function createTokenFromUser(int $facebookId) : string
     {
-        $user = User::whereFacebookId($facebookId)->first();
+        $user = $this->userRepository->findByFacebookId($facebookId);
 
         return $this->jwtAuth->fromUser($user);
     }
