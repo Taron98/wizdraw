@@ -3,24 +3,25 @@
 namespace Wizdraw\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class FacebookResponseException
  * @package Wizdraw\Exceptions
  */
-class FacebookResponseException extends Exception
+class FacebookResponseException extends HttpException
 {
 
     /**
-     * FacebookInvalidTokenException constructor.
+     * FacebookResponseException constructor.
      *
-     * @param string    $message
-     * @param int       $code
-     * @param Exception $previous
+     * @param Exception|null $previous
+     * @param array          $headers
      */
-    public function __construct($message = "", $code = 0, Exception $previous = null)
+    public function __construct(Exception $previous = null, array $headers = [])
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct(Response::HTTP_BAD_REQUEST, 'facebook_invalid_response', $previous);
     }
 
 }
