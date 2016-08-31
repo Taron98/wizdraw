@@ -58,6 +58,7 @@ class UserRepository extends AbstractRepository
     {
         $user = $this->fromFacebookUser($facebookUser);
 
+        // TODO: check if $user not null?
         return $this->updateModel($user, $facebookUser->getId(), 'facebook_id');
     }
 

@@ -14,6 +14,7 @@ use Wizdraw\Services\FacebookService;
 
 /**
  * Class AuthController
+ * TODO: change the code, seems odd
  * @package Wizdraw\Http\Controllers\Auth
  */
 class AuthController extends AbstractController
