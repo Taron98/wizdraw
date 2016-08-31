@@ -18,20 +18,21 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('identity_type_id')->unsigned()->index();
-            $table->string('identity_number', 20);
-            $table->date('identity_expire');
+            $table->integer('identity_type_id')->unsigned()->nullable()->index();
+            $table->string('identity_number', 20)->nullable();
+            $table->date('identity_expire')->nullable();
             $table->string('first_name', 40);
             $table->string('middle_name', 25)->nullable();
             $table->string('last_name', 35);
-            $table->date('birth_date');
-            $table->enum('gender', ['male', 'female']);
-            $table->string('phone', 20);
+            $table->date('birth_date')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('phone', 20)->nullable();
             $table->integer('resident_country_id')->unsigned();     // FK to cached administration_country
-            $table->string('state', 35);
-            $table->string('city', 30);
-            $table->string('address', 60);
-            $table->string('zip', 10);
+            /*$table->string('state', 35);*/
+            $table->string('city', 30)->nullable();
+            $table->string('address', 60)->nullable();
+            /*$table->string('zip', 10);*/
+            $table->enum('client_type', ['sender', 'receiver'])->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

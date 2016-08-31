@@ -21,10 +21,9 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property string                            $gender
  * @property string                            $phone
  * @property integer                           $residentCountryId
- * @property string                            $state
  * @property string                            $city
  * @property string                            $address
- * @property string                            $zip
+ * @property string                            $clientType
  * @property \Carbon\Carbon                    $createdAt
  * @property \Carbon\Carbon                    $updatedAt
  * @property \Carbon\Carbon                    $deletedAt
@@ -41,10 +40,9 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereGender($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client wherePhone($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereState($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereZip($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
@@ -77,10 +75,8 @@ class Client extends AbstractModel
         'gender',
         'phone',
         'resident_country_id',
-        'state',
         'city',
         'address',
-        'zip',
     ];
 
     /**

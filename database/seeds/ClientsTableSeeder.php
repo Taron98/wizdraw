@@ -32,10 +32,8 @@ class ClientsTableSeeder extends Seeder
                 'gender'              => 'male',
                 'phone'               => '05222222222',
                 'resident_country_id' => 1,
-                'state'               => 'Gush Dan',
                 'city'                => 'Tel Aviv-Yafo',
                 'address'             => 'Levinsky 10',
-                'zip'                 => '1212212',
             ],
             [
                 'identity_type_id'    => 1,
@@ -48,10 +46,8 @@ class ClientsTableSeeder extends Seeder
                 'gender'              => 'female',
                 'phone'               => '05223333333',
                 'resident_country_id' => 1,
-                'state'               => 'Gush Dan',
                 'city'                => 'Petah Tikva',
                 'address'             => 'Herzel 2',
-                'zip'                 => '3333333',
             ],
         ];
 

@@ -25,7 +25,10 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property string                      $facebookToken
  * @property \Carbon\Carbon              $facebookTokenExpire
  * @property string                      $deviceId
+ * @property integer                     $verifyCode
+ * @property \Carbon\Carbon              $verifyExpire
  * @property boolean                     $isPending
+ * @property \Carbon\Carbon              $passwordChangedAt
  * @property \Carbon\Carbon              $lastLoginAt
  * @property \Carbon\Carbon              $createdAt
  * @property \Carbon\Carbon              $updatedAt
@@ -40,7 +43,10 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookToken($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookTokenExpire($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeviceId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereVerifyCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereVerifyExpire($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereIsPending($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePasswordChangedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereLastLoginAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUpdatedAt($value)
@@ -75,8 +81,11 @@ class User extends AbstractModel implements
         'facebook_token',
         'facebook_token_expire',
         'device_id',
-        'last_login_at',
+        'verify_code',
+        'verify_expire',
         'is_pending',
+        'password_changed_at',
+        'last_login_at',
     ];
 
     /**
@@ -95,10 +104,12 @@ class User extends AbstractModel implements
      */
     protected $dates = [
         'facebook_token_expire',
+        'verify_expire',
+        'password_changed_at',
+        'last_login_at',
         'created_at',
         'updated_at',
         'deleted_at',
-        'last_login_at',
     ];
 
     /**

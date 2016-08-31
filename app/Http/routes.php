@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Api v1.0
 Route::group(['prefix' => 'v1/'], function () {
 
+    // Authentication
     Route::group(['prefix' => 'auth/'], function () {
 
         Route::post('login/', [
@@ -24,9 +26,14 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'Auth\AuthController@login',
         ]);
 
+        Route::post('signup/', [
+            'as'   => 'auth.signup',
+            'uses' => 'Auth\AuthController@signup',
+        ]);
+
         Route::post('facebook/', [
             'as'   => 'auth.facebook',
-            'uses' => 'Auth\AuthController@loginFacebook',
+            'uses' => 'Auth\AuthController@facebook',
         ]);
 
     });

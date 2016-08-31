@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Wizdraw\Http\Controllers\AbstractController;
-use Wizdraw\Http\Requests\LoginFacebookRequest;
+use Wizdraw\Http\Requests\FacebookRequest;
 use Wizdraw\Http\Requests\LoginRequest;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
@@ -66,11 +66,11 @@ class AuthController extends AbstractController
     /**
      * Login route using facebook connect
      *
-     * @param LoginFacebookRequest $request
+     * @param FacebookRequest $request
      *
      * @return JsonResponse
      */
-    public function loginFacebook(LoginFacebookRequest $request) : JsonResponse
+    public function facebook(FacebookRequest $request) : JsonResponse
     {
         $this->facebookService->setDefaultAccessToken($request->getToken(), $request->getExpire());
         $facebookUser = $this->facebookService->getBasicInfo();
