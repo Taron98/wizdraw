@@ -9,6 +9,7 @@ class Kernel extends ConsoleKernel
 {
     /**
      * The Artisan commands provided by your application.
+     * todo: create commands to generate ide-helper stuff
      *
      * @var array
      */
