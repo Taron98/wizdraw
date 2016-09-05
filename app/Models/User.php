@@ -103,13 +103,13 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $dates = [
-        'facebook_token_expire',
-        'verify_expire',
-        'password_changed_at',
-        'last_login_at',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'facebookTokenExpire',
+        'verifyExpire',
+        'passwordChangedAt',
+        'lastLoginAt',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
     ];
 
     /**
@@ -117,7 +117,7 @@ class User extends AbstractModel implements
      *
      * @return BelongsTo
      */
-    public function Client() : BelongsTo
+    public function client() : BelongsTo
     {
         return $this->belongsTo(Client::class);
     }

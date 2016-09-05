@@ -48,9 +48,9 @@ class IdentityType extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
     ];
 
     /**
@@ -58,7 +58,7 @@ class IdentityType extends AbstractModel
      *
      * @return HasMany
      */
-    public function Clients() : HasMany
+    public function clients() : HasMany
     {
         return $this->hasMany(Client::class);
     }

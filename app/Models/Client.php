@@ -65,16 +65,16 @@ class Client extends AbstractModel
      * @var array
      */
     protected $fillable = [
-        'identity_type_id',
-        'identity_number',
-        'identity_expire',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'birth_date',
+        'identityTypeId',
+        'identityNumber',
+        'identityExpire',
+        'firstName',
+        'middleName',
+        'lastName',
+        'birthDate',
         'gender',
         'phone',
-        'resident_country_id',
+        'residentCountryId',
         'city',
         'address',
     ];
@@ -85,17 +85,19 @@ class Client extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
     ];
+
+    public static $snakeAttributes = false;
 
     /**
      * One-to-many relationship with identity_types table
      *
      * @return BelongsTo
      */
-    public function IdentityType() : BelongsTo
+    public function identityType() : BelongsTo
     {
         return $this->belongsTo(IdentityType::class);
     }
@@ -105,7 +107,7 @@ class Client extends AbstractModel
      *
      * @return HasOne
      */
-    public function User() : HasOne
+    public function user() : HasOne
     {
         return $this->hasOne(User::class);
     }
@@ -114,7 +116,7 @@ class Client extends AbstractModel
      * TODO: Currently, we haven't decided yet
      * TODO:  how to implement the caching of the old tables
      */
-    public function ResidentCountry()
+    public function residentCountry()
     {
 
     }

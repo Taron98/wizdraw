@@ -3,6 +3,7 @@
 namespace Wizdraw\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
+use Illuminate\Database\Eloquent\Model;
 use Wizdraw\Models\AbstractModel;
 
 /**
@@ -11,6 +12,31 @@ use Wizdraw\Models\AbstractModel;
  */
 abstract class AbstractRepository extends Repository
 {
+
+    /** @var  AbstractModel */
+    protected $model;
+
+    /**
+     * @param array $attributes
+     *
+     * @return bool
+     */
+    public function exists(array $attributes): bool
+    {
+        return $this->model->where($attributes)->exists();
+    }
+
+    /**
+     * Shorthand for creating a model, instead of array
+     *
+     * @param AbstractModel $model
+     *
+     * @return mixed
+     */
+    public function createModel(AbstractModel $model) : mixed
+    {
+        return $this->create($model->toArray());
+    }
 
     /**
      * Shorthand for updating a model, instead of array
