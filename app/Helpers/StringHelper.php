@@ -37,3 +37,20 @@ if (!function_exists('array_value_snake_case')) {
         return $changedCase;
     }
 }
+
+if (!function_exists('generate_code')) {
+    /**
+     * Generate an integer code
+     *
+     * @return int
+     */
+    function generate_code() : int
+    {
+        $length = config('auth.verify_code_length');
+
+        $min = pow(10, $length - 1);
+        $max = pow(10, $length) - 1;
+
+        return mt_rand($min, $max);
+    }
+}

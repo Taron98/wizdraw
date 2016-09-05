@@ -104,4 +104,15 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Verify Code Generation Length
+    |--------------------------------------------------------------------------
+    |
+    | When generating a verification code for user, use this length.
+    |
+    */
+
+    'verify_code_length' => 3
+
 ];

@@ -166,6 +166,7 @@ return [
         Wizdraw\Providers\AuthServiceProvider::class,
         Wizdraw\Providers\EventServiceProvider::class,
         Wizdraw\Providers\RouteServiceProvider::class,
+        Wizdraw\Providers\HelperServiceProvider::class,
 
     ],
 

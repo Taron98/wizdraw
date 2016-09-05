@@ -131,7 +131,7 @@ class User extends AbstractModel implements
 
     protected function generateVerifyCode()
     {
-        $this->attributes[ 'verify_code' ] = mt_rand(10000, 99999);
+        $this->attributes[ 'verify_code' ] = generate_code();
     }
 
     /**
