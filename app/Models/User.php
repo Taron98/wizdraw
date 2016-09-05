@@ -73,19 +73,19 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $fillable = [
-        'client_id',
+        'clientId',
         'email',
         'username',
         'password',
-        'facebook_id',
-        'facebook_token',
-        'facebook_token_expire',
-        'device_id',
-        'verify_code',
-        'verify_expire',
-        'is_pending',
-        'password_changed_at',
-        'last_login_at',
+        'facebookId',
+        'facebookToken',
+        'facebookTokenExpire',
+        'deviceId',
+        'verifyCode',
+        'verifyExpire',
+        'isPending',
+        'passwordChangedAt',
+        'lastLoginAt',
     ];
 
     /**
@@ -94,7 +94,7 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $casts = [
-        'is_pending' => 'boolean',
+        'isPending' => 'boolean',
     ];
 
     /**
