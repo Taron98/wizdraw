@@ -119,4 +119,214 @@ class Client extends AbstractModel
 
     }
 
+    //<editor-fold desc="Getters & Setters">
+    /**
+     * @return int
+     */
+    public function getIdentityTypeId(): int
+    {
+        return $this->identityTypeId;
+    }
+
+    /**
+     * @param int $identityTypeId
+     */
+    public function setIdentityTypeId(int $identityTypeId)
+    {
+        $this->identityTypeId = $identityTypeId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentityNumber(): string
+    {
+        return $this->identityNumber;
+    }
+
+    /**
+     * @param string $identityNumber
+     */
+    public function setIdentityNumber(string $identityNumber)
+    {
+        $this->identityNumber = $identityNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentityExpire(): string
+    {
+        return $this->identityExpire;
+    }
+
+    /**
+     * @param string $identityExpire
+     */
+    public function setIdentityExpire(string $identityExpire)
+    {
+        $this->identityExpire = $identityExpire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMiddleName(): string
+    {
+        return $this->middleName;
+    }
+
+    /**
+     * @param string $middleName
+     */
+    public function setMiddleName(string $middleName)
+    {
+        $this->middleName = $middleName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBirthDate(): string
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param string $birthDate
+     */
+    public function setBirthDate(string $birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResidentCountryId(): int
+    {
+        return $this->residentCountryId;
+    }
+
+    /**
+     * @param int $residentCountryId
+     */
+    public function setResidentCountryId(int $residentCountryId)
+    {
+        $this->residentCountryId = $residentCountryId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity(string $city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientType(): string
+    {
+        return $this->clientType;
+    }
+
+    /**
+     * @param string $clientType
+     */
+    public function setClientType(string $clientType)
+    {
+        $this->clientType = $clientType;
+    }
+    //</editor-fold>
+
 }

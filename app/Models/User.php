@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Models;
 
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -23,16 +24,16 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property string                      $password
  * @property string                      $facebookId
  * @property string                      $facebookToken
- * @property \Carbon\Carbon              $facebookTokenExpire
+ * @property Carbon                      $facebookTokenExpire
  * @property string                      $deviceId
  * @property integer                     $verifyCode
- * @property \Carbon\Carbon              $verifyExpire
+ * @property Carbon                      $verifyExpire
  * @property boolean                     $isPending
- * @property \Carbon\Carbon              $passwordChangedAt
- * @property \Carbon\Carbon              $lastLoginAt
- * @property \Carbon\Carbon              $createdAt
- * @property \Carbon\Carbon              $updatedAt
- * @property \Carbon\Carbon              $deletedAt
+ * @property Carbon                      $passwordChangedAt
+ * @property Carbon                      $lastLoginAt
+ * @property Carbon                      $createdAt
+ * @property Carbon                      $updatedAt
+ * @property Carbon                      $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
@@ -122,6 +123,9 @@ class User extends AbstractModel implements
         return $this->belongsTo(Client::class);
     }
 
+    /**
+     * Registering event before creating a new user
+     */
     protected static function boot()
     {
         static::creating(function ($model) {
@@ -129,9 +133,14 @@ class User extends AbstractModel implements
         });
     }
 
+    /**
+     * Generating a verification for the user, before saving.
+     */
     protected function generateVerifyCode()
     {
-        $this->attributes[ 'verify_code' ] = generate_code();
+        if (empty($this->attributes[ 'verify_code' ])) {
+            $this->attributes[ 'verify_code' ] = generate_code();
+        }
     }
 
     /**
@@ -143,5 +152,215 @@ class User extends AbstractModel implements
     {
         $this->attributes[ 'password' ] = Hash::make($password);
     }
+
+    //<editor-fold desc="Getters & Setters">
+    /**
+     * @return int
+     */
+    public function getClientId() : int
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * @param int $clientId
+     */
+    public function setClientId(int $clientId)
+    {
+        $this->clientId = $clientId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail() : string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername() : string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword() : string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId() : string
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param string $facebookId
+     */
+    public function setFacebookId(string $facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookToken() : string
+    {
+        return $this->facebookToken;
+    }
+
+    /**
+     * @param string $facebookToken
+     */
+    public function setFacebookToken(string $facebookToken)
+    {
+        $this->facebookToken = $facebookToken;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getFacebookTokenExpire() : Carbon
+    {
+        return $this->facebookTokenExpire;
+    }
+
+    /**
+     * @param Carbon $facebookTokenExpire
+     */
+    public function setFacebookTokenExpire(Carbon $facebookTokenExpire)
+    {
+        $this->facebookTokenExpire = $facebookTokenExpire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeviceId() : string
+    {
+        return $this->deviceId;
+    }
+
+    /**
+     * @param string $deviceId
+     */
+    public function setDeviceId(string $deviceId)
+    {
+        $this->deviceId = $deviceId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVerifyCode() : int
+    {
+        return $this->verifyCode;
+    }
+
+    /**
+     * @param int $verifyCode
+     */
+    public function setVerifyCode(int $verifyCode)
+    {
+        $this->verifyCode = $verifyCode;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getVerifyExpire() : Carbon
+    {
+        return $this->verifyExpire;
+    }
+
+    /**
+     * @param Carbon $verifyExpire
+     */
+    public function setVerifyExpire(Carbon $verifyExpire)
+    {
+        $this->verifyExpire = $verifyExpire;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsPending() : bool
+    {
+        return $this->isPending;
+    }
+
+    /**
+     * @param boolean $isPending
+     */
+    public function setIsPending(bool $isPending)
+    {
+        $this->isPending = $isPending;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getPasswordChangedAt() : Carbon
+    {
+        return $this->passwordChangedAt;
+    }
+
+    /**
+     * @param Carbon $passwordChangedAt
+     */
+    public function setPasswordChangedAt(Carbon $passwordChangedAt)
+    {
+        $this->passwordChangedAt = $passwordChangedAt;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getLastLoginAt() : Carbon
+    {
+        return $this->lastLoginAt;
+    }
+
+    /**
+     * @param Carbon $lastLoginAt
+     */
+    public function setLastLoginAt(Carbon $lastLoginAt)
+    {
+        $this->lastLoginAt = $lastLoginAt;
+    }
+    //</editor-fold>
 
 }

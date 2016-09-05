@@ -63,4 +63,22 @@ class IdentityType extends AbstractModel
         return $this->hasMany(Client::class);
     }
 
+    //<editor-fold desc="Getters & Setters">
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
+    }
+    //</editor-fold>
+
 }

@@ -29,11 +29,13 @@ trait ModelCamelCaseTrait
      * @param string $key
      * @param mixed  $value
      *
-     * @return Model
+     * @return Model|ModelCamelCaseTrait
      */
-    public function setAttribute($key, $value) : Model
+    public function setAttribute($key, $value)
     {
-        return parent::setAttribute(snake_case($key), $value);
+        parent::setAttribute(snake_case($key), $value);
+
+        return $this;
     }
 
 }
