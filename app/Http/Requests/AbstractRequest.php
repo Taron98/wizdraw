@@ -22,4 +22,25 @@ abstract class AbstractRequest extends FormRequest
     {
         return new JsonResponse($errors, 422);
     }
+
+    /**
+     * Get all the request's input by the rules
+     *
+     * @return array
+     */
+    public function inputs() : array
+    {
+        $inputs = [];
+
+        foreach ($this->rules() as $name => $rule) {
+            $input = $this->input($name);
+
+            if (!empty($input)) {
+                $inputs[ snake_case($name) ] = $input;
+            }
+        }
+
+        return $inputs;
+    }
+
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace Wizdraw\Http\Requests;
+namespace Wizdraw\Http\Requests\Auth;
+
+use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class LoginRequest
@@ -8,6 +10,22 @@ namespace Wizdraw\Http\Requests;
  */
 class LoginRequest extends AbstractRequest
 {
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
     /**
      * Determine if the user is authorized to make this request.

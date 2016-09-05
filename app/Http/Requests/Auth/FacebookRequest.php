@@ -1,6 +1,8 @@
 <?php
 
-namespace Wizdraw\Http\Requests;
+namespace Wizdraw\Http\Requests\Auth;
+
+use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class LoginFacebookRequest
@@ -8,7 +10,6 @@ namespace Wizdraw\Http\Requests;
  */
 class FacebookRequest extends AbstractRequest
 {
-    protected $redirect = false;
 
     /**
      * @return string
@@ -19,27 +20,11 @@ class FacebookRequest extends AbstractRequest
     }
 
     /**
-     * @param string $token
-     */
-    public function setToken(string $token)
-    {
-        $this->token = $token;
-    }
-
-    /**
      * @return int
      */
     public function getExpire(): int
     {
         return $this->expire;
-    }
-
-    /**
-     * @param int $expire
-     */
-    public function setExpire(int $expire)
-    {
-        $this->expire = $expire;
     }
 
     /**
