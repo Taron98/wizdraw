@@ -27,8 +27,8 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property \Carbon\Carbon                    $createdAt
  * @property \Carbon\Carbon                    $updatedAt
  * @property \Carbon\Carbon                    $deletedAt
- * @property-read \Wizdraw\Models\IdentityType $IdentityType
- * @property-read \Wizdraw\Models\User         $User
+ * @property-read \Wizdraw\Models\IdentityType $identityType
+ * @property-read \Wizdraw\Models\User         $user
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -65,16 +65,16 @@ class Client extends AbstractModel
      * @var array
      */
     protected $fillable = [
-        'identityTypeId',
-        'identityNumber',
-        'identityExpire',
-        'firstName',
-        'middleName',
-        'lastName',
-        'birthDate',
+        'identity_type_id',
+        'identity_number',
+        'identity_expire',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'birth_date',
         'gender',
         'phone',
-        'residentCountryId',
+        'resident_country_id',
         'city',
         'address',
     ];
@@ -85,12 +85,10 @@ class Client extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'createdAt',
-        'updatedAt',
-        'deletedAt',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
-
-    public static $snakeAttributes = false;
 
     /**
      * One-to-many relationship with identity_types table

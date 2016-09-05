@@ -33,7 +33,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property \Carbon\Carbon              $createdAt
  * @property \Carbon\Carbon              $updatedAt
  * @property \Carbon\Carbon              $deletedAt
- * @property-read \Wizdraw\Models\Client $Client
+ * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
@@ -73,19 +73,19 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $fillable = [
-        'clientId',
+        'client_id',
         'email',
         'username',
         'password',
-        'facebookId',
-        'facebookToken',
-        'facebookTokenExpire',
-        'deviceId',
-        'verifyCode',
-        'verifyExpire',
-        'isPending',
-        'passwordChangedAt',
-        'lastLoginAt',
+        'facebook_id',
+        'facebook_token',
+        'facebook_token_expire',
+        'device_id',
+        'verify_code',
+        'verify_expire',
+        'is_pending',
+        'password_changed_at',
+        'last_login_at',
     ];
 
     /**
@@ -103,13 +103,13 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $dates = [
-        'facebookTokenExpire',
-        'verifyExpire',
-        'passwordChangedAt',
-        'lastLoginAt',
-        'createdAt',
-        'updatedAt',
-        'deletedAt',
+        'facebook_token_expire',
+        'verify_expire',
+        'password_changed_at',
+        'last_login_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**
@@ -120,6 +120,18 @@ class User extends AbstractModel implements
     public function client() : BelongsTo
     {
         return $this->belongsTo(Client::class);
+    }
+
+    protected static function boot()
+    {
+        static::creating(function ($model) {
+            $model->generateVerifyCode();
+        });
+    }
+
+    protected function generateVerifyCode()
+    {
+        $this->attributes[ 'verify_code' ] = mt_rand(10000, 99999);
     }
 
     /**

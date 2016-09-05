@@ -14,7 +14,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property \Carbon\Carbon                                                         $createdAt
  * @property \Carbon\Carbon                                                         $updatedAt
  * @property \Carbon\Carbon                                                         $deletedAt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $Clients
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
@@ -48,9 +48,9 @@ class IdentityType extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'createdAt',
-        'updatedAt',
-        'deletedAt',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

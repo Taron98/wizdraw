@@ -153,7 +153,11 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
+        Bosnadev\Repositories\Providers\RepositoryProvider::class,
 
         /*
          * Application Service Providers...
@@ -162,15 +166,7 @@ return [
         Wizdraw\Providers\AuthServiceProvider::class,
         Wizdraw\Providers\EventServiceProvider::class,
         Wizdraw\Providers\RouteServiceProvider::class,
-
-        /*
-         * Vendor plugins
-         */
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,      // Utils for the ide
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
-        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
-        Bosnadev\Repositories\Providers\RepositoryProvider::class,
+        Wizdraw\Providers\HelperServiceProvider::class,
 
     ],
 
