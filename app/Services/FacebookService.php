@@ -58,7 +58,7 @@ class FacebookService extends AbstractService
      *
      * @param AccessToken $accessToken
      *
-     * @return AccessToken|null
+     * @return AccessToken
      * @throws FacebookInvalidTokenException
      */
     private function getLongLivedAccessToken(AccessToken $accessToken) : AccessToken
