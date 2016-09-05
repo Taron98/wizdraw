@@ -6,15 +6,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Wizdraw\Http\Controllers\AbstractController;
-use Wizdraw\Http\Requests\FacebookRequest;
-use Wizdraw\Http\Requests\LoginRequest;
+use Wizdraw\Http\Requests\Auth\FacebookRequest;
+use Wizdraw\Http\Requests\Auth\LoginRequest;
+use Wizdraw\Http\Requests\Auth\SignupRequest;
+use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\FacebookService;
 
 /**
  * Class AuthController
- * TODO: change the code, seems odd
  * @package Wizdraw\Http\Controllers\Auth
  */
 class AuthController extends AbstractController
@@ -23,30 +24,36 @@ class AuthController extends AbstractController
     /** @var FacebookService */
     private $facebookService;
 
+    /** @var  AuthService */
+    private $authService;
+
     /** @var  UserRepository */
     private $userRepository;
 
-    /** @var  AuthService */
-    private $authService;
+    /** @var  ClientRepository */
+    private $clientRepository;
 
     /**
      * AuthController constructor.
      *
-     * @param FacebookService $facebookService
-     * @param UserRepository  $userRepository
-     * @param AuthService     $authService
+     * @param FacebookService  $facebookService
+     * @param AuthService      $authService
+     * @param UserRepository   $userRepository
+     * @param ClientRepository $clientRepository
      */
     public function __construct(
         FacebookService $facebookService,
+        AuthService $authService,
         UserRepository $userRepository,
-        AuthService $authService
+        ClientRepository $clientRepository
     ) {
         $this->facebookService = $facebookService;
-        $this->userRepository = $userRepository;
         $this->authService = $authService;
+        $this->userRepository = $userRepository;
+        $this->clientRepository = $clientRepository;
 
         // Don't run the auth middleware on the login routes
-        $this->middleware('jwt.auth', ['except' => ['login', 'loginFacebook']]);
+        $this->middleware('jwt.auth', ['except' => ['login', 'loginFacebook', 'signup']]);
     }
 
     /**
@@ -65,6 +72,7 @@ class AuthController extends AbstractController
 
     /**
      * Login route using facebook connect
+     * TODO: change the code, seems odd
      *
      * @param FacebookRequest $request
      *
@@ -80,7 +88,32 @@ class AuthController extends AbstractController
     }
 
     /**
+     * Basic signup route
+     *
+     * @param SignupRequest $request
+     *
+     * @return string
+     */
+    public function signup(SignupRequest $request) : string
+    {
+        $userAttrs = $request->only('email', 'deviceId');
+        $clientAttrs = $request->only('firstName', 'lastName', 'phone');
+
+        if ($this->userRepository->exists($request->only('email'))) {
+            return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
+        }
+
+        $client = $this->clientRepository->create($clientAttrs);
+        $user = $this->userRepository->createWithRelation($userAttrs, $client);
+
+        return $this->respond([
+            'token' => $this->authService->createTokenFromUser($user),
+        ]);
+    }
+
+    /**
      * Create a token for the authenticated user
+     * TODO: change the code, seems odd
      *
      * @param array  $credentials
      * @param string $facebookId
@@ -93,7 +126,7 @@ class AuthController extends AbstractController
             if (!empty($credentials)) {
                 $token = $this->authService->createTokenFromCredentials($credentials);
             } else {
-                $token = $this->authService->createTokenFromUser($facebookId);
+                $token = $this->authService->createTokenFromFbId($facebookId);
             }
         } catch (JWTException $exception) {
             return $this->respondWithError('could_not_create_token', Response::HTTP_INTERNAL_SERVER_ERROR);

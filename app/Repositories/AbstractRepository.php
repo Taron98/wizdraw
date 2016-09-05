@@ -3,7 +3,6 @@
 namespace Wizdraw\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
-use Illuminate\Database\Eloquent\Model;
 use Wizdraw\Models\AbstractModel;
 
 /**

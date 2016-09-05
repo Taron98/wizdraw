@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Repositories;
 
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\User;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -18,6 +19,24 @@ class UserRepository extends AbstractRepository
     public function model() : string
     {
         return User::class;
+    }
+
+    /**
+     * @param array         $data
+     *
+     * @param AbstractModel $client
+     *
+     * @return mixed
+     */
+    public function createWithRelation(array $data, AbstractModel $client)
+    {
+        $newModel = $this->model
+            ->newInstance($data)
+            ->client()->associate($client);
+
+        $success = $newModel->save();
+
+        return (!$success) ?: $newModel;
     }
 
     /**
