@@ -9,6 +9,8 @@ use Wizdraw\Http\Controllers\AbstractController;
 use Wizdraw\Http\Requests\Auth\FacebookRequest;
 use Wizdraw\Http\Requests\Auth\LoginRequest;
 use Wizdraw\Http\Requests\Auth\SignupRequest;
+use Wizdraw\Models\Client;
+use Wizdraw\Models\User;
 use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
@@ -103,11 +105,22 @@ class AuthController extends AbstractController
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
+        /** @var Client $client */
         $client = $this->clientRepository->create($clientAttrs);
+        if (!$client instanceof Client) {
+            return $this->respondWithError('cant_create_client');
+        }
+
+        /** @var User $user */
         $user = $this->userRepository->createWithRelation($userAttrs, $client);
+        if (!$user) {
+            return $this->respondWithError('cant_create_user');
+        }
 
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
+            'verifyCode' => $user->getVerifyCode(),
+            'verifyExpire' => $user->getVerifyExpire()
         ]);
     }
 

@@ -113,6 +113,6 @@ return [
     |
     */
 
-    'verify_code_length' => 3
+    'verify_code_length' => 6,
 
 ];
