@@ -46,7 +46,7 @@ if (!function_exists('generate_code')) {
      */
     function generate_code() : int
     {
-        $length = config('auth.verify_code_length');
+        $length = config('auth.verification.length');
 
         $min = pow(10, $length - 1);
         $max = pow(10, $length) - 1;

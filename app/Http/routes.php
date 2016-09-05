@@ -38,4 +38,18 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
+    Route::group(['middleware' => 'api'], function () {
+
+        // User
+        Route::group(['prefix' => 'user/'], function () {
+
+            Route::post('code/', [
+                'as'   => 'user.code',
+                'uses' => 'UserController@code',
+            ]);
+
+        });
+
+    });
+
 });

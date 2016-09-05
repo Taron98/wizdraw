@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url'         => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,21 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // todo: change to project default timezone
+    'timezone'    => 'UTC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Time Format
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default timeformat for your application, which
+    | will be used by the Carbon date and time functions.
+    |
+    */
+
+    // todo: change to project default time format
+//    'timeformat' => 'd-m-Y H:i:s',
 
     /*
     |--------------------------------------------------------------------------

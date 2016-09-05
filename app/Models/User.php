@@ -124,22 +124,31 @@ class User extends AbstractModel implements
     }
 
     /**
-     * Registering event before creating a new user
+     * The "booting" method of the model.
+     *
+     * @return void
      */
     protected static function boot()
     {
+        // Event for saving a new user
         static::creating(function ($model) {
-            $model->generateVerifyCode();
+            /** @var User $model */
+            $model->generateVerifyCode(true);
         });
     }
 
     /**
      * Generating a verification for the user, before saving.
+     *
+     * @param bool $isNew
      */
-    protected function generateVerifyCode()
+    public function generateVerifyCode($isNew = false)
     {
-        if (empty($this->attributes[ 'verify_code' ])) {
+        $verifyExpire = config('auth.verification.expire');
+
+        if (empty($this->attributes[ 'verify_code' ]) || !$isNew) {
             $this->attributes[ 'verify_code' ] = generate_code();
+            $this->attributes[ 'verify_expire' ] = Carbon::now()->addMinutes($verifyExpire);
         }
     }
 

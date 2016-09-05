@@ -106,13 +106,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Verify Code Generation Length
+    | Verification Code Generation
     |--------------------------------------------------------------------------
     |
-    | When generating a verification code for user, use this length.
+    | Configuration for generating a new verification code for user.
     |
     */
 
-    'verify_code_length' => 6,
+    'verification' => [
+        'length' => 6,
+        'expire' => 60,
+    ],
 
 ];

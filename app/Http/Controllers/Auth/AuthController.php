@@ -53,9 +53,6 @@ class AuthController extends AbstractController
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->clientRepository = $clientRepository;
-
-        // Don't run the auth middleware on the login routes
-        $this->middleware('jwt.auth', ['except' => ['login', 'loginFacebook', 'signup']]);
     }
 
     /**
@@ -120,7 +117,7 @@ class AuthController extends AbstractController
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
             'verifyCode' => $user->getVerifyCode(),
-            'verifyExpire' => $user->getVerifyExpire()
+            'verifyExpire' => (string)$user->getVerifyExpire()
         ]);
     }
 

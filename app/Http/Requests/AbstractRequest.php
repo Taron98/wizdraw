@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
+use Wizdraw\Models\User;
 
 /**
  * Class AbstractRequest
@@ -12,6 +13,19 @@ use Illuminate\Http\JsonResponse;
  */
 abstract class AbstractRequest extends FormRequest
 {
+
+    /**
+     * Get the user making the request.
+     *
+     * @param  string|null $guard
+     *
+     * @return User
+     */
+    public function user($guard = null)
+    {
+        return parent::user($guard);
+    }
+
     /**
      * Get the proper failed validation response for the request.
      *
