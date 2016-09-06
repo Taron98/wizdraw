@@ -95,7 +95,7 @@ class User extends AbstractModel implements
      * @var array
      */
     protected $casts = [
-        'isPending' => 'boolean',
+        'is_pending' => 'boolean',
     ];
 
     /**
@@ -163,22 +163,6 @@ class User extends AbstractModel implements
     }
 
     //<editor-fold desc="Getters & Setters">
-    /**
-     * @return int
-     */
-    public function getClientId() : int
-    {
-        return $this->clientId;
-    }
-
-    /**
-     * @param int $clientId
-     */
-    public function setClientId(int $clientId)
-    {
-        $this->clientId = $clientId;
-    }
-
     /**
      * @return string
      */

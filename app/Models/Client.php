@@ -74,9 +74,11 @@ class Client extends AbstractModel
         'birth_date',
         'gender',
         'phone',
+        'default_country_id',
         'resident_country_id',
         'city',
         'address',
+        'client_type',
     ];
 
     /**
@@ -85,6 +87,8 @@ class Client extends AbstractModel
      * @var array
      */
     protected $dates = [
+        'identity_expire',
+        'birth_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -114,28 +118,21 @@ class Client extends AbstractModel
      * TODO: Currently, we haven't decided yet
      * TODO:  how to implement the caching of the old tables
      */
+    public function defaultCountry()
+    {
+
+    }
+
+    /**
+     * TODO: Currently, we haven't decided yet
+     * TODO:  how to implement the caching of the old tables
+     */
     public function residentCountry()
     {
 
     }
 
     //<editor-fold desc="Getters & Setters">
-    /**
-     * @return int
-     */
-    public function getIdentityTypeId(): int
-    {
-        return $this->identityTypeId;
-    }
-
-    /**
-     * @param int $identityTypeId
-     */
-    public function setIdentityTypeId(int $identityTypeId)
-    {
-        $this->identityTypeId = $identityTypeId;
-    }
-
     /**
      * @return string
      */
@@ -262,22 +259,6 @@ class Client extends AbstractModel
     public function setPhone(string $phone)
     {
         $this->phone = $phone;
-    }
-
-    /**
-     * @return int
-     */
-    public function getResidentCountryId(): int
-    {
-        return $this->residentCountryId;
-    }
-
-    /**
-     * @param int $residentCountryId
-     */
-    public function setResidentCountryId(int $residentCountryId)
-    {
-        $this->residentCountryId = $residentCountryId;
     }
 
     /**
