@@ -73,7 +73,7 @@ class AuthController extends AbstractController
             return $token;
         }
 
-        return $this->respond($token);
+        return $this->respond(compact('token'));
     }
 
     /**

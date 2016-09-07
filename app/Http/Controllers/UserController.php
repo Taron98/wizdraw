@@ -4,6 +4,7 @@ namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Models\User;
 use Wizdraw\Repositories\UserRepository;
 
@@ -25,6 +26,23 @@ class UserController extends AbstractController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+    }
+
+    /**
+     * Update password route
+     *
+     * @param UserPasswordRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function password(UserPasswordRequest $request)
+    {
+        $user = $request->user();
+        $user->setPassword($request->getPassword());
+
+        $this->userRepository->updateModel($user);
+
+        return $this->respond();
     }
 
     /**

@@ -43,6 +43,11 @@ Route::group(['prefix' => 'v1/'], function () {
         // User
         Route::group(['prefix' => 'user/'], function () {
 
+            Route::post('password/', [
+                'as'   => 'user.password',
+                'uses' => 'UserController@password',
+            ]);
+
             Route::post('code/', [
                 'as'   => 'user.code',
                 'uses' => 'UserController@code',
