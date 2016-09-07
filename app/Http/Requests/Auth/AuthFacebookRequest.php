@@ -5,10 +5,10 @@ namespace Wizdraw\Http\Requests\Auth;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class LoginFacebookRequest
+ * Class AuthFacebookRequest
  * @package Wizdraw\Http\Requests\Auth
  */
-class FacebookRequest extends AbstractRequest
+class AuthFacebookRequest extends AbstractRequest
 {
 
     /**

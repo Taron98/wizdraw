@@ -6,10 +6,10 @@ use Wizdraw\Http\Requests\AbstractRequest;
 use Wizdraw\Traits\RequestAuthorizeUser;
 
 /**
- * Class UpdateUserRequest
+ * Class UserUpdateRequest
  * @package Wizdraw\Http\Requests\User
  */
-class UpdateClientRequest extends AbstractRequest
+class UserUpdateRequest extends AbstractRequest
 {
     use RequestAuthorizeUser;
 

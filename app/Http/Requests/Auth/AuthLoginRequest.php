@@ -5,10 +5,10 @@ namespace Wizdraw\Http\Requests\Auth;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class LoginRequest
+ * Class AuthLoginRequest
  * @package Wizdraw\Http\Requests\Auth
  */
-class LoginRequest extends AbstractRequest
+class AuthLoginRequest extends AbstractRequest
 {
 
     /**

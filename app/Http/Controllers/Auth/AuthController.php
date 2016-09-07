@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Http\Controllers\AbstractController;
-use Wizdraw\Http\Requests\Auth\FacebookRequest;
-use Wizdraw\Http\Requests\Auth\LoginRequest;
-use Wizdraw\Http\Requests\Auth\SignupRequest;
+use Wizdraw\Http\Requests\Auth\AuthFacebookRequest;
+use Wizdraw\Http\Requests\Auth\AuthLoginRequest;
+use Wizdraw\Http\Requests\Auth\AuthSignupRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
 use Wizdraw\Repositories\ClientRepository;
@@ -59,11 +59,11 @@ class AuthController extends AbstractController
     /**
      * Login route using username and password
      *
-     * @param LoginRequest $request
+     * @param AuthLoginRequest $request
      *
      * @return JsonResponse
      */
-    public function login(LoginRequest $request) : JsonResponse
+    public function login(AuthLoginRequest $request) : JsonResponse
     {
         $credentials = $request->only('username', 'password');
 
@@ -79,11 +79,11 @@ class AuthController extends AbstractController
     /**
      * Basic signup route
      *
-     * @param SignupRequest $request
+     * @param AuthSignupRequest $request
      *
      * @return JsonResponse
      */
-    public function signup(SignupRequest $request) : JsonResponse
+    public function signup(AuthSignupRequest $request) : JsonResponse
     {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
@@ -115,11 +115,11 @@ class AuthController extends AbstractController
      * Login route using facebook connect
      * TODO: change the code, seems odd
      *
-     * @param FacebookRequest $request
+     * @param AuthFacebookRequest $request
      *
      * @return JsonResponse
      */
-    public function facebook(FacebookRequest $request) : JsonResponse
+    public function facebook(AuthFacebookRequest $request) : JsonResponse
     {
         try {
             $facebookUser = $this->facebookService->connect($request->getToken(), $request->getExpire());

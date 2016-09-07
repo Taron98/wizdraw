@@ -3,7 +3,7 @@
 namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Wizdraw\Http\Requests\User\UpdateClientRequest;
+use Wizdraw\Http\Requests\User\UserUpdateRequest;
 use Wizdraw\Repositories\ClientRepository;
 
 /**
@@ -30,12 +30,12 @@ class ClientController extends AbstractController
     /**
      * Updating client route
      *
-     * @param UpdateClientRequest $request
+     * @param UserUpdateRequest   $request
      * @param                     $id
      *
      * @return JsonResponse
      */
-    public function update(UpdateClientRequest $request, $id) : JsonResponse
+    public function update(UserUpdateRequest $request, $id) : JsonResponse
     {
         $input = $request->inputs();
 
