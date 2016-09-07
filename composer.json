@@ -11,7 +11,8 @@
         "tymon/jwt-auth": "0.5.*",
         "sammyk/laravel-facebook-sdk": "^3.3",
         "graham-campbell/exceptions": "^9.1",
-        "bosnadev/repositories": "0.*"
+        "bosnadev/repositories": "0.*",
+        "propaganistas/laravel-phone": "^2.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

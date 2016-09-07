@@ -171,6 +171,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         //Bosnadev\Repositories\Providers\RepositoryProvider::class,
 
         /*
