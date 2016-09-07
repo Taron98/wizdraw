@@ -7,6 +7,9 @@ use Facebook\Exceptions\FacebookSDKException;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Exceptions\FacebookResponseException;
+use Wizdraw\Models\User;
+use Wizdraw\Repositories\ClientRepository;
+use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\Entities\AbstractEntity;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -20,16 +23,29 @@ class FacebookService extends AbstractService
     const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name';
 
     /** @var LaravelFacebookSdk */
-    public $sdk;
+    private $sdk;
+
+    /** @var UserRepository */
+    private $userRepository;
+
+    /** @var ClientRepository */
+    private $clientRepository;
 
     /**
      * FacebookService constructor.
      *
      * @param LaravelFacebookSdk $sdk
+     * @param UserRepository     $userRepository
+     * @param ClientRepository   $clientRepository
      */
-    public function __construct(LaravelFacebookSdk $sdk)
-    {
+    public function __construct(
+        LaravelFacebookSdk $sdk,
+        UserRepository $userRepository,
+        ClientRepository $clientRepository
+    ) {
         $this->sdk = $sdk;
+        $this->userRepository = $userRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     /**
@@ -97,6 +113,31 @@ class FacebookService extends AbstractService
     public function getDefaultAccessToken() : AccessToken
     {
         return $this->sdk->getDefaultAccessToken();
+    }
+
+    /**
+     * Connect using facebook, signup if new | login if exists
+     *
+     * @param string $token
+     * @param int    $expire
+     *
+     * @return FacebookUser
+     */
+    public function connect(string $token, int $expire)
+    {
+        $this->setDefaultAccessToken($token, $expire);
+        $facebookUser = $this->getBasicInfo();
+
+        /** @var User|null $user */
+        $user = $this->userRepository->findByFacebookId($facebookUser->getId());
+        if (is_null($user)) {
+            $client = $this->clientRepository->createByFacebook($facebookUser);
+            $user = $this->userRepository->createByFacebook($client, $facebookUser);
+        } else {
+            $this->userRepository->updateFacebook($facebookUser);
+        }
+
+        return $facebookUser;
     }
 
     /**

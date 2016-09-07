@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
 
             $table->integer('client_id')->unsigned()->index();
-            $table->string('email', 255)->unique();
+            $table->string('email', 255)->unique()->nullable();
             $table->string('username', 30)->nullable()->unique();
             $table->string('password', 255)->nullable();
             $table->string('facebook_id', 20)->nullable();

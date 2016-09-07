@@ -3,6 +3,7 @@
 namespace Wizdraw\Repositories;
 
 use Wizdraw\Models\AbstractModel;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -69,6 +70,7 @@ class UserRepository extends AbstractRepository
     public function fromFacebookUser(FacebookUser $facebookUser)
     {
         $user = new User();
+        $user->email = $facebookUser->getEmail();
         $user->facebookId = $facebookUser->getId();
         $user->facebookToken = $facebookUser->getToken();
         $user->facebookTokenExpire = $facebookUser->getExpire();
@@ -77,7 +79,22 @@ class UserRepository extends AbstractRepository
     }
 
     /**
-     * Update facebook token, expire and id to our user
+     * Creating a user by the facebook details
+     *
+     * @param Client       $client
+     * @param FacebookUser $facebookUser
+     *
+     * @return mixed
+     */
+    public function createByFacebook(Client $client, FacebookUser $facebookUser)
+    {
+        $user = $this->fromFacebookUser($facebookUser);
+
+        return $this->createWithRelation($user->toArray(), $client);
+    }
+
+    /**
+     * Update facebook session to the user
      *
      * @param FacebookUser $facebookUser
      *

@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Controllers\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Http\Controllers\AbstractController;
 use Wizdraw\Http\Requests\Auth\FacebookRequest;
 use Wizdraw\Http\Requests\Auth\LoginRequest;
@@ -66,24 +67,13 @@ class AuthController extends AbstractController
     {
         $credentials = $request->only('username', 'password');
 
-        return $this->authenticate($credentials);
-    }
+        $token = $this->authenticate($credentials);
 
-    /**
-     * Login route using facebook connect
-     * TODO: change the code, seems odd
-     *
-     * @param FacebookRequest $request
-     *
-     * @return JsonResponse
-     */
-    public function facebook(FacebookRequest $request) : JsonResponse
-    {
-        $this->facebookService->setDefaultAccessToken($request->getToken(), $request->getExpire());
-        $facebookUser = $this->facebookService->getBasicInfo();
-        $this->userRepository->updateFacebook($facebookUser);
+        if ($token instanceof JsonResponse) {
+            return $token;
+        }
 
-        return $this->authenticate([], $facebookUser->getId());
+        return $this->respond($token);
     }
 
     /**
@@ -91,9 +81,9 @@ class AuthController extends AbstractController
      *
      * @param SignupRequest $request
      *
-     * @return string
+     * @return JsonResponse
      */
-    public function signup(SignupRequest $request) : string
+    public function signup(SignupRequest $request) : JsonResponse
     {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
@@ -122,15 +112,41 @@ class AuthController extends AbstractController
     }
 
     /**
+     * Login route using facebook connect
+     * TODO: change the code, seems odd
+     *
+     * @param FacebookRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function facebook(FacebookRequest $request) : JsonResponse
+    {
+        try {
+            $facebookUser = $this->facebookService->connect($request->getToken(), $request->getExpire());
+        } catch (FacebookInvalidTokenException $exception) {
+            return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        $token = $this->authenticate([], $facebookUser->getId());
+
+        if ($token instanceof JsonResponse) {
+            return $token;
+        }
+
+        // Returns our token, including his facebook information
+        return $this->respond(array_merge(compact('token'), $facebookUser->toArray()));
+    }
+
+    /**
      * Create a token for the authenticated user
      * TODO: change the code, seems odd
      *
      * @param array  $credentials
      * @param string $facebookId
      *
-     * @return JsonResponse
+     * @return JsonResponse|string
      */
-    private function authenticate(array $credentials = [], string $facebookId = '') : JsonResponse
+    private function authenticate(array $credentials = [], string $facebookId = '')
     {
         try {
             if (!empty($credentials)) {
@@ -146,7 +162,7 @@ class AuthController extends AbstractController
             return $this->respondWithError('invalid_credentials', Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->respond(compact('token'));
+        return $token;
     }
 
 }

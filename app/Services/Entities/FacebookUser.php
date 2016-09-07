@@ -11,25 +11,25 @@ use Facebook\Authentication\AccessToken;
 class FacebookUser extends AbstractEntity
 {
 
-    /** @var  string */
-    protected $token;
+    /** @var  string|null */
+    private $token;
 
-    /** @var  int */
-    protected $expire;
+    /** @var  int|null */
+    private $expire;
 
-    /** @var  string */
+    /** @var  string|null */
     protected $id;
 
-    /** @var  string */
+    /** @var  string|null */
     protected $email;
 
-    /** @var  string */
+    /** @var  string|null */
     protected $firstName;
 
-    /** @var  string */
+    /** @var  string|null */
     protected $middleName;
 
-    /** @var  string */
+    /** @var  string|null */
     protected $lastName;
 
     /**
@@ -42,9 +42,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getToken(): string
+    public function getToken()
     {
         return $this->token;
     }
@@ -62,9 +62,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getExpire(): int
+    public function getExpire()
     {
         return $this->expire;
     }
@@ -82,9 +82,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -102,9 +102,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -122,9 +122,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName(): string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -142,9 +142,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMiddleName(): string
+    public function getMiddleName()
     {
         return $this->middleName;
     }
@@ -162,9 +162,9 @@ class FacebookUser extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName(): string
+    public function getLastName()
     {
         return $this->lastName;
     }

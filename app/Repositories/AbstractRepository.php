@@ -32,7 +32,7 @@ abstract class AbstractRepository extends Repository
      *
      * @return mixed
      */
-    public function createModel(AbstractModel $model) : mixed
+    public function createModel(AbstractModel $model)
     {
         return $this->create($model->toArray());
     }
