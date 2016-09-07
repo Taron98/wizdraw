@@ -20,7 +20,7 @@ use Wizdraw\Services\Entities\FacebookUser;
 class FacebookService extends AbstractService
 {
     /** Request for basic user information */
-    const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name';
+    const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name,gender';
 
     /** @var LaravelFacebookSdk */
     private $sdk;

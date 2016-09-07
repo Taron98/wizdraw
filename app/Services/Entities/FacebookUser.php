@@ -32,6 +32,9 @@ class FacebookUser extends AbstractEntity
     /** @var  string|null */
     protected $lastName;
 
+    /** @var string|null */
+    protected $gender;
+
     /**
      * @param AccessToken $accessToken
      */
@@ -177,6 +180,26 @@ class FacebookUser extends AbstractEntity
     public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     *
+     * @return $this
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
 
         return $this;
     }

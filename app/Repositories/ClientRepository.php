@@ -33,6 +33,7 @@ class ClientRepository extends AbstractRepository
         $client->firstName = $facebookUser->getFirstName();
         $client->middleName = $facebookUser->getMiddleName();
         $client->lastName = $facebookUser->getLastName();
+        $client->gender = $facebookUser->getGender();
 
         return $client;
     }
