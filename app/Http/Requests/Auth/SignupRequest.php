@@ -6,7 +6,7 @@ use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class SignupRequest
- * @package Wizdraw\Http\Requests
+ * @package Wizdraw\Http\Requests\Auth
  */
 class SignupRequest extends AbstractRequest
 {

@@ -2,8 +2,13 @@
 
 namespace Wizdraw\Http\Requests;
 
+/**
+ * Class NoParamRequest
+ * @package Wizdraw\Http\Requests
+ */
 class NoParamRequest extends AbstractRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,4 +30,5 @@ class NoParamRequest extends AbstractRequest
 
         ];
     }
+
 }

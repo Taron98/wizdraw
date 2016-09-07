@@ -6,7 +6,7 @@ use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class LoginRequest
- * @package Wizdraw\Http\Requests
+ * @package Wizdraw\Http\Requests\Auth
  */
 class LoginRequest extends AbstractRequest
 {
@@ -46,7 +46,7 @@ class LoginRequest extends AbstractRequest
     {
         // TODO: update rules
         return [
-            'username' => 'required|max:255',
+            'username' => 'required|max:30',
             'password' => 'required|min:3',
         ];
     }

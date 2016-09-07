@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('client_id')->unsigned()->index();
             $table->string('email', 255)->unique();
             $table->string('username', 30)->nullable()->unique();
-            $table->string('password')->nullable();
+            $table->string('password', 255)->nullable();
             $table->string('facebook_id', 20)->nullable();
             $table->string('facebook_token', 300)->nullable();
             $table->timestamp('facebook_token_expire')->nullable();

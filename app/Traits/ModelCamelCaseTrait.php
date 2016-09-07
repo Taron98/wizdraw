@@ -5,7 +5,7 @@ namespace Wizdraw\Traits;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CamelCaseTrait
+ * Class ModelCamelCaseTrait
  * @package Wizdraw\Traits
  */
 trait ModelCamelCaseTrait

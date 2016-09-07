@@ -6,7 +6,7 @@ use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class LoginFacebookRequest
- * @package Wizdraw\Http\Requests
+ * @package Wizdraw\Http\Requests\Auth
  */
 class FacebookRequest extends AbstractRequest
 {

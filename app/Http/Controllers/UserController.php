@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Http\Controllers;
 
-use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Repositories\UserRepository;
@@ -28,6 +27,8 @@ class UserController extends AbstractController
     }
 
     /**
+     * Generating verification code route
+     *
      * @param NoParamRequest $request
      *
      * @return JsonResponse
@@ -42,8 +43,8 @@ class UserController extends AbstractController
         }
 
         return $this->respond([
-            'verifyCode' => $user->getVerifyCode(),
-            'verifyExpire' => (string)$user->getVerifyExpire()
+            'verifyCode'   => $user->getVerifyCode(),
+            'verifyExpire' => (string)$user->getVerifyExpire(),
         ]);
     }
 

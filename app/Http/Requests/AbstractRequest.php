@@ -15,7 +15,7 @@ abstract class AbstractRequest extends FormRequest
 {
 
     /**
-     * Get the user making the request.
+     * Get the user making the request, this is only for auto complete
      *
      * @param  string|null $guard
      *
@@ -27,7 +27,7 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Get the proper failed validation response for the request.
+     * Get the proper failed validation response for the request
      *
      * @param  array $errors
      *
@@ -39,22 +39,27 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Retrieve an input item from the request.
+     * Retrieve an input item from the request by camel case
      *
      * @param  string            $key
      * @param  string|array|null $default
      *
-     * @return array
+     * @return string|array
      */
-    public function input($key = null, $default = null) : array
+    public function input($key = null, $default = null)
     {
         $input = parent::input($key, $default);
+
+        if (!is_array($input)) {
+            return $input;
+        }
 
         return array_key_snake_case($input);
     }
 
+
     /**
-     * Get a subset containing the provided keys with values from the input data.
+     * Get a subset containing the provided keys with values from the input data by camel case
      *
      * @param  array|mixed $keys
      *
@@ -68,7 +73,19 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Get the validator instance for the request.
+     * Get an array of all of the files on the request by camel case
+     *
+     * @return array
+     */
+    public function allFiles()
+    {
+        $files = parent::allFiles();
+
+        return array_key_snake_case($files);
+    }
+
+    /**
+     * Get the validator instance for the request
      *
      * @return Validator
      */
@@ -89,7 +106,17 @@ abstract class AbstractRequest extends FormRequest
      */
     public function inputs() : array
     {
-        return array_key_snake_case($this->rules());
+        $inputs = [];
+
+        foreach ($this->rules() as $name => $rule) {
+            $input = $this->input($name);
+
+            if (!empty($input)) {
+                $inputs[ snake_case($name) ] = $input;
+            }
+        }
+
+        return $inputs;
     }
 
 }

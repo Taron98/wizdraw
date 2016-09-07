@@ -115,9 +115,9 @@ class AuthController extends AbstractController
         }
 
         return $this->respond([
-            'token' => $this->authService->createTokenFromUser($user),
-            'verifyCode' => $user->getVerifyCode(),
-            'verifyExpire' => (string)$user->getVerifyExpire()
+            'token'        => $this->authService->createTokenFromUser($user),
+            'verifyCode'   => $user->getVerifyCode(),
+            'verifyExpire' => (string)$user->getVerifyExpire(),
         ]);
     }
 
