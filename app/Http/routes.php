@@ -48,6 +48,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'UserController@code',
             ]);
 
+            Route::post('verify/{verifyCode}', [
+                'as'   => 'user.verify',
+                'uses' => 'UserController@verify',
+            ]);
+
             Route::get('device/{deviceId}/', [
                 'as'   => 'user.device',
                 'uses' => 'UserController@device',

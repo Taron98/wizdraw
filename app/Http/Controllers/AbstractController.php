@@ -38,8 +38,12 @@ abstract class AbstractController extends Controller
      *
      * @return JsonResponse
      */
-    protected function respond(array $message) : JsonResponse
+    protected function respond(array $message = []) : JsonResponse
     {
+        if (empty($message)) {
+            return new JsonResponse();
+        }
+
         return response()->json($message);
     }
 

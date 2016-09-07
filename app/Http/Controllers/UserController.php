@@ -50,6 +50,27 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param NoParamRequest $request
+     * @param int            $verifyCode
+     *
+     * @return JsonResponse
+     */
+    public function verify(NoParamRequest $request, int $verifyCode) : JsonResponse
+    {
+        $user = $request->user();
+
+        if ($user->getVerifyCode() !== $verifyCode) {
+            return $this->respondWithError('invalid_verification_code');
+        }
+
+        if ($user->getVerifyExpire()->isPast()) {
+            return $this->respondWithError('verification_code_expired');
+        }
+
+        return $this->respond();
+    }
+
+    /**
      * User details by device id route
      *
      * @param string $deviceId
