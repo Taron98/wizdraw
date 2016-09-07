@@ -48,6 +48,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'UserController@code',
             ]);
 
+            Route::get('device/{deviceId}/', [
+                'as'   => 'user.device',
+                'uses' => 'UserController@device',
+            ]);
+
         });
 
         // Client

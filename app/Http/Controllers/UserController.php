@@ -4,6 +4,7 @@ namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Models\User;
 use Wizdraw\Repositories\UserRepository;
 
 /**
@@ -46,6 +47,25 @@ class UserController extends AbstractController
             'verifyCode'   => $user->getVerifyCode(),
             'verifyExpire' => (string)$user->getVerifyExpire(),
         ]);
+    }
+
+    /**
+     * User details by device id route
+     *
+     * @param string $deviceId
+     *
+     * @return JsonResponse
+     */
+    public function device(string $deviceId) : JsonResponse
+    {
+        /** @var User $user */
+        $user = $this->userRepository->findByDeviceId($deviceId);
+
+        $facebookId = ($user->getFacebookId()) ?: '';
+        $username = ($user->getUsername()) ?: '';
+        $fullName = $user->client->getFullName();
+
+        return $this->respond(compact('username', 'facebookId', 'fullName'));
     }
 
 }

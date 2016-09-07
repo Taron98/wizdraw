@@ -328,6 +328,14 @@ class Client extends AbstractModel
     {
         $this->clientType = $clientType;
     }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return "{$this->firstName} {$this->middleName} {$this->lastName}";
+    }
     //</editor-fold>
 
 }

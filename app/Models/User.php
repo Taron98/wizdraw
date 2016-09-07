@@ -189,9 +189,9 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername() : string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -221,9 +221,9 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFacebookId() : string
+    public function getFacebookId()
     {
         return $this->facebookId;
     }

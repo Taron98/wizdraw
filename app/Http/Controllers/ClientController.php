@@ -28,6 +28,8 @@ class ClientController extends AbstractController
     }
 
     /**
+     * Updating client route
+     *
      * @param UpdateClientRequest $request
      * @param                     $id
      *
