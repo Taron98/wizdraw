@@ -50,6 +50,16 @@ Route::group(['prefix' => 'v1/'], function () {
 
         });
 
+        // Client
+        Route::group(['prefix' => 'client/'], function () {
+
+            Route::post('{id}/', [
+                'as'   => 'client.update',
+                'uses' => 'ClientController@update',
+            ]);
+
+        });
+
     });
 
 });

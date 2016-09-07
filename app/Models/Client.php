@@ -13,11 +13,11 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property integer                           $id
  * @property integer                           $identityTypeId
  * @property string                            $identityNumber
- * @property string                            $identityExpire
+ * @property \Carbon\Carbon                    $identityExpire
  * @property string                            $firstName
  * @property string                            $middleName
  * @property string                            $lastName
- * @property string                            $birthDate
+ * @property \Carbon\Carbon                    $birthDate
  * @property string                            $gender
  * @property string                            $phone
  * @property integer                           $residentCountryId
@@ -130,6 +130,16 @@ class Client extends AbstractModel
     public function residentCountry()
     {
 
+    }
+
+    /**
+     * Format the phone every time is being updated
+     *
+     * @param string $phone
+     */
+    public function setPhoneAttribute(string $phone)
+    {
+        $this->attributes[ 'phone' ] = phone_format($phone);
     }
 
     //<editor-fold desc="Getters & Setters">
