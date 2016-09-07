@@ -90,6 +90,13 @@ class User extends AbstractModel implements
     ];
 
     /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -108,20 +115,8 @@ class User extends AbstractModel implements
         'verify_expire',
         'password_changed_at',
         'last_login_at',
-        'created_at',
-        'updated_at',
         'deleted_at',
     ];
-
-    /**
-     * One-to-one relationship with clients table
-     *
-     * @return BelongsTo
-     */
-    public function client() : BelongsTo
-    {
-        return $this->belongsTo(Client::class);
-    }
 
     /**
      * The "booting" method of the model.
@@ -152,6 +147,19 @@ class User extends AbstractModel implements
         }
     }
 
+    //<editor-fold desc="Relationships">
+    /**
+     * One-to-one relationship with clients table
+     *
+     * @return BelongsTo
+     */
+    public function client() : BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Accessors & Mutators">
     /**
      * Hash the password each time the password is being updated
      *
@@ -161,6 +169,7 @@ class User extends AbstractModel implements
     {
         $this->attributes[ 'password' ] = Hash::make($password);
     }
+    //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
     /**

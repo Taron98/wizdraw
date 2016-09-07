@@ -79,7 +79,15 @@ class Client extends AbstractModel
         'city',
         'address',
         'client_type',
+        'deleted_at',
     ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -89,11 +97,10 @@ class Client extends AbstractModel
     protected $dates = [
         'identity_expire',
         'birth_date',
-        'created_at',
-        'updated_at',
         'deleted_at',
     ];
 
+    //<editor-fold desc="Relationships">
     /**
      * One-to-many relationship with identity_types table
      *
@@ -131,7 +138,9 @@ class Client extends AbstractModel
     {
 
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Accessors & Mutators">
     /**
      * Format the phone every time is being updated
      *
@@ -141,6 +150,7 @@ class Client extends AbstractModel
     {
         $this->attributes[ 'phone' ] = phone_format($phone);
     }
+    //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
     /**

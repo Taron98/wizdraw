@@ -40,7 +40,22 @@ class IdentityType extends AbstractModel
      */
     protected $fillable = [
         'type',
+        'deleted_at',
     ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -48,11 +63,10 @@ class IdentityType extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at',
         'deleted_at',
     ];
 
+    //<editor-fold desc="Relationships">
     /**
      * One-to-many relationship with clients table
      *
@@ -62,6 +76,10 @@ class IdentityType extends AbstractModel
     {
         return $this->hasMany(Client::class);
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Accessors & Mutators">
+    //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
     /**
