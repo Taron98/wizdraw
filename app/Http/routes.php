@@ -80,6 +80,16 @@ Route::group(['prefix' => 'v1/'], function () {
 
         });
 
+        // Identity Type
+        Route::group(['prefix' => 'identitytype/'], function () {
+
+            Route::get('/', [
+                'as'   => 'identitytype.all',
+                'uses' => 'IdentityTypeController@all',
+            ]);
+
+        });
+
     });
 
 });
