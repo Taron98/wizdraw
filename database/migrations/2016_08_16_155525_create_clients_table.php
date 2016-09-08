@@ -34,6 +34,7 @@ class CreateClientsTable extends Migration
             $table->string('address', 60)->nullable();
             /*$table->string('zip', 10);*/
             $table->enum('client_type', ['sender', 'receiver'])->nullable();
+            $table->boolean('did_setup')->default(false);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

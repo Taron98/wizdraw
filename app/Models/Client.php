@@ -20,10 +20,12 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property \Carbon\Carbon                    $birthDate
  * @property string                            $gender
  * @property string                            $phone
+ * @property integer                           $defaultCountryId
  * @property integer                           $residentCountryId
  * @property string                            $city
  * @property string                            $address
  * @property string                            $clientType
+ * @property boolean                           $didSetup
  * @property \Carbon\Carbon                    $createdAt
  * @property \Carbon\Carbon                    $updatedAt
  * @property \Carbon\Carbon                    $deletedAt
@@ -39,10 +41,12 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereBirthDate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereGender($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client wherePhone($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDefaultCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDidSetup($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
@@ -79,6 +83,7 @@ class Client extends AbstractModel
         'city',
         'address',
         'client_type',
+        'did_setup',
         'deleted_at',
     ];
 
@@ -99,6 +104,19 @@ class Client extends AbstractModel
         'birth_date',
         'deleted_at',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        static::updating(function ($model) {
+            /** @var Client $model */
+            $model->didSetup = true;
+        });
+    }
 
     //<editor-fold desc="Relationships">
     /**
@@ -327,6 +345,22 @@ class Client extends AbstractModel
     public function setClientType(string $clientType)
     {
         $this->clientType = $clientType;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDidSetup() : bool
+    {
+        return $this->didSetup;
+    }
+
+    /**
+     * @param boolean $didSetup
+     */
+    public function setDidSetup(bool $didSetup)
+    {
+        $this->didSetup = $didSetup;
     }
 
     /**
