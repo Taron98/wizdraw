@@ -57,22 +57,4 @@ abstract class AbstractRepository extends Repository
         return parent::saveModel($data);
     }
 
-    /**
-     * Shorthand for updating a model, instead of array
-     *
-     * @param AbstractModel $model
-     * @param string        $key
-     * @param string        $attribute
-     *
-     * @return mixed
-     */
-    public function updateModel(AbstractModel $model, string $key = '', string $attribute = 'id')
-    {
-        if (empty($key)) {
-            $key = $model->getId();
-        }
-
-        return $this->update($model->toArray(), $key, $attribute);
-    }
-
 }
