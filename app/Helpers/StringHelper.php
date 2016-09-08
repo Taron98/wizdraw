@@ -20,6 +20,26 @@ if (!function_exists('array_key_snake_case')) {
     }
 }
 
+if (!function_exists('array_key_camel_case')) {
+    /**
+     * Convert array keys into camel case
+     *
+     * @param array $items
+     *
+     * @return array
+     */
+    function array_key_camel_case(array $items) : array
+    {
+        $changedCase = [];
+
+        foreach ($items as $key => $value) {
+            $changedCase[ camel_case($key) ] = $value;
+        }
+
+        return $changedCase;
+    }
+}
+
 if (!function_exists('array_value_snake_case')) {
     /**
      * Convert array values into snake case

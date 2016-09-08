@@ -53,4 +53,17 @@ abstract class AbstractModel extends Model
         return $this->deletedAt;
     }
 
+    /**
+     * Get an attribute array of all arrayable values.
+     *
+     * @param  array  $values
+     * @return array
+     */
+    protected function getArrayableItems(array $values) : array
+    {
+        $values = parent::getArrayableItems($values);
+
+        return array_key_camel_case($values);
+    }
+
 }
