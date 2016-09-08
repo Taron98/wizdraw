@@ -95,6 +95,15 @@ class Client extends AbstractModel
     protected $hidden = [];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'did_setup' => 'boolean',
+    ];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array

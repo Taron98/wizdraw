@@ -37,7 +37,7 @@ class UserController extends AbstractController
      */
     public function password(UserPasswordRequest $request) : JsonResponse
     {
-        $user = $this->userService->update($request->inputs(), $request->user()->client->getId());
+        $user = $this->userService->update($request->inputs(), $request->user()->getId());
 
         return $this->respond($user);
     }
@@ -83,7 +83,9 @@ class UserController extends AbstractController
             return $this->respondWithError('verification_code_expired');
         }
 
-        return $this->respond();
+        $this->userService->updateIsPending($user);
+
+        return $this->respond($user);
     }
 
     /**

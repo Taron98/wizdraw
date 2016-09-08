@@ -28,6 +28,9 @@ class FacebookService extends AbstractService
     /** @var UserRepository */
     private $userRepository;
 
+    /** @var  UserService */
+    private $userService;
+
     /** @var ClientRepository */
     private $clientRepository;
 
@@ -36,15 +39,18 @@ class FacebookService extends AbstractService
      *
      * @param LaravelFacebookSdk $sdk
      * @param UserRepository     $userRepository
+     * @param UserService        $userService
      * @param ClientRepository   $clientRepository
      */
     public function __construct(
         LaravelFacebookSdk $sdk,
         UserRepository $userRepository,
+        UserService $userService,
         ClientRepository $clientRepository
     ) {
         $this->sdk = $sdk;
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
         $this->clientRepository = $clientRepository;
     }
 
@@ -134,7 +140,7 @@ class FacebookService extends AbstractService
             $client = $this->clientRepository->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser);
         } else {
-            $this->userRepository->updateFacebook($facebookUser);
+            $this->userService->updateFacebook($user->getId(), $facebookUser);
         }
 
         return $facebookUser;

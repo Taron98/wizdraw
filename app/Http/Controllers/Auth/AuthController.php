@@ -73,7 +73,10 @@ class AuthController extends AbstractController
             return $token;
         }
 
-        return $this->respond(compact('token'));
+        return $this->respond([
+            'token'    => $token,
+            'didSetup' => $request->user()->client->isDidSetup(),
+        ]);
     }
 
     /**
@@ -134,7 +137,10 @@ class AuthController extends AbstractController
         }
 
         // Returns our token, including his facebook information
-        return $this->respond(array_merge(compact('token'), $facebookUser->toArray()));
+        return $this->respond(array_merge([
+            'token'    => $token,
+            'didSetup' => (!empty($request->user())) ? $request->user()->client->isDidSetup() : false,
+        ], $facebookUser->toArray()));
     }
 
     /**
