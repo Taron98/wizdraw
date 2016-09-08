@@ -125,7 +125,6 @@ class User extends AbstractModel implements
      */
     protected static function boot()
     {
-        // Event for saving a new user
         static::creating(function ($model) {
             /** @var User $model */
             $model->generateVerifyCode(true);
@@ -168,6 +167,7 @@ class User extends AbstractModel implements
     public function setPasswordAttribute(string $password)
     {
         $this->attributes[ 'password' ] = Hash::make($password);
+        $this->attributes[ 'password_changed_at' ] = Carbon::now();
     }
     //</editor-fold>
 

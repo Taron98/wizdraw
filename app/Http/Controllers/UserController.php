@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Models\User;
-use Wizdraw\Repositories\UserRepository;
+use Wizdraw\Services\UserService;
 
 /**
  * Class UserController
@@ -15,17 +15,17 @@ use Wizdraw\Repositories\UserRepository;
 class UserController extends AbstractController
 {
 
-    /** @var  UserRepository */
-    private $userRepository;
+    /** @var  UserService */
+    private $userService;
 
     /**
      * UserController constructor.
      *
-     * @param UserRepository $userRepository
+     * @param UserService $userService
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     /**
@@ -37,12 +37,9 @@ class UserController extends AbstractController
      */
     public function password(UserPasswordRequest $request) : JsonResponse
     {
-        $user = $request->user();
-        $user->setPassword($request->getPassword());
+        $user = $this->userService->update($request->inputs(), $request->user()->client->getId());
 
-        $this->userRepository->updateModel($user);
-
-        return $this->respond();
+        return $this->respond($user);
     }
 
     /**
@@ -57,8 +54,7 @@ class UserController extends AbstractController
         $user = $request->user();
 
         if ($user->getVerifyExpire()->isPast()) {
-            $user->generateVerifyCode();
-            $this->userRepository->updateModel($user);
+            $this->userService->generateVerifyCode($user);
         }
 
         return $this->respond([
@@ -100,13 +96,13 @@ class UserController extends AbstractController
     public function device(string $deviceId) : JsonResponse
     {
         /** @var User $user */
-        $user = $this->userRepository->findByDeviceId($deviceId);
+        $user = $this->userService->findByDeviceId($deviceId);
 
-        $facebookId = ($user->getFacebookId()) ?: '';
-        $username = ($user->getUsername()) ?: '';
-        $fullName = $user->client->getFullName();
-
-        return $this->respond(compact('username', 'facebookId', 'fullName'));
+        return $this->respond([
+            'username'   => ($user->getFacebookId()) ?: '',
+            'facebookId' => ($user->getUsername()) ?: '',
+            'fullName'   => $user->client->getFullName(),
+        ]);
     }
 
 }
