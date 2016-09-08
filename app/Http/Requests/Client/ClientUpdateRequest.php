@@ -1,17 +1,26 @@
 <?php
 
-namespace Wizdraw\Http\Requests\User;
+namespace Wizdraw\Http\Requests\Client;
 
 use Wizdraw\Http\Requests\AbstractRequest;
 use Wizdraw\Traits\RequestAuthorizeUser;
 
 /**
- * Class UserUpdateRequest
- * @package Wizdraw\Http\Requests\User
+ * Class ClientUpdateRequest
+ * @package Wizdraw\Http\Requests\Client
  */
-class UserUpdateRequest extends AbstractRequest
+class ClientUpdateRequest extends AbstractRequest
 {
-    use RequestAuthorizeUser;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.

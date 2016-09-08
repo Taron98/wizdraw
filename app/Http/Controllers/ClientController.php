@@ -2,9 +2,10 @@
 
 namespace Wizdraw\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use Wizdraw\Http\Requests\User\UserUpdateRequest;
-use Wizdraw\Repositories\ClientRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
+use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Services\ClientService;
 
 /**
  * Class ClientController
@@ -13,36 +14,46 @@ use Wizdraw\Repositories\ClientRepository;
 class ClientController extends AbstractController
 {
 
-    /** @var  ClientRepository */
-    private $clientRepository;
+    /** @var  ClientService */
+    private $clientService;
 
     /**
      * UserController constructor.
      *
-     * @param ClientRepository $clientRepository
+     * @param ClientService $clientService
      *
      */
-    public function __construct(ClientRepository $clientRepository)
+    public function __construct(ClientService $clientService)
     {
-        $this->clientRepository = $clientRepository;
+        $this->clientService = $clientService;
     }
 
     /**
      * Updating client route
      *
-     * @param UserUpdateRequest   $request
-     * @param                     $id
+     * @param ClientUpdateRequest $request
      *
      * @return JsonResponse
      */
-    public function update(UserUpdateRequest $request, $id) : JsonResponse
+    public function update(ClientUpdateRequest $request) : JsonResponse
     {
-        $input = $request->inputs();
+        $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
 
-        $this->clientRepository->update($input, $id);
-        $client = $this->clientRepository->find($id);
+        return $this->respond($client);
+    }
 
-        return response()->json($client);
+    /**
+     * Updating phone route
+     *
+     * @param ClientPhoneRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function phone(ClientPhoneRequest $request) : JsonResponse
+    {
+        $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
+
+        return $this->respond($client);
     }
 
 }
