@@ -34,17 +34,17 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * @param array $message
+     * @param mixed $content
      *
      * @return JsonResponse
      */
-    protected function respond(array $message = []) : JsonResponse
+    protected function respond($content) : JsonResponse
     {
-        if (empty($message)) {
+        if (empty($content)) {
             return new JsonResponse();
         }
 
-        return response()->json($message);
+        return response()->json($content);
     }
 
 }

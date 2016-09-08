@@ -29,13 +29,13 @@ class UserController extends AbstractController
     }
 
     /**
-     * Update password route
+     * Updating password route
      *
      * @param UserPasswordRequest $request
      *
      * @return JsonResponse
      */
-    public function password(UserPasswordRequest $request)
+    public function password(UserPasswordRequest $request) : JsonResponse
     {
         $user = $request->user();
         $user->setPassword($request->getPassword());

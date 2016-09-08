@@ -68,9 +68,14 @@ Route::group(['prefix' => 'v1/'], function () {
         // Client
         Route::group(['prefix' => 'client/'], function () {
 
-            Route::post('{id}/', [
+            Route::post('/', [
                 'as'   => 'client.update',
                 'uses' => 'ClientController@update',
+            ]);
+
+            Route::post('phone/', [
+                'as'   => 'client.phone',
+                'uses' => 'ClientController@phone',
             ]);
 
         });
