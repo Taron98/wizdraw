@@ -41,16 +41,6 @@ class UserRepository extends AbstractRepository
     }
 
     /**
-     * @param int $facebookId
-     *
-     * @return mixed
-     */
-    public function findByFacebookId(int $facebookId)
-    {
-        return $this->findBy('facebook_id', $facebookId);
-    }
-
-    /**
      * Convert facebook user entity into user model
      *
      * @param FacebookUser $facebookUser

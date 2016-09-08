@@ -35,6 +35,16 @@ class UserService extends AbstractService
     }
 
     /**
+     * @param int $facebookId
+     *
+     * @return mixed
+     */
+    public function findByFacebookId(int $facebookId)
+    {
+        return $this->repository->findBy('facebook_id', $facebookId);
+    }
+
+    /**
      * @param $user
      */
     public function generateVerifyCode(User $user)

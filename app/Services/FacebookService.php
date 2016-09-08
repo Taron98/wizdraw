@@ -135,7 +135,8 @@ class FacebookService extends AbstractService
         $facebookUser = $this->getBasicInfo();
 
         /** @var User|null $user */
-        $user = $this->userRepository->findByFacebookId($facebookUser->getId());
+        $user = $this->userService->findByFacebookId($facebookUser->getId());
+
         if (is_null($user)) {
             $client = $this->clientRepository->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser);

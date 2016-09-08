@@ -319,7 +319,7 @@ class User extends AbstractModel implements
     /**
      * @return boolean
      */
-    public function isIsPending() : bool
+    public function isPending() : bool
     {
         return $this->isPending;
     }

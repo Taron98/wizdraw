@@ -16,6 +16,16 @@ abstract class AbstractService
     protected $repository;
 
     /**
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function all($columns = ['*'])
+    {
+        return $this->repository->all($columns);
+    }
+
+    /**
      * @param array  $data
      * @param mixed  $id
      * @param string $attribute

@@ -16,6 +16,7 @@ use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\FacebookService;
+use Wizdraw\Services\UserService;
 
 /**
  * Class AuthController
@@ -33,6 +34,9 @@ class AuthController extends AbstractController
     /** @var  UserRepository */
     private $userRepository;
 
+    /** @var UserService */
+    private $userService;
+
     /** @var  ClientRepository */
     private $clientRepository;
 
@@ -42,17 +46,20 @@ class AuthController extends AbstractController
      * @param FacebookService  $facebookService
      * @param AuthService      $authService
      * @param UserRepository   $userRepository
+     * @param UserService      $userService
      * @param ClientRepository $clientRepository
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
+        UserService $userService,
         ClientRepository $clientRepository
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
         $this->clientRepository = $clientRepository;
     }
 
@@ -63,7 +70,10 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function login(AuthLoginRequest $request) : JsonResponse
+    public
+    function login(
+        AuthLoginRequest $request
+    ) : JsonResponse
     {
         $credentials = $request->only('username', 'password');
 
@@ -86,7 +96,10 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function signup(AuthSignupRequest $request) : JsonResponse
+    public
+    function signup(
+        AuthSignupRequest $request
+    ) : JsonResponse
     {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
@@ -122,7 +135,10 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function facebook(AuthFacebookRequest $request) : JsonResponse
+    public
+    function facebook(
+        AuthFacebookRequest $request
+    ) : JsonResponse
     {
         try {
             $facebookUser = $this->facebookService->connect($request->getToken(), $request->getExpire());
@@ -130,6 +146,8 @@ class AuthController extends AbstractController
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
 
+        /** @var Client $client */
+        $client = $this->userService->findByFacebookId($facebookUser->getId())->client;
         $token = $this->authenticate([], $facebookUser->getId());
 
         if ($token instanceof JsonResponse) {
@@ -139,7 +157,7 @@ class AuthController extends AbstractController
         // Returns our token, including his facebook information
         return $this->respond(array_merge([
             'token'    => $token,
-            'didSetup' => (!empty($request->user())) ? $request->user()->client->isDidSetup() : false,
+            'didSetup' => $client->isDidSetup(),
         ], $facebookUser->toArray()));
     }
 
@@ -152,8 +170,11 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse|string
      */
-    private function authenticate(array $credentials = [], string $facebookId = '')
-    {
+    private
+    function authenticate(
+        array $credentials = [],
+        string $facebookId = ''
+    ) {
         try {
             if (!empty($credentials)) {
                 $token = $this->authService->createTokenFromCredentials($credentials);
