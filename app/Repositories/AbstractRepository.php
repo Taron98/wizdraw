@@ -38,6 +38,26 @@ abstract class AbstractRepository extends Repository
     }
 
     /**
+     * Save a model without massive assignment
+     *
+     * @param array  $data
+     * @param        $id
+     * @param string $attribute
+     *
+     * @return bool
+     */
+    public function update(array $data, $id, $attribute = "id")
+    {
+        $data['exists'] = true;
+
+        if (empty($data[$attribute])) {
+            $data[$attribute] = $id;
+        }
+
+        return parent::saveModel($data);
+    }
+
+    /**
      * Shorthand for updating a model, instead of array
      *
      * @param AbstractModel $model
