@@ -53,7 +53,7 @@ class UserController extends AbstractController
     {
         $user = $request->user();
 
-        if ($user->getVerifyExpire()->isPast()) {
+        if (is_null($user->getVerifyExpire()) || $user->getVerifyExpire()->isPast()) {
             $this->userService->generateVerifyCode($user);
         }
 

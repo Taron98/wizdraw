@@ -56,7 +56,8 @@ abstract class AbstractModel extends Model
     /**
      * Get an attribute array of all arrayable values.
      *
-     * @param  array  $values
+     * @param  array $values
+     *
      * @return array
      */
     protected function getArrayableItems(array $values) : array

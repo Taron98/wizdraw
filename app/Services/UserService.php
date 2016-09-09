@@ -58,6 +58,7 @@ class UserService extends AbstractService
      */
     public function updateIsPending(User $user)
     {
+        // todo: set verify code and expire to null
         $user->setIsPending(false);
         $this->updateModel($user);
     }

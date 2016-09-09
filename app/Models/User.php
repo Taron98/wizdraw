@@ -94,7 +94,9 @@ class User extends AbstractModel implements
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'password',
+    ];
 
     /**
      * The attributes that should be cast to native types.
@@ -303,7 +305,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getVerifyExpire() : Carbon
+    public function getVerifyExpire()
     {
         return $this->verifyExpire;
     }

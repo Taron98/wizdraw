@@ -48,10 +48,10 @@ abstract class AbstractRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $data['exists'] = true;
+        $data[ 'exists' ] = true;
 
-        if (empty($data[$attribute])) {
-            $data[$attribute] = $id;
+        if (empty($data[ $attribute ])) {
+            $data[ $attribute ] = $id;
         }
 
         return parent::saveModel($data);

@@ -3,7 +3,6 @@
 namespace Wizdraw\Http\Requests\Client;
 
 use Wizdraw\Http\Requests\AbstractRequest;
-use Wizdraw\Traits\RequestAuthorizeUser;
 
 /**
  * Class ClientUpdateRequest

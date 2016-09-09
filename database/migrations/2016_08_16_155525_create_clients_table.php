@@ -27,8 +27,8 @@ class CreateClientsTable extends Migration
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('phone', 20)->nullable();
-            $table->integer('default_country_id')->unsigned();     // FK to cached administration_country
-            $table->integer('resident_country_id')->unsigned();     // FK to cached administration_country
+            $table->integer('default_country_id')->unsigned()->nullable();     // FK to cached administration_country
+            $table->integer('resident_country_id')->unsigned()->nullable();     // FK to cached administration_country
             /*$table->string('state', 35);*/
             $table->string('city', 30)->nullable();
             $table->string('address', 60)->nullable();

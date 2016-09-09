@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Services;
 
-use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
 
 /**
