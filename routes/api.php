@@ -2,18 +2,14 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Api v1.0
 Route::group(['prefix' => 'v1/'], function () {
@@ -38,7 +34,7 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
-    Route::group(['middleware' => 'api'], function () {
+    Route::group(['middleware' => 'auth'], function () {
 
         // User
         Route::group(['prefix' => 'user/'], function () {
@@ -53,7 +49,7 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'UserController@code',
             ]);
 
-            Route::post('verify/{verifyCode}', [
+            Route::post('verify/{verifyCode}/', [
                 'as'   => 'user.verify',
                 'uses' => 'UserController@verify',
             ]);

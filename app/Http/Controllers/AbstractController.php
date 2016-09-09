@@ -3,7 +3,6 @@
 namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
@@ -17,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 abstract class AbstractController extends Controller
 {
 
-    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
      * @param string $message

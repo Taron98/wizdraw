@@ -20,7 +20,7 @@ return [
     | The path to the repository folder.
     |
     */
-    'repository_path' => 'app' . DIRECTORY_SEPARATOR . 'Repositories',
+    'repository_path'      => 'app' . DIRECTORY_SEPARATOR . 'Repositories',
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ return [
     | The namespace for the criteria classes.
     |
     */
-    'criteria_namespace' => 'Wizdraw\Repositories\Criteria',
+    'criteria_namespace'   => 'Wizdraw\Repositories\Criteria',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     | The path to the criteria folder.
     |
     */
-    'criteria_path'=> 'app' . DIRECTORY_SEPARATOR . 'Repositories' . DIRECTORY_SEPARATOR . 'Criteria',
+    'criteria_path'        => 'app' . DIRECTORY_SEPARATOR . 'Repositories' . DIRECTORY_SEPARATOR . 'Criteria',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,5 +50,5 @@ return [
     | The model namespace.
     |
     */
-    'model_namespace' => 'Wizdraw\Models'
+    'model_namespace'      => 'Wizdraw\Models',
 ];
