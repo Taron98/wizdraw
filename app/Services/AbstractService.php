@@ -53,7 +53,7 @@ abstract class AbstractService
             $key = $model->getId();
         }
 
-        return $this->update($model->toArray(), $key, $attribute);
+        return $this->update($model->attributesToArray(), $key, $attribute);
     }
 
 }

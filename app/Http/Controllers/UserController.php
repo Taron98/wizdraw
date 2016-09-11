@@ -75,6 +75,10 @@ class UserController extends AbstractController
     {
         $user = $request->user();
 
+        if ($user->isPending()) {
+            return $this->respondWithError('user_already_verified');
+        }
+
         if ($user->getVerifyCode() !== $verifyCode) {
             return $this->respondWithError('invalid_verification_code');
         }

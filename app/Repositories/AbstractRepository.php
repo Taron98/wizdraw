@@ -34,7 +34,7 @@ abstract class AbstractRepository extends Repository
      */
     public function createModel(AbstractModel $model)
     {
-        return $this->create($model->toArray());
+        return $this->create($model->attributesToArray());
     }
 
     /**

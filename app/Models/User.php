@@ -289,7 +289,7 @@ class User extends AbstractModel implements
     /**
      * @return int
      */
-    public function getVerifyCode() : int
+    public function getVerifyCode()
     {
         return $this->verifyCode;
     }
