@@ -2,12 +2,10 @@
 
 namespace Wizdraw\Exceptions;
 
-// todo: find out why laravel-exceptions isn't working with l5.3
-//use GrahamCampbell\Exceptions\ExceptionHandler;
+use GrahamCampbell\Exceptions\NewExceptionHandler as ExceptionHandler;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
