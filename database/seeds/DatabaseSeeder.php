@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(IdentityTypesTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(GroupsTableSeeder::class);
+        $this->call(GroupMembersTableSeeder::class);
 
         // Enable foreign keys constraints
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
