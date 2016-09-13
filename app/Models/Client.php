@@ -3,6 +3,7 @@
 namespace Wizdraw\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Traits\ModelCamelCaseTrait;
@@ -10,27 +11,28 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
 /**
  * Wizdraw\Models\Client
  *
- * @property integer                           $id
- * @property integer                           $identityTypeId
- * @property string                            $identityNumber
- * @property \Carbon\Carbon                    $identityExpire
- * @property string                            $firstName
- * @property string                            $middleName
- * @property string                            $lastName
- * @property \Carbon\Carbon                    $birthDate
- * @property string                            $gender
- * @property string                            $phone
- * @property integer                           $defaultCountryId
- * @property integer                           $residentCountryId
- * @property string                            $city
- * @property string                            $address
- * @property string                            $clientType
- * @property boolean                           $didSetup
- * @property \Carbon\Carbon                    $createdAt
- * @property \Carbon\Carbon                    $updatedAt
- * @property \Carbon\Carbon                    $deletedAt
- * @property-read \Wizdraw\Models\IdentityType $identityType
- * @property-read \Wizdraw\Models\User         $user
+ * @property integer                                                               $id
+ * @property integer                                                               $identityTypeId
+ * @property string                                                                $identityNumber
+ * @property \Carbon\Carbon                                                        $identityExpire
+ * @property string                                                                $firstName
+ * @property string                                                                $middleName
+ * @property string                                                                $lastName
+ * @property \Carbon\Carbon                                                        $birthDate
+ * @property string                                                                $gender
+ * @property string                                                                $phone
+ * @property integer                                                               $defaultCountryId
+ * @property integer                                                               $residentCountryId
+ * @property string                                                                $city
+ * @property string                                                                $address
+ * @property string                                                                $clientType
+ * @property boolean                                                               $didSetup
+ * @property \Carbon\Carbon                                                        $createdAt
+ * @property \Carbon\Carbon                                                        $updatedAt
+ * @property \Carbon\Carbon                                                        $deletedAt
+ * @property-read \Wizdraw\Models\IdentityType                                     $identityType
+ * @property-read \Wizdraw\Models\User                                             $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -146,6 +148,16 @@ class Client extends AbstractModel
     public function user() : HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    /**
+     * One-to-many relationship with group_members table
+     *
+     * @return HasMany
+     */
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
     }
 
     /**
