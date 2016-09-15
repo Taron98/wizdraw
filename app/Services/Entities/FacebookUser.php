@@ -2,7 +2,9 @@
 
 namespace Wizdraw\Services\Entities;
 
+use Carbon\Carbon;
 use Facebook\Authentication\AccessToken;
+use Facebook\GraphNodes\Birthday;
 
 /**
  * Class FacebookUser
@@ -34,6 +36,9 @@ class FacebookUser extends AbstractEntity
 
     /** @var string|null */
     protected $gender;
+
+    /** @var  int|null */
+    protected $birthday;
 
     /**
      * @param AccessToken $accessToken
@@ -200,6 +205,28 @@ class FacebookUser extends AbstractEntity
     public function setGender($gender)
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param mixed $birthday
+     *
+     * @return $this
+     */
+    public function setBirthday(Birthday $birthday)
+    {
+        if ($birthday->hasDate()) {
+            $this->birthday = new Carbon($birthday->date);
+        }
 
         return $this;
     }

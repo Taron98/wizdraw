@@ -20,7 +20,7 @@ use Wizdraw\Services\Entities\FacebookUser;
 class FacebookService extends AbstractService
 {
     /** Request for basic user information */
-    const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name,gender';
+    const BASIC_INFO = '/me?fields=id,email,first_name,middle_name,last_name,gender,birthday';
 
     /** @var LaravelFacebookSdk */
     private $sdk;
@@ -141,7 +141,7 @@ class FacebookService extends AbstractService
             $client = $this->clientRepository->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser);
         } else {
-            $this->userService->updateFacebook($user->getId(), $facebookUser);
+            $this->userService->updateFacebook($facebookUser);
         }
 
         return $facebookUser;
