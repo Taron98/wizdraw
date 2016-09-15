@@ -26,6 +26,16 @@ abstract class AbstractService
     }
 
     /**
+     * @param array $data
+     *
+     * @return AbstractModel
+     */
+    public function create(array $data) : AbstractModel
+    {
+        return $this->repository->create($data);
+    }
+
+    /**
      * @param array  $data
      * @param mixed  $id
      * @param string $attribute
@@ -34,6 +44,8 @@ abstract class AbstractService
      */
     public function update(array $data, $id, $attribute = "id") : AbstractModel
     {
+        $data = array_key_snake_case($data);
+
         $this->repository->update($data, $id, $attribute);
         $model = $this->repository->find($id);
 
