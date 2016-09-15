@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Wizdraw\Services\Entities\FacebookUser;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
@@ -148,6 +149,26 @@ class User extends AbstractModel implements
         }
     }
 
+    /**
+     * Convert facebook user entity into user model
+     *
+     * @param FacebookUser $facebookUser
+     *
+     * @return User
+     */
+    public function fromFacebookUser(FacebookUser $facebookUser)
+    {
+        $tokenExpire = Carbon::createFromTimestamp($facebookUser->getExpire());
+
+        $user = new User();
+        $user->email = $facebookUser->getEmail();
+        $user->facebookId = $facebookUser->getId();
+        $user->facebookToken = $facebookUser->getToken();
+        $user->facebookTokenExpire = $tokenExpire;
+
+        return $user;
+    }
+
     //<editor-fold desc="Relationships">
     /**
      * One-to-one relationship with clients table
@@ -183,9 +204,9 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         $this->email = $email;
     }

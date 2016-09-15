@@ -20,7 +20,7 @@ abstract class AbstractRepository extends Repository
      *
      * @return bool
      */
-    public function exists(array $attributes): bool
+    public function exists(array $attributes) : bool
     {
         return $this->model->where($attributes)->exists();
     }
@@ -46,7 +46,7 @@ abstract class AbstractRepository extends Repository
      *
      * @return bool
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = "id") : bool
     {
         $data[ 'exists' ] = true;
 
@@ -55,6 +55,22 @@ abstract class AbstractRepository extends Repository
         }
 
         return parent::saveModel($data);
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @param string        $key
+     * @param string        $attribute
+     *
+     * @return bool
+     */
+    public function updateModel(AbstractModel $model, string $key = '', string $attribute = 'id') : bool
+    {
+        if (empty($key)) {
+            $key = $model->getId();
+        }
+
+        return $this->update($model->attributesToArray(), $key, $attribute);
     }
 
 }

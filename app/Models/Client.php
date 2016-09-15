@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Wizdraw\Services\Entities\FacebookUser;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
@@ -129,6 +130,25 @@ class Client extends AbstractModel
         });
     }
 
+    /**
+     * Convert facebook user entity into client model
+     *
+     * @param FacebookUser $facebookUser
+     *
+     * @return Client
+     */
+    public function fromFacebookUser(FacebookUser $facebookUser)
+    {
+        $client = new Client();
+        $client->firstName = $facebookUser->getFirstName();
+        $client->middleName = $facebookUser->getMiddleName();
+        $client->lastName = $facebookUser->getLastName();
+        $client->gender = $facebookUser->getGender();
+        $client->birthDate = $facebookUser->getBirthday();
+
+        return $client;
+    }
+
     //<editor-fold desc="Relationships">
     /**
      * One-to-many relationship with identity_types table
@@ -195,7 +215,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getIdentityNumber(): string
+    public function getIdentityNumber() : string
     {
         return $this->identityNumber;
     }
@@ -211,7 +231,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getIdentityExpire(): string
+    public function getIdentityExpire() : string
     {
         return $this->identityExpire;
     }
@@ -227,7 +247,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName() : string
     {
         return $this->firstName;
     }
@@ -243,7 +263,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getMiddleName(): string
+    public function getMiddleName() : string
     {
         return $this->middleName;
     }
@@ -259,7 +279,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName() : string
     {
         return $this->lastName;
     }
@@ -275,7 +295,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getBirthDate(): string
+    public function getBirthDate() : string
     {
         return $this->birthDate;
     }
@@ -291,7 +311,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getGender(): string
+    public function getGender() : string
     {
         return $this->gender;
     }
@@ -307,7 +327,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getPhone(): string
+    public function getPhone() : string
     {
         return $this->phone;
     }
@@ -323,7 +343,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity() : string
     {
         return $this->city;
     }
@@ -339,7 +359,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getAddress(): string
+    public function getAddress() : string
     {
         return $this->address;
     }
@@ -355,7 +375,7 @@ class Client extends AbstractModel
     /**
      * @return string
      */
-    public function getClientType(): string
+    public function getClientType() : string
     {
         return $this->clientType;
     }

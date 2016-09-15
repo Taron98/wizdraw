@@ -126,10 +126,11 @@ class FacebookService extends AbstractService
      *
      * @param string $token
      * @param int    $expire
+     * @param string $deviceId
      *
      * @return FacebookUser
      */
-    public function connect(string $token, int $expire)
+    public function connect(string $token, int $expire, string $deviceId)
     {
         $this->setDefaultAccessToken($token, $expire);
         $facebookUser = $this->getBasicInfo();
@@ -139,7 +140,7 @@ class FacebookService extends AbstractService
 
         if (is_null($user)) {
             $client = $this->clientRepository->createByFacebook($facebookUser);
-            $user = $this->userRepository->createByFacebook($client, $facebookUser);
+            $user = $this->userRepository->createByFacebook($client, $facebookUser, $deviceId);
         } else {
             $this->userService->updateFacebook($facebookUser);
         }

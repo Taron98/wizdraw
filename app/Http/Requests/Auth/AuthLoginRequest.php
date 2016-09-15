@@ -12,22 +12,6 @@ class AuthLoginRequest extends AbstractRequest
 {
 
     /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

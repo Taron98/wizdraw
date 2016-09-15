@@ -12,14 +12,6 @@ class UserPasswordRequest extends AbstractRequest
 {
 
     /**
-     * @return string
-     */
-    public function getPassword() : string
-    {
-        return $this->password;
-    }
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

@@ -41,34 +41,19 @@ class UserRepository extends AbstractRepository
     }
 
     /**
-     * Convert facebook user entity into user model
-     *
-     * @param FacebookUser $facebookUser
-     *
-     * @return User
-     */
-    public function fromFacebookUser(FacebookUser $facebookUser)
-    {
-        $user = new User();
-        $user->email = $facebookUser->getEmail();
-        $user->facebookId = $facebookUser->getId();
-        $user->facebookToken = $facebookUser->getToken();
-        $user->facebookTokenExpire = $facebookUser->getExpire();
-
-        return $user;
-    }
-
-    /**
      * Creating a user by the facebook details
      *
      * @param Client       $client
      * @param FacebookUser $facebookUser
+     * @param string       $deviceId
      *
      * @return mixed
      */
-    public function createByFacebook(Client $client, FacebookUser $facebookUser)
+    public function createByFacebook(Client $client, FacebookUser $facebookUser, string $deviceId)
     {
-        $user = $this->fromFacebookUser($facebookUser);
+        /** @var User $user */
+        $user = $this->model->fromFacebookUser($facebookUser);
+        $user->setDeviceId($deviceId);
 
         return $this->createWithRelation($user->toArray(), $client);
     }
@@ -82,7 +67,7 @@ class UserRepository extends AbstractRepository
      */
     public function updateFacebook(FacebookUser $facebookUser) : bool
     {
-        $user = $this->fromFacebookUser($facebookUser);
+        $user = $this->model->fromFacebookUser($facebookUser);
 
         // TODO: check if $user not null?
         return $this->updateModel($user, $facebookUser->getId(), 'facebook_id');
