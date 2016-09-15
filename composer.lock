@@ -682,16 +682,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.6.0",
+            "version": "7.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "12010105a3c8d7e0c3f40ce6721141c5779a6c42"
+                "reference": "78b06909657a11d3b915bd348adf982854dbbc29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/12010105a3c8d7e0c3f40ce6721141c5779a6c42",
-                "reference": "12010105a3c8d7e0c3f40ce6721141c5779a6c42",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/78b06909657a11d3b915bd348adf982854dbbc29",
+                "reference": "78b06909657a11d3b915bd348adf982854dbbc29",
                 "shasum": ""
             },
             "require": {
@@ -703,10 +703,10 @@
                 "pear/pear-core-minimal": "^1.9",
                 "pear/pear_exception": "^1.0",
                 "pear/versioncontrol_git": "dev-master",
-                "phing/phing": "~2.7",
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "~0.6",
-                "symfony/console": "^2.5"
+                "phing/phing": "^2.7",
+                "phpunit/phpunit": "^4.8|^5.0",
+                "satooshi/php-coveralls": "^1.0",
+                "symfony/console": "^2.8|^3.0"
             },
             "type": "library",
             "extra": {
@@ -740,7 +740,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2016-08-24 13:12:13"
+            "time": "2016-09-12 19:11:13"
         },
         {
             "name": "giggsey/locale",
@@ -1037,16 +1037,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.3.8",
+            "version": "v5.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99c74afc0b99e1af1984cb55dc242ab28a0e496b"
+                "reference": "f6fbb481672f8dc4bc6882d5d654bbfa3588c8ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99c74afc0b99e1af1984cb55dc242ab28a0e496b",
-                "reference": "99c74afc0b99e1af1984cb55dc242ab28a0e496b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f6fbb481672f8dc4bc6882d5d654bbfa3588c8ec",
+                "reference": "f6fbb481672f8dc4bc6882d5d654bbfa3588c8ec",
                 "shasum": ""
             },
             "require": {
@@ -1160,7 +1160,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-09-09 16:33:59"
+            "time": "2016-09-12 14:08:29"
         },
         {
             "name": "league/flysystem",
@@ -3301,16 +3301,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc"
+                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/da8529775f14f4fdae33f916eb0cf65f6afbddbc",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/94e5ca3e90aa5b34663780393e10914f7438f991",
+                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991",
                 "shasum": ""
             },
             "require": {
@@ -3339,7 +3339,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-06 16:07:05"
+            "time": "2016-09-07 15:34:10"
         },
         {
             "name": "phpdocumentor/reflection-common",
