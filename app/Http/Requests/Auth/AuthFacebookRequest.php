@@ -12,22 +12,6 @@ class AuthFacebookRequest extends AbstractRequest
 {
 
     /**
-     * @return string
-     */
-    public function getToken(): string
-    {
-        return $this->token;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpire(): int
-    {
-        return $this->expire;
-    }
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -46,8 +30,10 @@ class AuthFacebookRequest extends AbstractRequest
     {
         // TODO: add more validation
         return [
-            'token'  => 'required',
-            'expire' => 'required',
+            'token'    => 'required',
+            'expire'   => 'required',
+            'deviceId' => 'required|unique:users',
         ];
     }
+
 }

@@ -54,6 +54,19 @@ abstract class AbstractModel extends Model
     }
 
     /**
+     * Get the fillable attributes of a given array.
+     *
+     * @param  array  $attributes
+     * @return array
+     */
+    protected function fillableFromArray(array $attributes)
+    {
+        $attributes = array_key_snake_case($attributes);
+
+        return parent::fillableFromArray($attributes);
+    }
+
+    /**
      * Get an attribute array of all arrayable values.
      *
      * @param  array $values

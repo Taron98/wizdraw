@@ -21,24 +21,6 @@ class ClientRepository extends AbstractRepository
     }
 
     /**
-     * Convert facebook user entity into client model
-     *
-     * @param FacebookUser $facebookUser
-     *
-     * @return Client
-     */
-    public function fromFacebookUser(FacebookUser $facebookUser)
-    {
-        $client = new Client();
-        $client->firstName = $facebookUser->getFirstName();
-        $client->middleName = $facebookUser->getMiddleName();
-        $client->lastName = $facebookUser->getLastName();
-        $client->gender = $facebookUser->getGender();
-
-        return $client;
-    }
-
-    /**
      * Creating a client by the facebook details
      *
      * @param FacebookUser $facebookUser
@@ -47,7 +29,7 @@ class ClientRepository extends AbstractRepository
      */
     public function createByFacebook(FacebookUser $facebookUser)
     {
-        $client = $this->fromFacebookUser($facebookUser);
+        $client = $this->model->fromFacebookUser($facebookUser);
 
         return $this->createModel($client);
     }

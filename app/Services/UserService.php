@@ -66,17 +66,13 @@ class UserService extends AbstractService
     /**
      * Update facebook session to the user
      *
-     * @param int          $userId
      * @param FacebookUser $facebookUser
      *
-     * @return AbstractModel
+     * @return bool
      */
-    public function updateFacebook(int $userId, FacebookUser $facebookUser) : AbstractModel
+    public function updateFacebook(FacebookUser $facebookUser) : bool
     {
-        $user = $this->repository->fromFacebookUser($facebookUser);
-
-        // TODO: check if $user not null?
-        return $this->updateModel($user, $userId);
+        return $this->repository->updateFacebook($facebookUser);
     }
 
 }
