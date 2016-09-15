@@ -225,7 +225,7 @@ class FacebookUser extends AbstractEntity
     public function setBirthday(Birthday $birthday)
     {
         if ($birthday->hasDate()) {
-            $this->birthday = new Carbon($birthday->date);
+            $this->birthday = Carbon::instance($birthday);
         }
 
         return $this;
