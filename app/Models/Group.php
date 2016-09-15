@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Traits\ModelCamelCaseTrait;
@@ -74,11 +74,11 @@ class Group extends AbstractModel
     /**
      * One-to-many relationship with clients table
      *
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function client() : BelongsToMany
+    public function client() : BelongsTo
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsTo(Client::class, 'admin_client_id');
     }
 
     /**

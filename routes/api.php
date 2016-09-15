@@ -76,6 +76,16 @@ Route::group(['prefix' => 'v1/'], function () {
 
         });
 
+        // Group
+        Route::group(['prefix' => 'group/'], function () {
+
+            Route::post('/', [
+                'as'   => 'group.create',
+                'uses' => 'GroupController@store',
+            ]);
+
+        });
+
         // Identity Type
         Route::group(['prefix' => 'identitytype/'], function () {
 
