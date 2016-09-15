@@ -16,6 +16,16 @@ abstract class AbstractService
     protected $repository;
 
     /**
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function find(int $id)
+    {
+        return $this->repository->find($id);
+    }
+
+    /**
      * @param array $columns
      *
      * @return mixed
