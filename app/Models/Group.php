@@ -12,7 +12,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  *
  * @property integer                                                                $id
  * @property string                                                                 $name
- * @property integer                                                                $adminClientId
+ * @property integer                                                                $clientId
  * @property \Carbon\Carbon                                                         $createdAt
  * @property \Carbon\Carbon                                                         $updatedAt
  * @property \Carbon\Carbon                                                         $deletedAt
@@ -20,7 +20,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $members
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereAdminClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereDeletedAt($value)
@@ -44,7 +44,7 @@ class Group extends AbstractModel
      */
     protected $fillable = [
         'name',
-        'admin_client_id',
+        'client_id',
     ];
 
     /**
@@ -78,7 +78,7 @@ class Group extends AbstractModel
      */
     public function client() : BelongsTo
     {
-        return $this->belongsTo(Client::class, 'admin_client_id');
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     /**

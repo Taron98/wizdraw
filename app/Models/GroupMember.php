@@ -12,7 +12,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  *
  * @property integer                     $id
  * @property integer                     $groupId
- * @property integer                     $memberClientId
+ * @property integer                     $clientId
  * @property boolean                     $isApproved
  * @property \Carbon\Carbon              $createdAt
  * @property \Carbon\Carbon              $updatedAt
@@ -21,7 +21,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereGroupId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereMemberClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereIsApproved($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereUpdatedAt($value)
@@ -46,7 +46,7 @@ class GroupMember extends Model
      */
     protected $fillable = [
         'group_id',
-        'member_client_id',
+        'client_id',
         'is_approved',
     ];
 
