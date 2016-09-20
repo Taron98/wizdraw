@@ -21,7 +21,6 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property integer                     $id
  * @property integer                     $clientId
  * @property string                      $email
- * @property string                      $username
  * @property string                      $password
  * @property string                      $facebookId
  * @property string                      $facebookToken
@@ -39,7 +38,6 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUsername($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePassword($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookToken($value)
@@ -77,7 +75,6 @@ class User extends AbstractModel implements
     protected $fillable = [
         'client_id',
         'email',
-        'username',
         'password',
         'facebook_id',
         'facebook_token',
@@ -209,22 +206,6 @@ class User extends AbstractModel implements
     public function setEmail($email)
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string $username
-     */
-    public function setUsername(string $username)
-    {
-        $this->username = $username;
     }
 
     /**
