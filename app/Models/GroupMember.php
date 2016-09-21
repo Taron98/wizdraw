@@ -10,14 +10,14 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
 /**
  * Wizdraw\Models\GroupMember
  *
- * @property integer                     $id
- * @property integer                     $groupId
- * @property integer                     $memberClientId
- * @property boolean                     $isApproved
- * @property \Carbon\Carbon              $createdAt
- * @property \Carbon\Carbon              $updatedAt
- * @property \Carbon\Carbon              $deletedAt
- * @property-read \Wizdraw\Models\Group  $group
+ * @property integer $id
+ * @property integer $groupId
+ * @property integer $memberClientId
+ * @property boolean $isApproved
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @property-read \Wizdraw\Models\Group $group
  * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereGroupId($value)

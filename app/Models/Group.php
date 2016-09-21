@@ -10,13 +10,13 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
 /**
  * Wizdraw\Models\Group
  *
- * @property integer                                                                $id
- * @property string                                                                 $name
- * @property integer                                                                $adminClientId
- * @property \Carbon\Carbon                                                         $createdAt
- * @property \Carbon\Carbon                                                         $updatedAt
- * @property \Carbon\Carbon                                                         $deletedAt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $client
+ * @property integer $id
+ * @property string $name
+ * @property integer $adminClientId
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @property-read \Wizdraw\Models\Client $client
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $members
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereName($value)

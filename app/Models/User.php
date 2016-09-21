@@ -18,22 +18,22 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
 /**
  * Wizdraw\Models\User
  *
- * @property integer                     $id
- * @property integer                     $clientId
- * @property string                      $email
- * @property string                      $password
- * @property string                      $facebookId
- * @property string                      $facebookToken
- * @property \Carbon\Carbon              $facebookTokenExpire
- * @property string                      $deviceId
- * @property integer                     $verifyCode
- * @property \Carbon\Carbon              $verifyExpire
- * @property boolean                     $isPending
- * @property \Carbon\Carbon              $passwordChangedAt
- * @property \Carbon\Carbon              $lastLoginAt
- * @property \Carbon\Carbon              $createdAt
- * @property \Carbon\Carbon              $updatedAt
- * @property \Carbon\Carbon              $deletedAt
+ * @property integer $id
+ * @property integer $clientId
+ * @property string $email
+ * @property string $password
+ * @property string $facebookId
+ * @property string $facebookToken
+ * @property \Carbon\Carbon $facebookTokenExpire
+ * @property string $deviceId
+ * @property integer $verifyCode
+ * @property \Carbon\Carbon $verifyExpire
+ * @property boolean $isPending
+ * @property \Carbon\Carbon $passwordChangedAt
+ * @property \Carbon\Carbon $lastLoginAt
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
