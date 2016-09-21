@@ -2,14 +2,14 @@
 
 namespace Wizdraw\Repositories;
 
-use Bosnadev\Repositories\Eloquent\Repository;
+use Prettus\Repository\Eloquent\BaseRepository;
 use Wizdraw\Models\AbstractModel;
 
 /**
  * Class AbstractRepository
  * @package Wizdraw\Repositories
  */
-abstract class AbstractRepository extends Repository
+abstract class AbstractRepository extends BaseRepository
 {
 
     /** @var  AbstractModel */

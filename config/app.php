@@ -186,7 +186,7 @@ return [
         GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-        //Bosnadev\Repositories\Providers\RepositoryProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
