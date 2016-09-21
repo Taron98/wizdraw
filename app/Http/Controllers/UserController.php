@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Models\User;
@@ -75,16 +76,16 @@ class UserController extends AbstractController
     {
         $user = $request->user();
 
-        if ($user->isPending()) {
-            return $this->respondWithError('user_already_verified');
+        if (!$user->isPending()) {
+            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
         }
 
         if ($user->getVerifyCode() !== $verifyCode) {
-            return $this->respondWithError('invalid_verification_code');
+            return $this->respondWithError('invalid_verification_code', Response::HTTP_BAD_REQUEST);
         }
 
         if ($user->getVerifyExpire()->isPast()) {
-            return $this->respondWithError('verification_code_expired');
+            return $this->respondWithError('verification_code_expired', Response::HTTP_BAD_REQUEST);
         }
 
         $this->userService->updateIsPending($user);
