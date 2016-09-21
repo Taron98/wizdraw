@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "420d452d7f5201085116c14962ef23ac",
-    "content-hash": "80d2613b350770e7d058dd6839dd36b2",
+    "hash": "1ff68f2d923773067e00e00412672c3f",
+    "content-hash": "e167d2b57267513829bb3601134c0492",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -59,66 +59,6 @@
                 "laravel"
             ],
             "time": "2016-08-11 08:46:01"
-        },
-        {
-            "name": "bosnadev/repositories",
-            "version": "0.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bosnadev/repository.git",
-                "reference": "3a289a137e27ac6b795852a0d72c509a51b70a26"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bosnadev/repository/zipball/3a289a137e27ac6b795852a0d72c509a51b70a26",
-                "reference": "3a289a137e27ac6b795852a0d72c509a51b70a26",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^5.2",
-                "illuminate/database": "^5.2",
-                "illuminate/filesystem": "^5.2",
-                "illuminate/support": "^5.2",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "dev-master@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bosnadev\\": "src/Bosnadev/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maarten Paauw",
-                    "email": "maartenpaauw@gmail.com"
-                },
-                {
-                    "name": "Mirza Pasic",
-                    "email": "mirza@bosnadev.com"
-                }
-            ],
-            "description": "Laravel Repositories",
-            "homepage": "https://bosnadev.com",
-            "keywords": [
-                "database",
-                "eloquent",
-                "laravel",
-                "repositories",
-                "repository"
-            ],
-            "time": "2016-08-19 13:21:55"
         },
         {
             "name": "classpreloader/classpreloader",
