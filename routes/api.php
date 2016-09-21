@@ -79,7 +79,7 @@ Route::group(['prefix' => 'v1/'], function () {
         // Group
         Route::group(['prefix' => 'group/'], function () {
 
-            Route::get('/{id}', [
+            Route::get('/{group}', [
                 'as'   => 'group.show',
                 'uses' => 'GroupController@show',
             ]);
