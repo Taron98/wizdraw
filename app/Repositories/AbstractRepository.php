@@ -38,33 +38,13 @@ abstract class AbstractRepository extends BaseRepository
     }
 
     /**
-     * Save a model without massive assignment
-     *
-     * @param array  $data
-     * @param        $id
+     * @param AbstractModel $model
      *
      * @return AbstractModel
      */
-    public function update(array $data, $id) : AbstractModel
+    public function updateModel(AbstractModel $model) : AbstractModel
     {
-        $data[ 'exists' ] = true;
-
-        return parent::update($data, $id);
-    }
-
-    /**
-     * @param AbstractModel $model
-     * @param string        $key
-     *
-     * @return bool
-     */
-    public function updateModel(AbstractModel $model, string $key = '') : bool
-    {
-        if (empty($key)) {
-            $key = $model->getId();
-        }
-
-        return $this->update($model->attributesToArray(), $key);
+        return $this->update($model->attributesToArray(), $model->getId());
     }
 
 }
