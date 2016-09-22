@@ -31,7 +31,7 @@ class UserService extends AbstractService
      */
     public function findByDeviceId(string $deviceId)
     {
-        return $this->repository->findBy('device_id', $deviceId);
+        return $this->repository->findByField('device_id', $deviceId)->first();
     }
 
     /**
@@ -41,7 +41,7 @@ class UserService extends AbstractService
      */
     public function findByFacebookId(int $facebookId)
     {
-        return $this->repository->findBy('facebook_id', $facebookId);
+        return $this->repository->findByField('facebook_id', $facebookId)->first();
     }
 
     /**
@@ -66,13 +66,14 @@ class UserService extends AbstractService
     /**
      * Update facebook session to the user
      *
+     * @param int          $id
      * @param FacebookUser $facebookUser
      *
-     * @return bool
+     * @return AbstractModel
      */
-    public function updateFacebook(FacebookUser $facebookUser) : bool
+    public function updateFacebook(int $id, FacebookUser $facebookUser) : AbstractModel
     {
-        return $this->repository->updateFacebook($facebookUser);
+        return $this->repository->updateFacebook($id, $facebookUser);
     }
 
 }

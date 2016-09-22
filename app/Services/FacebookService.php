@@ -4,6 +4,7 @@ namespace Wizdraw\Services;
 
 use Facebook\Authentication\AccessToken;
 use Facebook\Exceptions\FacebookSDKException;
+use League\Flysystem\Exception;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Exceptions\FacebookResponseException;
@@ -135,14 +136,19 @@ class FacebookService extends AbstractService
         $this->setDefaultAccessToken($token, $expire);
         $facebookUser = $this->getBasicInfo();
 
-        /** @var User|null $user */
-        $user = $this->userService->findByFacebookId($facebookUser->getId());
+        // todo: do something else with the exception
+        /** @var User $user */
+        try {
+            $user = $this->userService->findByFacebookId($facebookUser->getId());
+        } catch (Exception $e) {
+            $user = null;
+        }
 
         if (is_null($user)) {
             $client = $this->clientRepository->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser, $deviceId);
         } else {
-            $this->userService->updateFacebook($facebookUser);
+            $this->userService->updateFacebook($user->getId(), $facebookUser);
         }
 
         return $facebookUser;

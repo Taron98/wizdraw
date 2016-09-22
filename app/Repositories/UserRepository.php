@@ -61,16 +61,18 @@ class UserRepository extends AbstractRepository
     /**
      * Update facebook session to the user
      *
+     * @param int          $id
      * @param FacebookUser $facebookUser
      *
-     * @return bool
+     * @return AbstractModel
      */
-    public function updateFacebook(FacebookUser $facebookUser) : bool
+    public function updateFacebook(int $id, FacebookUser $facebookUser) : AbstractModel
     {
         $user = $this->model->fromFacebookUser($facebookUser);
+        $user->setId($id);
 
         // TODO: check if $user not null?
-        return $this->updateModel($user, $facebookUser->getId(), 'facebook_id');
+        return $this->updateModel($user);
     }
 
 }
