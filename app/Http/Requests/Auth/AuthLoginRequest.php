@@ -30,7 +30,7 @@ class AuthLoginRequest extends AbstractRequest
     {
         // TODO: update rules
         return [
-            'username' => 'required|max:30',
+            'email'    => 'required',
             'password' => 'required|min:3',
         ];
     }

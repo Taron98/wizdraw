@@ -11,8 +11,9 @@
         "tymon/jwt-auth": "0.5.*",
         "sammyk/laravel-facebook-sdk": "^3.3",
         "graham-campbell/exceptions": "^9.1",
-        "bosnadev/repositories": "0.*",
-        "propaganistas/laravel-phone": "^2.7"
+        "propaganistas/laravel-phone": "^2.7",
+        "barryvdh/laravel-cors": "^0.8.2",
+        "prettus/l5-repository": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -32,9 +33,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Wizdraw\\Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
@@ -55,6 +56,9 @@
             "php artisan ide-helper:generate",
             "php artisan ide-helper:meta",
             "php artisan optimize"
+        ],
+        "post-autoload-dump": [
+            "php artisan ide-helper:models --write --reset"
         ]
     },
     "config": {

@@ -64,7 +64,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * Login route using username and password
+     * Login route using email and password
      *
      * @param AuthLoginRequest $request
      *
@@ -75,7 +75,7 @@ class AuthController extends AbstractController
         AuthLoginRequest $request
     ) : JsonResponse
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         $token = $this->authenticate($credentials);
 

@@ -9,11 +9,11 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
 /**
  * Wizdraw\Models\IdentityType
  *
- * @property integer                                                                $id
- * @property string                                                                 $type
- * @property \Carbon\Carbon                                                         $createdAt
- * @property \Carbon\Carbon                                                         $updatedAt
- * @property \Carbon\Carbon                                                         $deletedAt
+ * @property integer $id
+ * @property string $type
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)

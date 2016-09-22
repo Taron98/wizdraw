@@ -185,7 +185,8 @@ return [
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
-        //Bosnadev\Repositories\Providers\RepositoryProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
