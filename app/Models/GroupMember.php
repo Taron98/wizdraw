@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Traits\ModelCamelCaseTrait;
@@ -28,7 +27,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\GroupMember whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class GroupMember extends Model
+class GroupMember extends AbstractModel
 {
     use SoftDeletes, ModelCamelCaseTrait;
 
