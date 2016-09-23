@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Tests\Unit\Repositories;
 
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Repositories\AbstractRepository;
 use Wizdraw\Tests\AbstractTestCase;
 
@@ -43,6 +44,36 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
             [
                 'id' => $expected->getId(),
             ]
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @param array $excludeAttributes
+     */
+    public function it_can_update_entity($excludeAttributes = [])
+    {
+        $defaultExcludedAttributes = [
+            'createdAt',
+            'updatedAt',
+            'deletedAt',
+        ];
+
+        /** @var AbstractModel $original */
+        $original = factory($this->repository->model())->create();
+
+        /** @var AbstractModel $expected */
+        $expected = factory($this->repository->model())->make();
+        $expected->setId($original->getId());
+
+        $this->repository->update($expected->toArray(), $original->getId());
+
+        $this->seeInDatabase(
+            $original->getTable(),
+            $expected->attributesToArray(
+                array_merge($defaultExcludedAttributes, $excludeAttributes)
+            )
         );
     }
 

@@ -27,4 +27,10 @@ class ClientRepositoryTest extends AbstractRepositoryTest
         $this->seed(IdentityTypesTableSeeder::class);
     }
 
+    /** @test */
+    public function it_can_update_entity()
+    {
+        parent::it_can_update_entity(['didSetup']);
+    }
+
 }
