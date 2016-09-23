@@ -15,6 +15,11 @@ class ClientRepositoryTest extends AbstractRepositoryTest
     /** @var  string */
     protected $repositoryClass = ClientRepository::class;
 
+    /** @var array */
+    protected $excludeOnUpdate = [
+        'didSetup'
+    ];
+
     /**
      * Setup the test environment
      *
@@ -25,12 +30,6 @@ class ClientRepositoryTest extends AbstractRepositoryTest
         parent::setUp();
 
         $this->seed(IdentityTypesTableSeeder::class);
-    }
-
-    /** @test */
-    public function it_can_update_entity()
-    {
-        parent::it_can_update_entity(['didSetup']);
     }
 
 }

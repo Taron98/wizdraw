@@ -13,11 +13,21 @@ use Wizdraw\Tests\AbstractTestCase;
 abstract class AbstractRepositoryTest extends AbstractTestCase
 {
 
+    /** @var array */
+    private $defaultExcludedOnUpdate = [
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
+    ];
+
     /** @var  string */
     protected $repositoryClass;
 
     /** @var  AbstractRepository */
     protected $repository;
+
+    /** @var array */
+    protected $excludeOnUpdate = [];
 
     /**
      * Setup the test environment
@@ -50,16 +60,10 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
     /**
      * @test
      *
-     * @param array $excludeAttributes
+     * todo: keep it dry
      */
-    public function it_can_update_entity($excludeAttributes = [])
+    public function it_can_update_entity()
     {
-        $defaultExcludedAttributes = [
-            'createdAt',
-            'updatedAt',
-            'deletedAt',
-        ];
-
         /** @var AbstractModel $original */
         $original = factory($this->repository->model())->create();
 
@@ -72,7 +76,31 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
         $this->seeInDatabase(
             $original->getTable(),
             $expected->attributesToArray(
-                array_merge($defaultExcludedAttributes, $excludeAttributes)
+                array_merge($this->defaultExcludedOnUpdate, $this->excludeOnUpdate)
+            )
+        );
+    }
+
+    /**
+     * @test
+     *
+     * todo: keep it dry
+     */
+    public function it_can_update_model_entity()
+    {
+        /** @var AbstractModel $original */
+        $original = factory($this->repository->model())->create();
+
+        /** @var AbstractModel $expected */
+        $expected = factory($this->repository->model())->make();
+        $expected->setId($original->getId());
+
+        $this->repository->updateModel($expected);
+
+        $this->seeInDatabase(
+            $original->getTable(),
+            $expected->attributesToArray(
+                array_merge($this->defaultExcludedOnUpdate, $this->excludeOnUpdate)
             )
         );
     }
