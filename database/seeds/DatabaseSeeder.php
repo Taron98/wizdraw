@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
 
         // Disable foreign keys constraints
         // Required if we want to truncate (clear) tables that has an fk
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        if ($this->isMysql()) {
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        }
 
         $this->call(IdentityTypesTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
@@ -27,6 +29,21 @@ class DatabaseSeeder extends Seeder
         $this->call(GroupMembersTableSeeder::class);
 
         // Enable foreign keys constraints
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+        if ($this->isMysql()) {
+            DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+        }
+    }
+
+    /**
+     * Check if the current database driver is mysql
+     *
+     * @return bool
+     */
+    private function isMysql() : bool
+    {
+        $default = config('database.default');
+        $driver = config('database.connections.' . $default . '.driver');
+
+        return strtolower($driver) === 'mysql';
     }
 }

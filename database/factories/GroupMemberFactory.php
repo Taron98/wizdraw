@@ -4,6 +4,6 @@ $factory->define(Wizdraw\Models\GroupMember::class, function (Faker\Generator $f
     return [
         'group_id'      => Wizdraw\Models\Group::all()->random()->id,
         'client_id'     => factory(\Wizdraw\Models\Client::class)->create()->id,
-        'is_approved'   => $faker->boolean
+        'is_approved'   => $faker->boolean,
     ];
 });
