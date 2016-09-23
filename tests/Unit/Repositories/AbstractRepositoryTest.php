@@ -30,4 +30,20 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
         $this->repository = $this->app->make($this->repositoryClass);
     }
 
+    /** @test */
+    public function it_can_create_entity()
+    {
+        /** @var Group $entity */
+        $entity = factory($this->repository->model())->make();
+
+        $expected = $this->repository->create($entity->attributesToArray());
+
+        $this->seeInDatabase(
+            $entity->getTable(),
+            [
+                'id' => $expected->getId(),
+            ]
+        );
+    }
+
 }
