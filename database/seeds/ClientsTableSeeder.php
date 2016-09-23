@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Wizdraw\Models\Client;
 

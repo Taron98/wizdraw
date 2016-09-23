@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Wizdraw\Models\Group;
-use Wizdraw\Models\GroupMember;
 
 class GroupsTableSeeder extends Seeder
 {

@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
     private function isMysql() : bool
     {
         $default = config('database.default');
-        $driver = config('database.connections.'. $default .'.driver');
+        $driver = config('database.connections.' . $default . '.driver');
 
         return strtolower($driver) === 'mysql';
     }

@@ -17,18 +17,6 @@ class IdentityTypesTableSeeder extends Seeder
     {
         IdentityType::truncate();
 
-        $identityTypes = [
-            [
-                'type' => 'Passport',
-            ],
-            [
-                'type' => 'ID Card',
-            ],
-            [
-                'type' => 'Driver License',
-            ],
-        ];
-
-        IdentityType::insert($identityTypes);
+        factory(IdentityType::class, 3)->create();
     }
 }
