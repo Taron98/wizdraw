@@ -56,7 +56,8 @@ abstract class AbstractModel extends Model
     /**
      * Get the fillable attributes of a given array.
      *
-     * @param  array  $attributes
+     * @param  array $attributes
+     *
      * @return array
      */
     protected function fillableFromArray(array $attributes)
@@ -78,6 +79,26 @@ abstract class AbstractModel extends Model
         $values = parent::getArrayableItems($values);
 
         return array_key_camel_case($values);
+    }
+
+    /**
+     * Convert the model's attributes to an array.
+     *
+     * @param array $exclude
+     *
+     * @return array
+     */
+    public function attributesToArray($exclude = [])
+    {
+        $attributes = parent::attributesToArray();
+
+        if (!is_null($exclude)) {
+            $flippedExclude = array_flip($exclude);
+
+            $attributes = array_diff_key($attributes, $flippedExclude);
+        }
+
+        return $attributes;
     }
 
 }
