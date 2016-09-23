@@ -77,4 +77,21 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
         );
     }
 
+    /** @test */
+    public function it_can_delete_entity()
+    {
+        /** @var AbstractModel $original */
+        $original = factory($this->repository->model())->create();
+
+        $this->repository->delete($original->getId());
+
+        $this->notSeeInDatabase(
+            $original->getTable(),
+            [
+                'id'        => $original->getId(),
+                'deletedAt' => null,
+            ]
+        );
+    }
+
 }
