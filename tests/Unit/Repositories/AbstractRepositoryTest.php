@@ -41,10 +41,38 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
         $this->repository = $this->app->make($this->repositoryClass);
     }
 
+    /**
+     * Generic update testing
+     *
+     * @param bool $isModel
+     */
+    public function updateEntityTest(bool $isModel = false)
+    {
+        /** @var AbstractModel $original */
+        $original = factory($this->repository->model())->create();
+
+        /** @var AbstractModel $expected */
+        $expected = factory($this->repository->model())->make();
+        $expected->setId($original->getId());
+
+        if ($isModel) {
+            $this->repository->updateModel($expected);
+        } else {
+            $this->repository->update($expected->toArray(), $original->getId());
+        }
+
+        $this->seeInDatabase(
+            $original->getTable(),
+            $expected->attributesToArray(
+                array_merge($this->defaultExcludedOnUpdate, $this->excludeOnUpdate)
+            )
+        );
+    }
+
     /** @test */
     public function it_can_create_entity()
     {
-        /** @var Group $entity */
+        /** @var AbstractModel $entity */
         $entity = factory($this->repository->model())->make();
 
         $expected = $this->repository->create($entity->attributesToArray());
@@ -57,52 +85,16 @@ abstract class AbstractRepositoryTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * todo: keep it dry
-     */
+    /** @test */
     public function it_can_update_entity()
     {
-        /** @var AbstractModel $original */
-        $original = factory($this->repository->model())->create();
-
-        /** @var AbstractModel $expected */
-        $expected = factory($this->repository->model())->make();
-        $expected->setId($original->getId());
-
-        $this->repository->update($expected->toArray(), $original->getId());
-
-        $this->seeInDatabase(
-            $original->getTable(),
-            $expected->attributesToArray(
-                array_merge($this->defaultExcludedOnUpdate, $this->excludeOnUpdate)
-            )
-        );
+        $this->updateEntityTest();
     }
 
-    /**
-     * @test
-     *
-     * todo: keep it dry
-     */
+    /** @test */
     public function it_can_update_model_entity()
     {
-        /** @var AbstractModel $original */
-        $original = factory($this->repository->model())->create();
-
-        /** @var AbstractModel $expected */
-        $expected = factory($this->repository->model())->make();
-        $expected->setId($original->getId());
-
-        $this->repository->updateModel($expected);
-
-        $this->seeInDatabase(
-            $original->getTable(),
-            $expected->attributesToArray(
-                array_merge($this->defaultExcludedOnUpdate, $this->excludeOnUpdate)
-            )
-        );
+        $this->updateEntityTest(true);
     }
 
     /** @test */
