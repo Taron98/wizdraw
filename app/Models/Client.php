@@ -2,10 +2,12 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Wizdraw\Services\Entities\FacebookUser;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
@@ -55,9 +57,9 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class Client extends AbstractModel
+class Client extends AbstractModel implements AuthorizableContract
 {
-    use SoftDeletes, ModelCamelCaseTrait;
+    use SoftDeletes, Authorizable, ModelCamelCaseTrait;
 
     /**
      * The table associated with the model.
