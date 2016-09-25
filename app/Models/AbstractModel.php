@@ -14,6 +14,13 @@ abstract class AbstractModel extends Model
 {
 
     /**
+     * Indicates whether attributes are snake cased on arrays.
+     *
+     * @var bool
+     */
+    public static $snakeAttributes = false;
+
+    /**
      * @return int
      */
     public function getId(): int
