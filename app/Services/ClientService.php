@@ -51,8 +51,7 @@ class ClientService extends AbstractService
             $clientModel = null;
 
             if (isset($client[ 'phone' ])) {
-                $phone = phone_format($client[ 'phone' ]);
-                $clientModel = $this->repository->findByPhone($phone)->first();
+                $clientModel = $this->findByPhone($client[ 'phone' ]);
             }
 
             if (is_null($clientModel)) {
@@ -77,6 +76,18 @@ class ClientService extends AbstractService
         $client = $this->repository->makeModel()->fromFacebookUser($facebookUser);
 
         return $this->createClient($client->toArray());
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return Client|null
+     */
+    private function findByPhone(string $phone)
+    {
+        $phone = phone_format($phone);
+
+        return $this->repository->findByPhone($phone)->first();
     }
 
 }
