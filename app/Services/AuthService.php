@@ -21,7 +21,7 @@ class AuthService extends AbstractService
     /**
      * AuthService constructor.
      *
-     * @param JWTAuth     $jwtAuth
+     * @param JWTAuth $jwtAuth
      * @param UserService $userService
      */
     public function __construct(JWTAuth $jwtAuth, UserService $userService)

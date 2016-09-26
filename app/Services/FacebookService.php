@@ -39,9 +39,9 @@ class FacebookService extends AbstractService
      * FacebookService constructor.
      *
      * @param LaravelFacebookSdk $sdk
-     * @param UserRepository     $userRepository
-     * @param UserService        $userService
-     * @param ClientRepository   $clientRepository
+     * @param UserRepository $userRepository
+     * @param UserService $userService
+     * @param ClientRepository $clientRepository
      */
     public function __construct(
         LaravelFacebookSdk $sdk,
@@ -101,7 +101,7 @@ class FacebookService extends AbstractService
      * Set access token for later use, and extend it if needed
      *
      * @param string $token
-     * @param int    $expire
+     * @param int $expire
      */
     public function setDefaultAccessToken(string $token, int $expire)
     {
@@ -126,7 +126,7 @@ class FacebookService extends AbstractService
      * Connect using facebook, signup if new | login if exists
      *
      * @param string $token
-     * @param int    $expire
+     * @param int $expire
      * @param string $deviceId
      *
      * @return FacebookUser

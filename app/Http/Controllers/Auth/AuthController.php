@@ -43,10 +43,10 @@ class AuthController extends AbstractController
     /**
      * AuthController constructor.
      *
-     * @param FacebookService  $facebookService
-     * @param AuthService      $authService
-     * @param UserRepository   $userRepository
-     * @param UserService      $userService
+     * @param FacebookService $facebookService
+     * @param AuthService $authService
+     * @param UserRepository $userRepository
+     * @param UserService $userService
      * @param ClientRepository $clientRepository
      */
     public function __construct(
@@ -141,7 +141,8 @@ class AuthController extends AbstractController
         $requestAttr = $request->inputs();
 
         try {
-            $facebookUser = $this->facebookService->connect($requestAttr['token'], $requestAttr['expire'], $requestAttr['deviceId']);
+            $facebookUser = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
+                $requestAttr[ 'deviceId' ]);
         } catch (FacebookInvalidTokenException $exception) {
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
@@ -165,7 +166,7 @@ class AuthController extends AbstractController
      * Create a token for the authenticated user
      * TODO: change the code, seems odd
      *
-     * @param array  $credentials
+     * @param array $credentials
      * @param string $facebookId
      *
      * @return JsonResponse|string
