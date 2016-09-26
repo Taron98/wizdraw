@@ -30,7 +30,7 @@ class GroupCreateUpdateRequest extends AbstractRequest
     {
         return [
             'name'                 => 'required|min:2|max:50',
-            'clients'              => 'required|array',
+            'clients'              => 'array',
             'clients.*.firstName'  => 'min:2|max:40',
             'clients.*.middleName' => 'min:1|max:25',
             'clients.*.lastName'   => 'min:2|max:35',

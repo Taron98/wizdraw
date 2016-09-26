@@ -63,7 +63,9 @@ class GroupController extends AbstractController
      */
     public function update(GroupCreateUpdateRequest $request, int $id)
     {
-        return $this->groupService->update($request->inputs(), $id);
+        $groupClients = $request->input('clients');
+
+        return $this->groupService->updateGroup($id, $request->inputs(), $groupClients);
     }
 
 }

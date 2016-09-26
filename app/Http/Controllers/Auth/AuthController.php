@@ -12,9 +12,9 @@ use Wizdraw\Http\Requests\Auth\AuthLoginRequest;
 use Wizdraw\Http\Requests\Auth\AuthSignupRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
-use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
+use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
 use Wizdraw\Services\UserService;
 
@@ -37,8 +37,8 @@ class AuthController extends AbstractController
     /** @var UserService */
     private $userService;
 
-    /** @var  ClientRepository */
-    private $clientRepository;
+    /** @var  ClientService */
+    private $clientService;
 
     /**
      * AuthController constructor.
@@ -47,20 +47,20 @@ class AuthController extends AbstractController
      * @param AuthService $authService
      * @param UserRepository $userRepository
      * @param UserService $userService
-     * @param ClientRepository $clientRepository
+     * @param ClientService $clientService
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
         UserService $userService,
-        ClientRepository $clientRepository
+        ClientService $clientService
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
-        $this->clientRepository = $clientRepository;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -109,7 +109,7 @@ class AuthController extends AbstractController
         }
 
         /** @var Client $client */
-        $client = $this->clientRepository->create($clientAttrs);
+        $client = $this->clientService->createClient($clientAttrs);
         if (!$client instanceof Client) {
             return $this->respondWithError('cant_create_client');
         }

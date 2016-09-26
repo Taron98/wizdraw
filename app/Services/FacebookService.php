@@ -9,7 +9,6 @@ use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Exceptions\FacebookResponseException;
 use Wizdraw\Models\User;
-use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\Entities\AbstractEntity;
 use Wizdraw\Services\Entities\FacebookUser;
@@ -32,8 +31,8 @@ class FacebookService extends AbstractService
     /** @var  UserService */
     private $userService;
 
-    /** @var ClientRepository */
-    private $clientRepository;
+    /** @var ClientService */
+    private $clientService;
 
     /**
      * FacebookService constructor.
@@ -41,18 +40,18 @@ class FacebookService extends AbstractService
      * @param LaravelFacebookSdk $sdk
      * @param UserRepository $userRepository
      * @param UserService $userService
-     * @param ClientRepository $clientRepository
+     * @param ClientService $clientService
      */
     public function __construct(
         LaravelFacebookSdk $sdk,
         UserRepository $userRepository,
         UserService $userService,
-        ClientRepository $clientRepository
+        ClientService $clientService
     ) {
         $this->sdk = $sdk;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
-        $this->clientRepository = $clientRepository;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -145,7 +144,7 @@ class FacebookService extends AbstractService
         }
 
         if (is_null($user)) {
-            $client = $this->clientRepository->createByFacebook($facebookUser);
+            $client = $this->clientService->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser, $deviceId);
         } else {
             $this->userService->updateFacebook($user->getId(), $facebookUser);

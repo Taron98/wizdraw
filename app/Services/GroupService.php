@@ -46,4 +46,25 @@ class GroupService extends AbstractService
         return $group;
     }
 
+    /**
+     * @param int $id
+     * @param array $attributes
+     * @param array $groupClients
+     *
+     * @return AbstractModel
+     */
+    public function updateGroup(int $id, array $attributes, $groupClients = [])
+    {
+        $memberClientsIds = [];
+
+        if (!is_null($groupClients)) {
+            $memberClients = $this->clientService->createClients($groupClients);
+            $memberClientsIds = $memberClients->pluck('id')->toArray();
+        }
+
+        $group = $this->repository->updateWithRelation($id, $attributes, $memberClientsIds);
+
+        return $group;
+    }
+
 }

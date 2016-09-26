@@ -3,7 +3,9 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Support\Collection;
+use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
+use Wizdraw\Services\Entities\FacebookUser;
 
 /**
  * Class ClientService
@@ -23,6 +25,18 @@ class ClientService extends AbstractService
     }
 
     /**
+     * Creation of clients
+     *
+     * @param array $attributes
+     *
+     * @return Client
+     */
+    public function createClient(array $attributes) : Client
+    {
+        return $this->createClients([0 => $attributes])->first();
+    }
+
+    /**
      * Mass creation of clients
      *
      * @param array $clients
@@ -34,8 +48,12 @@ class ClientService extends AbstractService
         $clientModels = new Collection();
 
         foreach ($clients as $client) {
-            $phone = phone_format($client[ 'phone' ]);
-            $clientModel = $this->repository->findByPhone($phone)->first();
+            $clientModel = null;
+
+            if (isset($client[ 'phone' ])) {
+                $phone = phone_format($client[ 'phone' ]);
+                $clientModel = $this->repository->findByPhone($phone)->first();
+            }
 
             if (is_null($clientModel)) {
                 $clientModel = $this->repository->create($client);
@@ -45,6 +63,20 @@ class ClientService extends AbstractService
         }
 
         return $clientModels;
+    }
+
+    /**
+     * Creating a client by the facebook details
+     *
+     * @param FacebookUser $facebookUser
+     *
+     * @return mixed
+     */
+    public function createByFacebook(FacebookUser $facebookUser)
+    {
+        $client = $this->repository->makeModel()->fromFacebookUser($facebookUser);
+
+        return $this->createClient($client->toArray());
     }
 
 }
