@@ -156,7 +156,7 @@ class Client extends AbstractModel implements AuthorizableContract
 
     //<editor-fold desc="Relationships">
     /**
-     * One-to-many relationship with identity_types table
+     * One-to-one relationship with identity_types table
      *
      * @return BelongsTo
      */
