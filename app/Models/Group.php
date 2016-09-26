@@ -2,22 +2,25 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\Group
  *
- * @property integer                                                                $id
- * @property string                                                                 $name
- * @property integer                                                                $clientId
- * @property \Carbon\Carbon                                                         $createdAt
- * @property \Carbon\Carbon                                                         $updatedAt
- * @property \Carbon\Carbon                                                         $deletedAt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $client
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $members
+ * @property integer $id
+ * @property string $name
+ * @property integer $clientId
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @property-read \Wizdraw\Models\Client $adminClient
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $memberClients
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereClientId($value)
@@ -76,19 +79,39 @@ class Group extends AbstractModel
      *
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function adminClient() : BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
 
     /**
-     * One-to-many relationship with clients table
+     * Many-to-many relationship with clients table
      *
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function members() : HasMany
+    public function memberClients() : BelongsToMany
     {
-        return $this->hasMany(Client::class);
+        return $this->belongsToMany(Client::class, 'group_clients')
+            ->withPivot(['is_approved']);
+    }
+
+    /**
+     * Create a new pivot model instance
+     *
+     * @param  Model $parent
+     * @param  array $attributes
+     * @param  string $table
+     * @param  bool $exists
+     *
+     * @return Pivot
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Client) {
+            return new GroupClient($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
     //</editor-fold>
 

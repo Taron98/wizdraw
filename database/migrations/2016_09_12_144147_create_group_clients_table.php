@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateGroupMembersTable
+ * Class CreateGroupClientsTable
  */
-class CreateGroupMembersTable extends Migration
+class CreateGroupClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateGroupMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_members', function (Blueprint $table) {
+        Schema::create('group_clients', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('group_id')->unsigned()->index();
@@ -27,7 +27,7 @@ class CreateGroupMembersTable extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
 
-            $table->unique(['group_id', 'client_id']);
+//            $table->unique(['group_id', 'client_id']);
 
             $table->foreign('group_id')
                 ->references('id')->on('groups')
@@ -48,6 +48,6 @@ class CreateGroupMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_members');
+        Schema::dropIfExists('group_clients');
     }
 }
