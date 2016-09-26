@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Illuminate\Support\Collection;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\GroupRepository;
@@ -28,6 +29,16 @@ class GroupService extends AbstractService
     ) {
         $this->repository = $groupRepository;
         $this->clientService = $clientService;
+    }
+
+    /**
+     * @param Client $client
+     *
+     * @return Collection
+     */
+    public function findByAdminClient(Client $client) : Collection
+    {
+        return $this->repository->findByAdminClient($client);
     }
 
     /**

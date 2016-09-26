@@ -4,6 +4,7 @@ namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Group\GroupCreateUpdateRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Group;
 use Wizdraw\Services\GroupService;
@@ -40,6 +41,21 @@ class GroupController extends AbstractController
     }
 
     /**
+     * Showing list of groups route
+     *
+     * @param NoParamRequest $request
+     *
+     * @return mixed
+     *
+     */
+    public function list(NoParamRequest $request)
+    {
+        $adminClient = $request->user()->client;
+
+        return $this->groupService->findByAdminClient($adminClient);
+    }
+
+    /**
      * Creating a group route
      *
      * @param GroupCreateUpdateRequest $request
@@ -66,9 +82,9 @@ class GroupController extends AbstractController
      */
     public function update(GroupCreateUpdateRequest $request, Group $group)
     {
-        $client = $request->user()->client;
+        $adminClient = $request->user()->client;
 
-        if ($client->cannot('update', $group)) {
+        if ($adminClient->cannot('update', $group)) {
             return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
         }
 

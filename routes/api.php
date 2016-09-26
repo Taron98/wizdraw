@@ -84,6 +84,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'GroupController@show',
             ]);
 
+            Route::get('/', [
+                'as'   => 'group.list',
+                'uses' => 'GroupController@list',
+            ]);
+
             Route::post('/', [
                 'as'   => 'group.create',
                 'uses' => 'GroupController@create',

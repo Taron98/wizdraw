@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Repositories;
 
+use Illuminate\Support\Collection;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Group;
 
@@ -18,6 +19,16 @@ class GroupRepository extends AbstractRepository
     public function model()
     {
         return Group::class;
+    }
+
+    /**
+     * @param Client $client
+     *
+     * @return Collection
+     */
+    public function findByAdminClient(Client $client) : Collection
+    {
+        return $this->findByField('client_id', $client->getId());
     }
 
     /**
