@@ -5,6 +5,10 @@ namespace Wizdraw\Models\Pivots;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
+/**
+ * Class GroupClient
+ * @package Wizdraw\Models\Pivots
+ */
 class GroupClient extends AbstractPivot
 {
     use SoftDeletes, ModelCamelCaseTrait;
