@@ -6,6 +6,10 @@ use Wizdraw\Http\Requests\Group\GroupCreateUpdateRequest;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Services\GroupService;
 
+/**
+ * Class GroupController
+ * @package Wizdraw\Http\Controllers
+ */
 class GroupController extends AbstractController
 {
     /** @var  GroupService */
@@ -42,16 +46,18 @@ class GroupController extends AbstractController
      */
     public function create(GroupCreateUpdateRequest $request)
     {
-        $client = $request->user()->client;
+        $adminClient = $request->user()->client;
+        $groupName = $request->only('name');
+        $groupClients = $request->input('clients');
 
-        return $this->groupService->createGroup($request->inputs(), $client);
+        return $this->groupService->createGroup($adminClient, $groupName, $groupClients);
     }
 
     /**
      * Updating a group route
      *
      * @param GroupCreateUpdateRequest $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return AbstractModel
      */

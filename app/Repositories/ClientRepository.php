@@ -21,6 +21,16 @@ class ClientRepository extends AbstractRepository
     }
 
     /**
+     * @param string $phone
+     *
+     * @return mixed
+     */
+    public function findByPhone(string $phone)
+    {
+        return $this->findByField('phone', $phone);
+    }
+
+    /**
      * Creating a client by the facebook details
      *
      * @param FacebookUser $facebookUser
