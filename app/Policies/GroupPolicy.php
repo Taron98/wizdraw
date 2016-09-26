@@ -15,6 +15,19 @@ class GroupPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can show the group
+     *
+     * @param Client $client
+     * @param Group $group
+     *
+     * @return bool
+     */
+    public function show(Client $client, Group $group)
+    {
+        return $client->getId() === $this->getAdminClientId($group);
+    }
+
+    /**
      * Determine whether the user can update the group
      *
      * @param Client $client
@@ -24,9 +37,19 @@ class GroupPolicy
      */
     public function update(Client $client, Group $group)
     {
+        return $client->getId() === $this->getAdminClientId($group);
+    }
+
+    /**
+     * @param Group $group
+     *
+     * @return int
+     */
+    private function getAdminClientId(Group $group) : int
+    {
         $groupClient = $group->adminClient()->first();
 
-        return $client->getId() === $groupClient->getId();
+        return $groupClient->getId();
     }
 
 }

@@ -31,13 +31,20 @@ class GroupController extends AbstractController
     /**
      * Showing a group route
      *
-     * @param $id
+     * @param NoParamRequest $request
+     * @param Group $group
      *
      * @return mixed
      */
-    public function show(int $id)
+    public function show(NoParamRequest $request, Group $group)
     {
-        return $this->groupService->find($id);
+        $adminClient = $request->user()->client;
+
+        if ($adminClient->cannot('show', $group)) {
+            return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        return $this->groupService->find($group->getId());
     }
 
     /**
@@ -46,7 +53,6 @@ class GroupController extends AbstractController
      * @param NoParamRequest $request
      *
      * @return mixed
-     *
      */
     public function list(NoParamRequest $request)
     {
@@ -78,7 +84,6 @@ class GroupController extends AbstractController
      * @param Group $group
      *
      * @return AbstractModel
-     *
      */
     public function update(GroupCreateUpdateRequest $request, Group $group)
     {
