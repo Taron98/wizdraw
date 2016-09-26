@@ -89,7 +89,7 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'GroupController@create',
             ]);
 
-            Route::post('/{id}', [
+            Route::post('/{group}', [
                 'as'   => 'group.update',
                 'uses' => 'GroupController@update',
             ]);
