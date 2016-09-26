@@ -6,6 +6,10 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Group;
 
+/**
+ * Class GroupPolicy
+ * @package Wizdraw\Policies
+ */
 class GroupPolicy
 {
     use HandlesAuthorization;
