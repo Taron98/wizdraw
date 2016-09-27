@@ -68,7 +68,7 @@ class UserController extends AbstractController
      * Verify code route
      *
      * @param NoParamRequest $request
-     * @param int            $verifyCode
+     * @param int $verifyCode
      *
      * @return JsonResponse
      */

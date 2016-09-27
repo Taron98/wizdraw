@@ -20,7 +20,7 @@ abstract class AbstractController extends Controller
 
     /**
      * @param string $message
-     * @param int    $statusCode
+     * @param int $statusCode
      *
      * @return JsonResponse
      */

@@ -2,10 +2,15 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
@@ -55,9 +60,9 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class Client extends AbstractModel
+class Client extends AbstractModel implements AuthorizableContract
 {
-    use SoftDeletes, ModelCamelCaseTrait;
+    use SoftDeletes, Authorizable, ModelCamelCaseTrait;
 
     /**
      * The table associated with the model.
@@ -151,7 +156,7 @@ class Client extends AbstractModel
 
     //<editor-fold desc="Relationships">
     /**
-     * One-to-many relationship with identity_types table
+     * One-to-one relationship with identity_types table
      *
      * @return BelongsTo
      */
@@ -171,13 +176,33 @@ class Client extends AbstractModel
     }
 
     /**
-     * One-to-many relationship with group_members table
+     * Many-to-many relationship with group_clients table
      *
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function groups()
+    public function groups() : BelongsToMany
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsToMany(Group::class, 'group_clients')
+            ->withPivot(['is_approved']);
+    }
+
+    /**
+     * Create a new pivot model instance
+     *
+     * @param  Model $parent
+     * @param  array $attributes
+     * @param  string $table
+     * @param  bool $exists
+     *
+     * @return Pivot
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Group) {
+            return new GroupClient($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
     /**

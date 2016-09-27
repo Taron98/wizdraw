@@ -12,9 +12,9 @@ use Wizdraw\Http\Requests\Auth\AuthLoginRequest;
 use Wizdraw\Http\Requests\Auth\AuthSignupRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
-use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
+use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
 use Wizdraw\Services\UserService;
 
@@ -37,30 +37,30 @@ class AuthController extends AbstractController
     /** @var UserService */
     private $userService;
 
-    /** @var  ClientRepository */
-    private $clientRepository;
+    /** @var  ClientService */
+    private $clientService;
 
     /**
      * AuthController constructor.
      *
-     * @param FacebookService  $facebookService
-     * @param AuthService      $authService
-     * @param UserRepository   $userRepository
-     * @param UserService      $userService
-     * @param ClientRepository $clientRepository
+     * @param FacebookService $facebookService
+     * @param AuthService $authService
+     * @param UserRepository $userRepository
+     * @param UserService $userService
+     * @param ClientService $clientService
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
         UserService $userService,
-        ClientRepository $clientRepository
+        ClientService $clientService
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
-        $this->clientRepository = $clientRepository;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -109,7 +109,7 @@ class AuthController extends AbstractController
         }
 
         /** @var Client $client */
-        $client = $this->clientRepository->create($clientAttrs);
+        $client = $this->clientService->createClient($clientAttrs);
         if (!$client instanceof Client) {
             return $this->respondWithError('cant_create_client');
         }
@@ -141,7 +141,8 @@ class AuthController extends AbstractController
         $requestAttr = $request->inputs();
 
         try {
-            $facebookUser = $this->facebookService->connect($requestAttr['token'], $requestAttr['expire'], $requestAttr['deviceId']);
+            $facebookUser = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
+                $requestAttr[ 'deviceId' ]);
         } catch (FacebookInvalidTokenException $exception) {
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
@@ -165,7 +166,7 @@ class AuthController extends AbstractController
      * Create a token for the authenticated user
      * TODO: change the code, seems odd
      *
-     * @param array  $credentials
+     * @param array $credentials
      * @param string $facebookId
      *
      * @return JsonResponse|string
