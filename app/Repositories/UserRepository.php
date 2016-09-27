@@ -23,13 +23,13 @@ class UserRepository extends AbstractRepository
     }
 
     /**
-     * @param array         $data
+     * @param array $data
      *
-     * @param AbstractModel $client
+     * @param Client $client
      *
      * @return mixed
      */
-    public function createWithRelation(array $data, AbstractModel $client)
+    public function createWithRelation(array $data, Client $client)
     {
         $newModel = $this->model
             ->newInstance($data)
@@ -43,9 +43,9 @@ class UserRepository extends AbstractRepository
     /**
      * Creating a user by the facebook details
      *
-     * @param Client       $client
+     * @param Client $client
      * @param FacebookUser $facebookUser
-     * @param string       $deviceId
+     * @param string $deviceId
      *
      * @return mixed
      */
@@ -61,7 +61,7 @@ class UserRepository extends AbstractRepository
     /**
      * Update facebook session to the user
      *
-     * @param int          $id
+     * @param int $id
      * @param FacebookUser $facebookUser
      *
      * @return AbstractModel

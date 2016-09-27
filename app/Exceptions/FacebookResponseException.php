@@ -17,7 +17,7 @@ class FacebookResponseException extends HttpException
      * FacebookResponseException constructor.
      *
      * @param Exception|null $previous
-     * @param array          $headers
+     * @param array $headers
      */
     public function __construct(Exception $previous = null, array $headers = [])
     {

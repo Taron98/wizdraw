@@ -6,12 +6,10 @@ use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use Wizdraw\Services\Entities\FacebookUser;
 use Wizdraw\Traits\ModelCamelCaseTrait;
 
@@ -55,10 +53,9 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class User extends AbstractModel implements
     AuthenticatableContract,
-    AuthorizableContract,
     CanResetPasswordContract
 {
-    use SoftDeletes, ModelCamelCaseTrait, Authenticatable, Authorizable, CanResetPassword;
+    use SoftDeletes, ModelCamelCaseTrait, Authenticatable, CanResetPassword;
 
     /**
      * The table associated with the model.

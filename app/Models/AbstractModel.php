@@ -63,7 +63,8 @@ abstract class AbstractModel extends Model
     /**
      * Get the fillable attributes of a given array.
      *
-     * @param  array  $attributes
+     * @param  array $attributes
+     *
      * @return array
      */
     protected function fillableFromArray(array $attributes)

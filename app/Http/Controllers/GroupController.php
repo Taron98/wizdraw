@@ -2,10 +2,17 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Group\GroupCreateUpdateRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\AbstractModel;
+use Wizdraw\Models\Group;
 use Wizdraw\Services\GroupService;
 
+/**
+ * Class GroupController
+ * @package Wizdraw\Http\Controllers
+ */
 class GroupController extends AbstractController
 {
     /** @var  GroupService */
@@ -24,13 +31,34 @@ class GroupController extends AbstractController
     /**
      * Showing a group route
      *
-     * @param $id
+     * @param NoParamRequest $request
+     * @param Group $group
      *
      * @return mixed
      */
-    public function show(int $id)
+    public function show(NoParamRequest $request, Group $group)
     {
-        return $this->groupService->find($id);
+        $adminClient = $request->user()->client;
+
+        if ($adminClient->cannot('show', $group)) {
+            return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        return $this->groupService->find($group->getId());
+    }
+
+    /**
+     * Showing list of groups route
+     *
+     * @param NoParamRequest $request
+     *
+     * @return mixed
+     */
+    public function list(NoParamRequest $request)
+    {
+        $adminClient = $request->user()->client;
+
+        return $this->groupService->findByAdminClient($adminClient);
     }
 
     /**
@@ -42,22 +70,32 @@ class GroupController extends AbstractController
      */
     public function create(GroupCreateUpdateRequest $request)
     {
-        $client = $request->user()->client;
+        $adminClient = $request->user()->client;
+        $groupName = $request->only('name');
+        $groupClients = $request->input('clients');
 
-        return $this->groupService->createGroup($request->inputs(), $client);
+        return $this->groupService->createGroup($adminClient, $groupName, $groupClients);
     }
 
     /**
      * Updating a group route
      *
      * @param GroupCreateUpdateRequest $request
-     * @param int                      $id
+     * @param Group $group
      *
      * @return AbstractModel
      */
-    public function update(GroupCreateUpdateRequest $request, int $id)
+    public function update(GroupCreateUpdateRequest $request, Group $group)
     {
-        return $this->groupService->update($request->inputs(), $id);
+        $adminClient = $request->user()->client;
+
+        if ($adminClient->cannot('update', $group)) {
+            return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        $groupClients = $request->input('clients');
+
+        return $this->groupService->updateGroup($group->getId(), $request->inputs(), $groupClients);
     }
 
 }

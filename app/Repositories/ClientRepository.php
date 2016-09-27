@@ -3,7 +3,6 @@
 namespace Wizdraw\Repositories;
 
 use Wizdraw\Models\Client;
-use Wizdraw\Services\Entities\FacebookUser;
 
 /**
  * Class ClientRepository
@@ -21,17 +20,13 @@ class ClientRepository extends AbstractRepository
     }
 
     /**
-     * Creating a client by the facebook details
-     *
-     * @param FacebookUser $facebookUser
+     * @param string $phone
      *
      * @return mixed
      */
-    public function createByFacebook(FacebookUser $facebookUser)
+    public function findByPhone(string $phone)
     {
-        $client = $this->model->fromFacebookUser($facebookUser);
-
-        return $this->createModel($client);
+        return $this->findByField('phone', $phone);
     }
 
 }

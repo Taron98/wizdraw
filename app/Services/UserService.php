@@ -66,7 +66,7 @@ class UserService extends AbstractService
     /**
      * Update facebook session to the user
      *
-     * @param int          $id
+     * @param int $id
      * @param FacebookUser $facebookUser
      *
      * @return AbstractModel

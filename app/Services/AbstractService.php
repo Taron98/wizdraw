@@ -46,36 +46,33 @@ abstract class AbstractService
     }
 
     /**
-     * @param array  $data
-     * @param mixed  $id
-     * @param string $attribute
+     * @param array $data
+     * @param mixed $id
      *
      * @return AbstractModel
      */
-    public function update(array $data, $id, $attribute = "id") : AbstractModel
+    public function update(array $data, $id) : AbstractModel
     {
         $data = array_key_snake_case($data);
 
-        $this->repository->update($data, $id, $attribute);
-        $model = $this->repository->find($id);
+        $model = $this->repository->update($data, $id);
 
         return $model;
     }
 
     /**
      * @param AbstractModel $model
-     * @param string        $key
-     * @param string        $attribute
+     * @param string $key
      *
      * @return AbstractModel
      */
-    public function updateModel(AbstractModel $model, string $key = '', string $attribute = 'id')
+    public function updateModel(AbstractModel $model, string $key = '')
     {
         if (empty($key)) {
             $key = $model->getId();
         }
 
-        return $this->update($model->attributesToArray(), $key, $attribute);
+        return $this->update($model->attributesToArray(), $key);
     }
 
 }

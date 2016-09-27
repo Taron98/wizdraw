@@ -79,9 +79,14 @@ Route::group(['prefix' => 'v1/'], function () {
         // Group
         Route::group(['prefix' => 'group/'], function () {
 
-            Route::get('/{id}', [
+            Route::get('/{group}', [
                 'as'   => 'group.show',
                 'uses' => 'GroupController@show',
+            ]);
+
+            Route::get('/', [
+                'as'   => 'group.list',
+                'uses' => 'GroupController@list',
             ]);
 
             Route::post('/', [
@@ -89,7 +94,7 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'GroupController@create',
             ]);
 
-            Route::post('/{id}', [
+            Route::post('/{group}', [
                 'as'   => 'group.update',
                 'uses' => 'GroupController@update',
             ]);
