@@ -32,6 +32,16 @@ class GroupService extends AbstractService
     }
 
     /**
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function find(int $id)
+    {
+        return $this->repository->with('memberClients')->find($id);
+    }
+
+    /**
      * @param Client $client
      *
      * @return Collection
