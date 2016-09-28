@@ -31,7 +31,7 @@ class ClientUpdateRequest extends AbstractRequest
         return [
             'identityTypeId'    => 'required|integer',
             'identityNumber'    => 'required|min:5|max:20',
-            'identityExpire'    => 'required|date|after:today',
+            'identityExpire'    => 'date|after:today',
             'identityImage'     => 'image',
             'firstName'         => 'min:2|max:40',
             'middleName'        => 'min:1|max:25',
