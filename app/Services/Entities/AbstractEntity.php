@@ -42,7 +42,7 @@ abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
     }
 
     /**
-     * Convert the entity instance to JSON.
+     * Convert the entity instance to JSON
      *
      * @param bool $includeNulls
      * @param  int $options
@@ -55,7 +55,7 @@ abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
     }
 
     /**
-     * Convert the object into something JSON serializable.
+     * Convert the object into something JSON serializable
      *
      * @param bool $includeNulls
      *
@@ -67,7 +67,7 @@ abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
     }
 
     /**
-     * Convert the entity instance to an array.
+     * Convert the entity instance to an array
      *
      * @param bool $includeNull
      *
