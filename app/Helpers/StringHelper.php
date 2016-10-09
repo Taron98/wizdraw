@@ -74,3 +74,17 @@ if (!function_exists('generate_code')) {
         return mt_rand($min, $max);
     }
 }
+
+if (!function_exists('ucwords_upper')) {
+    /**
+     * Upper case first letter of words
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    function ucwords_upper(string $string = '') : string
+    {
+        return ucwords(strtolower($string));
+    }
+}
