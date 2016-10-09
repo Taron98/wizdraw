@@ -111,6 +111,16 @@ Route::group(['prefix' => 'v1/'], function () {
 
         });
 
+        // Country
+        Route::group(['prefix' => 'country/'], function () {
+
+            Route::get('/{id}', [
+                'as'   => 'country.show',
+                'uses' => 'CountryController@show',
+            ]);
+
+        });
+
     });
 
 });
