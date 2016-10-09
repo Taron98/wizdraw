@@ -13,3 +13,19 @@ if (!function_exists('redis_key')) {
         return implode(':', $values);
     }
 }
+
+if (!function_exists('redis_unkey')) {
+    /**
+     * Return the id from the key
+     *
+     * @param $key
+     *
+     * @return string
+     */
+    function redis_unkey($key): string
+    {
+        $values = explode(':', $key);
+
+        return array_pop($values);
+    }
+}

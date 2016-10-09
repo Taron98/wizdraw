@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Cache\Entities;
 
+use Illuminate\Support\Collection;
+
 /**
  * Class CountryCache
  * @package Wizdraw\Cache\Entities
@@ -20,6 +22,12 @@ class CountryCache extends AbstractCacheEntity
 
     /** @var  int */
     protected $phoneCode;
+
+    /** @var  RateCache */
+    protected $rate;
+
+    /** @var  Collection */
+    protected $commissions;
 
     /**
      * @return string
@@ -99,6 +107,42 @@ class CountryCache extends AbstractCacheEntity
         $this->phoneCode = (int)$phoneCode;
 
         return $this;
+    }
+
+    /**
+     * @return RateCache|null
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param RateCache $rate
+     *
+     * @return $this
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getCommissions()
+    {
+        return $this->commissions;
+    }
+
+    /**
+     * @param Collection $commissions
+     */
+    public function setCommissions(Collection $commissions)
+    {
+        $this->commissions = $commissions;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Cache\Services;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Predis\Client;
 use stdClass;
@@ -13,6 +15,7 @@ use Wizdraw\Cache\Entities\AbstractCacheEntity;
  */
 abstract class AbstractCacheService
 {
+    const PAGE_NAME = 'page';
 
     /** @var  Client */
     protected $redis;
@@ -36,9 +39,9 @@ abstract class AbstractCacheService
     /**
      * @param $data
      *
-     * @return AbstractCacheEntity|null
+     * @return null|AbstractCacheEntity
      */
-    public function entityFromArray($data = [])
+    public function entityFromArray($data)
     {
         if (!is_array($data) || empty($data)) {
             return null;
@@ -55,17 +58,32 @@ abstract class AbstractCacheService
     }
 
     /**
+     * @return LengthAwarePaginator
+     */
+    public function all() : LengthAwarePaginator
+    {
+        $entitiesKeys = $this->redis->keys(redis_key($this->keyPrefix, '*'));
+        $entities = $this->transformIdsToEntities($entitiesKeys);
+
+        return $this->paginate($entities);
+    }
+
+    /**
      * @param string|int $key
      *
-     * @return string|[]
+     * @return null|AbstractCacheEntity
      */
     public function find($key)
     {
         $entityJson = $this->redis->hgetall(redis_key($this->keyPrefix, $key));
 
-        if (!is_null($entityJson)) {
-            return $this->entityFromArray($entityJson);
+        if (is_null($entityJson)) {
+            return null;
         }
+
+        $entity = $this->entityFromArray($entityJson);
+
+        return $entity;
     }
 
     /**
@@ -143,6 +161,42 @@ abstract class AbstractCacheService
         $entity->setId($stdJson->id);
 
         return $entity;
+    }
+
+    /**
+     * @param array $entityKeys
+     *
+     * @return Collection
+     */
+    private function transformIdsToEntities(array $entityKeys = []) : Collection
+    {
+        $entities = collect($entityKeys)->map(function ($entityKey) {
+            return $this->find(redis_unkey($entityKey));
+        });
+
+        return $entities;
+    }
+
+    /**
+     * @param Collection $entities
+     *
+     * @return LengthAwarePaginator
+     */
+    private function paginate(Collection $entities) : LengthAwarePaginator
+    {
+        $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
+        $perPage = config('cache.pagination.perPage');
+
+        $total = $entities->count();
+        $paginateEntities = $entities->forPage($page, $perPage);
+
+        $paginator = new LengthAwarePaginator($paginateEntities, $total, $perPage, $page, [
+            'path'     => Paginator::resolveCurrentPath(),
+            'pageName' => self::PAGE_NAME,
+        ]);
+
+        // todo: camel case?
+        return $paginator;
     }
 
     /**
