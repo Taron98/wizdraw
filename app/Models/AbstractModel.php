@@ -60,4 +60,16 @@ abstract class AbstractModel extends Model
         return $this->deletedAt;
     }
 
+    /**
+     * Create a new instance of the given model.
+     *
+     * @param  array  $attributes
+     * @param  bool  $exists
+     * @return mixed
+     */
+    public function newInstance($attributes = [], $exists = false)
+    {
+        return parent::newInstance(array_key_snake_case($attributes), $exists);
+    }
+
 }
