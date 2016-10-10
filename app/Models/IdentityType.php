@@ -4,7 +4,6 @@ namespace Wizdraw\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\IdentityType
@@ -24,7 +23,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class IdentityType extends AbstractModel
 {
-    use SoftDeletes, ModelCamelCaseTrait;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.

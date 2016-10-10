@@ -3,7 +3,6 @@
 namespace Wizdraw\Models\Pivots;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\AbstractPivot
@@ -12,6 +11,5 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 abstract class AbstractPivot extends Pivot
 {
-    use ModelCamelCaseTrait;
 
 }

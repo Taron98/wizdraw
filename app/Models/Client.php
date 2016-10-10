@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\Client
@@ -62,7 +61,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class Client extends AbstractModel implements AuthorizableContract
 {
-    use SoftDeletes, Authorizable, ModelCamelCaseTrait;
+    use SoftDeletes, Authorizable;
 
     /**
      * The table associated with the model.
@@ -131,7 +130,7 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         static::updating(function ($model) {
             /** @var Client $model */
-            $model->didSetup = true;
+            $model->did_setup = 1;
         });
     }
 
