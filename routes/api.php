@@ -32,6 +32,11 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'Auth\AuthController@facebook',
         ]);
 
+        Route::post('token/', [
+            'as'   => 'auth.token',
+            'uses' => 'Auth\AuthController@token',
+        ]);
+
     });
 
     Route::group(['middleware' => 'auth'], function () {
