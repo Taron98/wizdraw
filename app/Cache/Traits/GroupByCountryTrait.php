@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Cache\Traits;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 
@@ -38,9 +39,9 @@ trait GroupByCountryTrait
     /**
      * @param int $countryId
      *
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function findByCountryId(int $countryId) : Collection
+    public function findByCountryId(int $countryId) : LengthAwarePaginator
     {
         $entityIds = $this->findIdsByCountryId($countryId);
 
@@ -48,7 +49,7 @@ trait GroupByCountryTrait
             return $this->find($entityId);
         });
 
-        return $entities;
+        return $this->paginate($entities);
     }
 
 }

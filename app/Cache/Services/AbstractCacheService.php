@@ -182,7 +182,7 @@ abstract class AbstractCacheService
      *
      * @return LengthAwarePaginator
      */
-    private function paginate(Collection $entities) : LengthAwarePaginator
+    protected function paginate(Collection $entities) : LengthAwarePaginator
     {
         $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
         $perPage = config('cache.pagination.perPage');

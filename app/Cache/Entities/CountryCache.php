@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Cache\Entities;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 /**
@@ -118,7 +119,7 @@ class CountryCache extends AbstractCacheEntity
     }
 
     /**
-     * @param RateCache $rate
+     * @param RateCache|AbstractCacheEntity $rate
      *
      * @return $this
      */
@@ -138,9 +139,9 @@ class CountryCache extends AbstractCacheEntity
     }
 
     /**
-     * @param Collection $commissions
+     * @param LengthAwarePaginator $commissions
      */
-    public function setCommissions(Collection $commissions)
+    public function setCommissions($commissions)
     {
         $this->commissions = $commissions;
     }

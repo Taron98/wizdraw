@@ -119,6 +119,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@show',
             ]);
 
+            Route::get('/{id}/banks', [
+                'as'   => 'country.banks',
+                'uses' => 'CountryController@banks',
+            ]);
+
             Route::get('/', [
                 'as'   => 'country.list',
                 'uses' => 'CountryController@list',

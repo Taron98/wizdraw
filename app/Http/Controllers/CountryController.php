@@ -4,6 +4,7 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Wizdraw\Cache\Entities\CountryCache;
+use Wizdraw\Cache\Services\BankCacheService;
 use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
@@ -23,21 +24,27 @@ class CountryController extends AbstractController
     /** @var  CommissionCacheService */
     private $commissionCacheService;
 
+    /** @var  BankCacheService */
+    private $bankCacheService;
+
     /**
      * GroupController constructor.
      *
      * @param CountryCacheService $countryCacheService
      * @param RateCacheService $rateCacheService
      * @param CommissionCacheService $commissionCacheService
+     * @param BankCacheService $bankCacheService
      */
     public function __construct(
         CountryCacheService $countryCacheService,
         RateCacheService $rateCacheService,
-        CommissionCacheService $commissionCacheService
+        CommissionCacheService $commissionCacheService,
+        BankCacheService $bankCacheService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
         $this->commissionCacheService = $commissionCacheService;
+        $this->bankCacheService = $bankCacheService;
     }
 
     /**
@@ -73,6 +80,18 @@ class CountryController extends AbstractController
     public function list()
     {
         return $this->countryCacheService->all();
+    }
+
+    /**
+     * Showing list of bank of the country route
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function banks(int $id)
+    {
+        return $this->bankCacheService->findByCountryId($id);
     }
 
 }
