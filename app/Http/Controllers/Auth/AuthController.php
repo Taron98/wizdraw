@@ -2,9 +2,11 @@
 
 namespace Wizdraw\Http\Controllers\Auth;
 
+use JWTAuth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Http\Controllers\AbstractController;
 use Wizdraw\Http\Requests\Auth\AuthFacebookRequest;
@@ -160,6 +162,28 @@ class AuthController extends AbstractController
             'token'    => $token,
             'didSetup' => $client->isDidSetup(),
         ], $facebookUser->toArray()));
+    }
+
+    /**
+     * Refreshing token route
+     *
+     * @return JsonResponse
+     */
+    public function token()
+    {
+        $token = JWTAuth::getToken();
+
+        if (!$token) {
+            return $this->respondWithError('token_not_provided', Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $token = JWTAuth::refresh($token);
+        } catch (TokenInvalidException $exception) {
+            return $this->respondWithError('token_invalid');
+        }
+
+        return $this->respond(compact('token'));
     }
 
     /**

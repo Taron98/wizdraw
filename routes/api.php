@@ -32,6 +32,11 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'Auth\AuthController@facebook',
         ]);
 
+        Route::post('token/', [
+            'as'   => 'auth.token',
+            'uses' => 'Auth\AuthController@token',
+        ]);
+
     });
 
     Route::group(['middleware' => 'auth'], function () {
@@ -107,6 +112,26 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/', [
                 'as'   => 'identitytype.all',
                 'uses' => 'IdentityTypeController@all',
+            ]);
+
+        });
+
+        // Country
+        Route::group(['prefix' => 'country/'], function () {
+
+            Route::get('/{id}', [
+                'as'   => 'country.show',
+                'uses' => 'CountryController@show',
+            ]);
+
+            Route::get('/{id}/banks', [
+                'as'   => 'country.banks',
+                'uses' => 'CountryController@banks',
+            ]);
+
+            Route::get('/', [
+                'as'   => 'country.list',
+                'uses' => 'CountryController@list',
             ]);
 
         });
