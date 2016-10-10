@@ -53,8 +53,6 @@ abstract class AbstractService
      */
     public function update(array $data, $id) : AbstractModel
     {
-        $data = array_key_snake_case($data);
-
         $model = $this->repository->update($data, $id);
 
         return $model;

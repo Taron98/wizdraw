@@ -11,7 +11,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Services\Entities\FacebookUser;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\User
@@ -55,7 +54,7 @@ class User extends AbstractModel implements
     AuthenticatableContract,
     CanResetPasswordContract
 {
-    use SoftDeletes, ModelCamelCaseTrait, Authenticatable, CanResetPassword;
+    use SoftDeletes, Authenticatable, CanResetPassword;
 
     /**
      * The table associated with the model.
