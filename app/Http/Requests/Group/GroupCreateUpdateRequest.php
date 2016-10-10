@@ -34,7 +34,7 @@ class GroupCreateUpdateRequest extends AbstractRequest
             'clients.*.firstName'         => 'min:2|max:40',
             'clients.*.middleName'        => 'min:1|max:25',
             'clients.*.lastName'          => 'min:2|max:35',
-            'clients.*.residentCountryId' => 'required|integer',
+            'clients.*.residentCountryId' => 'integer',
             'clients.*.phone'             => 'required|phone:AUTO',
         ];
     }
