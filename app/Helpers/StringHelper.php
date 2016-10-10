@@ -13,7 +13,11 @@ if (!function_exists('array_key_snake_case')) {
         $changedCase = [];
 
         foreach ($items as $key => $value) {
-            $changedCase[ snake_case($key) ] = $value;
+            if (is_array($value)) {
+                $changedCase[ snake_case($key) ] = array_key_snake_case($value);
+            } else {
+                $changedCase[ snake_case($key) ] = $value;
+            }
         }
 
         return $changedCase;
@@ -33,7 +37,11 @@ if (!function_exists('array_key_camel_case')) {
         $changedCase = [];
 
         foreach ($items as $key => $value) {
-            $changedCase[ camel_case($key) ] = $value;
+            if (is_array($value)) {
+                $changedCase[ camel_case($key) ] = array_key_camel_case($value);
+            } else {
+                $changedCase[ camel_case($key) ] = $value;
+            }
         }
 
         return $changedCase;

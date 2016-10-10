@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             'cors',
+            'res.camel',
         ],
 
         'auth' => [
@@ -60,5 +61,6 @@ class Kernel extends HttpKernel
         'jwt.auth'    => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
         'cors'        => \Barryvdh\Cors\HandleCors::class,
+        'res.camel'   => \Wizdraw\Http\Middleware\CamelCaseResponse::class,
     ];
 }
