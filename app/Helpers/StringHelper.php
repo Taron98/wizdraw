@@ -8,7 +8,7 @@ if (!function_exists('array_key_snake_case')) {
      *
      * @return array
      */
-    function array_key_snake_case(array $items) : array
+    function array_key_snake_case($items = []) : array
     {
         $changedCase = [];
 
@@ -32,7 +32,7 @@ if (!function_exists('array_key_camel_case')) {
      *
      * @return array
      */
-    function array_key_camel_case(array $items) : array
+    function array_key_camel_case($items = []) : array
     {
         $changedCase = [];
 
@@ -56,7 +56,7 @@ if (!function_exists('array_value_snake_case')) {
      *
      * @return array
      */
-    function array_value_snake_case(array $items) : array
+    function array_value_snake_case($items = []) : array
     {
         $changedCase = array_map(function ($value) {
             return snake_case($value);
