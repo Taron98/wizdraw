@@ -72,4 +72,29 @@ abstract class AbstractModel extends Model
         return parent::newInstance(array_key_snake_case($attributes), $exists);
     }
 
+    /**
+     * Get an attribute from the model
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getAttribute($key)
+    {
+        return parent::getAttribute(snake_case($key));
+    }
+
+    /**
+     * Set a given attribute on the model.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function setAttribute($key, $value)
+    {
+        parent::setAttribute(snake_case($key), $value);
+
+        return $this;
+    }
+
 }

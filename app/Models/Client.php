@@ -130,7 +130,7 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         static::updating(function ($model) {
             /** @var Client $model */
-            $model->did_setup = 1;
+            $model->didSetup = 1;
         });
     }
 
@@ -231,7 +231,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function setPhoneAttribute(string $phone)
     {
-        $this->attributes[ 'phone' ] = phone_format($phone);
+        $this->phone = phone_format($phone);
     }
     //</editor-fold>
 

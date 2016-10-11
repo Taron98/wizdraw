@@ -136,9 +136,9 @@ class User extends AbstractModel implements
     {
         $verifyExpire = config('auth.verification.expire');
 
-        if (empty($this->attributes[ 'verify_code' ]) || !$isNew) {
-            $this->attributes[ 'verify_code' ] = generate_code();
-            $this->attributes[ 'verify_expire' ] = Carbon::now()->addMinutes($verifyExpire);
+        if (empty($this->verifyCode) || !$isNew) {
+            $this->verifyCode = generate_code();
+            $this->verifyExpire = Carbon::now()->addMinutes($verifyExpire);
         }
     }
 
@@ -182,8 +182,8 @@ class User extends AbstractModel implements
      */
     public function setPasswordAttribute(string $password)
     {
-        $this->attributes[ 'password' ] = Hash::make($password);
-        $this->attributes[ 'password_changed_at' ] = Carbon::now();
+        $this->password = Hash::make($password);
+        $this->passwordChangedAt = Carbon::now();
     }
     //</editor-fold>
 
