@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Wizdraw\Models\User;
@@ -35,6 +36,49 @@ abstract class AbstractRequest extends FormRequest
     public function response(array $errors) : JsonResponse
     {
         return new JsonResponse($errors, 422);
+    }
+
+    /**
+     * Get a subset containing the provided keys with values from the input data by camel case
+     *
+     * @param  array|mixed $keys
+     *
+     * @return array
+     */
+    public function only($keys) : array
+    {
+        $keys = is_array($keys) ? $keys : func_get_args();
+
+        return parent::only(array_value_snake_case($keys));
+    }
+
+    /**
+     * Validate the class instance
+     *
+     * @return void
+     */
+    public function validate()
+    {
+        $instance = $this->getValidatorInstance();
+        $instance->setRules(array_key_snake_case($instance->getRules()));
+
+        if (!$this->passesAuthorization()) {
+            $this->failedAuthorization();
+        } elseif (!$instance->passes()) {
+            $this->failedValidation($instance);
+        }
+    }
+
+    /**
+     * Format the errors from the given Validator instance.
+     *
+     * @param  Validator $validator
+     *
+     * @return array
+     */
+    protected function formatErrors(Validator $validator)
+    {
+        return array_key_camel_case($validator->getMessageBag()->toArray());
     }
 
     /**

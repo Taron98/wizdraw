@@ -34,7 +34,7 @@ class AuthSignupRequest extends AbstractRequest
             'lastName'  => 'required',
             'email'     => 'required',
             'phone'     => 'required',
-            'deviceId'  => 'required', // todo: |unique:users',
+            'deviceId'  => 'required|unique:users',
         ];
     }
 

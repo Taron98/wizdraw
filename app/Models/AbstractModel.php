@@ -4,6 +4,7 @@ namespace Wizdraw\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Wizdraw\Traits\EloquentCamelCaseTrait;
 
 /**
  * Wizdraw\Models\AbstractModel
@@ -12,13 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class AbstractModel extends Model
 {
-
-    /**
-     * Indicates whether attributes are snake cased on arrays.
-     *
-     * @var bool
-     */
-    public static $snakeAttributes = false;
+    use EloquentCamelCaseTrait;
 
     /**
      * @return int
@@ -58,43 +53,6 @@ abstract class AbstractModel extends Model
     public function getDeletedAt(): Carbon
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * Create a new instance of the given model.
-     *
-     * @param  array  $attributes
-     * @param  bool  $exists
-     * @return mixed
-     */
-    public function newInstance($attributes = [], $exists = false)
-    {
-        return parent::newInstance(array_key_snake_case($attributes), $exists);
-    }
-
-    /**
-     * Get an attribute from the model
-     *
-     * @param  string  $key
-     * @return mixed
-     */
-    public function getAttribute($key)
-    {
-        return parent::getAttribute(snake_case($key));
-    }
-
-    /**
-     * Set a given attribute on the model.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return $this
-     */
-    public function setAttribute($key, $value)
-    {
-        parent::setAttribute(snake_case($key), $value);
-
-        return $this;
     }
 
 }
