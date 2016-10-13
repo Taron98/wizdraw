@@ -1,11 +1,12 @@
 <?php
 
-namespace Wizdraw\Jobs;
+namespace Wizdraw\Cache\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Wizdraw\Cache\Services\AbstractCacheService;
 
 /**
  * Class AbstractQueueJob
@@ -35,5 +36,21 @@ abstract class AbstractQueueJob implements ShouldQueue
     {
         return $this->data;
     }
+
+    /**
+     * Execute the job
+     */
+    public function handle()
+    {
+        /** @var AbstractCacheService $cacheService */
+        $cacheService = resolve($this->cacheService());
+
+        $cacheService->saveFromQueue($this->data);
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function cacheService() : string;
 
 }

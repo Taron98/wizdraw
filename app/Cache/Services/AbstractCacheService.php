@@ -191,6 +191,7 @@ abstract class AbstractCacheService
      */
     protected function paginate(Collection $entities) : LengthAwarePaginator
     {
+        // todo: change implementation to get only $perPage from redis
         $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
         $perPage = config('cache.pagination.perPage');
 

@@ -3,14 +3,10 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
-use Wizdraw\Cache\Services\BankCacheService;
-use Wizdraw\Cache\Services\CommissionCacheService;
-use Wizdraw\Cache\Services\CountryCacheService;
-use Wizdraw\Cache\Services\RateCacheService;
-use Wizdraw\Jobs\BankQueueJob;
-use Wizdraw\Jobs\CommissionQueueJob;
-use Wizdraw\Jobs\CountryQueueJob;
-use Wizdraw\Jobs\RateQueueJob;
+use Wizdraw\Cache\Jobs\BankQueueJob;
+use Wizdraw\Cache\Jobs\CommissionQueueJob;
+use Wizdraw\Cache\Jobs\CountryQueueJob;
+use Wizdraw\Cache\Jobs\RateQueueJob;
 
 /**
  * Class QueueTestCommand
