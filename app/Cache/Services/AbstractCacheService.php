@@ -132,10 +132,17 @@ abstract class AbstractCacheService
     }
 
     /**
-     * @param array $rawEntities
+     * @param string $data
+     *
+     * @return null
      */
-    public function saveFromQueue(array $rawEntities = [])
+    public function saveFromQueue($data = '')
     {
+        if (empty($data)) {
+            return null;
+        }
+
+        $rawEntities = json_decode($data);
         $entities = new Collection();
 
         foreach ($rawEntities as $rawEntity) {

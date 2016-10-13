@@ -93,6 +93,6 @@ if (!function_exists('ucwords_upper')) {
      */
     function ucwords_upper(string $string = '') : string
     {
-        return ucwords(strtolower($string));
+        return mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
     }
 }
