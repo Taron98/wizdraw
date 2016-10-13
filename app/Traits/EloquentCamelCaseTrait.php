@@ -24,7 +24,7 @@ trait EloquentCamelCaseTrait
      * for field names in databases.
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function setAttribute($key, $value)
     {
@@ -35,6 +35,7 @@ trait EloquentCamelCaseTrait
      * Retrieve a given attribute but allow it to be accessed via alternative case methods (such as camelCase).
      *
      * @param  string $key
+     *
      * @return mixed
      */
     public function getAttribute($key)
@@ -97,6 +98,7 @@ trait EloquentCamelCaseTrait
     public function getDates()
     {
         $dates = parent::getDates();
+
         return array_map('snake_case', $dates);
     }
 
@@ -104,6 +106,7 @@ trait EloquentCamelCaseTrait
      * Converts a given array of attribute keys to the casing required by CamelCaseModel.
      *
      * @param mixed $attributes
+     *
      * @return array
      */
     public function toCamelCase($attributes)
@@ -112,7 +115,7 @@ trait EloquentCamelCaseTrait
 
         foreach ($attributes as $key => $value) {
             $key = $this->getTrueKey($key);
-            $convertedAttributes[$key] = $value;
+            $convertedAttributes[ $key ] = $value;
         }
 
         return $convertedAttributes;
@@ -121,8 +124,9 @@ trait EloquentCamelCaseTrait
     /**
      * Get the model's original attribute values.
      *
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param  string $key
+     * @param  mixed $default
+     *
      * @return array
      */
     public function getOriginal($key = null, $default = null)
@@ -134,6 +138,7 @@ trait EloquentCamelCaseTrait
      * Converts a given array of attribute keys to the casing required by CamelCaseModel.
      *
      * @param $attributes
+     *
      * @return array
      */
     public function toSnakeCase($attributes)
@@ -141,7 +146,7 @@ trait EloquentCamelCaseTrait
         $convertedAttributes = [];
 
         foreach ($attributes as $key => $value) {
-            $convertedAttributes[$this->getSnakeKey($key)] = $value;
+            $convertedAttributes[ $this->getSnakeKey($key) ] = $value;
         }
 
         return $convertedAttributes;
@@ -151,6 +156,7 @@ trait EloquentCamelCaseTrait
      * Retrieves the true key name for a key.
      *
      * @param $key
+     *
      * @return string
      */
     public function getTrueKey($key)
@@ -172,13 +178,15 @@ trait EloquentCamelCaseTrait
      */
     public function isCamelCase()
     {
-        return $this->enforceCamelCase or (isset($this->parent) && method_exists($this->parent, 'isCamelCase') && $this->parent->isCamelCase());
+        return $this->enforceCamelCase or (isset($this->parent) && method_exists($this->parent,
+                'isCamelCase') && $this->parent->isCamelCase());
     }
 
     /**
      * If the field names need to be converted so that they can be accessed by camelCase, then we can do that here.
      *
      * @param $key
+     *
      * @return string
      */
     protected function getSnakeKey($key)
@@ -191,6 +199,7 @@ trait EloquentCamelCaseTrait
      * we do isset checks we need to ensure that we check using snake_case.
      *
      * @param $key
+     *
      * @return mixed
      */
     public function __isset($key)
@@ -203,6 +212,7 @@ trait EloquentCamelCaseTrait
      * we do unset variables we need to ensure that we unset using snake_case.
      *
      * @param $key
+     *
      * @return void
      */
     public function __unset($key)
