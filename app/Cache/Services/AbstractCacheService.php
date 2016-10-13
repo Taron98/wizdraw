@@ -132,10 +132,17 @@ abstract class AbstractCacheService
     }
 
     /**
-     * @param array $rawEntities
+     * @param string $data
+     *
+     * @return null
      */
-    public function saveFromQueue(array $rawEntities = [])
+    public function saveFromQueue($data = '')
     {
+        if (empty($data)) {
+            return null;
+        }
+
+        $rawEntities = json_decode($data);
         $entities = new Collection();
 
         foreach ($rawEntities as $rawEntity) {
@@ -184,6 +191,7 @@ abstract class AbstractCacheService
      */
     protected function paginate(Collection $entities) : LengthAwarePaginator
     {
+        // todo: change implementation to get only $perPage from redis
         $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
         $perPage = config('cache.pagination.perPage');
 
