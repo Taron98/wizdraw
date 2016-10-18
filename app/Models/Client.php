@@ -6,11 +6,13 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Wizdraw\Models\Pivots\GroupClient;
+use Wizdraw\Models\Pivots\ReceiverClient;
 use Wizdraw\Services\Entities\FacebookUser;
 
 /**
@@ -38,6 +40,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $senders
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -186,6 +189,34 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Many-to-many relationship with group_clients table
+     *
+     * @return HasMany
+     */
+    public function adminGroups() : HasMany
+    {
+        return $this->hasMany(Group::class, 'admin_client_id');
+    }
+
+    /**
+     * Many-to-many relationship with receiver_clients table
+     * @return BelongsToMany
+     */
+    public function senders()
+    {
+        return $this->belongsToMany(Client::class, 'receiver_clients', 'receiver_client_id');
+    }
+
+    /**
+     * Many-to-many relationship with receiver_clients table
+     * @return BelongsToMany
+     */
+    public function receivers() : BelongsToMany
+    {
+        return $this->belongsToMany(Client::class, 'receiver_clients', 'client_id', 'receiver_client_id');
+    }
+
+    /**
      * Create a new pivot model instance
      *
      * @param  Model $parent
@@ -197,11 +228,22 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
-        if ($parent instanceof Group) {
-            return new GroupClient($parent, $attributes, $table, $exists);
+        $pivot = null;
+
+        switch (get_class($parent)) {
+            case Group::class:
+                $pivot = new GroupClient($parent, $attributes, $table, $exists);
+                break;
+
+            case Client::class:
+                $pivot = new ReceiverClient($parent, $attributes, $table, $exists);
+                break;
+
+            default:
+                $pivot = parent::newPivot($parent, $attributes, $table, $exists);
         }
 
-        return parent::newPivot($parent, $attributes, $table, $exists);
+        return $pivot;
     }
 
     /**
