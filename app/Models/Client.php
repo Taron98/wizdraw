@@ -40,7 +40,9 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $senders
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $receivers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)

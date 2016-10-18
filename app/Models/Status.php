@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\Status
  *
+ * @property integer $id
+ * @property string $status
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Status extends AbstractModel
