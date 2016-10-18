@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Wizdraw\Models\Client;
 
 /**
  * Class ClientsTableSeeder
  */
-class ClientsTableSeeder extends Seeder
+class ClientsTableSeeder extends AbstractTableSeeder
 {
     /**
      * Run the database seeds.

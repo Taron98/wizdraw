@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Wizdraw\Models\Group;
 
-class GroupsTableSeeder extends Seeder
+class GroupsTableSeeder extends AbstractTableSeeder
 {
     /**
      * Run the database seeds.
