@@ -130,7 +130,7 @@ class AuthController extends AbstractController
         if (!$user) {
             return $this->respondWithError('cant_create_user');
         }
-        //$this->smsService->sendSms($clientAttrs['phone']);
+        $this->smsService->sendSms($clientAttrs['phone']);
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
         ]);
