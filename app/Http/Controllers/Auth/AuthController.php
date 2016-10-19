@@ -55,6 +55,8 @@ class AuthController extends AbstractController
      * @param UserRepository $userRepository
      * @param UserService $userService
      * @param ClientService $clientService
+     * @param SmsService $smsService
+
      */
     public function __construct(
         FacebookService $facebookService,
@@ -130,7 +132,8 @@ class AuthController extends AbstractController
         if (!$user) {
             return $this->respondWithError('cant_create_user');
         }
-        $this->smsService->sendSms($clientAttrs['phone']);
+        print_r($user['verify_code']);
+        $this->smsService->sendSms($clientAttrs['phone'],$user['verify_code']);
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
         ]);
