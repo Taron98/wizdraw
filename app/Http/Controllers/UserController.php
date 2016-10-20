@@ -76,9 +76,10 @@ class UserController extends AbstractController
     {
         $user = $request->user();
 
-//        if (!$user->isPending()) {
-//            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
-//        }
+        // todo: check if working
+        if (!$user->isPending()) {
+            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
+        }
 
         if ($user->getVerifyCode() !== $verifyCode) {
             return $this->respondWithError('invalid_verification_code', Response::HTTP_BAD_REQUEST);
