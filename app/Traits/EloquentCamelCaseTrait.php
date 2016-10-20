@@ -40,7 +40,7 @@ trait EloquentCamelCaseTrait
      */
     public function getAttribute($key)
     {
-        if (method_exists($this, $key)) {
+        if (method_exists($this, $key) && !$this->isBoolean($key)) {
             return $this->getRelationValue($key);
         }
 
@@ -218,6 +218,25 @@ trait EloquentCamelCaseTrait
     public function __unset($key)
     {
         return parent::__unset($this->getSnakeKey($key));
+    }
+
+    /**
+     * Boolean can have a getter without "get"
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    private function isBoolean($key)
+    {
+        $casts = $this->casts;
+        $key = snake_case($key);
+
+        if (isset($casts[$key])) {
+            return $casts[$key] === 'boolean';
+        }
+
+        return false;
     }
 
 }

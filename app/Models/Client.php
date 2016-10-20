@@ -275,7 +275,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function setPhoneAttribute(string $phone)
     {
-        $this->phone = phone_format($phone);
+        $this->attributes[ 'phone' ] = phone_format($phone);
     }
     //</editor-fold>
 

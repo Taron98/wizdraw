@@ -91,6 +91,8 @@ abstract class AbstractRequest extends FormRequest
         $inputs = [];
 
         foreach ($this->rules() as $name => $rule) {
+            $name = snake_case($name);
+
             $input = $this->input($name);
 
             if (isset($input) && strpos($name, '*') === false) {
