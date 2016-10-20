@@ -19,6 +19,8 @@ use Wizdraw\Services\AuthService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
 use Wizdraw\Services\UserService;
+use Wizdraw\Services\SmsService;
+
 
 /**
  * Class AuthController
@@ -42,6 +44,9 @@ class AuthController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
+    /** @var  SmsService */
+    private $smsService;
+
     /**
      * AuthController constructor.
      *
@@ -50,19 +55,25 @@ class AuthController extends AbstractController
      * @param UserRepository $userRepository
      * @param UserService $userService
      * @param ClientService $clientService
+     * @param SmsService $smsService
+
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
         UserService $userService,
-        ClientService $clientService
+        ClientService $clientService,
+        SmsService $smsService
+
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
         $this->clientService = $clientService;
+        $this->smsService = $smsService;
+
     }
 
     /**
@@ -121,7 +132,8 @@ class AuthController extends AbstractController
         if (!$user) {
             return $this->respondWithError('cant_create_user');
         }
-
+        print_r($user['verify_code']);
+        $this->smsService->sendSms($clientAttrs['phone'],$user['verify_code']);
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
         ]);
