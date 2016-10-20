@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -66,6 +67,15 @@ class Nature extends AbstractModel
     ];
 
     //<editor-fold desc="Relationships">
+    /**
+     * Many-to-many relationship with transfer_natures table
+     *
+     * @return BelongsToMany
+     */
+    public function transfers() : BelongsToMany
+    {
+        return $this->belongsToMany(Transfer::class, 'transfer_natures');
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">

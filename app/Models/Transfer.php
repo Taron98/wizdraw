@@ -3,6 +3,7 @@
 namespace Wizdraw\Models;
 
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 
@@ -94,6 +95,16 @@ class Transfer extends AbstractModel implements AuthorizableContract
     // todo: receiverCountry()
     // todo: senderCountry()
     // todo: status()
+
+    /**
+     * Many-to-many relationship with transfer_natures table
+     *
+     * @return BelongsToMany
+     */
+    public function transfers() : BelongsToMany
+    {
+        return $this->belongsToMany(Nature::class, 'transfer_natures');
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
