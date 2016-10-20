@@ -33,7 +33,7 @@ class AuthSignupRequest extends AbstractRequest
             'firstName' => 'required',
             'lastName'  => 'required',
             'email'     => 'required',
-            'phone'     => 'required',
+            'phone'     => 'required|phone:AUTO',
             'deviceId'  => 'required|unique:users',
         ];
     }
