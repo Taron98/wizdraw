@@ -133,10 +133,10 @@ class AuthController extends AbstractController
         }
 
         // todo: relocation?
-//        $sms = $this->smsService->sendSms($clientAttrs[ 'phone' ], $user[ 'verify_code' ]);
-//        if (!$sms) {
-//            return $this->respondWithError('problem sending SMS');
-//        }
+        $sms = $this->smsService->sendSms($clientAttrs[ 'phone' ], $user[ 'verify_code' ]);
+        if (!$sms) {
+            return $this->respondWithError('problem sending SMS');
+        }
 
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
