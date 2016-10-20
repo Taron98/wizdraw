@@ -218,6 +218,8 @@ class Client extends AbstractModel implements AuthorizableContract
         return $this->belongsToMany(Client::class, 'receiver_clients', 'client_id', 'receiver_client_id');
     }
 
+    // todo: transfers()
+
     /**
      * Create a new pivot model instance
      *

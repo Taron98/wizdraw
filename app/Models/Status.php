@@ -78,7 +78,7 @@ class Status extends AbstractModel
     ];
 
     //<editor-fold desc="Relationships">
-    // todo: transfer()
+    // todo: transfers()
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
