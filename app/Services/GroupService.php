@@ -58,10 +58,15 @@ class GroupService extends AbstractService
      *
      * @return AbstractModel
      */
-    public function createGroup(Client $adminClient, array $attributes, array $groupClients = []) : AbstractModel
+    public function createGroup(Client $adminClient, array $attributes, $groupClients = []) : AbstractModel
     {
-        $memberClients = $this->clientService->createClients($groupClients);
-        $memberClientsIds = $memberClients->pluck('id')->toArray();
+        $memberClientsIds = [];
+
+        if (is_array($groupClients)) {
+            $memberClients = $this->clientService->createClients($groupClients);
+            $memberClientsIds = $memberClients->pluck('id')->toArray();
+        }
+
         $group = $this->repository->createWithRelation($adminClient, $attributes, $memberClientsIds);
 
         return $group;
