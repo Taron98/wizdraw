@@ -2,6 +2,9 @@
 
 use Wizdraw\Models\Status;
 
+/**
+ * Class StatusesTableSeeder
+ */
 class StatusesTableSeeder extends AbstractTableSeeder
 {
     /**

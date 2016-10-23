@@ -1,8 +1,10 @@
 <?php
 
 use Wizdraw\Models\Nature;
-use Wizdraw\Models\Status;
 
+/**
+ * Class NaturesTableSeeder
+ */
 class NaturesTableSeeder extends AbstractTableSeeder
 {
     /**
@@ -12,7 +14,7 @@ class NaturesTableSeeder extends AbstractTableSeeder
      */
     public function run()
     {
-        Status::truncate();
+        Nature::truncate();
 
         $this->createByConsts(Nature::class, 'nature');
     }
