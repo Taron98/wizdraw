@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(GroupsTableSeeder::class);
+        $this->call(StatusesTableSeeder::class);
+        $this->call(NaturesTableSeeder::class);
 
         // Enable foreign keys constraints
         if ($this->isMysql()) {

@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Wizdraw\Models\IdentityType;
 
 /**
  * Class IdentityTypesTableSeeder
  */
-class IdentityTypesTableSeeder extends Seeder
+class IdentityTypesTableSeeder extends AbstractTableSeeder
 {
     /**
      * Run the database seeds.

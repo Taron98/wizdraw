@@ -4,10 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Class CreateGroupsTable
- */
-class CreateGroupsTable extends Migration
+class CreateBankAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,18 +13,24 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name', 50);
-            // todo: change to is_admin in group_clients?
-            $table->integer('admin_client_id')->unsigned()->index()->nullable();
+            $table->integer('bank_id')->unsigned()->index();
+            $table->integer('bank_branch_id')->unsigned()->index();
+            $table->integer('client_id')->unsigned()->index();
+            $table->string('account_number', 60)->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
 
-            $table->foreign('admin_client_id')
+            $table->foreign('bank_branch_id')
+                ->references('id')->on('bank_branches')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('client_id')
                 ->references('id')->on('clients')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -41,6 +44,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('bank_accounts');
     }
 }

@@ -6,10 +6,12 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Collection;
 use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -38,6 +40,9 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -186,6 +191,36 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Many-to-many relationship with group_clients table
+     *
+     * @return HasMany
+     */
+    public function adminGroups() : HasMany
+    {
+        return $this->hasMany(Group::class, 'admin_client_id');
+    }
+
+    /**
+     * Transfers that this client has been sent
+     *
+     * @return HasMany
+     */
+    public function transfers() : HasMany
+    {
+        return $this->hasMany(Transfer::class);
+    }
+
+    /**
+     * Transfers that this client has been received
+     *
+     * @return HasMany
+     */
+    public function receivedTransfers() : HasMany
+    {
+        return $this->hasMany(Transfer::class, 'receiver_client_id');
+    }
+
+    /**
      * Create a new pivot model instance
      *
      * @param  Model $parent
@@ -197,11 +232,18 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
-        if ($parent instanceof Group) {
-            return new GroupClient($parent, $attributes, $table, $exists);
+        $pivot = null;
+
+        switch (get_class($parent)) {
+            case Group::class:
+                $pivot = new GroupClient($parent, $attributes, $table, $exists);
+                break;
+
+            default:
+                $pivot = parent::newPivot($parent, $attributes, $table, $exists);
         }
 
-        return parent::newPivot($parent, $attributes, $table, $exists);
+        return $pivot;
     }
 
     /**
@@ -220,6 +262,38 @@ class Client extends AbstractModel implements AuthorizableContract
     public function residentCountry()
     {
 
+    }
+
+    /**
+     * Get all clients that sent transfers to this client
+     *
+     * @return Collection
+     */
+    public function senders() : Collection
+    {
+        /** @var Collection $transfers */
+        $transfers = $this->receivedTransfers()->with('client')->get();
+
+        return $transfers->map(function ($transfer) {
+            /** @var Transfer $transfer */
+            return $transfer->client;
+        });
+    }
+
+    /**
+     * Get all clients that received transfers from this client
+     *
+     * @return Collection
+     */
+    public function receivers() : Collection
+    {
+        /** @var Collection $receivedTransfers */
+        $receivedTransfers = $this->receivedTransfers()->with('receiverClient')->get();
+
+        return $receivedTransfers->map(function ($receivedTransfer) {
+            /** @var Transfer $receivedTransfer */
+            return $receivedTransfer->receiverClient;
+        });
     }
     //</editor-fold>
 

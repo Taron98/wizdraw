@@ -5,10 +5,10 @@ namespace Wizdraw\Models\Pivots;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class GroupClient
+ * Class TransferNature
  * @package Wizdraw\Models\Pivots
  */
-class GroupClient extends AbstractPivot
+class TransferNature extends AbstractPivot
 {
     use SoftDeletes;
 
@@ -17,7 +17,7 @@ class GroupClient extends AbstractPivot
      *
      * @var string
      */
-    protected $table = 'group_clients';
+    protected $table = 'transfer_natures';
 
     /**
      * The attributes that are mass assignable.
@@ -25,9 +25,8 @@ class GroupClient extends AbstractPivot
      * @var array
      */
     protected $fillable = [
-        'group_id',
-        'client_id',
-        'is_approved',
+        'transfer_id',
+        'nature_id',
     ];
 
     /**
@@ -42,9 +41,7 @@ class GroupClient extends AbstractPivot
      *
      * @var array
      */
-    protected $casts = [
-        'is_approved' => 'boolean',
-    ];
+    protected $casts = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -62,21 +59,6 @@ class GroupClient extends AbstractPivot
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
-    /**
-     * @return boolean
-     */
-    public function isIsApproved(): bool
-    {
-        return $this->isApproved;
-    }
-
-    /**
-     * @param boolean $isApproved
-     */
-    public function setIsApproved(bool $isApproved)
-    {
-        $this->isApproved = $isApproved;
-    }
     //</editor-fold>
 
 }
