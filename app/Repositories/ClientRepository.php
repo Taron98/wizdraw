@@ -14,7 +14,7 @@ class ClientRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model()
+    public function model() : string
     {
         return Client::class;
     }
