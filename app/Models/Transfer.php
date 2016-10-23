@@ -3,6 +3,7 @@
 namespace Wizdraw\Models;
 
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  *
  * @property integer $id
  * @property string $transactionNumber
+ * @property integer $clientId
  * @property integer $receiverClientId
  * @property integer $bankAccountId
  * @property integer $receiverCountryId
@@ -22,8 +24,13 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property-read \Wizdraw\Models\Client $client
+ * @property-read \Wizdraw\Models\Client $receiverClient
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
+ * @property-read \Wizdraw\Models\Status $status
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
@@ -54,6 +61,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     protected $fillable = [
         'transaction_number',
+        'client_id',
         'receiver_client_id',
         'bank_account_id',
         'receiver_country_id',
@@ -90,20 +98,47 @@ class Transfer extends AbstractModel implements AuthorizableContract
     ];
 
     //<editor-fold desc="Relationships">
-    // todo: receiverClient()
+    // todo: bankBranch()
     // todo: bankAccount()
     // todo: receiverCountry()
     // todo: senderCountry()
-    // todo: status()
 
     /**
-     * Many-to-many relationship with transfer_natures table
+     * The client that opened the transfer
+     *
+     * @return BelongsTo
+     */
+    public function client() : BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    /**
+     * The client that received the transfer
+     */
+    public function receiverClient() : BelongsTo
+    {
+        return $this->belongsTo(Client::class, 'receiver_client_id');
+    }
+
+    /**
+     * Natures of the transfer
      *
      * @return BelongsToMany
      */
-    public function transfers() : BelongsToMany
+    public function natures() : BelongsToMany
     {
         return $this->belongsToMany(Nature::class, 'transfer_natures');
+    }
+
+    /**
+     * Current status of the transfer
+     *
+     * @return BelongsTo
+     */
+    public function status() : BelongsTo
+    {
+        return $this->belongsTo(Status::class);
     }
     //</editor-fold>
 
@@ -124,26 +159,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setTransactionNumber(string $transactionNumber): Transfer
     {
         $this->transactionNumber = $transactionNumber;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getReceiverClientId(): int
-    {
-        return $this->receiverClientId;
-    }
-
-    /**
-     * @param int $receiverClientId
-     *
-     * @return Transfer
-     */
-    public function setReceiverClientId(int $receiverClientId): Transfer
-    {
-        $this->receiverClientId = $receiverClientId;
 
         return $this;
     }

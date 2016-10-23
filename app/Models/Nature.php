@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereNature($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereCreatedAt($value)

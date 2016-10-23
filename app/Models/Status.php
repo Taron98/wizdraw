@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereStatus($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereCreatedAt($value)
@@ -78,7 +80,15 @@ class Status extends AbstractModel
     ];
 
     //<editor-fold desc="Relationships">
-    // todo: transfers()
+    /**
+     * Transfers currently in this status
+     *
+     * @return HasMany
+     */
+    public function transfers() : HasMany
+    {
+        return $this->hasMany(Transfer::class);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">

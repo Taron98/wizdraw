@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Collection;
 use Wizdraw\Models\Pivots\GroupClient;
-use Wizdraw\Models\Pivots\ReceiverClient;
 use Wizdraw\Services\Entities\FacebookUser;
 
 /**
@@ -41,8 +41,8 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $senders
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $receivers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -201,24 +201,24 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * Many-to-many relationship with receiver_clients table
-     * @return BelongsToMany
+     * Transfers that this client has been sent
+     *
+     * @return HasMany
      */
-    public function senders()
+    public function transfers() : HasMany
     {
-        return $this->belongsToMany(Client::class, 'receiver_clients', 'receiver_client_id');
+        return $this->hasMany(Transfer::class);
     }
 
     /**
-     * Many-to-many relationship with receiver_clients table
-     * @return BelongsToMany
+     * Transfers that this client has been received
+     *
+     * @return HasMany
      */
-    public function receivers() : BelongsToMany
+    public function receivedTransfers() : HasMany
     {
-        return $this->belongsToMany(Client::class, 'receiver_clients', 'client_id', 'receiver_client_id');
+        return $this->hasMany(Transfer::class, 'receiver_client_id');
     }
-
-    // todo: transfers()
 
     /**
      * Create a new pivot model instance
@@ -237,10 +237,6 @@ class Client extends AbstractModel implements AuthorizableContract
         switch (get_class($parent)) {
             case Group::class:
                 $pivot = new GroupClient($parent, $attributes, $table, $exists);
-                break;
-
-            case Client::class:
-                $pivot = new ReceiverClient($parent, $attributes, $table, $exists);
                 break;
 
             default:
@@ -266,6 +262,38 @@ class Client extends AbstractModel implements AuthorizableContract
     public function residentCountry()
     {
 
+    }
+
+    /**
+     * Get all clients that sent transfers to this client
+     *
+     * @return Collection
+     */
+    public function senders() : Collection
+    {
+        /** @var Collection $transfers */
+        $transfers = $this->receivedTransfers()->with('client')->get();
+
+        return $transfers->map(function ($transfer) {
+            /** @var Transfer $transfer */
+            return $transfer->client;
+        });
+    }
+
+    /**
+     * Get all clients that received transfers from this client
+     *
+     * @return Collection
+     */
+    public function receivers() : Collection
+    {
+        /** @var Collection $receivedTransfers */
+        $receivedTransfers = $this->receivedTransfers()->with('receiverClient')->get();
+
+        return $receivedTransfers->map(function ($receivedTransfer) {
+            /** @var Transfer $receivedTransfer */
+            return $receivedTransfer->receiverClient;
+        });
     }
     //</editor-fold>
 

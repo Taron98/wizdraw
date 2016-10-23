@@ -17,6 +17,7 @@ class CreateTransfersTable extends Migration
             $table->increments('id');
 
             $table->string('transaction_number', 15);
+            $table->integer('client_id')->unsigned()->index();
             $table->integer('receiver_client_id')->unsigned()->index();
             $table->integer('bank_account_id')->unsigned()->index();
             $table->integer('receiver_country_id')->unsigned()->index();
@@ -29,6 +30,11 @@ class CreateTransfersTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
+
+            $table->foreign('client_id')
+                ->references('id')->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('receiver_client_id')
                 ->references('id')->on('clients')
