@@ -136,6 +136,16 @@ Route::group(['prefix' => 'v1/'], function () {
 
         });
 
+        // Transfer
+        Route::group(['prefix' => 'transfer/'], function () {
+
+            Route::get('/{transfer}', [
+                'as'   => 'transfer.show',
+                'uses' => 'TransferController@show',
+            ]);
+
+        });
+
     });
 
 });

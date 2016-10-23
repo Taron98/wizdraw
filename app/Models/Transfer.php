@@ -76,7 +76,11 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'client_id',
+        'receiver_client_id',
+        'status_id',
+    ];
 
     /**
      * The attributes that should be cast to native types.
