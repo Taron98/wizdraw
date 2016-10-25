@@ -4,6 +4,8 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Services\TransferService;
 
@@ -43,6 +45,21 @@ class TransferController extends AbstractController
         }
 
         return $this->transferService->find($transfer->getId());
+    }
+
+    /**
+     * Creating a transfer route
+     *
+     * @param TransferCreateRequest $request
+     *
+     * @return AbstractModel
+     */
+    public function create(TransferCreateRequest $request)
+    {
+        $client = $request->user()->client;
+        $inputs = $request->inputs();
+
+        return $this->transferService->createTransfer($client, $inputs);
     }
 
 }

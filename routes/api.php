@@ -144,6 +144,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@show',
             ]);
 
+            Route::post('/', [
+                'as'   => 'group.create',
+                'uses' => 'TransferController@create',
+            ]);
+
         });
 
     });

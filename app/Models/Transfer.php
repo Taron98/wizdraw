@@ -101,6 +101,21 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'deleted_at',
     ];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        static::creating(function ($model) {
+            /** @var Transfer $model */
+            // todo: change to the real thing
+            $randomNumber = mt_rand(pow(10, 10), pow(10, 11) - 1);
+            $model->transactionNumber = 'WF9' . (string)$randomNumber;
+        });
+    }
+
     //<editor-fold desc="Relationships">
     // todo: bankBranch()
     // todo: bankAccount()
