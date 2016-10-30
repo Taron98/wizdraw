@@ -159,6 +159,16 @@ class Transfer extends AbstractModel implements AuthorizableContract
     {
         return $this->belongsTo(Status::class);
     }
+
+    /**
+     * Type of the transfer
+     *
+     * @return BelongsTo
+     */
+    public function type() : BelongsTo
+    {
+        return $this->belongsTo(TransferType::class);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
