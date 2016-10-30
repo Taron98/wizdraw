@@ -95,7 +95,8 @@ abstract class AbstractRequest extends FormRequest
 
             $input = $this->input($name);
 
-            if (isset($input) && strpos($name, '*') === false) {
+            // Check if exists and it's not an array
+            if (isset($input) && strpos($name, '*') === false && strpos($name, '.') === false) {
                 $inputs[ $name ] = $input;
             }
         }
