@@ -16,7 +16,7 @@ class CreateTransferTypesTable extends Migration
         Schema::create('transfer_types', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('type', 10);
+            $table->string('type', 20);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

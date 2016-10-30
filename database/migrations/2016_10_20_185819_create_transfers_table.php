@@ -47,7 +47,7 @@ class CreateTransfersTable extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('status_id')
-                ->references('id')->on('statuses')
+                ->references('id')->on('transfer_statuses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

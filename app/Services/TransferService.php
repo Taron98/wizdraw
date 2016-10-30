@@ -5,7 +5,7 @@ namespace Wizdraw\Services;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Nature;
-use Wizdraw\Models\Status;
+use Wizdraw\Models\TransferStatus;
 use Wizdraw\Repositories\TransferRepository;
 
 /**
@@ -56,7 +56,7 @@ class TransferService extends AbstractService
      */
     public function createTransfer(Client $senderClient, array $attributes = []) : AbstractModel
     {
-        $initStatus = $this->statusService->findByStatus(Status::STATUS_WAIT);
+        $initStatus = $this->statusService->findByStatus(TransferStatus::STATUS_WAIT);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();

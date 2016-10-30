@@ -3,7 +3,7 @@
 namespace Wizdraw\Repositories;
 
 use Wizdraw\Models\Client;
-use Wizdraw\Models\Status;
+use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\Transfer;
 
 /**
@@ -26,13 +26,13 @@ class TransferRepository extends AbstractRepository
      *
      * @param Client $senderClient
      *
-     * @param Status $status
+     * @param TransferStatus $status
      * @param array $natures
      * @param array $attributes
      *
      * @return null|Transfer
      */
-    public function createWithRelation(Client $senderClient, Status $status, array $natures, array $attributes)
+    public function createWithRelation(Client $senderClient, TransferStatus $status, array $natures, array $attributes)
     {
         /** @var Transfer $newTransfer */
         $newTransfer = $this->makeModel()->fill($attributes);

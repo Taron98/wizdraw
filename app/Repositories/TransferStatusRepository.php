@@ -2,13 +2,13 @@
 
 namespace Wizdraw\Repositories;
 
-use Wizdraw\Models\Status;
+use Wizdraw\Models\TransferStatus;
 
 /**
- * Class StatusRepository
+ * Class TransferStatusRepository
  * @package Wizdraw\Repositories
  */
-class StatusRepository extends AbstractRepository
+class TransferStatusRepository extends AbstractRepository
 {
 
     /**
@@ -16,7 +16,7 @@ class StatusRepository extends AbstractRepository
      */
     public function model() : string
     {
-        return Status::class;
+        return TransferStatus::class;
     }
 
 }

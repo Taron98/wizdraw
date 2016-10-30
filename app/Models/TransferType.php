@@ -5,11 +5,27 @@ namespace Wizdraw\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Wizdraw\Models\TransferType
+ *
+ * @property integer $id
+ * @property string $type
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereType($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereDeletedAt($value)
+ * @mixin \Eloquent
+ */
 class TransferType extends AbstractModel
 {
     use SoftDeletes;
 
-    const TYPE_PICKUP_CASH = 'PICKUP_CASE';
+    const TYPE_PICKUP_CASH = 'PICKUP_CASH';
     const TYPE_DEPOSIT = 'DEPOSIT';
 
     /**

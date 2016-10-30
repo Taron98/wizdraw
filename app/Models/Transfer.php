@@ -27,7 +27,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Wizdraw\Models\Client $receiverClient
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
- * @property-read \Wizdraw\Models\Status $status
+ * @property-read \Wizdraw\Models\TransferStatus $status
+ * @property-read \Wizdraw\Models\TransferType $type
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
@@ -157,7 +158,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     public function status() : BelongsTo
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(TransferStatus::class);
     }
 
     /**
