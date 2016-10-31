@@ -32,7 +32,7 @@ class ClientUpdateRequest extends AbstractRequest
             'identityTypeId'    => 'required|integer',
             'identityNumber'    => 'required|min:5|max:20',
             'identityExpire'    => 'date|after:today',
-            'identityImage'     => 'image',
+            'identityImage'     => 'base64image',
             'firstName'         => 'min:2|max:40',
             'middleName'        => 'min:1|max:25',
             'lastName'          => 'min:2|max:35',
@@ -44,7 +44,7 @@ class ClientUpdateRequest extends AbstractRequest
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
             'clientType'        => 'required|in:sender,receiver',
-            'profileImage'      => 'image',
+            'profileImage'      => 'base64image',
         ];
     }
 
