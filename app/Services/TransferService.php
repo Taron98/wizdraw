@@ -15,8 +15,8 @@ use Wizdraw\Repositories\TransferRepository;
 class TransferService extends AbstractService
 {
 
-    /** @var StatusService */
-    protected $statusService;
+    /** @var TransferStatusService */
+    protected $transferStatusService;
 
     /** @var  NatureService */
     protected $natureService;
@@ -25,16 +25,16 @@ class TransferService extends AbstractService
      * TransferService constructor.
      *
      * @param TransferRepository $transferRepository
-     * @param StatusService $statusService
+     * @param TransferStatusService $transferStatusService
      * @param NatureService $natureService
      */
     public function __construct(
         TransferRepository $transferRepository,
-        StatusService $statusService,
+        TransferStatusService $transferStatusService,
         NatureService $natureService
     ) {
         $this->repository = $transferRepository;
-        $this->statusService = $statusService;
+        $this->transferStatusService = $transferStatusService;
         $this->natureService = $natureService;
     }
 
@@ -56,7 +56,7 @@ class TransferService extends AbstractService
      */
     public function createTransfer(Client $senderClient, array $attributes = []) : AbstractModel
     {
-        $initStatus = $this->statusService->findByStatus(TransferStatus::STATUS_WAIT);
+        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
