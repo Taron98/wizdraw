@@ -45,19 +45,19 @@ class TransferCreateRequest extends AbstractRequest
             'typeId' => 'required|integer',
 
             'pickup'       => 'required_without:deposit|array',
-            'pickup.city'  => 'required|min:2|max:30',
-            'pickup.state' => 'required|min:2|max:35',
+            'pickup.city'  => 'required_without:deposit|min:2|max:30',
+            'pickup.state' => 'required_without:deposit|min:2|max:35',
 
             'deposit'                => 'required_without:pickup|array',
-            'deposit.bankId'         => 'required|integer',
-            'deposit.bankBranchId'   => 'required_without:deposit.bankBranchName|integer',
-            'deposit.bankBranchName' => 'required_without:deposit.bankBranchId|string',
-            'deposit.accountNumber'  => 'required|string',
+            'deposit.bankId'         => 'required_without:pickup|integer',
+            'deposit.bankBranchId'   => 'required_without_all:pickup,deposit.bankBranchName|integer',
+            'deposit.bankBranchName' => 'required_without_all:pickup,deposit.bankBranchId|string',
+            'deposit.accountNumber'  => 'required_without:pickup|string',
 
             'note' => 'string',
 
             'receipt'             => 'required|array',
-            'receipt.image'       => 'required|image',
+            'receipt.image'       => 'required|base64image',
             'receipt.number'      => 'required|string',
             'receipt.expense'     => 'required|integer',
             'receipt.date'        => 'required|date',

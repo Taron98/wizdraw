@@ -60,7 +60,11 @@ abstract class AbstractRequest extends FormRequest
     public function validate()
     {
         $instance = $this->getValidatorInstance();
-        $instance->setRules(array_key_snake_case($instance->getRules()));
+
+        $rules = array_key_snake_case($instance->getRules());
+        $rules = array_value_snake_case($rules);
+
+        $instance->setRules($rules);
 
         if (!$this->passesAuthorization()) {
             $this->failedAuthorization();

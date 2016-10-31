@@ -86,6 +86,8 @@ return [
 
     'phone' => 'The :attribute field contains an invalid number.',
 
+    'base64image'                => 'The :attribute must be a valid base64 image.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

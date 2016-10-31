@@ -59,6 +59,10 @@ if (!function_exists('array_value_snake_case')) {
     function array_value_snake_case($items = []) : array
     {
         $changedCase = array_map(function ($value) {
+            if (is_array($value)) {
+                return array_value_snake_case($value);
+            }
+
             return snake_case($value);
         }, $items);
 
