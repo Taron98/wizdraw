@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $expense
  * @property string $expenseType
  * @property string $remark
- * @property Carbon $issuedAt
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
- * @property Carbon $deletedAt
+ * @property \Carbon\Carbon $issuedAt
+ * @property \Carbon\Carbon $createdAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereImage($value)

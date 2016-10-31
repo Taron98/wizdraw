@@ -23,6 +23,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property float $commission
  * @property integer $statusId
  * @property integer $receiptId
+ * @property string $note
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -44,6 +45,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
@@ -69,12 +71,15 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'transaction_number',
         'client_id',
         'receiver_client_id',
+        'type_id',
         'bank_account_id',
         'receiver_country_id',
         'sender_country_id',
         'amount',
         'commission',
         'status_id',
+        'receipt_id',
+        'note',
     ];
 
     /**
@@ -85,7 +90,9 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $hidden = [
         'client_id',
         'receiver_client_id',
+        'type_id',
         'status_id',
+        'receipt_id',
     ];
 
     /**
@@ -191,7 +198,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getTransactionNumber(): string
+    public function getTransactionNumber()
     {
         return $this->transactionNumber;
     }
@@ -201,7 +208,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return Transfer
      */
-    public function setTransactionNumber(string $transactionNumber): Transfer
+    public function setTransactionNumber($transactionNumber): Transfer
     {
         $this->transactionNumber = $transactionNumber;
 
@@ -211,7 +218,67 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * @return int
      */
-    public function getBankAccountId(): int
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * @param int $clientId
+     *
+     * @return Transfer
+     */
+    public function setClientId($clientId): Transfer
+    {
+        $this->clientId = $clientId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReceiverClientId()
+    {
+        return $this->receiverClientId;
+    }
+
+    /**
+     * @param int $receiverClientId
+     *
+     * @return Transfer
+     */
+    public function setReceiverClientId($receiverClientId): Transfer
+    {
+        $this->receiverClientId = $receiverClientId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
+
+    /**
+     * @param int $typeId
+     *
+     * @return Transfer
+     */
+    public function setTypeId($typeId): Transfer
+    {
+        $this->typeId = $typeId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBankAccountId()
     {
         return $this->bankAccountId;
     }
@@ -221,7 +288,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return Transfer
      */
-    public function setBankAccountId(int $bankAccountId): Transfer
+    public function setBankAccountId($bankAccountId): Transfer
     {
         $this->bankAccountId = $bankAccountId;
 
@@ -231,7 +298,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * @return int
      */
-    public function getReceiverCountryId(): int
+    public function getReceiverCountryId()
     {
         return $this->receiverCountryId;
     }
@@ -241,7 +308,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return Transfer
      */
-    public function setReceiverCountryId(int $receiverCountryId): Transfer
+    public function setReceiverCountryId($receiverCountryId): Transfer
     {
         $this->receiverCountryId = $receiverCountryId;
 
@@ -251,7 +318,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * @return int
      */
-    public function getSenderCountryId(): int
+    public function getSenderCountryId()
     {
         return $this->senderCountryId;
     }
@@ -261,7 +328,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return Transfer
      */
-    public function setSenderCountryId(int $senderCountryId): Transfer
+    public function setSenderCountryId($senderCountryId): Transfer
     {
         $this->senderCountryId = $senderCountryId;
 
@@ -269,29 +336,9 @@ class Transfer extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return int
-     */
-    public function getStatusId(): int
-    {
-        return $this->statusId;
-    }
-
-    /**
-     * @param int $statusId
-     *
-     * @return Transfer
-     */
-    public function setStatusId(int $statusId): Transfer
-    {
-        $this->statusId = $statusId;
-
-        return $this;
-    }
-
-    /**
      * @return float
      */
-    public function getAmount(): float
+    public function getAmount()
     {
         return $this->amount;
     }
@@ -321,9 +368,69 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return Transfer
      */
-    public function setCommission(float $commission): Transfer
+    public function setCommission($commission): Transfer
     {
         $this->commission = $commission;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusId()
+    {
+        return $this->statusId;
+    }
+
+    /**
+     * @param int $statusId
+     *
+     * @return Transfer
+     */
+    public function setStatusId($statusId): Transfer
+    {
+        $this->statusId = $statusId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReceiptId()
+    {
+        return $this->receiptId;
+    }
+
+    /**
+     * @param int $receiptId
+     *
+     * @return Transfer
+     */
+    public function setReceiptId($receiptId): Transfer
+    {
+        $this->receiptId = $receiptId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param string $note
+     *
+     * @return Transfer
+     */
+    public function setNote($note): Transfer
+    {
+        $this->note = $note;
 
         return $this;
     }

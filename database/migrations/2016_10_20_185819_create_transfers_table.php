@@ -30,6 +30,8 @@ class CreateTransfersTable extends Migration
             $table->integer('status_id')->unsigned()->index();
             $table->integer('receipt_id')->unsigned()->index();
 
+            $table->text('note')->nullable();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
