@@ -59,7 +59,7 @@ class TransferCreateRequest extends AbstractRequest
             'receipt'             => 'required|array',
             'receipt.image'       => 'required|base64image',
             'receipt.number'      => 'required|string',
-            'receipt.expense'     => 'required|integer',
+            'receipt.expense'     => 'required|string',
             'receipt.date'        => 'required|date',
             'receipt.typeExpense' => 'required|string',
             'receipt.remark'      => 'required|string'

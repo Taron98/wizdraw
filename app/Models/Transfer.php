@@ -15,12 +15,14 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property string $transactionNumber
  * @property integer $clientId
  * @property integer $receiverClientId
+ * @property integer $typeId
  * @property integer $bankAccountId
  * @property integer $receiverCountryId
  * @property integer $senderCountryId
- * @property integer $statusId
  * @property float $amount
  * @property float $commission
+ * @property integer $statusId
+ * @property integer $receiptId
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -29,16 +31,19 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
  * @property-read \Wizdraw\Models\TransferStatus $status
  * @property-read \Wizdraw\Models\TransferType $type
+ * @property-read \Wizdraw\Models\TransferReceipt $receipt
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
@@ -169,6 +174,16 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function type() : BelongsTo
     {
         return $this->belongsTo(TransferType::class);
+    }
+
+    /**
+     * Receipt of the transfer
+     *
+     * @return BelongsTo
+     */
+    public function receipt() : BelongsTo
+    {
+        return $this->belongsTo(TransferReceipt::class);
     }
     //</editor-fold>
 
