@@ -14,7 +14,7 @@ class FacebookUser extends AbstractEntity
 {
 
     /** @var  string|null */
-    private $token;
+    private $accessToken;
 
     /** @var  int|null */
     private $expire;
@@ -45,28 +45,16 @@ class FacebookUser extends AbstractEntity
      */
     public function setAccessToken(AccessToken $accessToken)
     {
-        $this->token = $accessToken->getValue();
+        $this->accessToken = $accessToken->getValue();
         $this->expire = $accessToken->getExpiresAt()->getTimestamp();
     }
 
     /**
      * @return string|null
      */
-    public function getToken()
+    public function getAccessToken()
     {
-        return $this->token;
-    }
-
-    /**
-     * @param string $token
-     *
-     * @return $this
-     */
-    public function setToken(string $token)
-    {
-        $this->token = $token;
-
-        return $this;
+        return $this->accessToken;
     }
 
     /**

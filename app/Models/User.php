@@ -156,7 +156,7 @@ class User extends AbstractModel implements
         $user = new User();
         $user->email = $facebookUser->getEmail();
         $user->facebookId = $facebookUser->getId();
-        $user->facebookToken = $facebookUser->getToken();
+        $user->facebookToken = $facebookUser->getAccessToken();
         $user->facebookTokenExpire = $tokenExpire;
 
         return $user;
