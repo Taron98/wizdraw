@@ -8,6 +8,7 @@ use Wizdraw\Cache\Services\BankCacheService;
 use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
+use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
 
 /**
  * Class CountryController
@@ -68,6 +69,29 @@ class CountryController extends AbstractController
 
         $commissions = $this->commissionCacheService->findByCountryId($country->getId());
         $country->setCommissions($commissions);
+
+        return $country;
+    }
+
+    /**
+     * Showing by location route
+     *
+     * @param CountryShowByLocationRequest $request
+     *
+     * @return mixed
+     */
+    public function showByLocation(CountryShowByLocationRequest $request)
+    {
+        $inputs = $request->inputs();
+        $latitude = $inputs[ 'latitude' ];
+        $longitude = $inputs[ 'longitude' ];
+
+        /** @var CountryCache $country */
+        $country = $this->countryCacheService->findByLocation($latitude, $longitude);
+
+        if (is_null($country)) {
+            return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND);
+        }
 
         return $country;
     }

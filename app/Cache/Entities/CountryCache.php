@@ -16,7 +16,10 @@ class CountryCache extends AbstractCacheEntity
     protected $name;
 
     /** @var  string */
-    protected $countryCode;
+    protected $countryCode2;
+
+    /** @var  string */
+    protected $countryCode3;
 
     /** @var  string */
     protected $coinCode;
@@ -53,19 +56,39 @@ class CountryCache extends AbstractCacheEntity
     /**
      * @return string
      */
-    public function getCountryCode()
+    public function getCountryCode2()
     {
-        return $this->countryCode;
+        return $this->countryCode2;
     }
 
     /**
-     * @param string $countryCode
+     * @param string $countryCode2
      *
      * @return CountryCache
      */
-    public function setCountryCode($countryCode): CountryCache
+    public function setCountryCode2($countryCode2): CountryCache
     {
-        $this->countryCode = $countryCode;
+        $this->countryCode2 = $countryCode2;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountryCode3()
+    {
+        return $this->countryCode3;
+    }
+
+    /**
+     * @param string $countryCode3
+     *
+     * @return CountryCache
+     */
+    public function setCountryCode3($countryCode3): CountryCache
+    {
+        $this->countryCode3 = $countryCode3;
 
         return $this;
     }

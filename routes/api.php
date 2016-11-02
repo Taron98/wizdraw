@@ -124,6 +124,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@show',
             ]);
 
+            Route::post('/location/', [
+                'as'   => 'country.showByLocation',
+                'uses' => 'CountryController@showByLocation',
+            ]);
+
             Route::get('/{id}/banks', [
                 'as'   => 'country.banks',
                 'uses' => 'CountryController@banks',
