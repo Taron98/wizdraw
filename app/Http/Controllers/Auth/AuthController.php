@@ -18,6 +18,7 @@ use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
+use Wizdraw\Services\GroupService;
 use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
 
@@ -47,6 +48,9 @@ class AuthController extends AbstractController
     /** @var  SmsService */
     private $smsService;
 
+    /** @var  GroupService */
+    private $groupService;
+
     /**
      * AuthController constructor.
      *
@@ -56,6 +60,7 @@ class AuthController extends AbstractController
      * @param UserService $userService
      * @param ClientService $clientService
      * @param SmsService $smsService
+     * @param GroupService $groupService
      */
     public function __construct(
         FacebookService $facebookService,
@@ -63,8 +68,8 @@ class AuthController extends AbstractController
         UserRepository $userRepository,
         UserService $userService,
         ClientService $clientService,
-        SmsService $smsService
-
+        SmsService $smsService,
+        GroupService $groupService
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
@@ -72,7 +77,7 @@ class AuthController extends AbstractController
         $this->userService = $userService;
         $this->clientService = $clientService;
         $this->smsService = $smsService;
-
+        $this->groupService = $groupService;
     }
 
     /**
@@ -95,10 +100,14 @@ class AuthController extends AbstractController
             return $token;
         }
 
-        return $this->respond([
+        $user = $request->user();
+        $hasGroup = ($this->groupService->findByAdminClient($user->client))->count() > 0;
+
+        return $this->respond(array_merge([
             'token'    => $token,
-            'didSetup' => $request->user()->client->isDidSetup(),
-        ]);
+            'didSetup' => $user->client->isDidSetup(),
+            'hasGroup' => $hasGroup,
+        ], $user->toArray()));
     }
 
     /**
