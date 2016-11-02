@@ -55,12 +55,19 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
+     *
+     * @param string $password
+     *
+     * @return User
      */
-    public function updateIsPending(User $user)
+    public function updatePassword(User $user, $password)
     {
-        // todo: set verify code and expire to null
         $user->setIsPending(false);
+        $user->setPassword($password);
+
         $this->updateModel($user);
+
+        return $user;
     }
 
     /**
@@ -74,6 +81,17 @@ class UserService extends AbstractService
     public function updateFacebook(int $id, FacebookUser $facebookUser) : AbstractModel
     {
         return $this->repository->updateFacebook($id, $facebookUser);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function resetVerification(User $user)
+    {
+        $user->setVerifyCode(null);
+        $user->setVerifyExpire(null);
+
+        $this->updateModel($user);
     }
 
 }
