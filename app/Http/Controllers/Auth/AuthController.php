@@ -166,8 +166,10 @@ class AuthController extends AbstractController
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
 
+        /** @var User $user */
+        $user = $this->userService->findByFacebookId($facebookUser->getId());
         /** @var Client $client */
-        $client = $this->userService->findByFacebookId($facebookUser->getId())->client;
+        $client = $user->client;
         $token = $this->authenticate([], $facebookUser->getId());
 
         if ($token instanceof JsonResponse) {
@@ -176,8 +178,9 @@ class AuthController extends AbstractController
 
         // Returns our token, including his facebook information
         return $this->respond(array_merge([
-            'token'    => $token,
-            'didSetup' => $client->isDidSetup(),
+            'token'     => $token,
+            'didSetup'  => $client->isDidSetup(),
+            'isPending' => $user->isPending(),
         ], $facebookUser->toArray()));
     }
 
