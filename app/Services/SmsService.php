@@ -15,7 +15,7 @@ class SmsService extends AbstractService
     {
     }
 
-    public function sendSms(string $phone, string $verifyCode)
+    public function sendSms($phone, $verifyCode)
     {
         $phone = '+' . preg_replace('/[^0-9]/', '', $phone);
 

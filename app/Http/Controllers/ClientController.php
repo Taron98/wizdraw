@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
 use Wizdraw\Services\ClientService;
+use Wizdraw\Services\SmsService;
 
 /**
  * Class ClientController
@@ -17,15 +18,19 @@ class ClientController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
+    /** @var  SmsService */
+    private $smsService;
+
     /**
      * UserController constructor.
      *
      * @param ClientService $clientService
-     *
+     * @param SmsService $smsService
      */
-    public function __construct(ClientService $clientService)
+    public function __construct(ClientService $clientService, SmsService $smsService)
     {
         $this->clientService = $clientService;
+        $this->smsService = $smsService;
     }
 
     /**
@@ -51,7 +56,14 @@ class ClientController extends AbstractController
      */
     public function phone(ClientPhoneRequest $request) : JsonResponse
     {
+        $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
+
+        // todo: relocation?
+        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
+        if (!$sms) {
+            return $this->respondWithError('problem sending SMS');
+        }
 
         return $this->respond($client);
     }
