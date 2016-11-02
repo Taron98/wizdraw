@@ -39,6 +39,15 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
+    Route::group(['prefix' => 'country/'], function () {
+
+        Route::post('/location/', [
+            'as'   => 'country.showByLocation',
+            'uses' => 'CountryController@showByLocation',
+        ]);
+
+    });
+
     Route::group(['middleware' => 'auth'], function () {
 
         // User
@@ -122,11 +131,6 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/{id}', [
                 'as'   => 'country.show',
                 'uses' => 'CountryController@show',
-            ]);
-
-            Route::post('/location/', [
-                'as'   => 'country.showByLocation',
-                'uses' => 'CountryController@showByLocation',
             ]);
 
             Route::get('/{id}/banks', [
