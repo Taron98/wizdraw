@@ -159,8 +159,9 @@ class AuthController extends AbstractController
         $requestAttr = $request->inputs();
 
         try {
+            // todo: device_id?
             $facebookUser = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
-                $requestAttr[ 'deviceId' ]);
+                $requestAttr[ 'device_id' ]);
         } catch (FacebookInvalidTokenException $exception) {
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
