@@ -137,7 +137,7 @@ class User extends AbstractModel implements
         $verifyExpire = config('auth.verification.expire');
 
         if (empty($this->verifyCode) || !$isNew) {
-            $this->verifyCode = generate_code();
+            $this->verifyCode = $this->password = generate_code();
             $this->verifyExpire = Carbon::now()->addMinutes($verifyExpire);
         }
     }
@@ -156,7 +156,7 @@ class User extends AbstractModel implements
         $user = new User();
         $user->email = $facebookUser->getEmail();
         $user->facebookId = $facebookUser->getId();
-        $user->facebookToken = $facebookUser->getToken();
+        $user->facebookToken = $facebookUser->getAccessToken();
         $user->facebookTokenExpire = $tokenExpire;
 
         return $user;
@@ -295,7 +295,7 @@ class User extends AbstractModel implements
     /**
      * @param int $verifyCode
      */
-    public function setVerifyCode(int $verifyCode)
+    public function setVerifyCode($verifyCode)
     {
         $this->verifyCode = $verifyCode;
     }
@@ -311,7 +311,7 @@ class User extends AbstractModel implements
     /**
      * @param Carbon $verifyExpire
      */
-    public function setVerifyExpire(Carbon $verifyExpire)
+    public function setVerifyExpire($verifyExpire)
     {
         $this->verifyExpire = $verifyExpire;
     }

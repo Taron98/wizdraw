@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Models\User;
+use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
 
 /**
@@ -19,14 +20,19 @@ class UserController extends AbstractController
     /** @var  UserService */
     private $userService;
 
+    /** @var  SmsService */
+    private $smsService;
+
     /**
      * UserController constructor.
      *
      * @param UserService $userService
+     * @param SmsService $smsService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, SmsService $smsService)
     {
         $this->userService = $userService;
+        $this->smsService = $smsService;
     }
 
     /**
@@ -38,7 +44,7 @@ class UserController extends AbstractController
      */
     public function password(UserPasswordRequest $request) : JsonResponse
     {
-        $user = $this->userService->update($request->inputs(), $request->user()->getId());
+        $user = $this->userService->updatePassword($request->user(), $request->input('password'));
 
         return $this->respond($user);
     }
@@ -56,6 +62,12 @@ class UserController extends AbstractController
 
         if (is_null($user->getVerifyExpire()) || $user->getVerifyExpire()->isPast()) {
             $this->userService->generateVerifyCode($user);
+        }
+
+        // todo: relocation?
+        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
+        if (!$sms) {
+            return $this->respondWithError('problem sending SMS');
         }
 
         return $this->respond([
@@ -76,7 +88,7 @@ class UserController extends AbstractController
     {
         $user = $request->user();
 
-        if (!$user->isPending()) {
+        if (is_null($user->getVerifyCode())) {
             return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
         }
 
@@ -88,7 +100,7 @@ class UserController extends AbstractController
             return $this->respondWithError('verification_code_expired', Response::HTTP_BAD_REQUEST);
         }
 
-        $this->userService->updateIsPending($user);
+        $this->userService->resetVerification($user);
 
         return $this->respond($user);
     }

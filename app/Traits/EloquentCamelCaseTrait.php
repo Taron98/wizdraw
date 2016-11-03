@@ -239,4 +239,33 @@ trait EloquentCamelCaseTrait
         return false;
     }
 
+    /**
+     * Create a new instance of the given model.
+     *
+     * @param  array  $attributes
+     * @param  bool  $exists
+     * @return static
+     */
+    public function newInstance($attributes = [], $exists = false)
+    {
+        $attributes = array_key_camel_case($attributes);
+
+        return parent::newInstance($attributes, $exists);
+    }
+
+    /**
+     * Fill the model with an array of attributes.
+     *
+     * @param  array  $attributes
+     * @return $this
+     *
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     */
+    public function fill(array $attributes)
+    {
+        $attributes = array_key_snake_case($attributes);
+
+        return parent::fill($attributes);
+    }
+
 }
