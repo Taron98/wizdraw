@@ -51,6 +51,7 @@ class ClientController extends AbstractController
     {
         $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
 
+        // todo: refactor
         $profileImage = $request->input('profileImage');
         if (!empty($profileImage)) {
             $uploadStatus = $this->fileService->upload(FileService::TYPE_PROFILE, $client->getId(), $profileImage);
@@ -60,6 +61,7 @@ class ClientController extends AbstractController
             }
         }
 
+        // todo: refactor
         $identityImage = $request->input('identityImage');
         if (!empty($identityImage)) {
             $uploadStatus = $this->fileService->upload(FileService::TYPE_IDENTITY, $client->getId(), $identityImage);
