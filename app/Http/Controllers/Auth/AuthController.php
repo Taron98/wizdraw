@@ -101,7 +101,7 @@ class AuthController extends AbstractController
         }
 
         $user = $request->user();
-        $hasGroup = ($this->groupService->findByAdminClient($user->client))->count() > 0;
+        $hasGroup = $user->client->adminGroups->count() > 0;
 
         return $this->respond(array_merge([
             'token'    => $token,
