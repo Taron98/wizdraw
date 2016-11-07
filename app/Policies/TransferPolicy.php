@@ -28,4 +28,17 @@ class TransferPolicy
             $client->getId() === $transfer->receiverClient->getId());
     }
 
+    /**
+     * Determine whether the user can add a receipt to the transfer
+     *
+     * @param Client $client
+     * @param Transfer $transfer
+     *
+     * @return bool
+     */
+    public function addReceipt(Client $client, Transfer $transfer)
+    {
+        return ($client->getId() === $transfer->client->getId());
+    }
+
 }

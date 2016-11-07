@@ -119,6 +119,12 @@ class TransferController extends AbstractController
      */
     public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer)
     {
+        $client = $request->user()->client;
+
+        if ($client->cannot('addReceipt', $transfer)) {
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
         $inputs = $request->except('image');
         $receiptImage = $request->input('image');
 
@@ -133,5 +139,19 @@ class TransferController extends AbstractController
 
         return $this->respond($transfer);
     }
+
+    /**
+     * Showing list of transfer route
+     *
+     * @param NoParamRequest $request
+     *
+     * @return mixed
+     */
+    /*public function list(NoParamRequest $request)
+    {
+        $client = $request->user()->client;
+
+        return $this->respond($client->transfers);
+    }*/
 
 }
