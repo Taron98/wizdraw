@@ -27,7 +27,9 @@ class SmsService extends AbstractService
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        \Log::error('Got an error: ' . print_r(curl_exec($ch), true));
         $response = simplexml_load_string(str_replace('utf-16', 'utf-8', curl_exec($ch)));
+        \Log::error('Got an error: ' . print_r($response, true));
         $response = json_decode(json_encode((array)$response), TRUE);
         \Log::error('Got an error: ' . print_r($response, true));
         if ($response['sms_response_code'] !== 200) {
