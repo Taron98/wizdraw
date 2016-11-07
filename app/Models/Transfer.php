@@ -124,7 +124,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         static::creating(function ($model) {
             /** @var Transfer $model */
             // todo: change to the real thing
-            $randomNumber = mt_rand(pow(10, 10), pow(10, 11) - 1);
+            $randomNumber = 'WF9' . (pow(10, 8) + time() % pow(10, 8));
             $model->transactionNumber = 'WF9' . (string)$randomNumber;
         });
     }

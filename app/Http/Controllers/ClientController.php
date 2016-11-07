@@ -54,20 +54,20 @@ class ClientController extends AbstractController
         // todo: refactor
         $profileImage = $request->input('profileImage');
         if (!empty($profileImage)) {
-            $uploadStatus = $this->fileService->upload(FileService::TYPE_PROFILE, $client->getId(), $profileImage);
+            $uploadStatus = $this->fileService->uploadProfile($client->getId(), $profileImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('Problem uploading profile image', Response::HTTP_BAD_REQUEST);
+                return $this->respondWithError('could_not_upload_profile_image', Response::HTTP_BAD_REQUEST);
             }
         }
 
         // todo: refactor
         $identityImage = $request->input('identityImage');
         if (!empty($identityImage)) {
-            $uploadStatus = $this->fileService->upload(FileService::TYPE_IDENTITY, $client->getId(), $identityImage);
+            $uploadStatus = $this->fileService->uploadIdentity($client->getId(), $identityImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('Problem uploading identity image', Response::HTTP_BAD_REQUEST);
+                return $this->respondWithError('could_not_upload_identity_image', Response::HTTP_BAD_REQUEST);
             }
         }
 
@@ -90,9 +90,9 @@ class ClientController extends AbstractController
         $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
 
         // todo: relocation?
-        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
+3        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
         if (!$sms) {
-            return $this->respondWithError('problem sending SMS');
+            return $this->respondWithError('could_not_send_sms');
         }
 
         return $this->respond($client);

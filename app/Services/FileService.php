@@ -51,6 +51,39 @@ class FileService extends AbstractService
     }
 
     /**
+     * @param string $name
+     * @param string $data
+     *
+     * @return bool
+     */
+    public function uploadProfile(string $name, string $data) : bool
+    {
+        return $this->upload(self::TYPE_PROFILE, $name, $data);
+    }
+
+    /**
+     * @param string $name
+     * @param string $data
+     *
+     * @return bool
+     */
+    public function uploadIdentity(string $name, string $data) : bool
+    {
+        return $this->upload(self::TYPE_IDENTITY, $name, $data);
+    }
+
+    /**
+     * @param string $name
+     * @param string $data
+     *
+     * @return bool
+     */
+    public function uploadReceipt(string $name, string $data) : bool
+    {
+        return $this->upload(self::TYPE_RECEIPT, $name, $data);
+    }
+
+    /**
      * @param string $data
      *
      * @return array|null
