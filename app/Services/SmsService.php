@@ -24,10 +24,11 @@ class SmsService extends AbstractService
         curl_setopt($ch, CURLOPT_URL, $string);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        $infoCurl = curl_getinfo($ch);
+        $response = simplexml_load_string(str_replace('utf-16', 'utf-8', curl_exec($ch)));
 
-        if ($infoCurl['http_code'] !== 200) {
+        if ($response->sms_response_code[0] !== 200) {
+            \Log::error('Got an error: ' . print_r($response, true));
+
             $response = false;
         } else {
             $response = true;
