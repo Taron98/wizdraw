@@ -34,7 +34,7 @@ class SmsService extends AbstractService
         $response = simplexml_load_string(str_replace('utf-16', 'utf-8', $response));
         \Log::error('Got an error: ' . print_r($response, true));
         $response = json_decode(json_encode((array)$response), TRUE);
-        \Log::error('Got an error: ' . print_r($response, true));
+        \Log::error('Got an error: ' . print_r($response['sms_response_code'] , true));
         if ($response['sms_response_code'] !== '200') {
             \Log::error('Got an error: ' . print_r($response, true));
 
