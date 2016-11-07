@@ -65,7 +65,10 @@ class UserService extends AbstractService
         $user->setIsPending(false);
         $user->setPassword($password);
 
-        $this->updateModel($user);
+//        $this->updateModel($user);
+        // todo: that's a temp solution, can't update attributes that are hidden
+        // todo: maybe it will be fixed when we'll use repository presenter
+        $user->save();
 
         return $user;
     }

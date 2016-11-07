@@ -182,7 +182,11 @@ class User extends AbstractModel implements
      */
     public function setPasswordAttribute(string $password)
     {
-        $this->attributes[ 'password' ] = Hash::make($password);
+        if (Hash::needsRehash($password)) {
+            $password = Hash::make($password);
+        }
+
+        $this->attributes[ 'password' ] = $password;
         $this->attributes[ 'password_changed_at' ] = Carbon::now();
     }
     //</editor-fold>
