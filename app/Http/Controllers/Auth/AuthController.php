@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use JWTAuth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -102,6 +103,10 @@ class AuthController extends AbstractController
 
         $user = $request->user();
         $hasGroup = $user->client->adminGroups->count() > 0;
+
+        // todo: relocation?
+        $user->setLastLoginAt(Carbon::now());
+        $this->userService->updateModel($user);
 
         return $this->respond(array_merge([
             'token'    => $token,
