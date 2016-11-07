@@ -20,7 +20,7 @@ class SmsService extends AbstractService
         $phone = '+' . preg_replace('/[^0-9]/', '', $phone);
         $text = 'You have successfully granted access to wizdraw! 
                  Simply return to wizdraw and enter PIN to complete the process.
-                 activation code:....';
+                 activation code:' . $verifyCode;
         $ch = curl_init();
         $string = 'https://188.138.96.222/VSServices/SendSms.ashx?login=1258965269888&pass=Test$WF@01!&text=' . $text . '&from=Wizdraw5&to=' . $phone;
         curl_setopt($ch, CURLOPT_URL, $string);
