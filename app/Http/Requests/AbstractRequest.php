@@ -108,4 +108,21 @@ abstract class AbstractRequest extends FormRequest
         return $inputs;
     }
 
+    /**
+     * Retrieve an input item from the request.
+     *
+     * @param  string $key
+     * @param  string|array|null $default
+     *
+     * @return string|array
+     */
+    public function input($key = null, $default = null)
+    {
+        if (!empty($key)) {
+            $key = snake_case($key);
+        }
+
+        return parent::input($key, $default);
+    }
+
 }

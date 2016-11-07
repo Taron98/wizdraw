@@ -7,6 +7,7 @@ use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Transfer;
+use Wizdraw\Services\FileService;
 use Wizdraw\Services\TransferService;
 
 /**
@@ -18,14 +19,19 @@ class TransferController extends AbstractController
     /** @var  TransferService */
     private $transferService;
 
+    /** @var  FileService */
+    private $fileService;
+
     /**
      * TransferController constructor.
      *
      * @param TransferService $transferService
+     * @param FileService $fileService
      */
-    public function __construct(TransferService $transferService)
+    public function __construct(TransferService $transferService, FileService $fileService)
     {
         $this->transferService = $transferService;
+        $this->fileService = $fileService;
     }
 
     /**
@@ -58,6 +64,17 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
         $inputs = $request->inputs();
+
+        // todo: refactor
+        // todo: move after the transfer and save with id of the transfer created
+        $receiptImage = $request->input('receipt.image');
+        if (!empty($receiptImage)) {
+            $uploadStatus = $this->fileService->upload(FileService::TYPE_RECEIPT, $client->getId(), $receiptImage);
+
+            if (!$uploadStatus) {
+                return $this->respondWithError('Problem uploading receipt image', Response::HTTP_BAD_REQUEST);
+            }
+        }
 
         return $this->transferService->createTransfer($client, $inputs);
     }

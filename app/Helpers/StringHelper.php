@@ -63,7 +63,12 @@ if (!function_exists('array_value_snake_case')) {
                 return array_value_snake_case($value);
             }
 
-            return snake_case($value);
+            // todo: find an elegant way, or just return to snake_case
+            if (!preg_match('/phone/i', $value)) {
+                return snake_case($value);
+            } else {
+                return $value;
+            }
         }, $items);
 
         return $changedCase;
