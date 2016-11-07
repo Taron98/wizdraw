@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Wizdraw\Models\Transfer
@@ -29,9 +30,10 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Wizdraw\Models\Client $receiverClient
+ * @property-read \Wizdraw\Models\TransferType $type
+ * @property-read \Wizdraw\Models\BankAccount $bankAccount
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
  * @property-read \Wizdraw\Models\TransferStatus $status
- * @property-read \Wizdraw\Models\TransferType $type
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
@@ -124,14 +126,14 @@ class Transfer extends AbstractModel implements AuthorizableContract
         static::creating(function ($model) {
             /** @var Transfer $model */
             // todo: change to the real thing
-            $randomNumber = 'WF9' . (pow(10, 8) + time() % pow(10, 8));
+            $randomNumber = (pow(10, 8) + time() % pow(10, 8));
             $model->transactionNumber = 'WF9' . (string)$randomNumber;
+
+            $model->client()->associate(Auth::user());
         });
     }
 
     //<editor-fold desc="Relationships">
-    // todo: bankBranch()
-    // todo: bankAccount()
     // todo: receiverCountry()
     // todo: senderCountry()
 
@@ -154,6 +156,26 @@ class Transfer extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Type of the transfer
+     *
+     * @return BelongsTo
+     */
+    public function type() : BelongsTo
+    {
+        return $this->belongsTo(TransferType::class);
+    }
+
+    /**
+     * Bank account of the receiver client
+     *
+     * @return BelongsTo
+     */
+    public function bankAccount() : BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class);
+    }
+
+    /**
      * Natures of the transfer
      *
      * @return BelongsToMany
@@ -171,16 +193,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function status() : BelongsTo
     {
         return $this->belongsTo(TransferStatus::class);
-    }
-
-    /**
-     * Type of the transfer
-     *
-     * @return BelongsTo
-     */
-    public function type() : BelongsTo
-    {
-        return $this->belongsTo(TransferType::class);
     }
 
     /**

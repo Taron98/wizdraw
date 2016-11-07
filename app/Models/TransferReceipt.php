@@ -3,14 +3,13 @@
 namespace Wizdraw\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Wizdraw\Models\TransferReceipt
  *
  * @property integer $id
- * @property string $image
  * @property string $number
  * @property string $expense
  * @property string $expenseType
@@ -19,9 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @property-read \Wizdraw\Models\Transfer $transfer
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereImage($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpense($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpenseType($value)
@@ -84,13 +82,13 @@ class TransferReceipt extends AbstractModel
 
     //<editor-fold desc="Relationships">
     /**
-     * Transfers currently in this status
+     * The receipt belongs to this transfer
      *
-     * @return HasMany
+     * @return HasOne
      */
-    public function transfers() : HasMany
+    public function transfer() : HasOne
     {
-        return $this->hasMany(Transfer::class);
+        return $this->hasOne(Transfer::class);
     }
     //</editor-fold>
 
@@ -98,26 +96,6 @@ class TransferReceipt extends AbstractModel
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     *
-     * @return TransferReceipt
-     */
-    public function setImage($image): TransferReceipt
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     /**
      * @return string
      */

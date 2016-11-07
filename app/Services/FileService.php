@@ -39,6 +39,7 @@ class FileService extends AbstractService
      */
     public function upload(string $type, string $name, string $data) : bool
     {
+        // todo: reduce image size and con
         $file = $this->extractFile($data);
 
         if (is_null($file)) {

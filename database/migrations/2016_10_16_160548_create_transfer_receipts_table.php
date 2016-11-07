@@ -17,7 +17,6 @@ class CreateTransferReceiptsTable extends Migration
             $table->increments('id');
 
             // todo: change typings
-            $table->string('image');
             $table->string('number');
             $table->string('expense');
             $table->string('expense_type');

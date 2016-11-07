@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Exception;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Repositories\AbstractRepository;
 
@@ -49,11 +50,15 @@ abstract class AbstractService
      * @param array $data
      * @param mixed $id
      *
-     * @return AbstractModel
+     * @return AbstractModel|bool
      */
-    public function update(array $data, $id) : AbstractModel
+    public function update(array $data, $id)
     {
-        $model = $this->repository->update($data, $id);
+        try {
+            $model = $this->repository->update($data, $id);
+        } catch (Exception $exception) {
+            return false;
+        }
 
         return $model;
     }

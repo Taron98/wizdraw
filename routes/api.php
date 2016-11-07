@@ -164,6 +164,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@create',
             ]);
 
+            Route::post('/{transfer}/receipt', [
+                'as'   => 'group.addReceipt',
+                'uses' => 'TransferController@addReceipt',
+            ]);
+
         });
 
     });

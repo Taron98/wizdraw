@@ -34,6 +34,8 @@ class CreateBankAccountsTable extends Migration
                 ->references('id')->on('clients')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+//            $table->unique(['bank_id', 'bank_branch_id', 'client_id', 'account_number'], 'bank_account_unique');
         });
     }
 

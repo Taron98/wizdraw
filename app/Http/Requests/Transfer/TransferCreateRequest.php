@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Requests\Transfer;
 
 use Wizdraw\Http\Requests\AbstractRequest;
+use Wizdraw\Models\TransferType;
 
 /**
  * Class TransferCreateRequest
@@ -30,19 +31,18 @@ class TransferCreateRequest extends AbstractRequest
     {
         return [
             'receiver'            => 'required|array',
-            'receiver.clientId'   => 'required|integer',
             'receiver.firstName'  => 'required|min:2|max:40',
             'receiver.middleName' => 'min:1|max:25',
             'receiver.lastName'   => 'required|min:2|max:35',
-            'receiver.countryId'  => 'required|integer',
 
-            'sender'           => 'required|array',
-            'sender.countryId' => 'required|integer',
+            'receiverClientId'  => 'required|integer',
+            'receiverCountryId' => 'required|integer',
+            'senderCountryId'   => 'required|integer',
 
             'amount'     => 'required|integer',
             'commission' => 'required|integer',
 
-            'typeId' => 'required|integer',
+            'typeId' => 'required|exists:transfer_types,id',
 
             'pickup'       => 'required_without:deposit|array',
             'pickup.city'  => 'required_without:deposit|min:2|max:30',
@@ -56,16 +56,22 @@ class TransferCreateRequest extends AbstractRequest
 
             'note' => 'string',
 
-            'receipt'             => 'required|array',
-            'receipt.image'       => 'required|base64image',
-            'receipt.number'      => 'required|string',
-            'receipt.expense'     => 'required|string',
-            'receipt.date'        => 'required|date',
-            'receipt.typeExpense' => 'required|string',
-            'receipt.remark'      => 'required|string'
-
             // 'natures', current is const
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransferType() : string
+    {
+        if (is_array($this->input('pickup'))) {
+            $type = TransferType::TYPE_PICKUP_CASH;
+        } else {
+            $type = TransferType::TYPE_DEPOSIT;
+        }
+
+        return $type;
     }
 
 }

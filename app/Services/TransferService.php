@@ -3,8 +3,11 @@
 namespace Wizdraw\Services;
 
 use Wizdraw\Models\AbstractModel;
+use Wizdraw\Models\BankAccount;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Nature;
+use Wizdraw\Models\Transfer;
+use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Repositories\TransferRepository;
 
@@ -14,6 +17,9 @@ use Wizdraw\Repositories\TransferRepository;
  */
 class TransferService extends AbstractService
 {
+
+    /** @var TransferReceiptService */
+    protected $transferReceiptService;
 
     /** @var TransferStatusService */
     protected $transferStatusService;
@@ -25,15 +31,18 @@ class TransferService extends AbstractService
      * TransferService constructor.
      *
      * @param TransferRepository $transferRepository
+     * @param TransferReceiptService $transferReceiptService
      * @param TransferStatusService $transferStatusService
      * @param NatureService $natureService
      */
     public function __construct(
         TransferRepository $transferRepository,
+        TransferReceiptService $transferReceiptService,
         TransferStatusService $transferStatusService,
         NatureService $natureService
     ) {
         $this->repository = $transferRepository;
+        $this->transferReceiptService = $transferReceiptService;
         $this->transferStatusService = $transferStatusService;
         $this->natureService = $natureService;
     }
@@ -45,23 +54,39 @@ class TransferService extends AbstractService
      */
     public function find(int $id)
     {
-        return $this->repository->with(['client', 'receiverClient', 'natures', 'status'])->find($id);
+        return $this->repository->with([
+            'client',
+            'receiverClient',
+            'bankAccount',
+            'natures',
+            'status',
+            'receipt',
+        ])->find($id);
     }
 
     /**
      * @param Client $senderClient
+     * @param BankAccount $bankAccount
      * @param array $attributes
      *
-     * @return AbstractModel
+     * @return void|AbstractModel
      */
-    public function createTransfer(Client $senderClient, array $attributes = []) : AbstractModel
+    public function createTransfer(Client $senderClient, BankAccount $bankAccount, array $attributes = [])
     {
-        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT);
+        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
 
-        $transfer = $this->repository->createWithRelation($senderClient, $initStatus, $defaultNatureIds, $attributes);
+        $transfer = $this->repository->createWithRelation($senderClient, $bankAccount, $initStatus, $defaultNatureIds,
+            $attributes);
+
+        return $transfer;
+    }
+
+    public function addReceipt(Transfer $transfer, TransferReceipt $transferReceipt)
+    {
+        $transfer->receipt()->associate($transferReceipt)->save();
 
         return $transfer;
     }

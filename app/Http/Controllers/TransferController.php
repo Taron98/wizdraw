@@ -4,10 +4,14 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Transfer;
-use Wizdraw\Services\FileService;
+use Wizdraw\Models\TransferType;
+use Wizdraw\Services\BankAccountService;
+use Wizdraw\Services\ClientService;
+use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 
 /**
@@ -19,19 +23,33 @@ class TransferController extends AbstractController
     /** @var  TransferService */
     private $transferService;
 
-    /** @var  FileService */
-    private $fileService;
+    /** @var  ClientService */
+    private $clientService;
+
+    /** @var  TransferReceiptService */
+    private $transferReceiptService;
+
+    /** @var BankAccountService */
+    private $bankAccountService;
 
     /**
      * TransferController constructor.
      *
      * @param TransferService $transferService
-     * @param FileService $fileService
+     * @param ClientService $clientService
+     * @param TransferReceiptService $transferReceiptService
+     * @param BankAccountService $bankAccountService
      */
-    public function __construct(TransferService $transferService, FileService $fileService)
-    {
+    public function __construct(
+        TransferService $transferService,
+        ClientService $clientService,
+        TransferReceiptService $transferReceiptService,
+        BankAccountService $bankAccountService
+    ) {
         $this->transferService = $transferService;
-        $this->fileService = $fileService;
+        $this->clientService = $clientService;
+        $this->transferReceiptService = $transferReceiptService;
+        $this->bankAccountService = $bankAccountService;
     }
 
     /**
@@ -65,18 +83,55 @@ class TransferController extends AbstractController
         $client = $request->user()->client;
         $inputs = $request->inputs();
 
-        // todo: refactor
-        // todo: move after the transfer and save with id of the transfer created
-        $receiptImage = $request->input('receipt.image');
-        if (!empty($receiptImage)) {
-            $uploadStatus = $this->fileService->upload(FileService::TYPE_RECEIPT, $client->getId(), $receiptImage);
+        $receiverClientId = $request->input('receiverClientId');
+        $receiver = $request->input('receiver');
 
-            if (!$uploadStatus) {
-                return $this->respondWithError('Problem uploading receipt image', Response::HTTP_BAD_REQUEST);
-            }
+        $bankAccount = null;
+        switch ($request->getTransferType()) {
+            case TransferType::TYPE_PICKUP_CASH:
+                $receiver = array_merge($receiver, $request->input('pickup'));
+
+                break;
+            case TransferType::TYPE_DEPOSIT:
+            default:
+                $deposit = $request->input('deposit');
+                $bankBranchName = $request->input('deposit.bankBranchName');
+                $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit, $bankBranchName);
         }
 
-        return $this->transferService->createTransfer($client, $inputs);
+        if (is_null($bankAccount)) {
+            return $this->respondWithError('could_not_create_bank_account', Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!$this->clientService->update($receiver, $receiverClientId)) {
+            // todo: delete bank account?
+            return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->transferService->createTransfer($client, $bankAccount, $inputs);
+    }
+
+    /**
+     * @param TransferAddReceiptRequest $request
+     * @param Transfer $transfer
+     *
+     * @return bool
+     */
+    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer)
+    {
+        $inputs = $request->except('image');
+        $receiptImage = $request->input('image');
+
+        $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(), $receiptImage,
+            $inputs);
+
+        if (is_null($receipt)) {
+            return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST);
+        }
+
+        $transfer = $this->transferService->addReceipt($transfer, $receipt);
+
+        return $this->respond($transfer);
     }
 
 }
