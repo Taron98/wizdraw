@@ -313,7 +313,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getIdentityNumber() : string
+    public function getIdentityNumber()
     {
         return $this->identityNumber;
     }
@@ -321,7 +321,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $identityNumber
      */
-    public function setIdentityNumber(string $identityNumber)
+    public function setIdentityNumber($identityNumber)
     {
         $this->identityNumber = $identityNumber;
     }
@@ -329,7 +329,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getIdentityExpire() : string
+    public function getIdentityExpire()
     {
         return $this->identityExpire;
     }
@@ -337,7 +337,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $identityExpire
      */
-    public function setIdentityExpire(string $identityExpire)
+    public function setIdentityExpire($identityExpire)
     {
         $this->identityExpire = $identityExpire;
     }
@@ -345,7 +345,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getFirstName() : string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -353,7 +353,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $firstName
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
@@ -361,7 +361,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getMiddleName() : string
+    public function getMiddleName()
     {
         return $this->middleName;
     }
@@ -369,7 +369,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $middleName
      */
-    public function setMiddleName(string $middleName)
+    public function setMiddleName($middleName)
     {
         $this->middleName = $middleName;
     }
@@ -377,7 +377,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getLastName() : string
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -385,7 +385,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $lastName
      */
-    public function setLastName(string $lastName)
+    public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
@@ -393,7 +393,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getBirthDate() : string
+    public function getBirthDate()
     {
         return $this->birthDate;
     }
@@ -401,7 +401,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $birthDate
      */
-    public function setBirthDate(string $birthDate)
+    public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
     }
@@ -409,7 +409,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getGender() : string
+    public function getGender()
     {
         return $this->gender;
     }
@@ -417,7 +417,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $gender
      */
-    public function setGender(string $gender)
+    public function setGender($gender)
     {
         $this->gender = $gender;
     }
@@ -425,7 +425,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getPhone() : string
+    public function getPhone()
     {
         return $this->phone;
     }
@@ -433,7 +433,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $phone
      */
-    public function setPhone(string $phone)
+    public function setPhone($phone)
     {
         $this->phone = $phone;
     }
@@ -441,7 +441,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getCity() : string
+    public function getCity()
     {
         return $this->city;
     }
@@ -449,7 +449,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity($city)
     {
         $this->city = $city;
     }
@@ -457,7 +457,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getAddress() : string
+    public function getAddress()
     {
         return $this->address;
     }
@@ -465,7 +465,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $address
      */
-    public function setAddress(string $address)
+    public function setAddress($address)
     {
         $this->address = $address;
     }
@@ -473,7 +473,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getClientType() : string
+    public function getClientType()
     {
         return $this->clientType;
     }
@@ -481,7 +481,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $clientType
      */
-    public function setClientType(string $clientType)
+    public function setClientType($clientType)
     {
         $this->clientType = $clientType;
     }
@@ -489,7 +489,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return boolean
      */
-    public function isDidSetup() : bool
+    public function isDidSetup()
     {
         return $this->didSetup;
     }
@@ -497,7 +497,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param boolean $didSetup
      */
-    public function setDidSetup(bool $didSetup)
+    public function setDidSetup($didSetup)
     {
         $this->didSetup = $didSetup;
     }
