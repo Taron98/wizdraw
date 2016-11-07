@@ -39,6 +39,17 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
+    // User
+    Route::group(['prefix' => 'user/'], function () {
+
+        Route::get('device/{deviceId}/', [
+            'as'   => 'user.device',
+            'uses' => 'UserController@device',
+        ]);
+
+    });
+
+    // Country
     Route::group(['prefix' => 'country/'], function () {
 
         Route::post('/location/', [
@@ -66,11 +77,6 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('verify/{verifyCode}/', [
                 'as'   => 'user.verify',
                 'uses' => 'UserController@verify',
-            ]);
-
-            Route::get('device/{deviceId}/', [
-                'as'   => 'user.device',
-                'uses' => 'UserController@device',
             ]);
 
         });
