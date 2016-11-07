@@ -116,11 +116,14 @@ class UserController extends AbstractController
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
+        $client = $user->client;
 
         return $this->respond([
             'email'      => ($user->getEmail()) ?: '',
             'facebookId' => ($user->getFacebookId()) ?: '',
-            'fullName'   => $user->client->getFullName(),
+            'firstName'  => ($client->getFirstName()) ?: '',
+            'middleName' => ($client->getMiddleName()) ?: '',
+            'lastName'   => ($client->getLastName()) ?: '',
         ]);
     }
 
