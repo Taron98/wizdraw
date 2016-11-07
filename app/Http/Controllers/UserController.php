@@ -116,6 +116,11 @@ class UserController extends AbstractController
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
+
+        if (is_null($user)) {
+            return $this->respondWithError('device_not_found', Response::HTTP_NOT_FOUND);
+        }
+
         $client = $user->client;
 
         return $this->respond([
