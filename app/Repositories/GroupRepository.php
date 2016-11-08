@@ -22,16 +22,6 @@ class GroupRepository extends AbstractRepository
     }
 
     /**
-     * @param Client $client
-     *
-     * @return Collection
-     */
-    public function findByAdminClient(Client $client) : Collection
-    {
-        return $this->findByField('admin_client_id', $client->getId());
-    }
-
-    /**
      * Create a group with his relationships
      *
      * @param Client $adminClient
