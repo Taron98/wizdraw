@@ -13,7 +13,7 @@ class FileService extends AbstractService
 {
     const TYPE_PROFILE = 'profile/';
     const TYPE_IDENTITY = 'identity/';
-    const TYPE_RECEIPT = 'receipts/';
+    const TYPE_RECEIPT = 'receipt/';
 
     const DEFAULT_FILE_EXT = 'jpg';
 
