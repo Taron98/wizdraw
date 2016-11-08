@@ -124,11 +124,16 @@ class UserController extends AbstractController
         $client = $user->client;
 
         return $this->respond([
-            'email'      => ($user->getEmail()) ?: '',
-            'facebookId' => ($user->getFacebookId()) ?: '',
-            'firstName'  => ($client->getFirstName()) ?: '',
-            'middleName' => ($client->getMiddleName()) ?: '',
-            'lastName'   => ($client->getLastName()) ?: '',
+            'user'   => [
+                'email'      => ($user->getEmail()) ?: '',
+                'facebookId' => ($user->getFacebookId()) ?: '',
+            ],
+            'client' => [
+                'id'         => $client->getId(),
+                'firstName'  => ($client->getFirstName()) ?: '',
+                'middleName' => ($client->getMiddleName()) ?: '',
+                'lastName'   => ($client->getLastName()) ?: '',
+            ],
         ]);
     }
 
