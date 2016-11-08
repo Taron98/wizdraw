@@ -65,7 +65,7 @@ class SmsService extends AbstractService
     private function sendSms($phone,$text){
         $phone = '+' . preg_replace('/[^0-9]/', '', $phone);
         $url = self::API_URL . '&text='.  $text . '&from=Wizdraw&to=' . $phone;
-        $response = json_decode($this->guzzleClient->get($url,['verify' => false])->getBody(), true);
+        $response = $this->guzzleClient->get($url,['verify' => false])->getBody();
         \Log::error('Got an error: ' . print_r($response, true));
         if ($response['sms_response_code'] !== '200') {
             \Log::error('Got an error: ' . print_r($response, true));
