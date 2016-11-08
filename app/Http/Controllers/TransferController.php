@@ -9,6 +9,7 @@ use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
+use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
@@ -191,6 +192,57 @@ class TransferController extends AbstractController
         $client = $request->user()->client;
 
         return $this->respond($client->transfers);
+    }
+
+    /**
+     * Getting nearby 7eleven branch by location
+     *
+     * @param TransferNearbyRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function nearby(TransferNearbyRequest $request) : JsonResponse
+    {
+        // todo: this solution will work only for 7eleven, in the 1st version
+        $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
+
+        $branches = [];
+        foreach ($branchesJson as $branch) {
+            $distance = $this->distance(
+                (float)$request->input('latitude'),
+                (float)$request->input('longitude'),
+                (float)$branch[ 'lat_location' ],
+                (float)$branch[ 'lng_location' ],
+                'K'
+            );
+
+            if ($distance <= 10) {
+                array_push($branches, $branch);
+            }
+        }
+
+        return $this->respond(collect($branches));
+    }
+
+    // todo: export to service
+    private function distance($lat1, $lon1, $lat2, $lon2, $unit)
+    {
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if ($unit == "K") {
+            return ($miles * 1.609344);
+        } else {
+            if ($unit == "N") {
+                return ($miles * 0.8684);
+            } else {
+                return $miles;
+            }
+        }
     }
 
 }

@@ -5,10 +5,10 @@ namespace Wizdraw\Http\Requests\Transfer;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class TransferAddReceiptRequest
+ * Class TransferNearbyRequest
  * @package Wizdraw\Http\Requests\Transfer
  */
-class TransferAddReceiptRequest extends AbstractRequest
+class TransferNearbyRequest extends AbstractRequest
 {
 
     /**
@@ -29,12 +29,8 @@ class TransferAddReceiptRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'image'       => 'required|base64image',
-            'number'      => 'required|string',
-            'expense'     => 'required|string',
-            'expenseType' => 'required|string',
-            'remark'      => 'required|string',
-            'issued_at'   => 'required|date|date_format:"Y-m-d"',
+            'latitude'  => ['required', 'regex:/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/'],
+            'longitude' => ['required', 'regex:/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/'],
         ];
     }
 
