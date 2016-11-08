@@ -162,7 +162,8 @@ class TransferController extends AbstractController
             $receiptImage, $inputs);
 
         $amount = $transfer->getAmount();
-        $receiverName = $transfer->receiverClient->getFullName();
+        //$receiverName = $transfer->receiverClient->getFullName();
+        $recieverPhone = $transfer->receiverClient->getPhone();
         /** @var CountryCache $coin */
         $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
 
@@ -173,8 +174,8 @@ class TransferController extends AbstractController
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(), $amount, $country->getCoinCode(),
-            $receiverName);
+        $sms = $this->smsService->sendSmsNewTransfer($recieverPhone, $amount, $country->getCoinCode(),
+            $client->getFullName());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
