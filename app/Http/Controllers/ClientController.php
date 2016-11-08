@@ -49,12 +49,13 @@ class ClientController extends AbstractController
      */
     public function update(ClientUpdateRequest $request) : JsonResponse
     {
-        $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
+        $clientId = $request->user()->client->getId();
+        $client = $this->clientService->update($request->inputs(), $clientId);
 
         // todo: refactor
         $profileImage = $request->input('profileImage');
         if (!empty($profileImage)) {
-            $uploadStatus = $this->fileService->uploadProfile($client->getId(), $profileImage);
+            $uploadStatus = $this->fileService->uploadProfile($clientId, $profileImage);
 
             if (!$uploadStatus) {
                 return $this->respondWithError('could_not_upload_profile_image', Response::HTTP_BAD_REQUEST);
@@ -64,7 +65,7 @@ class ClientController extends AbstractController
         // todo: refactor
         $identityImage = $request->input('identityImage');
         if (!empty($identityImage)) {
-            $uploadStatus = $this->fileService->uploadIdentity($client->getId(), $identityImage);
+            $uploadStatus = $this->fileService->uploadIdentity($clientId, $identityImage);
 
             if (!$uploadStatus) {
                 return $this->respondWithError('could_not_upload_identity_image', Response::HTTP_BAD_REQUEST);
@@ -72,8 +73,8 @@ class ClientController extends AbstractController
         }
 
         return $this->respond(array_merge($client->toArray(), [
-            'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $client->getId()),
-            'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $client->getId()),
+            'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
+            'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
     }
 

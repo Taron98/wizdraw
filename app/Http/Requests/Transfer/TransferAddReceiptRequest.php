@@ -34,7 +34,7 @@ class TransferAddReceiptRequest extends AbstractRequest
             'expense'     => 'required|string',
             'expenseType' => 'required|string',
             'remark'      => 'required|string',
-            'issued_at'   => 'required|date',
+            'issued_at'   => 'required|date|date_format:"Y-m-d"',
         ];
     }
 

@@ -61,10 +61,19 @@ abstract class AbstractRequest extends FormRequest
     {
         $instance = $this->getValidatorInstance();
 
-        $rules = array_key_snake_case($instance->getRules());
-        $rules = array_value_snake_case($rules);
+        $inputs = array_key_snake_case($instance->getRules());
+//        $inputs = array_value_snake_case($inputs);
 
-        $instance->setRules($rules);
+        // todo: change!
+        foreach ($inputs as $inputId => $input) {
+            foreach ($input as $ruleId => $rule) {
+                if (strpos($rule, 'date_format') === false && strpos($rule, 'phone') === false) {
+                    $inputs[$inputId][$ruleId] = snake_case($rule);
+                }
+            }
+        }
+
+        $instance->setRules($inputs);
 
         if (!$this->passesAuthorization()) {
             $this->failedAuthorization();
