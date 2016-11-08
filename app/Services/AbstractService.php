@@ -64,6 +64,16 @@ abstract class AbstractService
     }
 
     /**
+     * @param $id
+     *
+     * @return int
+     */
+    public function delete($id)
+    {
+        return $this->repository->delete($id);
+    }
+
+    /**
      * @param AbstractModel $model
      * @param string $key
      *
