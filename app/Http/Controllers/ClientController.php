@@ -90,7 +90,7 @@ class ClientController extends AbstractController
         $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
 
         // todo: relocation?
-        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
+        $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }

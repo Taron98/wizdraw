@@ -14,6 +14,7 @@ use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
+use Wizdraw\Services\SmsService;
 
 /**
  * Class TransferController
@@ -33,6 +34,9 @@ class TransferController extends AbstractController
     /** @var BankAccountService */
     private $bankAccountService;
 
+    /** @var  SmsService */
+    private $smsService;
+
     /**
      * TransferController constructor.
      *
@@ -40,17 +44,22 @@ class TransferController extends AbstractController
      * @param ClientService $clientService
      * @param TransferReceiptService $transferReceiptService
      * @param BankAccountService $bankAccountService
+     * @param SmsService $smsService
+
      */
     public function __construct(
         TransferService $transferService,
         ClientService $clientService,
         TransferReceiptService $transferReceiptService,
-        BankAccountService $bankAccountService
+        BankAccountService $bankAccountService,
+        SmsService $smsService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
         $this->bankAccountService = $bankAccountService;
+        $this->smsService = $smsService;
+
     }
 
     /**
@@ -147,6 +156,11 @@ class TransferController extends AbstractController
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
+        // todo: relocation?
+        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(), "150",'$HKD');
+        if (!$sms) {
+            return $this->respondWithError('could_not_send_sms');
+        }
         return $this->respond($transfer);
     }
 
