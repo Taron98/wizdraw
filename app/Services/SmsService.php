@@ -56,7 +56,7 @@ class SmsService extends AbstractService
     public function sendSmsNewTransfer($phone, $amount, $currency, $receiverName)
     {
 
-        $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' Tal waiting for you to withdrawal.';
+        $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 

@@ -89,7 +89,8 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
-
+        \Log::error('Got an error phone: ' . print_r($user->client->getPhone(), true));
+        \Log::error('Got an error verify: ' . print_r($user->getVerifyCode(), true));
         // todo: relocation?
         $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
         if (!$sms) {
