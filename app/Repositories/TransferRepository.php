@@ -54,7 +54,7 @@ class TransferRepository extends AbstractRepository
 
         $newTransfer->natures()->sync($natures);
 
-        return $this->find($newTransfer->getId());
+        return $newTransfer;
     }
 
 }

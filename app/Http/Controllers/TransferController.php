@@ -3,10 +3,10 @@
 namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
-use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
@@ -76,9 +76,9 @@ class TransferController extends AbstractController
      *
      * @param TransferCreateRequest $request
      *
-     * @return AbstractModel
+     * @return JsonResponse
      */
-    public function create(TransferCreateRequest $request)
+    public function create(TransferCreateRequest $request) : JsonResponse
     {
         $client = $request->user()->client;
         $inputs = $request->inputs();
@@ -96,7 +96,8 @@ class TransferController extends AbstractController
             default:
                 $deposit = $request->input('deposit');
                 $bankBranchName = $request->input('deposit.bankBranchName');
-                $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit, $bankBranchName);
+                $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit,
+                    $bankBranchName);
         }
 
         if (is_null($bankAccount)) {
@@ -108,16 +109,20 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->transferService->createTransfer($client, $bankAccount, $inputs);
+        $transfer = $this->transferService->createTransfer($client, $bankAccount, $inputs);
+
+        return $this->respond(array_merge($transfer->toArray(), [
+            'transactions' => $client->transfers->count(),
+        ]));
     }
 
     /**
      * @param TransferAddReceiptRequest $request
      * @param Transfer $transfer
      *
-     * @return bool
+     * @return JsonResponse
      */
-    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer)
+    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer) : JsonResponse
     {
         $client = $request->user()->client;
 
@@ -145,9 +150,9 @@ class TransferController extends AbstractController
      *
      * @param NoParamRequest $request
      *
-     * @return mixed
+     * @return JsonResponse
      */
-    public function list(NoParamRequest $request)
+    public function list(NoParamRequest $request) : JsonResponse
     {
         $client = $request->user()->client;
 
