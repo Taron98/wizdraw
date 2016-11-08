@@ -84,9 +84,20 @@ class TransferService extends AbstractService
         return $transfer;
     }
 
+    /**
+     * @param Transfer $transfer
+     * @param TransferReceipt $transferReceipt
+     *
+     * @return Transfer
+     */
     public function addReceipt(Transfer $transfer, TransferReceipt $transferReceipt)
     {
-        $transfer->receipt()->associate($transferReceipt)->save();
+        $statusWait = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT);
+
+        $transfer
+            ->receipt()->associate($transferReceipt)
+            ->status()->associate($statusWait)
+            ->save();
 
         return $transfer;
     }
