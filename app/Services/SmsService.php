@@ -45,12 +45,13 @@ class SmsService extends AbstractService
      * @param $phone
      * @param $amount
      * @param $currency
+     * @param $receiverName
      * @return bool|CashCardTransactions|SimpleXMLElement|CashCardTransactions|SimpleXMLElement
      */
-    public function sendSmsNewTransfer($phone,$amount,$currency)
+    public function sendSmsNewTransfer($phone,$amount,$currency,$receiverName)
     {
 
-        $text = $amount . ' ' . $currency . ' from Yuval Tal waiting for you to withdrawal.';
+        $text = $amount . ' ' . $currency . ' from '. $receiverName .' Tal waiting for you to withdrawal.';
         $text = urlencode($text);
         $response = $this->sendSms($phone,$text);
         return $response;
