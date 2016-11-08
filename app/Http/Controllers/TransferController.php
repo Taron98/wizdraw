@@ -111,6 +111,10 @@ class TransferController extends AbstractController
 
         if (is_null($receiverClient)) {
             // todo: delete bank account?
+            if (!is_null($bankAccount)) {
+                $this->bankAccountService->delete($bankAccount->getId());
+            }
+
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }
 
@@ -138,8 +142,8 @@ class TransferController extends AbstractController
         $inputs = $request->except('image');
         $receiptImage = $request->input('image');
 
-        $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(), $receiptImage,
-            $inputs);
+        $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(),
+            $receiptImage, $inputs);
 
         if (is_null($receipt)) {
             return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST);
