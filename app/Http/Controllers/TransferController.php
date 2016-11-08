@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Controllers;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\CountryCache;
+use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
@@ -13,10 +14,9 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
+use Wizdraw\Services\SmsService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
-use Wizdraw\Services\SmsService;
-use Wizdraw\Cache\Services\CountryCacheService;
 
 /**
  * Class TransferController
@@ -126,7 +126,6 @@ class TransferController extends AbstractController
         $receiverClient = $this->clientService->update($receiver, $receiverClientId);
 
         if (is_null($receiverClient)) {
-            // todo: delete bank account?
             if (!is_null($bankAccount)) {
                 $this->bankAccountService->delete($bankAccount->getId());
             }
@@ -172,10 +171,11 @@ class TransferController extends AbstractController
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(),$amount ,$country->getCoinCode());
+        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(), $amount, $country->getCoinCode());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
+
         return $this->respond($transfer);
     }
 
