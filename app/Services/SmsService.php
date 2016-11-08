@@ -35,7 +35,7 @@ class SmsService extends AbstractService
     public function sendSmsNewClient($phone,$verifyCode)
     {
 
-        $text = 'You have successfully granted access to wizdraw!Simply return to wizdraw and enter PIN to complete the process. activation code:' . $verifyCode;
+        $text = 'You have successfully granted access to wizdraw! Simply return to wizdraw and enter PIN to complete the process. activation code: ' . $verifyCode;
         $text = urlencode($text);
         $response = $this->sendSms($phone,$text);
         return $response;
