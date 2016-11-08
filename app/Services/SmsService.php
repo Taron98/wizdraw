@@ -1,6 +1,7 @@
 <?php
 
 namespace Wizdraw\Services;
+
 use GuzzleHttp\Client;
 
 
@@ -18,6 +19,7 @@ class SmsService extends AbstractService
 
     /**
      * SmsService constructor.
+     *
      * @param Client $guzzleClient
      * @param string $phone
      */
@@ -28,16 +30,18 @@ class SmsService extends AbstractService
 
 
     /**
- * @param $phone
- * @param $verifyCode
- * @return bool|CashCardTransactions|SimpleXMLElement
- */
-    public function sendSmsNewClient($phone,$verifyCode)
+     * @param $phone
+     * @param $verifyCode
+     *
+     * @return bool|CashCardTransactions|SimpleXMLElement
+     */
+    public function sendSmsNewClient($phone, $verifyCode)
     {
 
         $text = 'You have successfully granted access to wizdraw! Simply return to wizdraw and enter PIN to complete the process. activation code: ' . $verifyCode;
         $text = urlencode($text);
-        $response = $this->sendSms($phone,$text);
+        $response = $this->sendSms($phone, $text);
+
         return $response;
     }
 
@@ -45,14 +49,17 @@ class SmsService extends AbstractService
      * @param $phone
      * @param $amount
      * @param $currency
+     * @param $receiverName
+     *
      * @return bool|CashCardTransactions|SimpleXMLElement|CashCardTransactions|SimpleXMLElement
      */
-    public function sendSmsNewTransfer($phone,$amount,$currency)
+    public function sendSmsNewTransfer($phone, $amount, $currency, $receiverName)
     {
 
-        $text = $amount . ' ' . $currency . ' from Yuval Tal waiting for you to withdrawal.';
+        $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' Tal waiting for you to withdrawal.';
         $text = urlencode($text);
-        $response = $this->sendSms($phone,$text);
+        $response = $this->sendSms($phone, $text);
+
         return $response;
     }
 
@@ -60,21 +67,24 @@ class SmsService extends AbstractService
     /**
      * @param $phone
      * @param $text
+     *
      * @return bool|CashCardTransactions|SimpleXMLElement
      */
-    private function sendSms($phone,$text){
+    private function sendSms($phone, $text)
+    {
         $phone = '+' . preg_replace('/[^0-9]/', '', $phone);
-        $url = self::API_URL . '&text='.  $text . '&from=Wizdraw&to=' . $phone;
-        $response = $this->guzzleClient->get($url,['verify' => false])->getBody()->getContents();
+        $url = self::API_URL . '&text=' . $text . '&from=Wizdraw&to=' . $phone;
+        $response = $this->guzzleClient->get($url, ['verify' => false])->getBody()->getContents();
         $response = simplexml_load_string(str_replace('utf-16', 'utf-8', $response));
-        $response = json_decode(json_encode((array)$response), TRUE);
+        $response = json_decode(json_encode((array)$response), true);
         \Log::error('Got an error: ' . print_r($response, true));
-        if ($response['sms_response_code'] !== '200') {
+        if ($response[ 'sms_response_code' ] !== '200') {
             \Log::error('Got an error: ' . print_r($response, true));
             $response = false;
         } else {
             $response = true;
         }
+
         return $response;
 
     }
