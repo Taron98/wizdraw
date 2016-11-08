@@ -38,7 +38,7 @@ class BankAccountService extends AbstractService
     {
         $bankBranch = null;
         if (!is_null($bankBranchName)) {
-            $bankBranch = $this->bankBranchService->createBankAccount($bankBranchName);
+            $bankBranch = $this->bankBranchService->createBankBranch($bankBranchName);
         }
 
         return $this->repository->createWithRelation($clientId, $attributes, $bankBranch);

@@ -27,7 +27,7 @@ class BankBranchService extends AbstractService
      *
      * @return BankBranch
      */
-    public function createBankAccount(string $name) : BankBranch
+    public function createBankBranch(string $name) : BankBranch
     {
         return $this->repository->create(compact('name'));
     }
