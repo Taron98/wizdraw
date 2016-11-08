@@ -81,6 +81,7 @@ class TransferController extends AbstractController
      */
     public function create(TransferCreateRequest $request) : JsonResponse
     {
+        $client = $request->user()->client;
         $inputs = $request->inputs();
 
         $receiverClientId = $request->input('receiverClientId');
@@ -106,9 +107,9 @@ class TransferController extends AbstractController
         }
 
         /** @var Client $client */
-        $client = $this->clientService->update($receiver, $receiverClientId);
+        $receiverClient = $this->clientService->update($receiver, $receiverClientId);
 
-        if (is_null($client)) {
+        if (is_null($receiverClient)) {
             // todo: delete bank account?
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }

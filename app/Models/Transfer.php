@@ -128,8 +128,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
             // todo: change to the real thing
             $randomNumber = (pow(10, 8) + time() % pow(10, 8));
             $model->transactionNumber = 'WF9' . (string)$randomNumber;
-
-            $model->client()->associate(Auth::user()->client);
         });
     }
 

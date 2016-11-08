@@ -81,7 +81,7 @@ class TransferService extends AbstractService
         $transfer = $this->repository->createWithRelation($senderClient, $bankAccount, $initStatus, $defaultNatureIds,
             $attributes);
 
-        return $transfer;
+        return $this->find($transfer->getId());
     }
 
     /**
