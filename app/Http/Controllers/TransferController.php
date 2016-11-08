@@ -15,6 +15,7 @@ use Wizdraw\Services\ClientService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\SmsService;
+use Wizdraw\Cache\Services\CountryCacheService;
 
 /**
  * Class TransferController
@@ -37,6 +38,9 @@ class TransferController extends AbstractController
     /** @var  SmsService */
     private $smsService;
 
+    /** @var  CountryCacheService */
+    private $countryCacheService;
+
     /**
      * TransferController constructor.
      *
@@ -45,20 +49,22 @@ class TransferController extends AbstractController
      * @param TransferReceiptService $transferReceiptService
      * @param BankAccountService $bankAccountService
      * @param SmsService $smsService
-
+     * @param CountryCacheService $countryCacheService
      */
     public function __construct(
         TransferService $transferService,
         ClientService $clientService,
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
-        SmsService $smsService
+        SmsService $smsService,
+        CountryCacheService $countryCacheService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
         $this->bankAccountService = $bankAccountService;
         $this->smsService = $smsService;
+        $this->countryCacheService = $countryCacheService;
 
     }
 
@@ -150,6 +156,9 @@ class TransferController extends AbstractController
         $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(), $receiptImage,
             $inputs);
 
+        $amount = $transfer->getAmount();
+        $coin = $this->countryCacheService->find($transfer->getReceiverCountryId());
+
         if (is_null($receipt)) {
             return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST);
         }
@@ -157,7 +166,7 @@ class TransferController extends AbstractController
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(), "150",'$HKD');
+        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(),$amount ,$coin);
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
