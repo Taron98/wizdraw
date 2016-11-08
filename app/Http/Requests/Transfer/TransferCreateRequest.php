@@ -7,7 +7,7 @@ use Wizdraw\Models\TransferType;
 
 /**
  * Class TransferCreateRequest
- * @package Wizdraw\Http\Requests\Group
+ * @package Wizdraw\Http\Requests\Transfer
  */
 class TransferCreateRequest extends AbstractRequest
 {
