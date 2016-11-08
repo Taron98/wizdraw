@@ -147,11 +147,11 @@ class TransferController extends AbstractController
      *
      * @return mixed
      */
-    /*public function list(NoParamRequest $request)
+    public function list(NoParamRequest $request)
     {
         $client = $request->user()->client;
 
         return $this->respond($client->transfers);
-    }*/
+    }
 
 }

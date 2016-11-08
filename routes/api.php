@@ -169,10 +169,10 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@addReceipt',
             ]);
 
-            /*Route::get('/', [
+            Route::get('/', [
                 'as'   => 'transfer.list',
                 'uses' => 'TransferController@list',
-            ]);*/
+            ]);
 
         });
 
