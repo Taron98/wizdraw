@@ -71,7 +71,7 @@ class TransferService extends AbstractService
      *
      * @return void|AbstractModel
      */
-    public function createTransfer(Client $senderClient, BankAccount $bankAccount, array $attributes = [])
+    public function createTransfer(Client $senderClient, BankAccount $bankAccount = null, array $attributes = [])
     {
         $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE);
         // todo: change when we'll add new natures

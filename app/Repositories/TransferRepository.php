@@ -36,7 +36,7 @@ class TransferRepository extends AbstractRepository
      */
     public function createWithRelation(
         Client $senderClient,
-        BankAccount $bankAccount,
+        BankAccount $bankAccount = null,
         TransferStatus $status,
         array $natures,
         array $attributes

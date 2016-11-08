@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
@@ -80,7 +81,6 @@ class TransferController extends AbstractController
      */
     public function create(TransferCreateRequest $request) : JsonResponse
     {
-        $client = $request->user()->client;
         $inputs = $request->inputs();
 
         $receiverClientId = $request->input('receiverClientId');
@@ -92,19 +92,23 @@ class TransferController extends AbstractController
                 $receiver = array_merge($receiver, $request->input('pickup'));
 
                 break;
+
             case TransferType::TYPE_DEPOSIT:
             default:
                 $deposit = $request->input('deposit');
                 $bankBranchName = $request->input('deposit.bankBranchName');
                 $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit,
                     $bankBranchName);
+
+                if (is_null($bankAccount)) {
+                    return $this->respondWithError('could_not_create_bank_account', Response::HTTP_BAD_REQUEST);
+                }
         }
 
-        if (is_null($bankAccount)) {
-            return $this->respondWithError('could_not_create_bank_account', Response::HTTP_BAD_REQUEST);
-        }
+        /** @var Client $client */
+        $client = $this->clientService->update($receiver, $receiverClientId);
 
-        if (!$this->clientService->update($receiver, $receiverClientId)) {
+        if (is_null($client)) {
             // todo: delete bank account?
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }

@@ -41,6 +41,7 @@ class ClientUpdateRequest extends AbstractRequest
             'phone'             => 'phone:AUTO',
             'defaultCountryId'  => 'required|integer',
             'residentCountryId' => 'required|integer',
+            'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
             'clientType'        => 'required|in:sender,receiver',

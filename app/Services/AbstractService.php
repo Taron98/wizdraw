@@ -57,7 +57,7 @@ abstract class AbstractService
         try {
             $model = $this->repository->update($data, $id);
         } catch (Exception $exception) {
-            return false;
+            return null;
         }
 
         return $model;
