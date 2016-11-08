@@ -4,6 +4,7 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
@@ -161,7 +162,8 @@ class TransferController extends AbstractController
             $receiptImage, $inputs);
 
         $amount = $transfer->getAmount();
-        $coin = $this->countryCacheService->find($transfer->getReceiverCountryId());
+        /** @var CountryCache $coin */
+        $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
 
         if (is_null($receipt)) {
             return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST);
@@ -170,7 +172,7 @@ class TransferController extends AbstractController
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(),$amount ,$coin);
+        $sms = $this->smsService->sendSmsNewTransfer($client->getPhone(),$amount ,$country->getCoinCode());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
