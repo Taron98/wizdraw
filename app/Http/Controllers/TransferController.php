@@ -174,7 +174,8 @@ class TransferController extends AbstractController
         $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($receiverPhone, $amount, $country->getCoinCode(), $client->getFullName());
+        $sms = $this->smsService->sendSmsNewTransfer($receiverPhone, $amount, $country->getCoinCode(),
+            $client->getFullName());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
@@ -208,43 +209,37 @@ class TransferController extends AbstractController
         // todo: this solution will work only for 7eleven, in the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
 
-        $branches = [];
+        $branches = collect();
         foreach ($branchesJson as $branch) {
             $distance = $this->distance(
                 (float)$request->input('latitude'),
                 (float)$request->input('longitude'),
                 (float)$branch[ 'lat_location' ],
-                (float)$branch[ 'lng_location' ],
-                'K'
+                (float)$branch[ 'lng_location' ]
             );
 
             if ($distance <= 10) {
-                array_push($branches, $branch);
+                $branch['distance'] = (float)$distance;
+
+                $branches->put($branch['id'], $branch);
             }
         }
 
-        return $this->respond(collect($branches));
+        $branch = $branches->sortBy('distance')->first();
+
+        return $this->respond($branch);
     }
 
     // todo: export to service
-    private function distance($lat1, $lon1, $lat2, $lon2, $unit)
+    private function distance($lat1, $lon1, $lat2, $lon2)
     {
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);
         $dist = rad2deg($dist);
         $miles = $dist * 60 * 1.1515;
-        $unit = strtoupper($unit);
 
-        if ($unit == "K") {
-            return ($miles * 1.609344);
-        } else {
-            if ($unit == "N") {
-                return ($miles * 0.8684);
-            } else {
-                return $miles;
-            }
-        }
+        return ($miles * 1.609344);
     }
 
 }
