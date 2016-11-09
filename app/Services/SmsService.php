@@ -4,6 +4,7 @@ namespace Wizdraw\Services;
 
 use GuzzleHttp\Client;
 
+
 /**
  * Class SmsService
  * @package Wizdraw\Services
@@ -68,11 +69,13 @@ class SmsService extends AbstractService
     private function sendSms($phone, $text)
     {
         $phone = '+' . preg_replace('/[^0-9]/', '', $phone);
+
         $url = self::API_URL . '&text=' . $text . '&from=Wizdraw&to=' . $phone;
         $response = $this->guzzleClient->get($url, ['verify' => false])->getBody()->getContents();
+
         $response = simplexml_load_string(str_replace('utf-16', 'utf-8', $response));
         $response = json_decode(json_encode((array)$response), true);
-        \Log::error('Got an error: ' . print_r($response, true));
+
         if ($response[ 'sms_response_code' ] !== '200') {
             \Log::error('Got an error: ' . print_r($response, true));
             $response = false;
