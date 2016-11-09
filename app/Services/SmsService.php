@@ -4,7 +4,6 @@ namespace Wizdraw\Services;
 
 use GuzzleHttp\Client;
 
-
 /**
  * Class SmsService
  * @package Wizdraw\Services
@@ -14,20 +13,18 @@ class SmsService extends AbstractService
 
     const API_URL = 'https://188.138.96.222/VSServices/SendSms.ashx?login=1258965269888&pass=Test$WF@01!';
 
-    /** @var  GuzzleClient */
+    /** @var Client */
     private $guzzleClient;
 
     /**
      * SmsService constructor.
      *
      * @param Client $guzzleClient
-     * @param string $phone
      */
     public function __construct(Client $guzzleClient)
     {
         $this->guzzleClient = $guzzleClient;
     }
-
 
     /**
      * @param $phone
@@ -37,7 +34,6 @@ class SmsService extends AbstractService
      */
     public function sendSmsNewClient($phone, $verifyCode)
     {
-
         $text = 'You have successfully granted access to wizdraw! Simply return to wizdraw and enter PIN to complete the process. activation code: ' . $verifyCode;
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
@@ -55,7 +51,6 @@ class SmsService extends AbstractService
      */
     public function sendSmsNewTransfer($phone, $amount, $currency, $receiverName)
     {
-
         $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
@@ -86,7 +81,6 @@ class SmsService extends AbstractService
         }
 
         return $response;
-
     }
 
 }

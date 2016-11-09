@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $expense
  * @property string $expenseType
  * @property string $remark
+ * @property string $note
  * @property \Carbon\Carbon $issuedAt
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpense($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpenseType($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereRemark($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereIssuedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereUpdatedAt($value)
@@ -52,6 +54,7 @@ class TransferReceipt extends AbstractModel
         'expense',
         'expense_type',
         'remark',
+        'note',
         'issued_at',
         'deleted_at',
     ];
@@ -172,6 +175,26 @@ class TransferReceipt extends AbstractModel
     public function setRemark($remark): TransferReceipt
     {
         $this->remark = $remark;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param string $note
+     *
+     * @return TransferReceipt
+     */
+    public function setNote($note): TransferReceipt
+    {
+        $this->note = $note;
 
         return $this;
     }

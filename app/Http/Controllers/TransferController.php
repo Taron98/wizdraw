@@ -161,21 +161,20 @@ class TransferController extends AbstractController
         $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(),
             $receiptImage, $inputs);
 
-        $amount = $transfer->getAmount();
-        //$receiverName = $transfer->receiverClient->getFullName();
-        $recieverPhone = $transfer->receiverClient->getPhone();
-        /** @var CountryCache $coin */
-        $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
-
         if (is_null($receipt)) {
             return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST);
         }
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
+        $amount = $transfer->getAmount();
+        $receiverPhone = $transfer->receiverClient->getPhone();
+
+        /** @var CountryCache $coin */
+        $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
+
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($recieverPhone, $amount, $country->getCoinCode(),
-            $client->getFullName());
+        $sms = $this->smsService->sendSmsNewTransfer($receiverPhone, $amount, $country->getCoinCode(), $client->getFullName());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }

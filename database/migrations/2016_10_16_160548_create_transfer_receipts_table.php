@@ -19,8 +19,9 @@ class CreateTransferReceiptsTable extends Migration
             // todo: change typings
             $table->string('number');
             $table->string('expense');
-            $table->string('expense_type');
+            $table->enum('expense_type', ['fluent', 'special'])->default('fluent');
             $table->string('remark');
+            $table->text('note')->nullable();
 
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('created_at')->useCurrent();

@@ -17,7 +17,7 @@ class CreateBankAccountsTable extends Migration
             $table->increments('id');
 
             $table->integer('bank_id')->unsigned()->index();
-            $table->integer('bank_branch_id')->unsigned()->index();
+            $table->integer('bank_branch_id')->unsigned()->nullable()->index();
             $table->integer('client_id')->unsigned()->index();
             $table->string('account_number', 60)->nullable();
 

@@ -50,8 +50,8 @@ class TransferCreateRequest extends AbstractRequest
 
             'deposit'                => 'required_without:pickup|array',
             'deposit.bankId'         => 'required_without:pickup|integer',
-            'deposit.bankBranchId'   => 'required_without_all:pickup,deposit.bankBranchName|integer',
-            'deposit.bankBranchName' => 'required_without_all:pickup,deposit.bankBranchId|string',
+            'deposit.bankBranchId'   => 'integer',
+            'deposit.bankBranchName' => 'string',
             'deposit.accountNumber'  => 'required_without:pickup|string',
 
             'note' => 'string',
