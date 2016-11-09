@@ -88,11 +88,11 @@ class ClientController extends AbstractController
     public function phone(ClientPhoneRequest $request) : JsonResponse
     {
         $user = $request->user();
-        $client = $this->clientService->update($request->inputs(), $request->user()->client->getId());
-        \Log::error('Got an error phone: ' . print_r($user->client->getPhone(), true));
+        $client = $this->clientService->update($request->inputs(), $user->client->getId());
+        \Log::error('Got an error phone: ' . print_r($client->getPhone(), true));
         \Log::error('Got an error verify: ' . print_r($user->getVerifyCode(), true));
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
+        $sms = $this->smsService->sendSmsNewClient($client->getPhone(), $user->getVerifyCode());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
