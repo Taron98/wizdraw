@@ -32,8 +32,8 @@ class TransferAddReceiptRequest extends AbstractRequest
             'image'       => 'required|base64image',
             'number'      => 'required|string',
             'expense'     => 'required|string',
-            'expenseType' => 'required|string',
-            'remark'      => 'required|string',
+            'expenseType' => 'required|in:fluent,special',
+            'remark'      => 'string',
             'note'        => 'string',
             'issued_at'   => 'required|date|date_format:"Y-m-d"',
         ];
