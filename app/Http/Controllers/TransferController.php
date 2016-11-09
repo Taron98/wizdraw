@@ -225,6 +225,10 @@ class TransferController extends AbstractController
             }
         }
 
+        if (!$branches->count()) {
+            return $this->respondWithError('no_branch_found');
+        }
+
         $branch = $branches->sortBy('distance')->first();
 
         return $this->respond($branch);
