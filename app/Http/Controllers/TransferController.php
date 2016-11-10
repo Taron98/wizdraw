@@ -219,9 +219,9 @@ class TransferController extends AbstractController
             );
 
             if ($distance <= 10) {
-                $branch['distance'] = (float)$distance;
+                $branch[ 'distance' ] = (float)$distance;
 
-                $branches->put($branch['id'], $branch);
+                $branches->put($branch[ 'id' ], $branch);
             }
         }
 
