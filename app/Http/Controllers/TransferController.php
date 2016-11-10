@@ -206,7 +206,7 @@ class TransferController extends AbstractController
      */
     public function nearby(TransferNearbyRequest $request) : JsonResponse
     {
-        // todo: this solution will work only for 7eleven, in the 1st version
+        // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
 
         $branches = collect();
