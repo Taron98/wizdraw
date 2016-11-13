@@ -18,7 +18,7 @@ class RateCache extends AbstractCacheEntity
     /**
      * @return int
      */
-    public function getCountryId(): int
+    public function getCountryId()
     {
         return $this->countryId;
     }
@@ -38,7 +38,7 @@ class RateCache extends AbstractCacheEntity
     /**
      * @return float
      */
-    public function getRate(): float
+    public function getRate()
     {
         return $this->rate;
     }
