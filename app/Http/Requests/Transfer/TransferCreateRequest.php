@@ -39,8 +39,8 @@ class TransferCreateRequest extends AbstractRequest
             'receiverCountryId' => 'required|integer',
             'senderCountryId'   => 'required|integer',
 
-            'amount'     => 'required|integer',
-            'commission' => 'required|integer',
+            'amount'     => 'required|numeric',
+            'commission' => 'required|numeric',
 
             'typeId' => 'required|exists:transfer_types,id',
 
