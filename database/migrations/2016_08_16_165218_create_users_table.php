@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('facebook_id', 20)->nullable();
             $table->string('facebook_token', 300)->nullable();
             $table->timestamp('facebook_token_expire')->nullable();
-            $table->string('device_id', 40)->unique();
+            $table->string('device_id', 40); //->unique();
             $table->unsignedMediumInteger('verify_code')->nullable();
             $table->timestamp('verify_expire')->nullable();
             $table->boolean('is_pending')->default(true);

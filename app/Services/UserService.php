@@ -31,7 +31,7 @@ class UserService extends AbstractService
      */
     public function findByDeviceId(string $deviceId)
     {
-        return $this->repository->findByField('device_id', $deviceId)->first();
+        return $this->repository->findByField('device_id', $deviceId)->last();
     }
 
     /**
