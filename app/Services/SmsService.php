@@ -30,12 +30,20 @@ class SmsService extends AbstractService
     /**
      * @param $phone
      * @param $verifyCode
+     * @param $isFirstTime
      *
-     * @return bool|CashCardTransactions|SimpleXMLElement
+     * @return bool
      */
-    public function sendSmsNewClient($phone, $verifyCode)
+    public function sendSmsNewClient($phone, $verifyCode, $isFirstTime = false)
     {
-        $text = 'You have successfully granted access to Wizdraw! Simply return to Wizdraw and enter PIN to complete the process. activation code: ' . $verifyCode;
+        $expireInMinutes = config('auth.verification.expire') / 60;
+
+        if ($isFirstTime) {
+            $text = "Your Wizdraw verification code is {$verifyCode}.\nSimply open the app and enter the code to complete the process.\nThis code is valid for {$expireInMinutes} hours.";
+        } else {
+            $text = "Your verification code is {$verifyCode}.";
+        }
+
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 
@@ -48,7 +56,7 @@ class SmsService extends AbstractService
      * @param $currency
      * @param $receiverName
      *
-     * @return bool|CashCardTransactions|SimpleXMLElement|CashCardTransactions|SimpleXMLElement
+     * @return bool
      */
     public function sendSmsNewTransfer($phone, $amount, $currency, $receiverName)
     {
@@ -59,12 +67,11 @@ class SmsService extends AbstractService
         return $response;
     }
 
-
     /**
      * @param $phone
      * @param $text
      *
-     * @return bool|CashCardTransactions|SimpleXMLElement
+     * @return bool
      */
     private function sendSms($phone, $text)
     {
@@ -76,6 +83,7 @@ class SmsService extends AbstractService
         $response = simplexml_load_string(str_replace('utf-16', 'utf-8', $response));
         $response = json_decode(json_encode((array)$response), true);
         \Log::error('Got an error: ' . print_r($response, true));
+
         if ($response[ 'sms_response_code' ] !== '200') {
             \Log::error('Got an error: ' . print_r($response, true));
             $response = false;

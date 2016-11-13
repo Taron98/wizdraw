@@ -147,7 +147,7 @@ class AuthController extends AbstractController
         }
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewClient($clientAttrs[ 'phone' ], $user[ 'verify_code' ]);
+        $sms = $this->smsService->sendSmsNewClient($clientAttrs[ 'phone' ], $user[ 'verify_code' ], true);
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms');
         }
