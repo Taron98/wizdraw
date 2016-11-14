@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Services;
 
+use Wizdraw\Cache\Entities\RateCache;
+use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\BankAccount;
 use Wizdraw\Models\Client;
@@ -17,6 +19,7 @@ use Wizdraw\Repositories\TransferRepository;
  */
 class TransferService extends AbstractService
 {
+    const MAX_MONTHLY_TRANSFER = 8000;
 
     /** @var TransferReceiptService */
     protected $transferReceiptService;
@@ -27,6 +30,9 @@ class TransferService extends AbstractService
     /** @var  NatureService */
     protected $natureService;
 
+    /** @var RateCacheService */
+    protected $rateCacheService;
+
     /**
      * TransferService constructor.
      *
@@ -34,17 +40,20 @@ class TransferService extends AbstractService
      * @param TransferReceiptService $transferReceiptService
      * @param TransferStatusService $transferStatusService
      * @param NatureService $natureService
+     * @param RateCacheService $rateCacheService
      */
     public function __construct(
         TransferRepository $transferRepository,
         TransferReceiptService $transferReceiptService,
         TransferStatusService $transferStatusService,
-        NatureService $natureService
+        NatureService $natureService,
+        RateCacheService $rateCacheService
     ) {
         $this->repository = $transferRepository;
         $this->transferReceiptService = $transferReceiptService;
         $this->transferStatusService = $transferStatusService;
         $this->natureService = $natureService;
+        $this->rateCacheService = $rateCacheService;
     }
 
     /**
@@ -103,11 +112,40 @@ class TransferService extends AbstractService
     }
 
     /**
-     * @return mixed
+     * @param float $amount
+     *
+     * @return bool
      */
-    public function monthlyTransfer()
+    public function validateMonthly(float $amount) : bool
     {
-        return $this->repository->monthlyTransfer();
+        $monthlyTotal = $amount + $this->repository->monthlyTransfer();
+
+        return ($monthlyTotal <= self::MAX_MONTHLY_TRANSFER);
+    }
+
+    /**
+     * @param int $receiverCountryId
+     * @param float $amount
+     * @param float $totalAmount
+     * @param float $receiverAmount
+     *
+     * @return bool
+     */
+    public function validateTotals(
+        int $receiverCountryId,
+        float $amount,
+        float $totalAmount,
+        float $receiverAmount
+    ) : bool
+    {
+        $commission = 22;
+        $calcTotalAmount = $amount + $commission;
+
+        /** @var RateCache $rate */
+        $rate = $this->rateCacheService->find($receiverCountryId);
+        $calcReceiverAmount = $amount * $rate->getRate();
+
+        return ($totalAmount === $calcTotalAmount) && ($receiverAmount === $calcReceiverAmount);
     }
 
 }

@@ -136,7 +136,7 @@ class CountryCache extends AbstractCacheEntity
     /**
      * @return RateCache|null
      */
-    public function getRate()
+    public function rate()
     {
         return $this->rate;
     }
