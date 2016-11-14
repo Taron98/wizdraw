@@ -82,7 +82,7 @@ class BankCache extends AbstractCacheEntity
     /**
      * @return int
      */
-    public function getCountryId(): int
+    public function getCountryId()
     {
         return $this->countryId;
     }

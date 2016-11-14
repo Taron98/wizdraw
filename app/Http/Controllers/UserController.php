@@ -65,9 +65,9 @@ class UserController extends AbstractController
         }
 
         // todo: relocation?
-        $sms = $this->smsService->sendSms($user->client->getPhone(), $user->getVerifyCode());
+        $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
         if (!$sms) {
-            return $this->respondWithError('problem sending SMS');
+            return $this->respondWithError('could_not_send_sms');
         }
 
         return $this->respond([
@@ -124,11 +124,16 @@ class UserController extends AbstractController
         $client = $user->client;
 
         return $this->respond([
-            'email'      => ($user->getEmail()) ?: '',
-            'facebookId' => ($user->getFacebookId()) ?: '',
-            'firstName'  => ($client->getFirstName()) ?: '',
-            'middleName' => ($client->getMiddleName()) ?: '',
-            'lastName'   => ($client->getLastName()) ?: '',
+            'user'   => [
+                'email'      => ($user->getEmail()) ?: '',
+                'facebookId' => ($user->getFacebookId()) ?: '',
+            ],
+            'client' => [
+                'id'         => $client->getId(),
+                'firstName'  => ($client->getFirstName()) ?: '',
+                'middleName' => ($client->getMiddleName()) ?: '',
+                'lastName'   => ($client->getLastName()) ?: '',
+            ],
         ]);
     }
 

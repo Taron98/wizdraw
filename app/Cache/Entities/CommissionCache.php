@@ -27,7 +27,7 @@ class CommissionCache extends AbstractCacheEntity
     /**
      * @return mixed
      */
-    public function getCountryId(): int
+    public function getCountryId()
     {
         return $this->countryId;
     }
@@ -87,7 +87,7 @@ class CommissionCache extends AbstractCacheEntity
     /**
      * @return mixed
      */
-    public function getMinRange(): int
+    public function getMinRange()
     {
         return $this->minRange;
     }
@@ -107,7 +107,7 @@ class CommissionCache extends AbstractCacheEntity
     /**
      * @return mixed
      */
-    public function getMaxRange(): int
+    public function getMaxRange()
     {
         return $this->maxRange;
     }

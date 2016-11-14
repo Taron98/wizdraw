@@ -14,7 +14,7 @@ class BankBranchRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model()
+    public function model() : string
     {
         return BankBranch::class;
     }

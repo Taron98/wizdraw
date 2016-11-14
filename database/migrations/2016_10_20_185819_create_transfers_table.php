@@ -19,13 +19,18 @@ class CreateTransfersTable extends Migration
             $table->string('transaction_number', 15);
             $table->integer('client_id')->unsigned()->index();
             $table->integer('receiver_client_id')->unsigned()->index();
-            $table->integer('bank_account_id')->unsigned()->index();
+            $table->integer('type_id')->unsigned()->index();
+            $table->integer('bank_account_id')->unsigned()->nullable()->index();
             $table->integer('receiver_country_id')->unsigned()->index();
             $table->integer('sender_country_id')->unsigned()->index();
-            $table->integer('status_id')->unsigned()->index();
 
             $table->decimal('amount', 14, 4);
             $table->decimal('commission', 10, 4);
+
+            $table->integer('status_id')->unsigned()->index();
+            $table->integer('receipt_id')->unsigned()->nullable()->index();
+
+            $table->text('note')->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
@@ -41,13 +46,23 @@ class CreateTransfersTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            $table->foreign('type_id')
+                ->references('id')->on('transfer_types')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->foreign('bank_account_id')
                 ->references('id')->on('bank_accounts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table->foreign('status_id')
-                ->references('id')->on('statuses')
+                ->references('id')->on('transfer_statuses')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('receipt_id')
+                ->references('id')->on('transfer_receipts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

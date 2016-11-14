@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Wizdraw\Models\Status
+ * Wizdraw\Models\TransferStatus
  *
  * @property integer $id
  * @property string $status
@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Status whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class Status extends AbstractModel
+class TransferStatus extends AbstractModel
 {
     use SoftDeletes;
 
@@ -44,7 +44,7 @@ class Status extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'statuses';
+    protected $table = 'transfer_statuses';
 
     /**
      * The attributes that are mass assignable.

@@ -2,6 +2,9 @@
 
 use Wizdraw\Models\Group;
 
+/**
+ * Class GroupsTableSeeder
+ */
 class GroupsTableSeeder extends AbstractTableSeeder
 {
     /**

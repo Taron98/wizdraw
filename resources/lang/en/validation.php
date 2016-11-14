@@ -43,7 +43,7 @@ return [
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
     'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
+    'integer'              => 'The :attribute must be an round.',
     'ip'                   => 'The :attribute must be a valid IP address.',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
@@ -85,6 +85,8 @@ return [
     'url'                  => 'The :attribute format is invalid.',
 
     'phone' => 'The :attribute field contains an invalid number.',
+
+    'base64image'                => 'The :attribute must be a valid base64 image.',
 
     /*
     |--------------------------------------------------------------------------

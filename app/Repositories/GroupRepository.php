@@ -16,19 +16,9 @@ class GroupRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model()
+    public function model() : string
     {
         return Group::class;
-    }
-
-    /**
-     * @param Client $client
-     *
-     * @return Collection
-     */
-    public function findByAdminClient(Client $client) : Collection
-    {
-        return $this->findByField('admin_client_id', $client->getId());
     }
 
     /**

@@ -42,16 +42,6 @@ class GroupService extends AbstractService
     }
 
     /**
-     * @param Client $client
-     *
-     * @return Collection
-     */
-    public function findByAdminClient(Client $client) : Collection
-    {
-        return $this->repository->findByAdminClient($client);
-    }
-
-    /**
      * @param Client $adminClient
      * @param array $attributes
      * @param array $groupClients

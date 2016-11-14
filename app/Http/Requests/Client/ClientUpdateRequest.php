@@ -31,20 +31,21 @@ class ClientUpdateRequest extends AbstractRequest
         return [
             'identityTypeId'    => 'required|integer',
             'identityNumber'    => 'required|min:5|max:20',
-            'identityExpire'    => 'date|after:today',
-            'identityImage'     => 'image',
+            'identityExpire'    => 'date|date_format:"Y-m-d"|after:today',
+            'identityImage'     => 'base64image',
             'firstName'         => 'min:2|max:40',
             'middleName'        => 'min:1|max:25',
             'lastName'          => 'min:2|max:35',
-            'birthDate'         => 'required|date|before:18 years ago',
+            'birthDate'         => 'required|date_format:"Y-m-d"|before:18 years ago',
             'gender'            => 'required|in:male,female',
             'phone'             => 'phone:AUTO',
             'defaultCountryId'  => 'required|integer',
             'residentCountryId' => 'required|integer',
+            'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
             'clientType'        => 'required|in:sender,receiver',
-            'profileImage'      => 'image',
+            'profileImage'      => 'base64image',
         ];
     }
 

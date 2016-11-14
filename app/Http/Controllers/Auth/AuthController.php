@@ -137,19 +137,19 @@ class AuthController extends AbstractController
         /** @var Client $client */
         $client = $this->clientService->createClient($clientAttrs);
         if (!$client instanceof Client) {
-            return $this->respondWithError('cant_create_client');
+            return $this->respondWithError('could_not_create_client');
         }
 
         /** @var User $user */
         $user = $this->userRepository->createWithRelation($userAttrs, $client);
         if (!$user) {
-            return $this->respondWithError('cant_create_user');
+            return $this->respondWithError('could_not_create_user');
         }
 
         // todo: relocation?
-        $sms = $this->smsService->sendSms($clientAttrs[ 'phone' ], $user[ 'verify_code' ]);
+        $sms = $this->smsService->sendSmsNewClient($clientAttrs[ 'phone' ], $user[ 'verify_code' ], true);
         if (!$sms) {
-            return $this->respondWithError('problem sending SMS');
+            return $this->respondWithError('could_not_send_sms');
         }
 
         return $this->respond([

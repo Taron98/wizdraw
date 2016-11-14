@@ -14,7 +14,7 @@ class IdentityTypeRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model()
+    public function model() : string
     {
         return IdentityType::class;
     }

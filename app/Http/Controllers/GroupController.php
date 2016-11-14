@@ -58,7 +58,7 @@ class GroupController extends AbstractController
     {
         $adminClient = $request->user()->client;
 
-        return $this->groupService->findByAdminClient($adminClient);
+        return $this->respond($adminClient->adminGroups);
     }
 
     /**

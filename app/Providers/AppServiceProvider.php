@@ -2,10 +2,13 @@
 
 namespace Wizdraw\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Wizdraw\Services\ValidatorService;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->bootValidator();
     }
 
     /**
@@ -25,4 +28,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+    private function bootValidator()
+    {
+        Validator::resolver(function ($translator, $data, $rules, $messages = [], $customAttributes = []) {
+            return new ValidatorService($translator, $data, $rules, $messages, $customAttributes);
+        });
+    }
+
 }

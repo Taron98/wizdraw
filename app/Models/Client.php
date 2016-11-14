@@ -30,6 +30,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property string $phone
  * @property integer $defaultCountryId
  * @property integer $residentCountryId
+ * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
@@ -55,6 +56,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client wherePhone($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDefaultCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereState($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
@@ -92,6 +94,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'phone',
         'default_country_id',
         'resident_country_id',
+        'state',
         'city',
         'address',
         'client_type',
@@ -436,6 +439,22 @@ class Client extends AbstractModel implements AuthorizableContract
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 
     /**

@@ -17,22 +17,22 @@ Route::group(['prefix' => 'v1/'], function () {
     // Authentication
     Route::group(['prefix' => 'auth/'], function () {
 
-        Route::post('login/', [
+        Route::post('/login/', [
             'as'   => 'auth.login',
             'uses' => 'Auth\AuthController@login',
         ]);
 
-        Route::post('signup/', [
+        Route::post('/signup/', [
             'as'   => 'auth.signup',
             'uses' => 'Auth\AuthController@signup',
         ]);
 
-        Route::post('facebook/', [
+        Route::post('/facebook/', [
             'as'   => 'auth.facebook',
             'uses' => 'Auth\AuthController@facebook',
         ]);
 
-        Route::post('token/', [
+        Route::post('/token/', [
             'as'   => 'auth.token',
             'uses' => 'Auth\AuthController@token',
         ]);
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'v1/'], function () {
     // User
     Route::group(['prefix' => 'user/'], function () {
 
-        Route::get('device/{deviceId}/', [
+        Route::get('/device/{deviceId}/', [
             'as'   => 'user.device',
             'uses' => 'UserController@device',
         ]);
@@ -64,17 +64,17 @@ Route::group(['prefix' => 'v1/'], function () {
         // User
         Route::group(['prefix' => 'user/'], function () {
 
-            Route::post('password/', [
+            Route::post('/password/', [
                 'as'   => 'user.password',
                 'uses' => 'UserController@password',
             ]);
 
-            Route::post('code/', [
+            Route::post('/code/', [
                 'as'   => 'user.code',
                 'uses' => 'UserController@code',
             ]);
 
-            Route::post('verify/{verifyCode}/', [
+            Route::post('/verify/{verifyCode}/', [
                 'as'   => 'user.verify',
                 'uses' => 'UserController@verify',
             ]);
@@ -89,7 +89,7 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@update',
             ]);
 
-            Route::post('phone/', [
+            Route::post('/phone/', [
                 'as'   => 'client.phone',
                 'uses' => 'ClientController@phone',
             ]);
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'v1/'], function () {
         // Group
         Route::group(['prefix' => 'group/'], function () {
 
-            Route::get('/{group}', [
+            Route::get('/{group}/', [
                 'as'   => 'group.show',
                 'uses' => 'GroupController@show',
             ]);
@@ -114,7 +114,7 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'GroupController@create',
             ]);
 
-            Route::post('/{group}', [
+            Route::post('/{group}/', [
                 'as'   => 'group.update',
                 'uses' => 'GroupController@update',
             ]);
@@ -134,12 +134,12 @@ Route::group(['prefix' => 'v1/'], function () {
         // Country
         Route::group(['prefix' => 'country/'], function () {
 
-            Route::get('/{id}', [
+            Route::get('/{id}/', [
                 'as'   => 'country.show',
                 'uses' => 'CountryController@show',
             ]);
 
-            Route::get('/{id}/banks', [
+            Route::get('/{id}/banks/', [
                 'as'   => 'country.banks',
                 'uses' => 'CountryController@banks',
             ]);
@@ -147,6 +147,36 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/', [
                 'as'   => 'country.list',
                 'uses' => 'CountryController@list',
+            ]);
+
+        });
+
+        // Transfer
+        Route::group(['prefix' => 'transfer/'], function () {
+
+            Route::get('/{transfer}/', [
+                'as'   => 'transfer.show',
+                'uses' => 'TransferController@show',
+            ]);
+
+            Route::post('/', [
+                'as'   => 'transfer.create',
+                'uses' => 'TransferController@create',
+            ]);
+
+            Route::post('/{transfer}/receipt/', [
+                'as'   => 'transfer.addReceipt',
+                'uses' => 'TransferController@addReceipt',
+            ]);
+
+            Route::get('/', [
+                'as'   => 'transfer.list',
+                'uses' => 'TransferController@list',
+            ]);
+
+            Route::post('/nearby/', [
+                'as'   => 'transfer.nearby',
+                'uses' => 'TransferController@nearby',
             ]);
 
         });
