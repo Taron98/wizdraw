@@ -58,14 +58,24 @@ abstract class AbstractCacheService
     }
 
     /**
-     * @return LengthAwarePaginator
+     * @return Collection
      */
-    public function all() : LengthAwarePaginator
+    public function all() : Collection
     {
         $entitiesKeys = $this->redis->keys(redis_key($this->keyPrefix, '*'));
         $entities = $this->transformIdsToEntities($entitiesKeys);
 
-        return $this->paginate($entities);
+        return $entities;
+    }
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function allPaginated() : LengthAwarePaginator
+    {
+        $all = $this->all();
+
+        return $this->paginate($all);
     }
 
     /**
@@ -165,7 +175,10 @@ abstract class AbstractCacheService
     {
         /** @var AbstractCacheEntity $entity */
         $entity = new static::$entity();
-        $entity->setId($stdJson->id);
+
+        if (!empty($stdJson->id)) {
+            $entity->setId($stdJson->id);
+        }
 
         return $entity;
     }

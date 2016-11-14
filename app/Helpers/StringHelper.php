@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (!function_exists('array_key_snake_case')) {
     /**
      * Convert array keys into snake case
@@ -103,5 +105,19 @@ if (!function_exists('ucwords_upper')) {
     function ucwords_upper(string $string = '') : string
     {
         return mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
+    }
+}
+
+if (!function_exists('screaming_snake_case')) {
+    /**
+     * Convert case into SCREAMING_SNAKE_CASE
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    function screaming_snake_case(string $string = '') : string
+    {
+        return Str::upper(Str::snake(Str::lower($string)));
     }
 }

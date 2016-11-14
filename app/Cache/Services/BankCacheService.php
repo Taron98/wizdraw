@@ -2,10 +2,12 @@
 
 namespace Wizdraw\Cache\Services;
 
+use Illuminate\Support\Collection;
 use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\BankCache;
+use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Traits\GroupByCountryTrait;
 
 /**
@@ -19,11 +21,13 @@ class BankCacheService extends AbstractCacheService
     const INDEX_BY_COUNTRY_ID = 'banks:country';
 
     const TYPE_BDO = 'BDO';
-    const TYPE_IFSC = 'IFSC';
+    const TYPE_IME = 'IME';
+    const TYPE_METRO = 'METRO';
     const TYPE_GLOBAL = 'GLOBAL';
 
-    const TYPE_BDO_COUNTRY = 'Philippines';
-    const TYPE_IFSC_COUNTRY = 'India';
+    const TYPE_BDO_COUNTRY = 'PHILIPPINES';
+    const TYPE_IME_COUNTRY = 'NEPAL';
+    const TYPE_METRO_COUNTRY = 'PHILIPPINES';
 
     /** @var string */
     protected static $entity = BankCache::class;
@@ -31,8 +35,8 @@ class BankCacheService extends AbstractCacheService
     /** @var  string */
     protected $keyPrefix = 'bank';
 
-    /** @var  CountryCacheService */
-    protected $countryCacheService;
+    /** @var  Collection */
+    protected $countries;
 
     /**
      * RateCacheService constructor
@@ -44,7 +48,7 @@ class BankCacheService extends AbstractCacheService
     {
         parent::__construct($redis);
 
-        $this->countryCacheService = $countryCacheService;
+        $this->countries = $this->formatCountries($countryCacheService->all());
     }
 
     /**
@@ -56,12 +60,10 @@ class BankCacheService extends AbstractCacheService
     {
         /** @var BankCache $entity */
         switch ($entity->getType()) {
+            case self::TYPE_METRO:
             case self::TYPE_BDO:
-                $validation = !(empty($entity->getName()) || empty($entity->getBankCode()));
-                break;
-
-            case self::TYPE_IFSC:
-                $validation = !(empty($entity->getName()) || empty($entity->getBranch()) || empty($entity->getIfsc()));
+            case self::TYPE_IME:
+                $validation = !(empty($entity->getName()));
                 break;
 
             default:
@@ -79,100 +81,70 @@ class BankCacheService extends AbstractCacheService
     public function mapFromQueue(stdClass $stdJson)
     {
         /** @var BankCache $entity */
-        $entity = parent::mapFromQueue($stdJson);
+        $entity = parent::mapFromQueue($stdJson)
+            ->setName($stdJson->name);
 
-        $entity->setType($this->getBankType($stdJson));
-
-        switch ($entity->getType()) {
-            case self::TYPE_BDO:
-                $this->mapFromBdoBank($entity, $stdJson);
-                break;
-
-            case self::TYPE_IFSC:
-                $this->mapFromIfscBank($entity, $stdJson);
-                break;
-
-            default:
-                $this->mapFromGlobalBank($entity, $stdJson);
+        if (!empty($stdJson->type)) {
+            $entity->setType($this->getBankType($stdJson->type));
         }
 
-        return $entity;
-    }
+        $countryName = $this->getBankCountryName($stdJson);
 
-    /**
-     * @param BankCache $entity
-     * @param stdClass $stdClass
-     *
-     * @return BankCache
-     */
-    private function mapFromBdoBank(BankCache $entity, stdClass $stdClass): BankCache
-    {
-        $countryId = $this->countryCacheService->findCountryIdByName(self::TYPE_BDO_COUNTRY);
+        if (!$this->countries->has($countryName)) {
+            return null;
+        }
 
-        $entity->setName($stdClass->bank_name)
-            ->setCountryId($countryId)
-            ->setBankCode($stdClass->bank_code);
+        $entity->setCountryId($this->countries->get($countryName)->getId());
 
         return $entity;
     }
 
     /**
-     * @param BankCache $entity
-     * @param stdClass $stdClass
+     * @param string $type
      *
-     * @return BankCache
+     * @return mixed|null|string
      */
-    private function mapFromIfscBank(BankCache $entity, stdClass $stdClass): BankCache
+    private function getBankType(string $type)
     {
-        $countryId = $this->countryCacheService->findCountryIdByName(self::TYPE_IFSC_COUNTRY);
+        $constName = 'self::TYPE_' . strtoupper($type);
 
-        $entity
-            ->setName($stdClass->bank)
-            ->setCountryId($countryId)
-            ->setIfsc($stdClass->ifsc)
-            ->setBranch($stdClass->branch)
-            ->setAddress($stdClass->address)
-            ->setCity($stdClass->city)
-            ->setDistrict($stdClass->district)
-            ->setState($stdClass->state);
-
-        return $entity;
-    }
-
-    /**
-     * @param BankCache $entity
-     * @param stdClass $stdClass
-     *
-     * @return BankCache
-     */
-    private function mapFromGlobalBank(BankCache $entity, stdClass $stdClass): BankCache
-    {
-        $countryId = $this->countryCacheService->findCountryIdByName($stdClass->country_id);
-
-        $entity
-            ->setName($stdClass->description)
-            ->setCountryId($countryId)
-            ->setBankCode($stdClass->lbcode);
-
-        return $entity;
-    }
-
-    /**
-     * @param stdClass $stdClass
-     *
-     * @return string
-     */
-    private function getBankType(stdClass $stdClass)
-    {
-        if (!empty($stdClass->bank_name)) {
-            return self::TYPE_BDO;
-        } else {
-            if (!empty($stdClass->ifsc)) {
-                return self::TYPE_IFSC;
-            }
+        if (defined($constName)) {
+            return constant($constName);
         }
 
         return self::TYPE_GLOBAL;
+    }
+
+    /**
+     * @param $stdJson
+     *
+     * @return mixed|string
+     */
+    private function getBankCountryName($stdJson)
+    {
+        if (!empty($stdJson->country_name)) {
+            return screaming_snake_case($stdJson->country_name);
+        }
+
+        $constName = "self::TYPE_" . strtoupper($stdJson->type) . "_COUNTRY";
+
+        if (defined($constName)) {
+            return constant($constName);
+        }
+
+        return self::TYPE_GLOBAL;
+    }
+
+    /**
+     * @param Collection $countries
+     *
+     * @return Collection
+     */
+    private function formatCountries(Collection $countries) : Collection
+    {
+        return $countries->mapWithKeys(function (CountryCache $country) {
+            return [screaming_snake_case($country->getName()) => $country];
+        });
     }
 
 }

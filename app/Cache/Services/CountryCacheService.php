@@ -100,31 +100,39 @@ class CountryCacheService extends AbstractCacheService
     }
 
     /**
+     * @param string $code
+     *
+     * @return string
+     */
+    public function findCountryIdByCode(string $code)
+    {
+        return $this->redis->hget(self::INDEX_BY_COUNTRY_CODE, $code);
+    }
+
+    /**
      * @param string $name
      *
-     * @return CountryCache|null
+     * @return CountryCache|AbstractCacheEntity|null
      */
     public function findByName(string $name)
     {
         $countryId = $this->findCountryIdByName($name);
-        $countryData = $this->redis->hgetall(redis_key($this->keyPrefix, $countryId));
 
-        return $this->entityFromArray($countryData);
+        return $this->find($countryId);
     }
 
     /**
      * @param float $latitude
      * @param float $longitude
      *
-     * @return null|CountryCache
+     * @return CountryCache|AbstractCacheEntity|null
      */
     public function findByLocation(float $latitude, float $longitude)
     {
         $countryCode = $this->googleService->get($latitude, $longitude);
-        $countryId = $this->redis->hget(self::INDEX_BY_COUNTRY_CODE, $countryCode);
-        $countryData = $this->redis->hgetall(redis_key($this->keyPrefix, $countryId));
+        $countryId = $this->findCountryIdByCode($countryCode);
 
-        return $this->entityFromArray($countryData);
+        return $this->find($countryId);
     }
 
 }
