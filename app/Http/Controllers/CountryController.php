@@ -103,7 +103,7 @@ class CountryController extends AbstractController
      */
     public function list()
     {
-        return $this->countryCacheService->all();
+        return $this->countryCacheService->allPaginated();
     }
 
     /**
