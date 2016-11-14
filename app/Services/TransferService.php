@@ -102,4 +102,12 @@ class TransferService extends AbstractService
         return $transfer;
     }
 
+    /**
+     * @return mixed
+     */
+    public function monthlyTransfer()
+    {
+        return $this->repository->monthlyTransfer();
+    }
+
 }

@@ -25,6 +25,8 @@ use Wizdraw\Services\TransferService;
  */
 class TransferController extends AbstractController
 {
+    const MAX_MONTHLY_TRANSFER = 8000;
+
     /** @var  TransferService */
     private $transferService;
 
@@ -103,6 +105,12 @@ class TransferController extends AbstractController
 
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
+
+        $monthlyTotal = $request->input('amount') + $this->transferService->monthlyTransfer();
+
+        if ($monthlyTotal > self::MAX_MONTHLY_TRANSFER) {
+            return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         $bankAccount = null;
         switch ($request->getTransferType()) {
