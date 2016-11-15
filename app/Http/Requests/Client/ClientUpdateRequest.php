@@ -36,7 +36,7 @@ class ClientUpdateRequest extends AbstractRequest
             'firstName'         => 'min:2|max:40',
             'middleName'        => 'min:1|max:25',
             'lastName'          => 'min:2|max:35',
-            'birthDate'         => 'required|date_format:"Y-m-d"|before:18 years ago',
+            'birthDate'         => 'required|date_format:"Y-m-d"|before:18 years ago|after:100 years ago',
             'gender'            => 'required|in:male,female',
             'phone'             => 'phone:AUTO',
             'defaultCountryId'  => 'required|integer',
