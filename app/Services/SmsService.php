@@ -55,12 +55,29 @@ class SmsService extends AbstractService
      * @param $amount
      * @param $currency
      * @param $receiverName
+     * @param string $transactionNumber
      *
      * @return bool
      */
-    public function sendSmsNewTransfer($phone, $amount, $currency, $receiverName)
+    public function sendSmsTransferWaiting($phone, $receiverName, $amount, $currency, string $transactionNumber = '')
     {
         $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
+        $text = urlencode($text);
+        $response = $this->sendSms($phone, $text);
+
+        return $response;
+    }
+
+    /**
+     * @param $phone
+     * @param $senderName
+     * @param string $transactionNumber
+     *
+     * @return bool
+     */
+    public function sendSmsTransferCompleted($phone, $senderName, string $transactionNumber = '')
+    {
+        $text = "{$senderName}\nThe transaction has been successfully completed.\nThe transaction ID is: {$transactionNumber}\nThe Wizdraw team";
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 

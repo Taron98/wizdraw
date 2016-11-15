@@ -171,6 +171,10 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
 
+        if (!is_null($transfer->receipt)) {
+            return $this->respondWithError('transfer_has_receipt', Response::HTTP_BAD_REQUEST);
+        }
+
         if ($client->cannot('addReceipt', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
@@ -194,10 +198,15 @@ class TransferController extends AbstractController
         $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsNewTransfer($receiverPhone, $amount, $country->getCoinCode(),
-            $client->getFullName());
+        $sms = $this->smsService->sendSmsTransferWaiting($receiverPhone, $client->getFullName(), $amount, $country->getCoinCode());
         if (!$sms) {
-            return $this->respondWithError('could_not_send_sms');
+            return $this->respondWithError('could_not_send_sms_to_receiver');
+        }
+
+        // todo: relocation?
+        $sms = $this->smsService->sendSmsTransferCompleted($client->getPhone(), $client->getFullName(), $transfer->getTransactionNumber());
+        if (!$sms) {
+            return $this->respondWithError('could_not_send_sms_to_sender');
         }
 
         return $this->respond($transfer);
