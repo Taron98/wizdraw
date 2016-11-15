@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TransferStatusesTableSeeder::class);
         $this->call(TransferTypesTableSeeder::class);
         $this->call(NaturesTableSeeder::class);
+        $this->call(FeedbackQuestionsTableSeeder::class);
 
         // Enable foreign keys constraints
         if ($this->isMysql()) {

@@ -179,6 +179,21 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@nearby',
             ]);
 
+            Route::post('/{transfer}/feedback/', [
+                'as'   => 'transfer.feedback',
+                'uses' => 'TransferController@feedback',
+            ]);
+
+        });
+
+        // Feedback
+        Route::group(['prefix' => 'feedback/'], function () {
+
+            Route::get('/questions/', [
+                'as'   => 'feedback.questions',
+                'uses' => 'FeedbackController@questions',
+            ]);
+
         });
 
     });

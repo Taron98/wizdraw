@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateBankBranchesTable
+ * Class CreateFeedbackQuestions
  */
-class CreateBankBranchesTable extends Migration
+class CreateFeedbackQuestions extends Migration
 {
     /**
      * Run the migrations.
@@ -16,12 +16,10 @@ class CreateBankBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_branches', function (Blueprint $table) {
+        Schema::create('feedback_questions', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('bank_branch_id')->unsigned()->nullable();
-            $table->string('name', 40)->nullable();
-            $table->string('address', 60)->nullable();
+            $table->string('question', 100);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
@@ -36,6 +34,6 @@ class CreateBankBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_branches');
+        Schema::dropIfExists('feedback_questions');
     }
 }
