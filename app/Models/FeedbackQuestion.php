@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Feedback[] $feedbackQuestion
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Feedback[] $feedbacks
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)

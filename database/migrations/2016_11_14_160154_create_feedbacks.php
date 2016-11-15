@@ -22,6 +22,7 @@ class CreateFeedbacks extends Migration
             $table->integer('transfer_id')->unsigned()->index();
             $table->integer('client_id')->unsigned()->index();
             $table->integer('feedback_question_id')->unsigned()->index();
+            $table->smallInteger('rating');
             $table->string('note', 150)->nullable();
 
             $table->timestamp('created_at')->useCurrent();

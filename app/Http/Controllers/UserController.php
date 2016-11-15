@@ -84,7 +84,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function verify(NoParamRequest $request, int $verifyCode) : JsonResponse
+    public function verify(NoParamRequest $request, $verifyCode) : JsonResponse
     {
         $user = $request->user();
 

@@ -44,9 +44,11 @@ class CamelCasing
     {
         if (is_null($response->exception)) {
             $content = json_decode($response->getContent(), true);
-            $camelContent = array_key_camel_case($content);
 
-            $response->setContent(json_encode($camelContent));
+            if (!is_null($content)) {
+                $camelContent = array_key_camel_case($content);
+                $response->setContent(json_encode($camelContent));
+            }
         }
     }
 

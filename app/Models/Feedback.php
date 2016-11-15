@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $transferId
  * @property integer $clientId
  * @property integer $feedbackQuestionId
+ * @property integer $rating
  * @property string $note
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereTransferId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereFeedbackQuestionId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereRating($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereUpdatedAt($value)
@@ -49,6 +51,7 @@ class Feedback extends AbstractModel
         'transfer_id',
         'client_id',
         'feedback_question_id',
+        'rating',
         'note',
         'deleted_at',
     ];
@@ -182,6 +185,26 @@ class Feedback extends AbstractModel
     public function setNote($note): Feedback
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param int $rating
+     *
+     * @return Feedback
+     */
+    public function setRating($rating): Feedback
+    {
+        $this->rating = $rating;
 
         return $this;
     }
