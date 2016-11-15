@@ -14,6 +14,7 @@ class FileService extends AbstractService
     const TYPE_PROFILE = 'profile/';
     const TYPE_IDENTITY = 'identity/';
     const TYPE_RECEIPT = 'receipt/';
+    const TYPE_ADDRESS = 'address/';
 
     const DEFAULT_FILE_EXT = 'jpg';
 
@@ -82,6 +83,17 @@ class FileService extends AbstractService
     public function uploadReceipt(string $name, string $data) : bool
     {
         return $this->upload(self::TYPE_RECEIPT, $name, $data);
+    }
+
+    /**
+     * @param string $name
+     * @param string $data
+     *
+     * @return bool
+     */
+    public function uploadAddress(string $name, string $data) : bool
+    {
+        return $this->upload(self::TYPE_ADDRESS, $name, $data);
     }
 
     /**

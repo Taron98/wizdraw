@@ -44,6 +44,7 @@ class ClientUpdateRequest extends AbstractRequest
             'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
+            'addressImage'      => 'base64image',
             'clientType'        => 'required|in:sender,receiver',
             'profileImage'      => 'base64image',
         ];

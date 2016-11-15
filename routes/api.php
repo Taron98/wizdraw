@@ -52,6 +52,11 @@ Route::group(['prefix' => 'v1/'], function () {
     // Country
     Route::group(['prefix' => 'country/'], function () {
 
+        Route::get('/', [
+            'as'   => 'country.list',
+            'uses' => 'CountryController@list',
+        ]);
+
         Route::post('/location/', [
             'as'   => 'country.showByLocation',
             'uses' => 'CountryController@showByLocation',
@@ -142,11 +147,6 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/{id}/banks/', [
                 'as'   => 'country.banks',
                 'uses' => 'CountryController@banks',
-            ]);
-
-            Route::get('/', [
-                'as'   => 'country.list',
-                'uses' => 'CountryController@list',
             ]);
 
         });

@@ -91,7 +91,8 @@ class Group extends AbstractModel
     public function memberClients() : BelongsToMany
     {
         return $this->belongsToMany(Client::class, 'group_clients')
-            ->withPivot(['is_approved']);
+            ->withPivot(['is_approved'])
+            ->with(['bankAccounts', 'bankAccounts.bankBranch']);
     }
 
     /**
