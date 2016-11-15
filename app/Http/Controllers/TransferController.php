@@ -9,12 +9,14 @@ use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
+use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
+use Wizdraw\Services\FeedbackService;
 use Wizdraw\Services\SmsService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
@@ -25,6 +27,7 @@ use Wizdraw\Services\TransferService;
  */
 class TransferController extends AbstractController
 {
+
     /** @var  TransferService */
     private $transferService;
 
@@ -43,6 +46,9 @@ class TransferController extends AbstractController
     /** @var  CountryCacheService */
     private $countryCacheService;
 
+    /** @var FeedbackService */
+    private $feedbackService;
+
     /**
      * TransferController constructor.
      *
@@ -52,6 +58,7 @@ class TransferController extends AbstractController
      * @param BankAccountService $bankAccountService
      * @param SmsService $smsService
      * @param CountryCacheService $countryCacheService
+     * @param FeedbackService $feedbackService
      */
     public function __construct(
         TransferService $transferService,
@@ -59,7 +66,8 @@ class TransferController extends AbstractController
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
         SmsService $smsService,
-        CountryCacheService $countryCacheService
+        CountryCacheService $countryCacheService,
+        FeedbackService $feedbackService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
@@ -67,7 +75,7 @@ class TransferController extends AbstractController
         $this->bankAccountService = $bankAccountService;
         $this->smsService = $smsService;
         $this->countryCacheService = $countryCacheService;
-
+        $this->feedbackService = $feedbackService;
     }
 
     /**
@@ -103,6 +111,18 @@ class TransferController extends AbstractController
 
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
+        $amount = $request->input('amount');
+        $totalAmount = $request->input('totalAmount');
+        $receiverAmount = $request->input('receiverAmount');
+        $receiverCountryId = $request->input('receiverCountryId');
+
+        if (!$this->transferService->validateMonthly($amount)) {
+            return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (!$this->transferService->validateTotals($receiverCountryId, $amount, $totalAmount, $receiverAmount)) {
+            return $this->respondWithError('totals_are_invalid', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         $bankAccount = null;
         switch ($request->getTransferType()) {
@@ -253,6 +273,33 @@ class TransferController extends AbstractController
         $miles = $dist * 60 * 1.1515;
 
         return ($miles * 1.609344);
+    }
+
+    /**
+     * @param TransferFeedbackRequest $request
+     * @param Transfer $transfer
+     *
+     * @return JsonResponse
+     */
+    public function feedback(TransferFeedbackRequest $request, Transfer $transfer)
+    {
+        $client = $request->user()->client;
+
+        if ($this->feedbackService->alreadyFeedbacked($client, $transfer)) {
+            return $this->respondWithError('transfer_already_feedbacked', Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!$this->feedbackService->questionExists($request->input('feedbackQuestionId'))) {
+            return $this->respondWithError('feedback_question_not_found', Response::HTTP_FORBIDDEN);
+        }
+
+        if ($client->cannot('feedback', $transfer)) {
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        $inputs = $request->inputs();
+
+        return $this->feedbackService->createFeedback($client, $transfer, $inputs);
     }
 
 }

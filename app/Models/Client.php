@@ -200,7 +200,8 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function adminGroups() : HasMany
     {
-        return $this->hasMany(Group::class, 'admin_client_id');
+        return $this->hasMany(Group::class, 'admin_client_id')
+            ->with('memberClients');
     }
 
     /**
@@ -298,6 +299,14 @@ class Client extends AbstractModel implements AuthorizableContract
             return $receivedTransfer->receiverClient;
         });
     }
+
+    /**
+     * @return HasMany
+     */
+    public function bankAccounts() : HasMany
+    {
+        return $this->hasMany(BankAccount::class);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
@@ -308,7 +317,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function setPhoneAttribute(string $phone)
     {
-        $this->attributes[ 'phone' ] = phone_format($phone);
+        $this->attributes[ 'phone' ] = phone($phone);
     }
     //</editor-fold>
 

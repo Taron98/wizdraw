@@ -52,6 +52,11 @@ Route::group(['prefix' => 'v1/'], function () {
     // Country
     Route::group(['prefix' => 'country/'], function () {
 
+        Route::get('/', [
+            'as'   => 'country.list',
+            'uses' => 'CountryController@list',
+        ]);
+
         Route::post('/location/', [
             'as'   => 'country.showByLocation',
             'uses' => 'CountryController@showByLocation',
@@ -144,11 +149,6 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@banks',
             ]);
 
-            Route::get('/', [
-                'as'   => 'country.list',
-                'uses' => 'CountryController@list',
-            ]);
-
         });
 
         // Transfer
@@ -177,6 +177,21 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/nearby/', [
                 'as'   => 'transfer.nearby',
                 'uses' => 'TransferController@nearby',
+            ]);
+
+            Route::post('/{transfer}/feedback/', [
+                'as'   => 'transfer.feedback',
+                'uses' => 'TransferController@feedback',
+            ]);
+
+        });
+
+        // Feedback
+        Route::group(['prefix' => 'feedback/'], function () {
+
+            Route::get('/questions/', [
+                'as'   => 'feedback.questions',
+                'uses' => 'FeedbackController@questions',
             ]);
 
         });

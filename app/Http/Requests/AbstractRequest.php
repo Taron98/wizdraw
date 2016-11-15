@@ -68,7 +68,7 @@ abstract class AbstractRequest extends FormRequest
         foreach ($inputs as $inputId => $input) {
             foreach ($input as $ruleId => $rule) {
                 if (strpos($rule, 'date_format') === false && strpos($rule, 'phone') === false) {
-                    $inputs[$inputId][$ruleId] = snake_case($rule);
+                    $inputs[ $inputId ][ $ruleId ] = snake_case($rule);
                 }
             }
         }

@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Repositories;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Wizdraw\Models\BankAccount;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
@@ -55,6 +57,20 @@ class TransferRepository extends AbstractRepository
         $newTransfer->natures()->sync($natures);
 
         return $newTransfer;
+    }
+
+    /**
+     * @return float
+     */
+    public function monthlyTransfer() : float
+    {
+        $transfers = Auth::user()->client->transfers;
+
+        $total = $transfers
+            ->where('created_at', '>=', Carbon::now()->subMonth(1))
+            ->sum('amount');
+
+        return $total;
     }
 
 }
