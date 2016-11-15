@@ -29,9 +29,9 @@ class TransferFeedbackRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'feedbackQuestionId' => 'required|integer',
-            'rating'             => 'required|integer',
-            'note'               => 'string',
+            'feedbackQuestionId' => 'required|integer|exists:feedback_questions,id',
+            'rating'             => 'required|integer|min:1|max:10',
+            'note'               => 'string|max:150',
         ];
     }
 
