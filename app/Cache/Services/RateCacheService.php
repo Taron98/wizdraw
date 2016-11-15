@@ -13,7 +13,6 @@ use Wizdraw\Cache\Entities\RateCache;
  */
 class RateCacheService extends AbstractCacheService
 {
-    const INDEX_BY_COUNTRY_ID = 'rates:country';
 
     /** @var string */
     protected static $entity = RateCache::class;

@@ -71,6 +71,7 @@ class BankBranch extends AbstractModel
 
     //<editor-fold desc="Relationships">
     // todo: bankBranch()
+    // todo: bankAccounts()
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">

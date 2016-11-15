@@ -25,6 +25,7 @@ use Wizdraw\Services\TransferService;
  */
 class TransferController extends AbstractController
 {
+
     /** @var  TransferService */
     private $transferService;
 
@@ -67,7 +68,6 @@ class TransferController extends AbstractController
         $this->bankAccountService = $bankAccountService;
         $this->smsService = $smsService;
         $this->countryCacheService = $countryCacheService;
-
     }
 
     /**
@@ -103,6 +103,18 @@ class TransferController extends AbstractController
 
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
+        $amount = $request->input('amount');
+        $totalAmount = $request->input('totalAmount');
+        $receiverAmount = $request->input('receiverAmount');
+        $receiverCountryId = $request->input('receiverCountryId');
+
+        if (!$this->transferService->validateMonthly($amount)) {
+            return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (!$this->transferService->validateTotals($receiverCountryId, $amount, $totalAmount, $receiverAmount)) {
+            return $this->respondWithError('totals_are_invalid', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         $bankAccount = null;
         switch ($request->getTransferType()) {

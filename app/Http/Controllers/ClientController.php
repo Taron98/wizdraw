@@ -72,8 +72,19 @@ class ClientController extends AbstractController
             }
         }
 
+        // todo: refactor
+        $addressImage = $request->input('addressImage');
+        if (!empty($identityImage)) {
+            $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
+
+            if (!$uploadStatus) {
+                return $this->respondWithError('could_not_upload_address_image', Response::HTTP_BAD_REQUEST);
+            }
+        }
+
         return $this->respond(array_merge($client->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
+            'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
             'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
     }
