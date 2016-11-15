@@ -151,6 +151,10 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
 
+        if (!is_null($transfer->receipt)) {
+            return $this->respondWithError('transfer_has_receipt', Response::HTTP_BAD_REQUEST);
+        }
+
         if ($client->cannot('addReceipt', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
