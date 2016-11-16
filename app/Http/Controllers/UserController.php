@@ -92,7 +92,7 @@ class UserController extends AbstractController
             return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->getVerifyCode() !== $verifyCode) {
+        if ($user->getVerifyCode() != $verifyCode) {
             return $this->respondWithError('invalid_verification_code', Response::HTTP_BAD_REQUEST);
         }
 
