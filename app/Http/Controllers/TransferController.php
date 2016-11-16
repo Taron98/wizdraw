@@ -116,6 +116,10 @@ class TransferController extends AbstractController
         $receiverAmount = $request->input('receiverAmount');
         $receiverCountryId = $request->input('receiverCountryId');
 
+        if (!$client->canTransfer()) {
+            return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN);
+        }
+
         if (!$this->transferService->validateMonthly($amount)) {
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }

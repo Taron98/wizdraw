@@ -102,6 +102,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'address',
         'client_type',
         'did_setup',
+        'is_approved',
         'deleted_at',
     ];
 
@@ -118,7 +119,8 @@ class Client extends AbstractModel implements AuthorizableContract
      * @var array
      */
     protected $casts = [
-        'did_setup' => 'boolean',
+        'did_setup'   => 'boolean',
+        'is_approved' => 'boolean',
     ];
 
     /**
@@ -547,6 +549,11 @@ class Client extends AbstractModel implements AuthorizableContract
     public function setIsApproved($isApproved)
     {
         $this->isApproved = $isApproved;
+    }
+
+    public function canTransfer() : bool
+    {
+        return !(!$this->isApproved && $this->transfers->count() > 0);
     }
 
     /**
