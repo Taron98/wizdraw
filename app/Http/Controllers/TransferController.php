@@ -13,6 +13,7 @@ use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
+use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
@@ -315,6 +316,29 @@ class TransferController extends AbstractController
      */
     public function able(NoParamRequest $request)
     {
+        $canTransfer = $request->user()->client->canTransfer();
+
+        return $this->respond(compact('canTransfer'));
+    }
+
+    /**
+     * @param NoParamRequest $request
+     * @param Transfer $transfer
+     *
+     * @return JsonResponse
+     */
+    public function abort(NoParamRequest $request, Transfer $transfer)
+    {
+        $client = $request->user()->client;
+
+        if ($client->cannot('show', $transfer)) {
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        if (!$this->transferService->changeStatus($transfer, TransferStatus::STATUS_ABORTED)) {
+            return $this->respondWithError('could_not_update_status', Response::HTTP_FORBIDDEN);
+        }
+
         $canTransfer = $request->user()->client->canTransfer();
 
         return $this->respond(compact('canTransfer'));

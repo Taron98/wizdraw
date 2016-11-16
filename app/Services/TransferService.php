@@ -148,4 +148,18 @@ class TransferService extends AbstractService
         return (!bccomp($totalAmount, $calcTotalAmount, 3)) && !bccomp($receiverAmount, $calcReceiverAmount, 3);
     }
 
+    /**
+     * @param Transfer $transfer
+     * @param string $statusName
+     *
+     * @return bool
+     */
+    public function changeStatus(Transfer $transfer, string $statusName) : bool
+    {
+        $status = $this->transferStatusService->findByStatus($statusName);
+        $isUpdated = $transfer->status()->associate($status)->save();
+
+        return $isUpdated;
+    }
+
 }
