@@ -316,9 +316,7 @@ class TransferController extends AbstractController
      */
     public function able(NoParamRequest $request)
     {
-//        $canTransfer = $request->user()->client->canTransfer();
-        // todo: change
-        $canTransfer = true;
+        $canTransfer = $request->user()->client->canTransfer();
 
         return $this->respond(compact('canTransfer'));
     }
@@ -333,7 +331,7 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
 
-        if ($client->cannot('show', $transfer)) {
+        if ($client->cannot('abort', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
 

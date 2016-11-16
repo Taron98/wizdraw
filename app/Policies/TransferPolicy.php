@@ -54,4 +54,17 @@ class TransferPolicy
         return ($client->getId() === $transfer->client->getId());
     }
 
+    /**
+     * Determine whether the user can abort the transfer
+     *
+     * @param Client $client
+     * @param Transfer $transfer
+     *
+     * @return bool
+     */
+    public function abort(Client $client, Transfer $transfer)
+    {
+        return ($client->getId() === $transfer->client->getId());
+    }
+
 }
