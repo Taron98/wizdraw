@@ -35,6 +35,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property string $address
  * @property string $clientType
  * @property boolean $didSetup
+ * @property boolean $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -44,6 +45,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -61,6 +63,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDidSetup($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsApproved($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
@@ -99,6 +102,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'address',
         'client_type',
         'did_setup',
+        'is_approved',
         'deleted_at',
     ];
 
@@ -115,7 +119,8 @@ class Client extends AbstractModel implements AuthorizableContract
      * @var array
      */
     protected $casts = [
-        'did_setup' => 'boolean',
+        'did_setup'   => 'boolean',
+        'is_approved' => 'boolean',
     ];
 
     /**
@@ -528,6 +533,27 @@ class Client extends AbstractModel implements AuthorizableContract
     public function setDidSetup($didSetup)
     {
         $this->didSetup = $didSetup;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isApproved()
+    {
+        return $this->isApproved;
+    }
+
+    /**
+     * @param boolean $isApproved
+     */
+    public function setIsApproved($isApproved)
+    {
+        $this->isApproved = $isApproved;
+    }
+
+    public function canTransfer() : bool
+    {
+        return !(!$this->isApproved && $this->transfers->count() > 0);
     }
 
     /**

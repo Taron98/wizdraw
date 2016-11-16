@@ -109,9 +109,10 @@ class AuthController extends AbstractController
         $this->userService->updateModel($user);
 
         return $this->respond(array_merge([
-            'token'    => $token,
-            'didSetup' => $user->client->isDidSetup(),
-            'hasGroup' => $hasGroup,
+            'token'       => $token,
+            'didSetup'    => $user->client->isDidSetup(),
+            'hasGroup'    => $hasGroup,
+            'canTransfer' => $user->client->canTransfer(),
         ], $user->toArray()));
     }
 
