@@ -202,13 +202,15 @@ class TransferController extends AbstractController
         $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferWaiting($receiverPhone, $client->getFullName(), $amount, $country->getCoinCode());
+        $sms = $this->smsService->sendSmsTransferWaiting($receiverPhone, $client->getFullName(), $amount,
+            $country->getCoinCode());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms_to_receiver');
         }
 
         // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferCompleted($client->getPhone(), $client->getFullName(), $transfer->getTransactionNumber());
+        $sms = $this->smsService->sendSmsTransferCompleted($client->getPhone(), $client->getFullName(),
+            $transfer->getTransactionNumber());
         if (!$sms) {
             return $this->respondWithError('could_not_send_sms_to_sender');
         }
@@ -304,6 +306,18 @@ class TransferController extends AbstractController
         $inputs = $request->inputs();
 
         return $this->feedbackService->createFeedback($client, $transfer, $inputs);
+    }
+
+    /**
+     * @param NoParamRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function able(NoParamRequest $request)
+    {
+        $canTransfer = $request->user()->client->canTransfer();
+
+        return $this->respond(compact('canTransfer'));
     }
 
 }
