@@ -52,6 +52,10 @@ class ClientController extends AbstractController
         $clientId = $request->user()->client->getId();
         $client = $this->clientService->update($request->inputs(), $clientId);
 
+        if (is_null($client)) {
+            return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST);
+        }
+
         // todo: refactor
         $profileImage = $request->input('profileImage');
         if (!empty($profileImage)) {
