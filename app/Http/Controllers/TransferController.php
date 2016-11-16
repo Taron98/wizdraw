@@ -311,7 +311,7 @@ class TransferController extends AbstractController
     /**
      * @param NoParamRequest $request
      *
-     * @return bool
+     * @return JsonResponse
      */
     public function able(NoParamRequest $request)
     {
