@@ -553,7 +553,9 @@ class Client extends AbstractModel implements AuthorizableContract
 
     public function canTransfer() : bool
     {
-        return !(!$this->isApproved && $this->transfers->count() > 0);
+//        return !(!$this->isApproved && $this->transfers->count() > 0);
+        // todo: change
+        return true;
     }
 
     /**
