@@ -44,7 +44,13 @@ class GroupController extends AbstractController
             return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
         }
 
-        return $this->groupService->find($group->getId());
+        // todo: change that when we insert admin client id into the group clients
+        /** @var Group $group */
+        $group = $this->groupService->find($group->getId());
+        $myself = $request->user()->client()->with('bankAccounts')->first();
+        $group->memberClients->put(null, $myself);
+
+        return $group;
     }
 
     /**
