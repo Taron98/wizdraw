@@ -145,7 +145,7 @@ class TransferService extends AbstractService
         $rate = $this->rateCacheService->find($receiverCountryId);
         $calcReceiverAmount = $amount * $rate->getRate();
 
-        return ($totalAmount === $calcTotalAmount) && ($receiverAmount === $calcReceiverAmount);
+        return (!bccomp($totalAmount, $calcTotalAmount, 3)) && !bccomp($receiverAmount, $calcReceiverAmount, 3);
     }
 
 }
