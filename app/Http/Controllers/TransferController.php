@@ -331,7 +331,7 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
 
-        if ($client->cannot('show', $transfer)) {
+        if ($client->cannot('abort', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
 
