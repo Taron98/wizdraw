@@ -154,6 +154,11 @@ Route::group(['prefix' => 'v1/'], function () {
         // Transfer
         Route::group(['prefix' => 'transfer/'], function () {
 
+            Route::get('/able/', [
+                'as'   => 'transfer.able',
+                'uses' => 'TransferController@able',
+            ]);
+
             Route::get('/{transfer}/', [
                 'as'   => 'transfer.show',
                 'uses' => 'TransferController@show',
