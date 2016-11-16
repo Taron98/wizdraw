@@ -35,6 +35,7 @@ class CreateClientsTable extends Migration
             /*$table->string('zip', 10);*/
             $table->enum('client_type', ['sender', 'receiver'])->default('receiver');
             $table->boolean('did_setup')->default(false);
+            $table->boolean('is_approved')->default(false);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
