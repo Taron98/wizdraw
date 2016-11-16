@@ -316,7 +316,9 @@ class TransferController extends AbstractController
      */
     public function able(NoParamRequest $request)
     {
-        $canTransfer = $request->user()->client->canTransfer();
+//        $canTransfer = $request->user()->client->canTransfer();
+        // todo: change
+        $canTransfer = true;
 
         return $this->respond(compact('canTransfer'));
     }
