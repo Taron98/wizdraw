@@ -23,13 +23,16 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(IdentityTypesTableSeeder::class);
-        $this->call(ClientsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(GroupsTableSeeder::class);
         $this->call(TransferStatusesTableSeeder::class);
         $this->call(TransferTypesTableSeeder::class);
         $this->call(NaturesTableSeeder::class);
         $this->call(FeedbackQuestionsTableSeeder::class);
+
+        if (env('APP_ENV') === 'local') {
+            $this->call(ClientsTableSeeder::class);
+            $this->call(UsersTableSeeder::class);
+            $this->call(GroupsTableSeeder::class);
+        }
 
         // Enable foreign keys constraints
         if ($this->isMysql()) {
