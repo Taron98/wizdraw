@@ -29,23 +29,23 @@ class ClientUpdateRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'identityTypeId'    => 'required|integer',
-            'identityNumber'    => 'required|min:5|max:20',
+            'identityTypeId'    => 'integer',
+            'identityNumber'    => 'min:5|max:20',
             'identityExpire'    => 'date|date_format:"Y-m-d"|after:today',
             'identityImage'     => 'base64image',
             'firstName'         => 'min:2|max:40',
             'middleName'        => 'min:1|max:25',
             'lastName'          => 'min:2|max:35',
-            'birthDate'         => 'required|date_format:"Y-m-d"|before:18 years ago|after:100 years ago',
-            'gender'            => 'required|in:male,female',
+            'birthDate'         => 'date_format:"Y-m-d"|before:18 years ago|after:100 years ago',
+            'gender'            => 'in:male,female',
             'phone'             => 'phone:AUTO',
-            'defaultCountryId'  => 'required|integer',
-            'residentCountryId' => 'required|integer',
+            'defaultCountryId'  => 'integer',
+            'residentCountryId' => 'integer',
             'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
             'addressImage'      => 'base64image',
-            'clientType'        => 'required|in:sender,receiver',
+            'clientType'        => 'in:sender,receiver',
             'profileImage'      => 'base64image',
         ];
     }
