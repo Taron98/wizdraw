@@ -29,7 +29,13 @@ class GroupCreateRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:50',
+            'name'                        => 'required|min:2|max:50',
+            'clients'                     => 'array',
+            'clients.*.firstName'         => 'min:2|max:40',
+            'clients.*.middleName'        => 'min:1|max:25',
+            'clients.*.lastName'          => 'min:2|max:35',
+            'clients.*.residentCountryId' => 'integer',
+            'clients.*.phone'             => 'required|phone:AUTO',
         ];
     }
 

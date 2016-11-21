@@ -41,7 +41,7 @@ class GroupRepository extends AbstractRepository
         // Attach the members of the group
         $newGroup->memberClients()->attach($groupClientIds);
 
-        return (is_null($newGroup)) ?: $newGroup;
+        return (is_null($newGroup)) ?: $newGroup->load('memberClients');
     }
 
     /**
