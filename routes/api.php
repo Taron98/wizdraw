@@ -124,6 +124,16 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'GroupController@update',
             ]);
 
+            Route::delete('/{group}/client', [
+                'as'   => 'group.removeClient',
+                'uses' => 'GroupController@removeClient',
+            ]);
+
+            Route::post('/{group}/client', [
+                'as'   => 'group.addClient',
+                'uses' => 'GroupController@addClient',
+            ]);
+
         });
 
         // Identity Type

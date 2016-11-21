@@ -25,4 +25,25 @@ class ValidatorService extends Validator
         return isset($match[ 1 ]) && in_array($match[ 1 ], self::ALLOWED_IMAGE_TYPE);
     }
 
+    /**
+     * @param $attribute
+     * @param $values
+     *
+     * @return bool
+     */
+    protected function validateNumericArray($attribute, $values)
+    {
+        if (!is_array($values)) {
+            return false;
+        }
+
+        foreach ($values as $value) {
+            if (!is_numeric($value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

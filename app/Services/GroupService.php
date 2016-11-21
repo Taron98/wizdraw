@@ -2,9 +2,9 @@
 
 namespace Wizdraw\Services;
 
-use Illuminate\Support\Collection;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Client;
+use Wizdraw\Models\Group;
 use Wizdraw\Repositories\GroupRepository;
 
 /**
@@ -50,35 +50,47 @@ class GroupService extends AbstractService
      */
     public function createGroup(Client $adminClient, array $attributes, $groupClients = []) : AbstractModel
     {
-        $memberClientsIds = [];
+        $groupClientIds = [];
 
         if (is_array($groupClients)) {
             $memberClients = $this->clientService->createClients($groupClients);
-            $memberClientsIds = $memberClients->pluck('id')->toArray();
+            $groupClientIds = $memberClients->pluck('id')->toArray();
         }
 
-        $group = $this->repository->createWithRelation($adminClient, $attributes, $memberClientsIds);
+        $group = $this->repository->createWithRelation($adminClient, $attributes, $groupClientIds);
 
         return $group;
     }
 
     /**
-     * @param int $id
-     * @param array $attributes
+     * @param Group $group
      * @param array $groupClients
      *
      * @return AbstractModel
      */
-    public function updateGroup(int $id, array $attributes, $groupClients = [])
+    public function addClient(Group $group, $groupClients = [])
     {
-        $memberClientsIds = [];
+        $groupClientIds = [];
 
         if (!is_null($groupClients)) {
             $memberClients = $this->clientService->createClients($groupClients);
-            $memberClientsIds = $memberClients->pluck('id')->toArray();
+            $groupClientIds = $memberClients->pluck('id')->toArray();
         }
 
-        $group = $this->repository->updateWithRelation($id, $attributes, $memberClientsIds);
+        $group = $this->repository->addClient($group, $groupClientIds);
+
+        return $group;
+    }
+
+    /**
+     * @param Group $group
+     * @param array $groupClientIds
+     *
+     * @return AbstractModel
+     */
+    public function removeClient(Group $group, $groupClientIds = [])
+    {
+        $group = $this->repository->removeClient($group, $groupClientIds);
 
         return $group;
     }

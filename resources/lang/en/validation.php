@@ -84,9 +84,9 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
-    'phone' => 'The :attribute field contains an invalid number.',
-
-    'base64image'                => 'The :attribute must be a valid base64 image.',
+    'phone'         => 'The :attribute field contains an invalid number.',
+    'base64image'   => 'The :attribute must be a valid base64 image.',
+    'numeric_array' => 'The :attribute field must be an array of numeric values',
 
     /*
     |--------------------------------------------------------------------------

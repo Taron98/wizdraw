@@ -5,10 +5,10 @@ namespace Wizdraw\Http\Requests\Group;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class GroupCreateUpdateRequest
+ * Class GroupCreateRequest
  * @package Wizdraw\Http\Requests\Group
  */
-class GroupCreateUpdateRequest extends AbstractRequest
+class GroupCreateRequest extends AbstractRequest
 {
 
     /**

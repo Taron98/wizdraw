@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Repositories;
 
-use Illuminate\Support\Collection;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Group;
 
@@ -27,11 +26,11 @@ class GroupRepository extends AbstractRepository
      * @param Client $adminClient
      *
      * @param array $attributes
-     * @param array $groupClients
+     * @param array $groupClientIds
      *
      * @return mixed
      */
-    public function createWithRelation(Client $adminClient, array $attributes, array $groupClients = [])
+    public function createWithRelation(Client $adminClient, array $attributes, array $groupClientIds = [])
     {
         $newGroup = $this->create($attributes);
 
@@ -40,28 +39,37 @@ class GroupRepository extends AbstractRepository
             ->associate($adminClient)->save();
 
         // Attach the members of the group
-        $newGroup->memberClients()->attach($groupClients);
+        $newGroup->memberClients()->attach($groupClientIds);
 
-        return (is_null($newGroup)) ?: $newGroup;
+        return (is_null($newGroup)) ?: $newGroup->load('memberClients');
     }
 
     /**
-     * Update a group with his relationships
-     *
-     * @param int $id
-     * @param array $attributes
-     * @param array $groupClients
+     * @param Group $group
+     * @param array $groupClientIds
      *
      * @return mixed
      */
-    public function updateWithRelation(int $id, array $attributes, array $groupClients = [])
+    public function addClient(Group $group, array $groupClientIds = [])
     {
-        $newGroup = $this->update($attributes, $id);
+        // Add missing clients to group
+        $group->memberClients()->syncWithoutDetaching($groupClientIds);
 
-        // Attach the members of the group
-        $newGroup->memberClients()->sync($groupClients);
+        return $group->load('memberClients');
+    }
 
-        return (is_null($newGroup)) ?: $newGroup;
+    /**
+     * @param Group $group
+     * @param array $groupClientIds
+     *
+     * @return mixed
+     */
+    public function removeClient(Group $group, array $groupClientIds = [])
+    {
+        // Remove clients from the group
+        $group->memberClients()->detach($groupClientIds);
+
+        return $group->load('memberClients');
     }
 
 }
