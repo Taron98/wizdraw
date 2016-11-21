@@ -5,10 +5,10 @@ namespace Wizdraw\Http\Requests\Group;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class GroupCreateUpdateRequest
+ * Class GroupAddClientRequest
  * @package Wizdraw\Http\Requests\Group
  */
-class GroupCreateUpdateRequest extends AbstractRequest
+class GroupAddClientRequest extends AbstractRequest
 {
 
     /**
@@ -29,8 +29,7 @@ class GroupCreateUpdateRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'name'                        => 'required|min:2|max:50',
-            'clients'                     => 'array',
+            'clients'                     => 'required|array',
             'clients.*.firstName'         => 'min:2|max:40',
             'clients.*.middleName'        => 'min:1|max:25',
             'clients.*.lastName'          => 'min:2|max:35',
