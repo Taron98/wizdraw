@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
+use Wizdraw\Http\Requests\User\UserUpdateRequest;
 use Wizdraw\Models\User;
 use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
@@ -33,6 +34,19 @@ class UserController extends AbstractController
     {
         $this->userService = $userService;
         $this->smsService = $smsService;
+    }
+
+    /**
+     * @param UserUpdateRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function update(UserUpdateRequest $request)
+    {
+        $userId = $request->user()->getId();
+        $user = $this->userService->update($request->inputs(), $userId);
+
+        return $this->respond($user);
     }
 
     /**

@@ -1,14 +1,14 @@
 <?php
 
-namespace Wizdraw\Http\Requests\Auth;
+namespace Wizdraw\Http\Requests\User;
 
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class AuthLoginRequest
- * @package Wizdraw\Http\Requests\Auth
+ * Class UserUpdateRequest
+ * @package Wizdraw\Http\Requests\User
  */
-class AuthLoginRequest extends AbstractRequest
+class UserUpdateRequest extends AbstractRequest
 {
 
     /**
@@ -28,10 +28,8 @@ class AuthLoginRequest extends AbstractRequest
      */
     public function rules()
     {
-        // TODO: update rules
         return [
-            'email'    => 'required|email',
-            'password' => 'required|min:3',
+            'email' => 'email',
         ];
     }
 
