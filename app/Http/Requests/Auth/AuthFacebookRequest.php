@@ -32,7 +32,7 @@ class AuthFacebookRequest extends AbstractRequest
         return [
             'token'    => 'required',
             'expire'   => 'required',
-            'deviceId' => 'required|unique:users',
+            'deviceId' => 'required', //|unique:users',
         ];
     }
 

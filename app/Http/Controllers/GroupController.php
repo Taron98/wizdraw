@@ -3,7 +3,10 @@
 namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
-use Wizdraw\Http\Requests\Group\GroupCreateUpdateRequest;
+use Wizdraw\Http\Requests\Group\GroupAddClientRequest;
+use Wizdraw\Http\Requests\Group\GroupCreateRequest;
+use Wizdraw\Http\Requests\Group\GroupRemoveClientRequest;
+use Wizdraw\Http\Requests\Group\GroupUpdateRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Group;
@@ -44,7 +47,13 @@ class GroupController extends AbstractController
             return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
         }
 
-        return $this->groupService->find($group->getId());
+        // todo: change that when we insert admin client id into the group clients
+        /** @var Group $group */
+        $group = $this->groupService->find($group->getId());
+        $myself = $request->user()->client()->with('bankAccounts')->first();
+        $group->memberClients->put(null, $myself);
+
+        return $group;
     }
 
     /**
@@ -58,17 +67,17 @@ class GroupController extends AbstractController
     {
         $adminClient = $request->user()->client;
 
-        return $this->groupService->findByAdminClient($adminClient);
+        return $this->respond($adminClient->adminGroups);
     }
 
     /**
      * Creating a group route
      *
-     * @param GroupCreateUpdateRequest $request
+     * @param GroupCreateRequest $request
      *
      * @return AbstractModel
      */
-    public function create(GroupCreateUpdateRequest $request)
+    public function create(GroupCreateRequest $request)
     {
         $adminClient = $request->user()->client;
         $groupName = $request->only('name');
@@ -80,12 +89,12 @@ class GroupController extends AbstractController
     /**
      * Updating a group route
      *
-     * @param GroupCreateUpdateRequest $request
+     * @param GroupUpdateRequest $request
      * @param Group $group
      *
      * @return AbstractModel
      */
-    public function update(GroupCreateUpdateRequest $request, Group $group)
+    public function update(GroupUpdateRequest $request, Group $group)
     {
         $adminClient = $request->user()->client;
 
@@ -93,9 +102,45 @@ class GroupController extends AbstractController
             return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
         }
 
+        return $this->groupService->update($request->inputs(), $group->getId());
+    }
+
+    /**
+     * @param GroupAddClientRequest $request
+     * @param Group $group
+     *
+     * @return AbstractModel
+     */
+    public function addClient(GroupAddClientRequest $request, Group $group) : AbstractModel
+    {
+        $adminClient = $request->user()->client;
+
+        if ($adminClient->cannot('addClient', $group)) {
+            return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
         $groupClients = $request->input('clients');
 
-        return $this->groupService->updateGroup($group->getId(), $request->inputs(), $groupClients);
+        return $this->groupService->addClient($group, $groupClients);
+    }
+
+    /**
+     * @param GroupRemoveClientRequest $request
+     * @param Group $group
+     *
+     * @return AbstractModel
+     */
+    public function removeClient(GroupRemoveClientRequest $request, Group $group) : AbstractModel
+    {
+        $adminClient = $request->user()->client;
+
+        if ($adminClient->cannot('removeClient', $group)) {
+            return $this->respondWithError('group_not_owned', Response::HTTP_FORBIDDEN);
+        }
+
+        $groupClientIds = $request->input('clients');
+
+        return $this->groupService->removeClient($group, $groupClientIds);
     }
 
 }

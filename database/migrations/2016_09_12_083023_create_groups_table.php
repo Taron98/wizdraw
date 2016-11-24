@@ -20,6 +20,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
 
             $table->string('name', 50);
+            // todo: change to is_admin in group_clients?
             $table->integer('admin_client_id')->unsigned()->index()->nullable();
 
             $table->timestamp('created_at')->useCurrent();

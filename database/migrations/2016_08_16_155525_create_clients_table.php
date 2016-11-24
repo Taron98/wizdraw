@@ -21,20 +21,21 @@ class CreateClientsTable extends Migration
             $table->integer('identity_type_id')->unsigned()->nullable()->index();
             $table->string('identity_number', 20)->nullable();
             $table->date('identity_expire')->nullable();
-            $table->string('first_name', 40);
+            $table->string('first_name', 40)->nullable();
             $table->string('middle_name', 25)->nullable();
-            $table->string('last_name', 35);
+            $table->string('last_name', 35)->nullable();
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('phone', 20)->nullable();
-            $table->integer('default_country_id')->unsigned()->nullable();     // FK to cached administration_country
+            $table->integer('default_country_id')->unsigned()->nullable();      // FK to cached administration_country
             $table->integer('resident_country_id')->unsigned()->nullable();     // FK to cached administration_country
-            /*$table->string('state', 35);*/
+            $table->string('state', 35)->nullable();
             $table->string('city', 30)->nullable();
             $table->string('address', 60)->nullable();
             /*$table->string('zip', 10);*/
-            $table->enum('client_type', ['sender', 'receiver'])->nullable();
+            $table->enum('client_type', ['sender', 'receiver'])->default('receiver');
             $table->boolean('did_setup')->default(false);
+            $table->boolean('is_approved')->default(false);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

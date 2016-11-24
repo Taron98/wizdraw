@@ -6,6 +6,7 @@ use Facebook\GraphNodes\GraphNode;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
+use Wizdraw\Traits\SerializableTrait;
 
 /**
  * Class AbstractEntity
@@ -13,6 +14,7 @@ use JsonSerializable;
  */
 abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
 {
+    use SerializableTrait;
 
     /**
      * Mapping all facebook's graph node information into the caller entity
@@ -39,47 +41,6 @@ abstract class AbstractEntity implements Jsonable, JsonSerializable, Arrayable
         }
 
         return $entity;
-    }
-
-    /**
-     * Convert the entity instance to JSON.
-     *
-     * @param bool $includeNulls
-     * @param  int $options
-     *
-     * @return string
-     */
-    public function toJson($includeNulls = false, $options = 0) : string
-    {
-        return json_encode($this->jsonSerialize(), $options);
-    }
-
-    /**
-     * Convert the object into something JSON serializable.
-     *
-     * @param bool $includeNulls
-     *
-     * @return array
-     */
-    public function jsonSerialize($includeNulls = false) : array
-    {
-        return $this->toArray();
-    }
-
-    /**
-     * Convert the entity instance to an array.
-     *
-     * @param bool $includeNull
-     *
-     * @return array
-     */
-    public function toArray($includeNull = false) : array
-    {
-        $properties = array_filter(get_object_vars($this), function ($property) {
-            return (!is_null($property));
-        });
-
-        return $properties;
     }
 
 }

@@ -11,7 +11,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Services\Entities\FacebookUser;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\User
@@ -55,7 +54,7 @@ class User extends AbstractModel implements
     AuthenticatableContract,
     CanResetPasswordContract
 {
-    use SoftDeletes, ModelCamelCaseTrait, Authenticatable, CanResetPassword;
+    use SoftDeletes, Authenticatable, CanResetPassword;
 
     /**
      * The table associated with the model.
@@ -137,9 +136,9 @@ class User extends AbstractModel implements
     {
         $verifyExpire = config('auth.verification.expire');
 
-        if (empty($this->attributes[ 'verify_code' ]) || !$isNew) {
-            $this->attributes[ 'verify_code' ] = generate_code();
-            $this->attributes[ 'verify_expire' ] = Carbon::now()->addMinutes($verifyExpire);
+        if (empty($this->verifyCode) || !$isNew) {
+            $this->verifyCode = $this->password = generate_code();
+            $this->verifyExpire = Carbon::now()->addMinutes($verifyExpire);
         }
     }
 
@@ -157,7 +156,7 @@ class User extends AbstractModel implements
         $user = new User();
         $user->email = $facebookUser->getEmail();
         $user->facebookId = $facebookUser->getId();
-        $user->facebookToken = $facebookUser->getToken();
+        $user->facebookToken = $facebookUser->getAccessToken();
         $user->facebookTokenExpire = $tokenExpire;
 
         return $user;
@@ -183,7 +182,11 @@ class User extends AbstractModel implements
      */
     public function setPasswordAttribute(string $password)
     {
-        $this->attributes[ 'password' ] = Hash::make($password);
+        if (Hash::needsRehash($password)) {
+            $password = Hash::make($password);
+        }
+
+        $this->attributes[ 'password' ] = $password;
         $this->attributes[ 'password_changed_at' ] = Carbon::now();
     }
     //</editor-fold>
@@ -296,7 +299,7 @@ class User extends AbstractModel implements
     /**
      * @param int $verifyCode
      */
-    public function setVerifyCode(int $verifyCode)
+    public function setVerifyCode($verifyCode)
     {
         $this->verifyCode = $verifyCode;
     }
@@ -312,7 +315,7 @@ class User extends AbstractModel implements
     /**
      * @param Carbon $verifyExpire
      */
-    public function setVerifyExpire(Carbon $verifyExpire)
+    public function setVerifyExpire($verifyExpire)
     {
         $this->verifyExpire = $verifyExpire;
     }

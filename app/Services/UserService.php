@@ -31,7 +31,7 @@ class UserService extends AbstractService
      */
     public function findByDeviceId(string $deviceId)
     {
-        return $this->repository->findByField('device_id', $deviceId)->first();
+        return $this->repository->findByField('device_id', $deviceId)->last();
     }
 
     /**
@@ -55,12 +55,22 @@ class UserService extends AbstractService
 
     /**
      * @param User $user
+     *
+     * @param string $password
+     *
+     * @return User
      */
-    public function updateIsPending(User $user)
+    public function updatePassword(User $user, $password)
     {
-        // todo: set verify code and expire to null
         $user->setIsPending(false);
-        $this->updateModel($user);
+        $user->setPassword($password);
+
+//        $this->updateModel($user);
+        // todo: that's a temp solution, can't update attributes that are hidden
+        // todo: maybe it will be fixed when we'll use repository presenter
+        $user->save();
+
+        return $user;
     }
 
     /**
@@ -74,6 +84,17 @@ class UserService extends AbstractService
     public function updateFacebook(int $id, FacebookUser $facebookUser) : AbstractModel
     {
         return $this->repository->updateFacebook($id, $facebookUser);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function resetVerification(User $user)
+    {
+        $user->setVerifyCode(null);
+        $user->setVerifyExpire(null);
+
+        $this->updateModel($user);
     }
 
 }

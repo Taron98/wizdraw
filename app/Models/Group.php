@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wizdraw\Models\Pivots\GroupClient;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\Group
@@ -31,7 +30,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class Group extends AbstractModel
 {
-    use SoftDeletes, ModelCamelCaseTrait;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -92,7 +91,8 @@ class Group extends AbstractModel
     public function memberClients() : BelongsToMany
     {
         return $this->belongsToMany(Client::class, 'group_clients')
-            ->withPivot(['is_approved']);
+            ->withPivot(['is_approved'])
+            ->with(['bankAccounts', 'bankAccounts.bankBranch']);
     }
 
     /**

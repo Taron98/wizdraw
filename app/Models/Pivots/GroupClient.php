@@ -3,7 +3,6 @@
 namespace Wizdraw\Models\Pivots;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Class GroupClient
@@ -11,7 +10,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class GroupClient extends AbstractPivot
 {
-    use SoftDeletes, ModelCamelCaseTrait;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -60,7 +59,6 @@ class GroupClient extends AbstractPivot
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
-
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">

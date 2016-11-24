@@ -1,0 +1,582 @@
+[
+  {
+    "type": "IME",
+    "id": "1",
+    "name": "ACE DEVELOPMENT BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "2",
+    "name": "AGRICULTURE DEVELOPMENT BANK"
+  },
+  {
+    "type": "IME",
+    "id": "3",
+    "name": "ALPINE DEVELOPMENT BANK"
+  },
+  {
+    "type": "IME",
+    "id": "4",
+    "name": "APEX DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "5",
+    "name": "ARANIKO DEVELOPMENT BANK"
+  },
+  {
+    "type": "IME",
+    "id": "6",
+    "name": "ARUN FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "7",
+    "name": "BAGESHWARI DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "8",
+    "name": "BAGMATI DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "9",
+    "name": "BANK OF KATHMANDU"
+  },
+  {
+    "type": "IME",
+    "id": "10",
+    "name": "BHARGAV BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "11",
+    "name": "BIRATLAXMI DEV. BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "12",
+    "name": "BUSINESS UNIVERSAL DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "13",
+    "name": "CENTURY COMMERCIAL BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "14",
+    "name": "CHHIMEK BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "15",
+    "name": "CITIZENS BANK INTERNATIONAL LTD."
+  },
+  {
+    "type": "IME",
+    "id": "16",
+    "name": "CITY DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "17",
+    "name": "CIVIC DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "18",
+    "name": "CIVIL BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "19",
+    "name": "COSMOS DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "20",
+    "name": "COUNTRY DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "21",
+    "name": "DEVA BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "22",
+    "name": "EKATA BIKAS BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "23",
+    "name": "EVEREST BANK"
+  },
+  {
+    "type": "IME",
+    "id": "24",
+    "name": "EXCEL DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "25",
+    "name": "FEWA BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "26",
+    "name": "GANDAKI BIKASH BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "27",
+    "name": "GARIMA BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "28",
+    "name": "GAUMUKHI BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "29",
+    "name": "GLOBAL IME BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "30",
+    "name": "GRAND BANK NEPAL LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "31",
+    "name": "GUHESWORI MERCHANT BANKING AND FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "32",
+    "name": "HAMRO BIKAS BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "33",
+    "name": "HIMALAYAN BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "34",
+    "name": "ICFC FINANCE LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "35",
+    "name": "IME CO-OPERATIVE SERVICE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "36",
+    "name": "IME Ltd. - AC Deposit"
+  },
+  {
+    "type": "IME",
+    "id": "37",
+    "name": "INFRASTRUCTURE DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "38",
+    "name": "INNOVATIVE DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "39",
+    "name": "INTERNATIONAL DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "40",
+    "name": "JANATA BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "41",
+    "name": "JHIMRUK BIKAS BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "42",
+    "name": "JYOTI BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "43",
+    "name": "KABELI BIKAS BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "44",
+    "name": "KAILASH BIKAS BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "45",
+    "name": "KALIKA MICROCREDIT DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "46",
+    "name": "KALINCHOWK DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "47",
+    "name": "KAMANA BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "48",
+    "name": "KANCHAN DEVELOPMENT BANK"
+  },
+  {
+    "type": "IME",
+    "id": "49",
+    "name": "KANKAI BIKAS BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "50",
+    "name": "KANKREBIHAR BIKASH BANK"
+  },
+  {
+    "type": "IME",
+    "id": "51",
+    "name": "KARNALI DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "52",
+    "name": "KASKI FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "53",
+    "name": "KASTHAMANDAP DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "54",
+    "name": "KUMARI BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "55",
+    "name": "LAXMI BANK"
+  },
+  {
+    "type": "IME",
+    "id": "56",
+    "name": "LUMBINI BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "57",
+    "name": "MACHHAPURCHHRE BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "58",
+    "name": "MAHAKALI BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "59",
+    "name": "MAHALAXMI FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "60",
+    "name": "MALIKA VIKASH BANK"
+  },
+  {
+    "type": "IME",
+    "id": "61",
+    "name": "MANASLU BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "62",
+    "name": "MANJUSHREE FINANCIAL INSTITUTION LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "63",
+    "name": "MATRIBHUMI BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "64",
+    "name": "MEGHA BANK NEPAL LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "65",
+    "name": "METRO DEVELOPMENT BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "66",
+    "name": "MISSION DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "67",
+    "name": "MITERI DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "68",
+    "name": "MITHILA LAGHUBITTA BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "69",
+    "name": "MOUNT MAKALU DEVELOPMENT BANK"
+  },
+  {
+    "type": "IME",
+    "id": "70",
+    "name": "MUKTINATH BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "71",
+    "name": "NABIL BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "72",
+    "name": "NARAYANI NATIONAL FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "73",
+    "name": "NEPAL BANGLADESH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "74",
+    "name": "NEPAL BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "75",
+    "name": "NEPAL COMMUNITY DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "76",
+    "name": "NEPAL CREDIT AND COMMERCE BANK(NCC)"
+  },
+  {
+    "type": "IME",
+    "id": "77",
+    "name": "NEPAL EXPRESS FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "78",
+    "name": "NEPAL INVESTMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "79",
+    "name": "NIC Asia Bank Limited"
+  },
+  {
+    "type": "IME",
+    "id": "80",
+    "name": "NMB BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "81",
+    "name": "OM FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "82",
+    "name": "PACIFIC DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "83",
+    "name": "PASCHIMANCHAL DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "84",
+    "name": "PRABHU BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "85",
+    "name": "PRIME COMMERCIAL BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "86",
+    "name": "Professional Diyalo Bikas Bank Ltd"
+  },
+  {
+    "type": "IME",
+    "id": "87",
+    "name": "PURNIMA BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "88",
+    "name": "RAPTIBHERI BIKAS BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "89",
+    "name": "RASTRIYA BANIJYA BANK"
+  },
+  {
+    "type": "IME",
+    "id": "90",
+    "name": "RELIABLE DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "91",
+    "name": "ROYAL MERCHANT BANKING AND FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "92",
+    "name": "SAHARA BIKASH BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "93",
+    "name": "SAHAYOGI BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "94",
+    "name": "SALAPA BIKAS BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "95",
+    "name": "SANIMA BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "96",
+    "name": "SAPTAKOSHI DEVELOPMENT BANK LIMITED -"
+  },
+  {
+    "type": "IME",
+    "id": "97",
+    "name": "SBI BANK"
+  },
+  {
+    "type": "IME",
+    "id": "98",
+    "name": "SEWA BIKAS BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "99",
+    "name": "SHANGRI-LA DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "100",
+    "name": "SHINE RESUNGA DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "101",
+    "name": "SIDDHARTHA BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "102",
+    "name": "SIDDHARTHA DEVLOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "103",
+    "name": "SINDHU BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "104",
+    "name": "SOCIETY DEVELOPMENT BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "105",
+    "name": "SRIJANA FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "106",
+    "name": "STANDARD CHARTER BANK"
+  },
+  {
+    "type": "IME",
+    "id": "107",
+    "name": "SUBHECHHA BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "108",
+    "name": "SUNRISE BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "109",
+    "name": "SUPREME DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "110",
+    "name": "SYNERGY FINANCE LTD."
+  },
+  {
+    "type": "IME",
+    "id": "111",
+    "name": "TINAU DEVELOPMENT BANK LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "112",
+    "name": "TOURISM DEVELOPMENT BANK LTD"
+  },
+  {
+    "type": "IME",
+    "id": "113",
+    "name": "TRIVENI BIKASH BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "114",
+    "name": "UNITED FINANCE LIMITED"
+  },
+  {
+    "type": "IME",
+    "id": "115",
+    "name": "WESTERN DEVELOPMENT BANK LTD."
+  },
+  {
+    "type": "IME",
+    "id": "116",
+    "name": "YETI DEVELOPMENT BANK LTD"
+  }
+]

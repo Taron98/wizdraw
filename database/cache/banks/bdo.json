@@ -1,0 +1,387 @@
+[
+  {
+    "type": "BDO",
+    "id": "1",
+    "name": "Active Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "2",
+    "name": "Allied Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "3",
+    "name": "Allied Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "4",
+    "name": "AMA Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "5",
+    "name": "ANZ Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "6",
+    "name": "Asia Trust Development Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "7",
+    "name": "Asia United Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "8",
+    "name": "Asia United Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "9",
+    "name": "Asian Development Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "10",
+    "name": "Banco Filipino"
+  },
+  {
+    "type": "BDO",
+    "id": "11",
+    "name": "Banco San Juan (A Rural Bank)"
+  },
+  {
+    "type": "BDO",
+    "id": "12",
+    "name": "Bangkok Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "13",
+    "name": "Bank of Commerce"
+  },
+  {
+    "type": "BDO",
+    "id": "14",
+    "name": "Bank of the Philippine Islands"
+  },
+  {
+    "type": "BDO",
+    "id": "15",
+    "name": "Bank of Tokyo"
+  },
+  {
+    "type": "BDO",
+    "id": "16",
+    "name": "Bank One Savings and Trust Corp"
+  },
+  {
+    "type": "BDO",
+    "id": "17",
+    "name": "BPI Family Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "18",
+    "name": "China Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "19",
+    "name": "China Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "20",
+    "name": "Chinatrust Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "21",
+    "name": "Citibank"
+  },
+  {
+    "type": "BDO",
+    "id": "22",
+    "name": "Citibank"
+  },
+  {
+    "type": "BDO",
+    "id": "23",
+    "name": "CitiBank Savings"
+  },
+  {
+    "type": "BDO",
+    "id": "24",
+    "name": "Citibank Savings"
+  },
+  {
+    "type": "BDO",
+    "id": "25",
+    "name": "City Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "26",
+    "name": "City State Savings"
+  },
+  {
+    "type": "BDO",
+    "id": "27",
+    "name": "Deutsche Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "28",
+    "name": "Development Bank of the Philippines"
+  },
+  {
+    "type": "BDO",
+    "id": "29",
+    "name": "Development Bank of the Philippines"
+  },
+  {
+    "type": "BDO",
+    "id": "30",
+    "name": "East West Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "31",
+    "name": "East West Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "32",
+    "name": "Ecology Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "33",
+    "name": "Equicom Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "34",
+    "name": "Export and Industry Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "35",
+    "name": "Far Eastern Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "36",
+    "name": "Filipino Savers Bank (A Rural Bank)"
+  },
+  {
+    "type": "BDO",
+    "id": "37",
+    "name": "First Allied Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "38",
+    "name": "First Consolidated Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "39",
+    "name": "First Macro Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "40",
+    "name": "GSIS Family Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "41",
+    "name": "Guagua Savers Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "42",
+    "name": "Hongkong & Shanghai Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "43",
+    "name": "HSBC Savings"
+  },
+  {
+    "type": "BDO",
+    "id": "44",
+    "name": "Insular Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "45",
+    "name": "Islamic Bank (Al-Amanah Islamic Investment Bank)"
+  },
+  {
+    "type": "BDO",
+    "id": "46",
+    "name": "Land Bank of the Philippines"
+  },
+  {
+    "type": "BDO",
+    "id": "47",
+    "name": "Luzon Development Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "48",
+    "name": "Malayan Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "49",
+    "name": "MayBank Phils"
+  },
+  {
+    "type": "BDO",
+    "id": "50",
+    "name": "Metropolitan Bank and Trust Company"
+  },
+  {
+    "type": "BDO",
+    "id": "51",
+    "name": "Metropolitan Bank and Trust Company"
+  },
+  {
+    "type": "BDO",
+    "id": "52",
+    "name": "Phil Business Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "53",
+    "name": "Phil National Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "54",
+    "name": "Phil National Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "55",
+    "name": "Phil Postal Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "56",
+    "name": "Philippine Bank of Communications"
+  },
+  {
+    "type": "BDO",
+    "id": "57",
+    "name": "Philippine Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "58",
+    "name": "Philippine Trust Company"
+  },
+  {
+    "type": "BDO",
+    "id": "59",
+    "name": "Philippine Trust Company"
+  },
+  {
+    "type": "BDO",
+    "id": "60",
+    "name": "Philippine Veterans Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "61",
+    "name": "Philippine Veterans Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "62",
+    "name": "Planters Development Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "63",
+    "name": "Premiere Development Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "64",
+    "name": "RCBC Savings"
+  },
+  {
+    "type": "BDO",
+    "id": "65",
+    "name": "Rizal Commercial Banking Corp."
+  },
+  {
+    "type": "BDO",
+    "id": "66",
+    "name": "Robinsons Bank Corp"
+  },
+  {
+    "type": "BDO",
+    "id": "67",
+    "name": "Sarangani Rural Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "68",
+    "name": "Security Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "69",
+    "name": "Standard Chartered Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "70",
+    "name": "Sterling Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "71",
+    "name": "Summit Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "72",
+    "name": "UCPB Savings Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "73",
+    "name": "Union Bank of the Philippines"
+  },
+  {
+    "type": "BDO",
+    "id": "74",
+    "name": "United Coconut Planters Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "75",
+    "name": "United Coconut Planters Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "76",
+    "name": "United Overseas Bank"
+  },
+  {
+    "type": "BDO",
+    "id": "77",
+    "name": "University Savings Bank"
+  }
+]

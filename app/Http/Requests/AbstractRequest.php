@@ -39,26 +39,6 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Retrieve an input item from the request by camel case
-     *
-     * @param  string            $key
-     * @param  string|array|null $default
-     *
-     * @return string|array
-     */
-    public function input($key = null, $default = null)
-    {
-        $input = parent::input($key, $default);
-
-        if (!is_array($input)) {
-            return $input;
-        }
-
-        return array_key_snake_case($input);
-    }
-
-
-    /**
      * Get a subset containing the provided keys with values from the input data by camel case
      *
      * @param  array|mixed $keys
@@ -73,30 +53,45 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Get an array of all of the files on the request by camel case
+     * Validate the class instance
      *
-     * @return array
+     * @return void
      */
-    public function allFiles()
+    public function validate()
     {
-        $files = parent::allFiles();
+        $instance = $this->getValidatorInstance();
 
-        return array_key_snake_case($files);
+        $inputs = array_key_snake_case($instance->getRules());
+//        $inputs = array_value_snake_case($inputs);
+
+        // todo: change!
+        foreach ($inputs as $inputId => $input) {
+            foreach ($input as $ruleId => $rule) {
+                if (strpos($rule, 'date_format') === false && strpos($rule, 'phone') === false) {
+                    $inputs[ $inputId ][ $ruleId ] = snake_case($rule);
+                }
+            }
+        }
+
+        $instance->setRules($inputs);
+
+        if (!$this->passesAuthorization()) {
+            $this->failedAuthorization();
+        } elseif (!$instance->passes()) {
+            $this->failedValidation($instance);
+        }
     }
 
     /**
-     * Get the validator instance for the request
+     * Format the errors from the given Validator instance.
      *
-     * @return Validator
+     * @param  Validator $validator
+     *
+     * @return array
      */
-    protected function getValidatorInstance() : Validator
+    protected function formatErrors(Validator $validator)
     {
-        $validator = parent::getValidatorInstance();
-        $snakedValidatorRules = array_key_snake_case($validator->getRules());
-
-        $validator->setRules($snakedValidatorRules);
-
-        return $validator;
+        return array_key_camel_case($validator->getMessageBag()->toArray());
     }
 
     /**
@@ -109,14 +104,34 @@ abstract class AbstractRequest extends FormRequest
         $inputs = [];
 
         foreach ($this->rules() as $name => $rule) {
+            $name = snake_case($name);
+
             $input = $this->input($name);
 
-            if (isset($input)) {
+            // Check if exists and it's not an array
+            if (isset($input) && strpos($name, '*') === false && strpos($name, '.') === false) {
                 $inputs[ $name ] = $input;
             }
         }
 
         return $inputs;
+    }
+
+    /**
+     * Retrieve an input item from the request.
+     *
+     * @param  string $key
+     * @param  string|array|null $default
+     *
+     * @return string|array
+     */
+    public function input($key = null, $default = null)
+    {
+        if (!empty($key)) {
+            $key = snake_case($key);
+        }
+
+        return parent::input($key, $default);
     }
 
 }

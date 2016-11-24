@@ -56,6 +56,8 @@ class ClientService extends AbstractService
 
             if (is_null($clientModel)) {
                 $clientModel = $this->repository->create($client);
+            } else {
+                $clientModel = $this->repository->update($client, $clientModel->getId());
             }
 
             $clientModels->push($clientModel);
@@ -85,7 +87,7 @@ class ClientService extends AbstractService
      */
     private function findByPhone(string $phone)
     {
-        $phone = phone_format($phone);
+        $phone = phone($phone);
 
         return $this->repository->findByPhone($phone)->first();
     }

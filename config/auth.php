@@ -110,7 +110,7 @@ return [
 
     'verification' => [
         'length' => 6,
-        'expire' => 60,
+        'expire' => 60 * 5,
     ],
 
 ];

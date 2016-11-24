@@ -88,4 +88,17 @@ return [
 
     'prefix' => 'laravel',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Table Cache Pagination
+    |--------------------------------------------------------------------------
+    |
+    | When retrieving data from the cache tables, use this for pagination.
+    |
+    */
+
+    'pagination' => [
+        'perPage' => 30,
+    ],
+
 ];

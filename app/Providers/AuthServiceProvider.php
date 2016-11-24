@@ -4,7 +4,9 @@ namespace Wizdraw\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Wizdraw\Models\Group;
+use Wizdraw\Models\Transfer;
 use Wizdraw\Policies\GroupPolicy;
+use Wizdraw\Policies\TransferPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Group::class => GroupPolicy::class,
+        Group::class    => GroupPolicy::class,
+        Transfer::class => TransferPolicy::class,
     ];
 
     /**

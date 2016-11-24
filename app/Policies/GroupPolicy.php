@@ -24,7 +24,7 @@ class GroupPolicy
      */
     public function show(Client $client, Group $group)
     {
-        return $client->getId() === $this->getAdminClientId($group);
+        return $client->getId() === $group->adminClient->getId();
     }
 
     /**
@@ -37,19 +37,33 @@ class GroupPolicy
      */
     public function update(Client $client, Group $group)
     {
-        return $client->getId() === $this->getAdminClientId($group);
+        return $client->getId() === $group->adminClient->getId();
     }
 
     /**
+     * Determine whether the user can add a client to the group
+     *
+     * @param Client $client
      * @param Group $group
      *
-     * @return int
+     * @return bool
      */
-    private function getAdminClientId(Group $group) : int
+    public function addClient(Client $client, Group $group)
     {
-        $groupClient = $group->adminClient()->first();
+        return $client->getId() === $group->adminClient->getId();
+    }
 
-        return $groupClient->getId();
+    /**
+     * Determine whether the user can remove a client from the group
+     *
+     * @param Client $client
+     * @param Group $group
+     *
+     * @return bool
+     */
+    public function removeClient(Client $client, Group $group)
+    {
+        return $client->getId() === $group->adminClient->getId();
     }
 
 }

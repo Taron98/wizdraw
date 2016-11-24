@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Repositories;
 
-use Illuminate\Support\Collection;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Group;
 
@@ -16,19 +15,9 @@ class GroupRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model()
+    public function model() : string
     {
         return Group::class;
-    }
-
-    /**
-     * @param Client $client
-     *
-     * @return Collection
-     */
-    public function findByAdminClient(Client $client) : Collection
-    {
-        return $this->findByField('admin_client_id', $client->getId());
     }
 
     /**
@@ -37,14 +26,12 @@ class GroupRepository extends AbstractRepository
      * @param Client $adminClient
      *
      * @param array $attributes
-     * @param array $groupClients
+     * @param array $groupClientIds
      *
      * @return mixed
      */
-    public function createWithRelation(Client $adminClient, array $attributes, array $groupClients = [])
+    public function createWithRelation(Client $adminClient, array $attributes, array $groupClientIds = [])
     {
-        $attributes = array_key_snake_case($attributes);
-
         $newGroup = $this->create($attributes);
 
         // Set the admin client id of the group
@@ -52,30 +39,37 @@ class GroupRepository extends AbstractRepository
             ->associate($adminClient)->save();
 
         // Attach the members of the group
-        $newGroup->memberClients()->attach($groupClients);
+        $newGroup->memberClients()->attach($groupClientIds);
 
-        return (is_null($newGroup)) ?: $newGroup;
+        return (is_null($newGroup)) ?: $newGroup->load('memberClients');
     }
 
     /**
-     * Update a group with his relationships
-     *
-     * @param int $id
-     * @param array $attributes
-     * @param array $groupClients
+     * @param Group $group
+     * @param array $groupClientIds
      *
      * @return mixed
      */
-    public function updateWithRelation(int $id, array $attributes, array $groupClients = [])
+    public function addClient(Group $group, array $groupClientIds = [])
     {
-        $attributes = array_key_snake_case($attributes);
+        // Add missing clients to group
+        $group->memberClients()->syncWithoutDetaching($groupClientIds);
 
-        $newGroup = $this->update($attributes, $id);
+        return $group->load('memberClients');
+    }
 
-        // Attach the members of the group
-        $newGroup->memberClients()->sync($groupClients);
+    /**
+     * @param Group $group
+     * @param array $groupClientIds
+     *
+     * @return mixed
+     */
+    public function removeClient(Group $group, array $groupClientIds = [])
+    {
+        // Remove clients from the group
+        $group->memberClients()->detach($groupClientIds);
 
-        return (is_null($newGroup)) ?: $newGroup;
+        return $group->load('memberClients');
     }
 
 }

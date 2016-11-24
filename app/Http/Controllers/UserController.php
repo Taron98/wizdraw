@@ -6,7 +6,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
+use Wizdraw\Http\Requests\User\UserUpdateRequest;
 use Wizdraw\Models\User;
+use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
 
 /**
@@ -19,14 +21,32 @@ class UserController extends AbstractController
     /** @var  UserService */
     private $userService;
 
+    /** @var  SmsService */
+    private $smsService;
+
     /**
      * UserController constructor.
      *
      * @param UserService $userService
+     * @param SmsService $smsService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, SmsService $smsService)
     {
         $this->userService = $userService;
+        $this->smsService = $smsService;
+    }
+
+    /**
+     * @param UserUpdateRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function update(UserUpdateRequest $request)
+    {
+        $userId = $request->user()->getId();
+        $user = $this->userService->update($request->inputs(), $userId);
+
+        return $this->respond($user);
     }
 
     /**
@@ -38,7 +58,7 @@ class UserController extends AbstractController
      */
     public function password(UserPasswordRequest $request) : JsonResponse
     {
-        $user = $this->userService->update($request->inputs(), $request->user()->getId());
+        $user = $this->userService->updatePassword($request->user(), $request->input('password'));
 
         return $this->respond($user);
     }
@@ -58,6 +78,12 @@ class UserController extends AbstractController
             $this->userService->generateVerifyCode($user);
         }
 
+        // todo: relocation?
+        $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
+        if (!$sms) {
+            return $this->respondWithError('could_not_send_sms');
+        }
+
         return $this->respond([
             'verifyCode'   => $user->getVerifyCode(),
             'verifyExpire' => (string)$user->getVerifyExpire(),
@@ -72,15 +98,15 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function verify(NoParamRequest $request, int $verifyCode) : JsonResponse
+    public function verify(NoParamRequest $request, $verifyCode) : JsonResponse
     {
         $user = $request->user();
 
-        if (!$user->isPending()) {
+        if (is_null($user->getVerifyCode())) {
             return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->getVerifyCode() !== $verifyCode) {
+        if ($user->getVerifyCode() != $verifyCode) {
             return $this->respondWithError('invalid_verification_code', Response::HTTP_BAD_REQUEST);
         }
 
@@ -88,7 +114,7 @@ class UserController extends AbstractController
             return $this->respondWithError('verification_code_expired', Response::HTTP_BAD_REQUEST);
         }
 
-        $this->userService->updateIsPending($user);
+        $this->userService->resetVerification($user);
 
         return $this->respond($user);
     }
@@ -105,10 +131,23 @@ class UserController extends AbstractController
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
 
+        if (is_null($user)) {
+            return $this->respondWithError('device_not_found', Response::HTTP_NOT_FOUND);
+        }
+
+        $client = $user->client;
+
         return $this->respond([
-            'email'      => ($user->getEmail()) ?: '',
-            'facebookId' => ($user->getFacebookId()) ?: '',
-            'fullName'   => $user->client->getFullName(),
+            'user'   => [
+                'email'      => ($user->getEmail()) ?: '',
+                'facebookId' => ($user->getFacebookId()) ?: '',
+            ],
+            'client' => [
+                'id'         => $client->getId(),
+                'firstName'  => ($client->getFirstName()) ?: '',
+                'middleName' => ($client->getMiddleName()) ?: '',
+                'lastName'   => ($client->getLastName()) ?: '',
+            ],
         ]);
     }
 

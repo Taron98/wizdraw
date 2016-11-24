@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             'cors',
+            'camel.casing',
         ],
 
         'auth' => [
@@ -51,14 +52,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'        => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic'  => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'    => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can'         => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'       => \Wizdraw\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle'    => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'jwt.auth'    => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
-        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
-        'cors'        => \Barryvdh\Cors\HandleCors::class,
+        'auth'         => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'     => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'          => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'        => \Wizdraw\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'jwt.auth'     => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh'  => \Tymon\JWTAuth\Middleware\RefreshToken::class,
+        'cors'         => \Barryvdh\Cors\HandleCors::class,
+        'camel.casing' => \Wizdraw\Http\Middleware\CamelCasing::class,
     ];
 }

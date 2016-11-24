@@ -2,9 +2,12 @@
 
 namespace Wizdraw\Http\Controllers\Auth;
 
+use Carbon\Carbon;
+use JWTAuth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;
 use Wizdraw\Http\Controllers\AbstractController;
 use Wizdraw\Http\Requests\Auth\AuthFacebookRequest;
@@ -16,7 +19,10 @@ use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
+use Wizdraw\Services\GroupService;
+use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
+
 
 /**
  * Class AuthController
@@ -40,6 +46,12 @@ class AuthController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
+    /** @var  SmsService */
+    private $smsService;
+
+    /** @var  GroupService */
+    private $groupService;
+
     /**
      * AuthController constructor.
      *
@@ -48,19 +60,25 @@ class AuthController extends AbstractController
      * @param UserRepository $userRepository
      * @param UserService $userService
      * @param ClientService $clientService
+     * @param SmsService $smsService
+     * @param GroupService $groupService
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
         UserService $userService,
-        ClientService $clientService
+        ClientService $clientService,
+        SmsService $smsService,
+        GroupService $groupService
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
         $this->clientService = $clientService;
+        $this->smsService = $smsService;
+        $this->groupService = $groupService;
     }
 
     /**
@@ -83,10 +101,19 @@ class AuthController extends AbstractController
             return $token;
         }
 
-        return $this->respond([
-            'token'    => $token,
-            'didSetup' => $request->user()->client->isDidSetup(),
-        ]);
+        $user = $request->user();
+        $hasGroup = $user->client->adminGroups->count() > 0;
+
+        // todo: relocation?
+        $user->setLastLoginAt(Carbon::now());
+        $this->userService->updateModel($user);
+
+        return $this->respond(array_merge([
+            'token'       => $token,
+            'didSetup'    => $user->client->isDidSetup(),
+            'hasGroup'    => $hasGroup,
+            'canTransfer' => $user->client->canTransfer(),
+        ], $user->toArray()));
     }
 
     /**
@@ -111,13 +138,19 @@ class AuthController extends AbstractController
         /** @var Client $client */
         $client = $this->clientService->createClient($clientAttrs);
         if (!$client instanceof Client) {
-            return $this->respondWithError('cant_create_client');
+            return $this->respondWithError('could_not_create_client');
         }
 
         /** @var User $user */
         $user = $this->userRepository->createWithRelation($userAttrs, $client);
         if (!$user) {
-            return $this->respondWithError('cant_create_user');
+            return $this->respondWithError('could_not_create_user');
+        }
+
+        // todo: relocation?
+        $sms = $this->smsService->sendSmsNewClient($clientAttrs[ 'phone' ], $user[ 'verify_code' ], true);
+        if (!$sms) {
+            return $this->respondWithError('could_not_send_sms');
         }
 
         return $this->respond([
@@ -141,14 +174,17 @@ class AuthController extends AbstractController
         $requestAttr = $request->inputs();
 
         try {
+            // todo: device_id?
             $facebookUser = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
-                $requestAttr[ 'deviceId' ]);
+                $requestAttr[ 'device_id' ]);
         } catch (FacebookInvalidTokenException $exception) {
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
 
+        /** @var User $user */
+        $user = $this->userService->findByFacebookId($facebookUser->getId());
         /** @var Client $client */
-        $client = $this->userService->findByFacebookId($facebookUser->getId())->client;
+        $client = $user->client;
         $token = $this->authenticate([], $facebookUser->getId());
 
         if ($token instanceof JsonResponse) {
@@ -157,9 +193,32 @@ class AuthController extends AbstractController
 
         // Returns our token, including his facebook information
         return $this->respond(array_merge([
-            'token'    => $token,
-            'didSetup' => $client->isDidSetup(),
+            'token'     => $token,
+            'didSetup'  => $client->isDidSetup(),
+            'isPending' => $user->isPending(),
         ], $facebookUser->toArray()));
+    }
+
+    /**
+     * Refreshing token route
+     *
+     * @return JsonResponse
+     */
+    public function token()
+    {
+        $token = JWTAuth::getToken();
+
+        if (!$token) {
+            return $this->respondWithError('token_not_provided', Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $token = JWTAuth::refresh($token);
+        } catch (TokenInvalidException $exception) {
+            return $this->respondWithError('token_invalid');
+        }
+
+        return $this->respond(compact('token'));
     }
 
     /**

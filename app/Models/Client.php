@@ -6,13 +6,14 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Collection;
 use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
-use Wizdraw\Traits\ModelCamelCaseTrait;
 
 /**
  * Wizdraw\Models\Client
@@ -29,16 +30,22 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @property string $phone
  * @property integer $defaultCountryId
  * @property integer $residentCountryId
+ * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
  * @property boolean $didSetup
+ * @property boolean $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -51,10 +58,12 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client wherePhone($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDefaultCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereState($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDidSetup($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsApproved($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
@@ -62,7 +71,7 @@ use Wizdraw\Traits\ModelCamelCaseTrait;
  */
 class Client extends AbstractModel implements AuthorizableContract
 {
-    use SoftDeletes, Authorizable, ModelCamelCaseTrait;
+    use SoftDeletes, Authorizable;
 
     /**
      * The table associated with the model.
@@ -88,10 +97,12 @@ class Client extends AbstractModel implements AuthorizableContract
         'phone',
         'default_country_id',
         'resident_country_id',
+        'state',
         'city',
         'address',
         'client_type',
         'did_setup',
+        'is_approved',
         'deleted_at',
     ];
 
@@ -108,7 +119,8 @@ class Client extends AbstractModel implements AuthorizableContract
      * @var array
      */
     protected $casts = [
-        'did_setup' => 'boolean',
+        'did_setup'   => 'boolean',
+        'is_approved' => 'boolean',
     ];
 
     /**
@@ -131,7 +143,7 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         static::updating(function ($model) {
             /** @var Client $model */
-            $model->didSetup = true;
+            $model->didSetup = 1;
         });
     }
 
@@ -187,6 +199,37 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Many-to-many relationship with group_clients table
+     *
+     * @return HasMany
+     */
+    public function adminGroups() : HasMany
+    {
+        return $this->hasMany(Group::class, 'admin_client_id')
+            ->with('memberClients');
+    }
+
+    /**
+     * Transfers that this client has been sent
+     *
+     * @return HasMany
+     */
+    public function transfers() : HasMany
+    {
+        return $this->hasMany(Transfer::class);
+    }
+
+    /**
+     * Transfers that this client has been received
+     *
+     * @return HasMany
+     */
+    public function receivedTransfers() : HasMany
+    {
+        return $this->hasMany(Transfer::class, 'receiver_client_id');
+    }
+
+    /**
      * Create a new pivot model instance
      *
      * @param  Model $parent
@@ -198,11 +241,18 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
-        if ($parent instanceof Group) {
-            return new GroupClient($parent, $attributes, $table, $exists);
+        $pivot = null;
+
+        switch (get_class($parent)) {
+            case Group::class:
+                $pivot = new GroupClient($parent, $attributes, $table, $exists);
+                break;
+
+            default:
+                $pivot = parent::newPivot($parent, $attributes, $table, $exists);
         }
 
-        return parent::newPivot($parent, $attributes, $table, $exists);
+        return $pivot;
     }
 
     /**
@@ -222,6 +272,46 @@ class Client extends AbstractModel implements AuthorizableContract
     {
 
     }
+
+    /**
+     * Get all clients that sent transfers to this client
+     *
+     * @return Collection
+     */
+    public function senders() : Collection
+    {
+        /** @var Collection $transfers */
+        $transfers = $this->receivedTransfers()->with('client')->get();
+
+        return $transfers->map(function ($transfer) {
+            /** @var Transfer $transfer */
+            return $transfer->client;
+        });
+    }
+
+    /**
+     * Get all clients that received transfers from this client
+     *
+     * @return Collection
+     */
+    public function receivers() : Collection
+    {
+        /** @var Collection $receivedTransfers */
+        $receivedTransfers = $this->receivedTransfers()->with('receiverClient')->get();
+
+        return $receivedTransfers->map(function ($receivedTransfer) {
+            /** @var Transfer $receivedTransfer */
+            return $receivedTransfer->receiverClient;
+        });
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function bankAccounts() : HasMany
+    {
+        return $this->hasMany(BankAccount::class);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
@@ -232,7 +322,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function setPhoneAttribute(string $phone)
     {
-        $this->attributes[ 'phone' ] = phone_format($phone);
+        $this->attributes[ 'phone' ] = phone($phone);
     }
     //</editor-fold>
 
@@ -240,7 +330,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getIdentityNumber() : string
+    public function getIdentityNumber()
     {
         return $this->identityNumber;
     }
@@ -248,7 +338,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $identityNumber
      */
-    public function setIdentityNumber(string $identityNumber)
+    public function setIdentityNumber($identityNumber)
     {
         $this->identityNumber = $identityNumber;
     }
@@ -256,7 +346,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getIdentityExpire() : string
+    public function getIdentityExpire()
     {
         return $this->identityExpire;
     }
@@ -264,7 +354,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $identityExpire
      */
-    public function setIdentityExpire(string $identityExpire)
+    public function setIdentityExpire($identityExpire)
     {
         $this->identityExpire = $identityExpire;
     }
@@ -272,7 +362,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getFirstName() : string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -280,7 +370,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $firstName
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
@@ -288,7 +378,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getMiddleName() : string
+    public function getMiddleName()
     {
         return $this->middleName;
     }
@@ -296,7 +386,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $middleName
      */
-    public function setMiddleName(string $middleName)
+    public function setMiddleName($middleName)
     {
         $this->middleName = $middleName;
     }
@@ -304,7 +394,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getLastName() : string
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -312,7 +402,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $lastName
      */
-    public function setLastName(string $lastName)
+    public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
@@ -320,7 +410,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getBirthDate() : string
+    public function getBirthDate()
     {
         return $this->birthDate;
     }
@@ -328,7 +418,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $birthDate
      */
-    public function setBirthDate(string $birthDate)
+    public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
     }
@@ -336,7 +426,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getGender() : string
+    public function getGender()
     {
         return $this->gender;
     }
@@ -344,7 +434,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $gender
      */
-    public function setGender(string $gender)
+    public function setGender($gender)
     {
         $this->gender = $gender;
     }
@@ -352,7 +442,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getPhone() : string
+    public function getPhone()
     {
         return $this->phone;
     }
@@ -360,7 +450,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $phone
      */
-    public function setPhone(string $phone)
+    public function setPhone($phone)
     {
         $this->phone = $phone;
     }
@@ -368,7 +458,23 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getCity() : string
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
     {
         return $this->city;
     }
@@ -376,7 +482,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity($city)
     {
         $this->city = $city;
     }
@@ -384,7 +490,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getAddress() : string
+    public function getAddress()
     {
         return $this->address;
     }
@@ -392,7 +498,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $address
      */
-    public function setAddress(string $address)
+    public function setAddress($address)
     {
         $this->address = $address;
     }
@@ -400,7 +506,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getClientType() : string
+    public function getClientType()
     {
         return $this->clientType;
     }
@@ -408,7 +514,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param string $clientType
      */
-    public function setClientType(string $clientType)
+    public function setClientType($clientType)
     {
         $this->clientType = $clientType;
     }
@@ -416,7 +522,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return boolean
      */
-    public function isDidSetup() : bool
+    public function isDidSetup()
     {
         return $this->didSetup;
     }
@@ -424,9 +530,32 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @param boolean $didSetup
      */
-    public function setDidSetup(bool $didSetup)
+    public function setDidSetup($didSetup)
     {
         $this->didSetup = $didSetup;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isApproved()
+    {
+        return $this->isApproved;
+    }
+
+    /**
+     * @param boolean $isApproved
+     */
+    public function setIsApproved($isApproved)
+    {
+        $this->isApproved = $isApproved;
+    }
+
+    public function canTransfer() : bool
+    {
+//        return !(!$this->isApproved && $this->transfers->count() > 0);
+        // todo: change
+        return true;
     }
 
     /**
