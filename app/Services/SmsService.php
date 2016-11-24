@@ -3,6 +3,8 @@
 namespace Wizdraw\Services;
 
 use GuzzleHttp\Client;
+use Wizdraw\Models\Transfer;
+use Wizdraw\Models\TransferType;
 
 
 /**
@@ -51,17 +53,25 @@ class SmsService extends AbstractService
     }
 
     /**
+     * @param Transfer $transfer
      * @param $phone
-     * @param $amount
-     * @param $currency
      * @param $receiverName
-     * @param string $transactionNumber
      *
      * @return bool
      */
-    public function sendSmsTransferWaiting($phone, $receiverName, $amount, $currency, string $transactionNumber = '')
+    public function sendSmsTransferWaiting(Transfer $transfer, $phone, $receiverName)
     {
-        $text = $amount . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
+        if ($transfer->type->getType() === TransferType::TYPE_PICKUP_CASH) {
+            $text = "{$receiverName}\nsent you funds that are waiting for you to pick up. " .
+                "Your transaction number is {$transfer->getTransactionNumber()}. " .
+                "Open the Wizdraw app for more details.";
+        } else {
+            $text = "{$receiverName}\ndeposited funds for you in your bank account. " .
+                "Your transaction number is {$transfer->getTransactionNumber()}. " .
+                "Open the Wizdraw app for more details.";
+        }
+
+//        $text = $transfer->getAmount() . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 
