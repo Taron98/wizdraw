@@ -342,4 +342,14 @@ class TransferController extends AbstractController
         return $this->respond(compact('canTransfer'));
     }
 
+    /**
+     * @return JsonResponse
+     */
+    public function statuses()
+    {
+        $statuses = $this->transferService->statuses();
+
+        return $this->respond($statuses);
+    }
+
 }

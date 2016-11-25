@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Illuminate\Database\Eloquent\Collection;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Models\AbstractModel;
@@ -160,6 +161,14 @@ class TransferService extends AbstractService
         $isUpdated = $transfer->status()->associate($status)->save();
 
         return $isUpdated;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function statuses()
+    {
+        return $this->transferStatusService->all();
     }
 
 }
