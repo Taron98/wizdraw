@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "60c3f8c8c5c3eb83c71b69535f2a3c7a",
-    "content-hash": "32639ac466cb9b719c1e64fb1e176142",
+    "hash": "9f2110605e4b4e5f6816642b8b91e57b",
+    "content-hash": "272dd1d0824ca097507ec6c1dd5309a4",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -987,6 +987,69 @@
             "time": "2016-10-24 20:49:55"
         },
         {
+            "name": "gomoob/php-pushwoosh",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gomoob/php-pushwoosh.git",
+                "reference": "a004b257328b1fb8b3316b866d36eb6c0faac205"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gomoob/php-pushwoosh/zipball/a004b257328b1fb8b3316b866d36eb6c0faac205",
+                "reference": "a004b257328b1fb8b3316b866d36eb6c0faac205",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.3.2",
+                "pdepend/pdepend": "^2.2.4",
+                "phpdocumentor/phpdocumentor": "^2.9.0",
+                "phploc/phploc": "^3.0.1",
+                "phpmd/phpmd": "^2.4.3",
+                "phpunit/phpunit": "^5.5.4",
+                "satooshi/php-coveralls": "^1.0.1",
+                "sebastian/phpcpd": "^2.0.4",
+                "squizlabs/php_codesniffer": "^3.0.0RC1",
+                "symfony/yaml": "^3.1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gomoob\\": "src/main/php/Gomoob"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Gaillard",
+                    "email": "baptiste.gaillard@gomoob.com"
+                },
+                {
+                    "name": "Simon Baudry",
+                    "email": "simon.baudry@gomoob.com"
+                },
+                {
+                    "name": "GoMoob",
+                    "email": "contact@gomoob.com",
+                    "homepage": "http://www.gomoob.com"
+                }
+            ],
+            "description": "A PHP Library to easily send push notifications with the Pushwoosh REST Web Services.",
+            "keywords": [
+                "gomoob",
+                "notification",
+                "push",
+                "pushwoosh"
+            ],
+            "time": "2016-10-20 15:43:31"
+        },
+        {
             "name": "graham-campbell/exceptions",
             "version": "v9.1.0",
             "source": {
@@ -1054,6 +1117,65 @@
                 "whoops"
             ],
             "time": "2016-08-19 08:58:30"
+        },
+        {
+            "name": "graham-campbell/manager",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Laravel-Manager.git",
+                "reference": "fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b",
+                "reference": "fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.1.*|5.2.*|5.3.*",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "graham-campbell/testbench-core": "^1.1",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.8|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GrahamCampbell\\Manager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com"
+                }
+            ],
+            "description": "Manager Provides Some Manager Functionality For Laravel 5",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Laravel Manager",
+                "Laravel-Manager",
+                "connector",
+                "framework",
+                "interface",
+                "laravel",
+                "manager"
+            ],
+            "time": "2016-04-26 14:27:59"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1225,6 +1347,63 @@
                 "uri"
             ],
             "time": "2016-06-24 23:00:38"
+        },
+        {
+            "name": "hoy/pushwoosh",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoymultimedia/Laravel-Pushwoosh.git",
+                "reference": "a55d112a56cfcd7fc7e4b2ffb5d99c03041f44a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoymultimedia/Laravel-Pushwoosh/zipball/a55d112a56cfcd7fc7e4b2ffb5d99c03041f44a6",
+                "reference": "a55d112a56cfcd7fc7e4b2ffb5d99c03041f44a6",
+                "shasum": ""
+            },
+            "require": {
+                "gomoob/php-pushwoosh": "^1.1",
+                "graham-campbell/manager": "^2.4",
+                "illuminate/contracts": "5.1.* || 5.2.* || 5.3.*",
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.*",
+                "php": "^5.6.4 || ^7.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.2",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoy\\Pushwoosh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Klaiber",
+                    "email": "vincent@hoy.se"
+                }
+            ],
+            "description": "A Pushwoosh bridge for Laravel",
+            "keywords": [
+                "hoy",
+                "laravel",
+                "notification",
+                "push",
+                "pushwoosh"
+            ],
+            "time": "2016-07-11 19:13:10"
         },
         {
             "name": "jakub-onderka/php-console-color",

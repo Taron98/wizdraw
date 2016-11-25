@@ -188,6 +188,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
+        Hoy\Pushwoosh\PushwooshServiceProvider::class,
 
         /*
          * Application Service Providers...
