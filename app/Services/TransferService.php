@@ -151,13 +151,13 @@ class TransferService extends AbstractService
 
     /**
      * @param Transfer $transfer
-     * @param string $statusName
+     * @param int $statusId
      *
      * @return bool
      */
-    public function changeStatus(Transfer $transfer, string $statusName) : bool
+    public function changeStatus(Transfer $transfer, int $statusId) : bool
     {
-        $status = $this->transferStatusService->findByStatus($statusName);
+        $status = $this->transferStatusService->find($statusId);
         $isUpdated = $transfer->status()->associate($status)->save();
 
         return $isUpdated;

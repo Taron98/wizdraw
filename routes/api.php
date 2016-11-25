@@ -194,9 +194,9 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@addReceipt',
             ]);
 
-            Route::post('/{transfer}/abort/', [
-                'as'   => 'transfer.abort',
-                'uses' => 'TransferController@abort',
+            Route::post('/{transfer}/status/', [
+                'as'   => 'transfer.status',
+                'uses' => 'TransferController@status',
             ]);
 
             Route::get('/', [
