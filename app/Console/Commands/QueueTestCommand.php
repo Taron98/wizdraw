@@ -54,14 +54,14 @@ class QueueTestCommand extends Command
         $data = file_get_contents(database_path('cache/banks/global.json'));
         dispatch(new BankQueueJob($data));
 
-        $data = file_get_contents(database_path('cache/banks/ime_banks.json'));
-        dispatch(new BankQueueJob($data));
+//        $data = file_get_contents(database_path('cache/banks/ime_banks.json'));
+//        dispatch(new BankQueueJob($data));
 
 //        $data = file_get_contents(database_path('cache/banks/metro.json'));
 //        dispatch(new BankQueueJob($data));
 
-        $data = file_get_contents(database_path('cache/banks/bdo.json'));
-        dispatch(new BankQueueJob($data));
+//        $data = file_get_contents(database_path('cache/banks/bdo.json'));
+//        dispatch(new BankQueueJob($data));
     }
 
     private function writeRates()
