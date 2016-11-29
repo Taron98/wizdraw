@@ -78,7 +78,7 @@ class Group extends AbstractModel
      *
      * @return BelongsTo
      */
-    public function adminClient() : BelongsTo
+    public function adminClient(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'admin_client_id');
     }
@@ -88,7 +88,7 @@ class Group extends AbstractModel
      *
      * @return BelongsToMany
      */
-    public function memberClients() : BelongsToMany
+    public function memberClients(): BelongsToMany
     {
         return $this->belongsToMany(Client::class, 'group_clients')
             ->withPivot(['is_approved'])

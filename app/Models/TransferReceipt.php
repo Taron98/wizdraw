@@ -89,7 +89,7 @@ class TransferReceipt extends AbstractModel
      *
      * @return HasOne
      */
-    public function transfer() : HasOne
+    public function transfer(): HasOne
     {
         return $this->hasOne(Transfer::class);
     }

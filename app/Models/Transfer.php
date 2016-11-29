@@ -139,7 +139,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -147,7 +147,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * The client that received the transfer
      */
-    public function receiverClient() : BelongsTo
+    public function receiverClient(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'receiver_client_id');
     }
@@ -157,7 +157,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function type() : BelongsTo
+    public function type(): BelongsTo
     {
         return $this->belongsTo(TransferType::class);
     }
@@ -167,7 +167,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function bankAccount() : BelongsTo
+    public function bankAccount(): BelongsTo
     {
         return $this->belongsTo(BankAccount::class);
     }
@@ -177,7 +177,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsToMany
      */
-    public function natures() : BelongsToMany
+    public function natures(): BelongsToMany
     {
         return $this->belongsToMany(Nature::class, 'transfer_natures');
     }
@@ -187,7 +187,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function status() : BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(TransferStatus::class);
     }
@@ -197,7 +197,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function receipt() : BelongsTo
+    public function receipt(): BelongsTo
     {
         return $this->belongsTo(TransferReceipt::class);
     }
