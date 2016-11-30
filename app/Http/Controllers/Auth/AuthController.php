@@ -91,8 +91,7 @@ class AuthController extends AbstractController
     public
     function login(
         AuthLoginRequest $request
-    ) : JsonResponse
-    {
+    ): JsonResponse {
         $credentials = $request->only('email', 'password');
 
         $token = $this->authenticate($credentials);
@@ -113,6 +112,7 @@ class AuthController extends AbstractController
             'didSetup'    => $user->client->isDidSetup(),
             'hasGroup'    => $hasGroup,
             'canTransfer' => $user->client->canTransfer(),
+            'noPassword'  => $user->hasNoPassword(),
         ], $user->toArray()));
     }
 
@@ -126,8 +126,7 @@ class AuthController extends AbstractController
     public
     function signup(
         AuthSignupRequest $request
-    ) : JsonResponse
-    {
+    ): JsonResponse {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
 
@@ -166,11 +165,9 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse
      */
-    public
-    function facebook(
+    public function facebook(
         AuthFacebookRequest $request
-    ) : JsonResponse
-    {
+    ): JsonResponse {
         $requestAttr = $request->inputs();
 
         try {
