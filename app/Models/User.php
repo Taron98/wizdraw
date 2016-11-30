@@ -168,7 +168,7 @@ class User extends AbstractModel implements
      *
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -195,7 +195,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -211,7 +211,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -243,7 +243,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getFacebookToken() : string
+    public function getFacebookToken(): string
     {
         return $this->facebookToken;
     }
@@ -259,7 +259,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getFacebookTokenExpire() : Carbon
+    public function getFacebookTokenExpire(): Carbon
     {
         return $this->facebookTokenExpire;
     }
@@ -275,7 +275,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getDeviceId() : string
+    public function getDeviceId(): string
     {
         return $this->deviceId;
     }
@@ -323,7 +323,7 @@ class User extends AbstractModel implements
     /**
      * @return boolean
      */
-    public function isPending() : bool
+    public function isPending(): bool
     {
         return $this->isPending;
     }
@@ -339,7 +339,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getPasswordChangedAt() : Carbon
+    public function getPasswordChangedAt(): Carbon
     {
         return $this->passwordChangedAt;
     }
@@ -355,7 +355,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getLastLoginAt() : Carbon
+    public function getLastLoginAt(): Carbon
     {
         return $this->lastLoginAt;
     }
@@ -366,6 +366,14 @@ class User extends AbstractModel implements
     public function setLastLoginAt(Carbon $lastLoginAt)
     {
         $this->lastLoginAt = $lastLoginAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNoPassword()
+    {
+        return Hash::check($this->verifyCode, $this->password);
     }
     //</editor-fold>
 

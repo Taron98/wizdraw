@@ -6,7 +6,6 @@ use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\CountryCache;
-use Wizdraw\Http\Requests\Client\CountryShowByLocationRequest;
 use Wizdraw\Services\GoogleService;
 
 /**
@@ -66,7 +65,8 @@ class CountryCacheService extends AbstractCacheService
             ->setCountryCode2($stdJson->country_code_2)
             ->setCountryCode3($stdJson->country_code_3)
             ->setCoinCode($stdJson->coin_id)
-            ->setPhoneCode($stdJson->phone_code);
+            ->setPhoneCode($stdJson->phone_code)
+            ->setIsActive($stdJson->is_active);
 
         return $entity;
     }
