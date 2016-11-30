@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
@@ -56,7 +57,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function password(UserPasswordRequest $request) : JsonResponse
+    public function password(UserPasswordRequest $request): JsonResponse
     {
         $user = $this->userService->updatePassword($request->user(), $request->input('password'));
 
@@ -70,7 +71,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function code(NoParamRequest $request) : JsonResponse
+    public function code(NoParamRequest $request): JsonResponse
     {
         $user = $request->user();
 
@@ -98,7 +99,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function verify(NoParamRequest $request, $verifyCode) : JsonResponse
+    public function verify(NoParamRequest $request, $verifyCode): JsonResponse
     {
         $user = $request->user();
 
@@ -126,7 +127,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function device(string $deviceId) : JsonResponse
+    public function device(string $deviceId): JsonResponse
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
@@ -137,17 +138,20 @@ class UserController extends AbstractController
 
         $client = $user->client;
 
+        $passwordIsVerifyCode = Hash::check($user->getVerifyCode(), $user->getPassword());
+
         return $this->respond([
-            'user'   => [
+            'user'       => [
                 'email'      => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
             ],
-            'client' => [
+            'client'     => [
                 'id'         => $client->getId(),
                 'firstName'  => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName'   => ($client->getLastName()) ?: '',
             ],
+            'noPassword' => $passwordIsVerifyCode,
         ]);
     }
 
