@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Http\Controllers;
 
-use Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
@@ -138,20 +137,18 @@ class UserController extends AbstractController
 
         $client = $user->client;
 
-        $passwordIsVerifyCode = Hash::check($user->getVerifyCode(), $user->getPassword());
-
         return $this->respond([
-            'user'       => [
+            'user'   => [
                 'email'      => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
+                'noPassword' => $user->hasNoPassword(),
             ],
-            'client'     => [
+            'client' => [
                 'id'         => $client->getId(),
                 'firstName'  => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName'   => ($client->getLastName()) ?: '',
             ],
-            'noPassword' => $passwordIsVerifyCode,
         ]);
     }
 
