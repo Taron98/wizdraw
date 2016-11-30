@@ -5,7 +5,8 @@
         "coin_id": "ARS",
         "country_code_2": "AR",
         "country_code_3": "ARG",
-        "phone_code": "54"
+        "phone_code": "54",
+        "is_active": 0
     },
     {
         "id": "93",
@@ -13,7 +14,8 @@
         "coin_id": "AUD",
         "country_code_2": "AU",
         "country_code_3": "AUS",
-        "phone_code": "61"
+        "phone_code": "61",
+        "is_active": 0
     },
     {
         "id": "99",
@@ -21,7 +23,8 @@
         "coin_id": "EUR",
         "country_code_2": "AT",
         "country_code_3": "AUT",
-        "phone_code": "43"
+        "phone_code": "43",
+        "is_active": 0
     },
     {
         "id": "61",
@@ -29,7 +32,8 @@
         "coin_id": "EUR",
         "country_code_2": "AZ",
         "country_code_3": "AZE",
-        "phone_code": "994"
+        "phone_code": "994",
+        "is_active": 0
     },
     {
         "id": "50",
@@ -37,7 +41,8 @@
         "coin_id": "BDT",
         "country_code_2": "BD",
         "country_code_3": "BGD",
-        "phone_code": "880"
+        "phone_code": "880",
+        "is_active": 0
     },
     {
         "id": "66",
@@ -45,7 +50,8 @@
         "coin_id": "EUR",
         "country_code_2": "BY",
         "country_code_3": "BLR",
-        "phone_code": "375"
+        "phone_code": "375",
+        "is_active": 0
     },
     {
         "id": "77",
@@ -53,7 +59,8 @@
         "coin_id": "EUR",
         "country_code_2": "BE",
         "country_code_3": "BEL",
-        "phone_code": "32"
+        "phone_code": "32",
+        "is_active": 0
     },
     {
         "id": "16",
@@ -61,7 +68,8 @@
         "coin_id": "BRL",
         "country_code_2": "BR",
         "country_code_3": "BRA",
-        "phone_code": "55"
+        "phone_code": "55",
+        "is_active": 0
     },
     {
         "id": "106",
@@ -69,7 +77,8 @@
         "coin_id": "BGN",
         "country_code_2": "BG",
         "country_code_3": "BGR",
-        "phone_code": "359"
+        "phone_code": "359",
+        "is_active": 0
     },
     {
         "id": "12",
@@ -77,7 +86,8 @@
         "coin_id": "CAD",
         "country_code_2": "CA",
         "country_code_3": "CAN",
-        "phone_code": "1"
+        "phone_code": "1",
+        "is_active": 0
     },
     {
         "id": "19",
@@ -85,7 +95,8 @@
         "coin_id": "CLP",
         "country_code_2": "CL",
         "country_code_3": "CHL",
-        "phone_code": "56"
+        "phone_code": "56",
+        "is_active": 0
     },
     {
         "id": "53",
@@ -93,7 +104,8 @@
         "coin_id": "RMB",
         "country_code_2": "CN",
         "country_code_3": "CHN",
-        "phone_code": "86"
+        "phone_code": "86",
+        "is_active": 0
     },
     {
         "id": "89",
@@ -101,7 +113,8 @@
         "coin_id": "EUR",
         "country_code_2": "CY",
         "country_code_3": "CYP",
-        "phone_code": "357"
+        "phone_code": "357",
+        "is_active": 0
     },
     {
         "id": "78",
@@ -109,7 +122,8 @@
         "coin_id": "DKK",
         "country_code_2": "DK",
         "country_code_3": "DNK",
-        "phone_code": "45"
+        "phone_code": "45",
+        "is_active": 0
     },
     {
         "id": "100",
@@ -117,7 +131,8 @@
         "coin_id": "EUR",
         "country_code_2": "EE",
         "country_code_3": "EST",
-        "phone_code": "372"
+        "phone_code": "372",
+        "is_active": 0
     },
     {
         "id": "57",
@@ -125,7 +140,8 @@
         "coin_id": "ETB",
         "country_code_2": "ET",
         "country_code_3": "ETH",
-        "phone_code": "251"
+        "phone_code": "251",
+        "is_active": 0
     },
     {
         "id": "59",
@@ -133,7 +149,8 @@
         "coin_id": "EUR",
         "country_code_3": "",
         "phone_code": "",
-        "country_code_2": ""
+        "country_code_2": "",
+        "is_active": 0
     },
     {
         "id": "101",
@@ -141,7 +158,8 @@
         "coin_id": "EUR",
         "country_code_2": "FI",
         "country_code_3": "FIN",
-        "phone_code": "358"
+        "phone_code": "358",
+        "is_active": 0
     },
     {
         "id": "102",
@@ -149,7 +167,8 @@
         "coin_id": "EUR",
         "country_code_2": "FR",
         "country_code_3": "FRA",
-        "phone_code": "33"
+        "phone_code": "33",
+        "is_active": 0
     },
     {
         "id": "67",
@@ -157,7 +176,8 @@
         "coin_id": "EUR",
         "country_code_2": "GE",
         "country_code_3": "GEO",
-        "phone_code": "995"
+        "phone_code": "995",
+        "is_active": 0
     },
     {
         "id": "103",
@@ -165,7 +185,8 @@
         "coin_id": "EUR",
         "country_code_2": "DE",
         "country_code_3": "DEU",
-        "phone_code": "49"
+        "phone_code": "49",
+        "is_active": 0
     },
     {
         "id": "79",
@@ -173,7 +194,8 @@
         "coin_id": "EUR",
         "country_code_2": "GR",
         "country_code_3": "GRC",
-        "phone_code": "30"
+        "phone_code": "30",
+        "is_active": 0
     },
     {
         "id": "56",
@@ -181,7 +203,8 @@
         "coin_id": "GYD",
         "country_code_2": "GY",
         "country_code_3": "GUY",
-        "phone_code": "592"
+        "phone_code": "592",
+        "is_active": 0
     },
     {
         "id": "90",
@@ -189,7 +212,8 @@
         "coin_id": "HKD",
         "country_code_2": "HK",
         "country_code_3": "HKG",
-        "phone_code": "852"
+        "phone_code": "852",
+        "is_active": 0
     },
     {
         "id": "54",
@@ -197,7 +221,8 @@
         "coin_id": "INR",
         "country_code_2": "IN",
         "country_code_3": "IND",
-        "phone_code": "91"
+        "phone_code": "91",
+        "is_active": 1
     },
     {
         "id": "80",
@@ -205,7 +230,8 @@
         "coin_id": "EUR",
         "country_code_2": "IE",
         "country_code_3": "IRL",
-        "phone_code": "353"
+        "phone_code": "353",
+        "is_active": 0
     },
     {
         "id": "13",
@@ -213,7 +239,8 @@
         "coin_id": "NIS",
         "country_code_2": "IL",
         "country_code_3": "ISR",
-        "phone_code": "972"
+        "phone_code": "972",
+        "is_active": 0
     },
     {
         "id": "88",
@@ -221,7 +248,8 @@
         "coin_id": "EUR",
         "country_code_2": "IT",
         "country_code_3": "ITA",
-        "phone_code": "39"
+        "phone_code": "39",
+        "is_active": 0
     },
     {
         "id": "10",
@@ -229,7 +257,8 @@
         "coin_id": "JOD",
         "country_code_2": "JO",
         "country_code_3": "JOR",
-        "phone_code": "962"
+        "phone_code": "962",
+        "is_active": 0
     },
     {
         "id": "68",
@@ -237,7 +266,8 @@
         "coin_id": "EUR",
         "country_code_2": "KZ",
         "country_code_3": "KAZ",
-        "phone_code": "7"
+        "phone_code": "7",
+        "is_active": 0
     },
     {
         "id": "69",
@@ -245,7 +275,8 @@
         "coin_id": "EUR",
         "country_code_2": "KG",
         "country_code_3": "KGZ",
-        "phone_code": "996"
+        "phone_code": "996",
+        "is_active": 0
     },
     {
         "id": "70",
@@ -253,7 +284,8 @@
         "coin_id": "EUR",
         "country_code_2": "LV",
         "country_code_3": "LVA",
-        "phone_code": "371"
+        "phone_code": "371",
+        "is_active": 0
     },
     {
         "id": "11",
@@ -261,7 +293,8 @@
         "coin_id": "LBP",
         "country_code_2": "LB",
         "country_code_3": "LBN",
-        "phone_code": "961"
+        "phone_code": "961",
+        "is_active": 0
     },
     {
         "id": "104",
@@ -269,7 +302,8 @@
         "coin_id": "EUR",
         "country_code_2": "LU",
         "country_code_3": "LUX",
-        "phone_code": "352"
+        "phone_code": "352",
+        "is_active": 0
     },
     {
         "id": "105",
@@ -277,7 +311,8 @@
         "coin_id": "EUR",
         "country_code_2": "MT",
         "country_code_3": "MLT",
-        "phone_code": "356"
+        "phone_code": "356",
+        "is_active": 0
     },
     {
         "id": "42",
@@ -285,7 +320,8 @@
         "coin_id": "USD",
         "country_code_3": "",
         "phone_code": "",
-        "country_code_2": ""
+        "country_code_2": "",
+        "is_active": 0
     },
     {
         "id": "25",
@@ -293,7 +329,8 @@
         "coin_id": "MXN",
         "country_code_2": "MX",
         "country_code_3": "MEX",
-        "phone_code": "52"
+        "phone_code": "52",
+        "is_active": 0
     },
     {
         "id": "72",
@@ -301,7 +338,8 @@
         "coin_id": "EUR",
         "country_code_2": "MD",
         "country_code_3": "MDA",
-        "phone_code": "373"
+        "phone_code": "373",
+        "is_active": 0
     },
     {
         "id": "94",
@@ -309,7 +347,8 @@
         "coin_id": "MAD",
         "country_code_2": "MA",
         "country_code_3": "MAR",
-        "phone_code": "212"
+        "phone_code": "212",
+        "is_active": 0
     },
     {
         "id": "6",
@@ -317,7 +356,8 @@
         "coin_id": "NPR",
         "country_code_2": "NP",
         "country_code_3": "NPL",
-        "phone_code": "977"
+        "phone_code": "977",
+        "is_active": 1
     },
     {
         "id": "81",
@@ -325,7 +365,8 @@
         "coin_id": "EUR",
         "country_code_2": "NL",
         "country_code_3": "NLD",
-        "phone_code": "31"
+        "phone_code": "31",
+        "is_active": 0
     },
     {
         "id": "95",
@@ -333,7 +374,8 @@
         "coin_id": "NZD",
         "country_code_2": "NZ",
         "country_code_3": "NZL",
-        "phone_code": "64"
+        "phone_code": "64",
+        "is_active": 0
     },
     {
         "id": "44",
@@ -341,7 +383,8 @@
         "coin_id": "XOF",
         "country_code_2": "NE",
         "country_code_3": "NER",
-        "phone_code": "227"
+        "phone_code": "227",
+        "is_active": 0
     },
     {
         "id": "52",
@@ -349,7 +392,8 @@
         "coin_id": "PKR",
         "country_code_2": "PK",
         "country_code_3": "PAK",
-        "phone_code": "92"
+        "phone_code": "92",
+        "is_active": 0
     },
     {
         "id": "3",
@@ -357,7 +401,8 @@
         "coin_id": "PHP",
         "country_code_2": "PH",
         "country_code_3": "PHL",
-        "phone_code": "63"
+        "phone_code": "63",
+        "is_active": 1
     },
     {
         "id": "92",
@@ -365,7 +410,8 @@
         "coin_id": "PLN",
         "country_code_2": "PL",
         "country_code_3": "POL",
-        "phone_code": "48"
+        "phone_code": "48",
+        "is_active": 0
     },
     {
         "id": "82",
@@ -373,7 +419,8 @@
         "coin_id": "EUR",
         "country_code_2": "PT",
         "country_code_3": "PRT",
-        "phone_code": "351"
+        "phone_code": "351",
+        "is_active": 0
     },
     {
         "id": "87",
@@ -381,7 +428,8 @@
         "coin_id": "EUR",
         "country_code_2": "RO",
         "country_code_3": "ROU",
-        "phone_code": "40"
+        "phone_code": "40",
+        "is_active": 0
     },
     {
         "id": "73",
@@ -389,7 +437,8 @@
         "coin_id": "EUR",
         "country_code_2": "RU",
         "country_code_3": "RUS",
-        "phone_code": "7"
+        "phone_code": "7",
+        "is_active": 0
     },
     {
         "id": "91",
@@ -397,7 +446,8 @@
         "coin_id": "SGD",
         "country_code_2": "SG",
         "country_code_3": "SGP",
-        "phone_code": "65"
+        "phone_code": "65",
+        "is_active": 0
     },
     {
         "id": "98",
@@ -405,7 +455,8 @@
         "coin_id": "EUR",
         "country_code_2": "SK",
         "country_code_3": "SVK",
-        "phone_code": "421"
+        "phone_code": "421",
+        "is_active": 0
     },
     {
         "id": "96",
@@ -413,7 +464,8 @@
         "coin_id": "ZAR",
         "country_code_2": "ZA",
         "country_code_3": "ZAF",
-        "phone_code": "27"
+        "phone_code": "27",
+        "is_active": 0
     },
     {
         "id": "83",
@@ -421,7 +473,8 @@
         "coin_id": "EUR",
         "country_code_2": "ES",
         "country_code_3": "ESP",
-        "phone_code": "34"
+        "phone_code": "34",
+        "is_active": 0
     },
     {
         "id": "110",
@@ -429,7 +482,8 @@
         "coin_id": "LKR",
         "country_code_3": "LKR",
         "phone_code": "94",
-        "country_code_2": "LK"
+        "country_code_2": "LK",
+        "is_active": 0
     },
     {
         "id": "84",
@@ -437,7 +491,8 @@
         "coin_id": "SEK",
         "country_code_2": "SE",
         "country_code_3": "SWE",
-        "phone_code": "46"
+        "phone_code": "46",
+        "is_active": 0
     },
     {
         "id": "85",
@@ -445,7 +500,8 @@
         "coin_id": "CHF",
         "country_code_2": "CH",
         "country_code_3": "CHE",
-        "phone_code": "41"
+        "phone_code": "41",
+        "is_active": 0
     },
     {
         "id": "74",
@@ -453,7 +509,8 @@
         "coin_id": "EUR",
         "country_code_2": "TJ",
         "country_code_3": "TJK",
-        "phone_code": "992"
+        "phone_code": "992",
+        "is_active": 0
     },
     {
         "id": "1",
@@ -461,7 +518,8 @@
         "coin_id": "THB",
         "country_code_2": "TH",
         "country_code_3": "THA",
-        "phone_code": "66"
+        "phone_code": "66",
+        "is_active": 1
     },
     {
         "id": "97",
@@ -469,7 +527,8 @@
         "coin_id": "TRY",
         "country_code_2": "TR",
         "country_code_3": "TUR",
-        "phone_code": "90"
+        "phone_code": "90",
+        "is_active": 0
     },
     {
         "id": "60",
@@ -477,7 +536,8 @@
         "coin_id": "GBP",
         "country_code_2": "GB",
         "country_code_3": "GBR",
-        "phone_code": "44"
+        "phone_code": "44",
+        "is_active": 0
     },
     {
         "id": "75",
@@ -485,7 +545,8 @@
         "coin_id": "EUR",
         "country_code_2": "UA",
         "country_code_3": "UKR",
-        "phone_code": "380"
+        "phone_code": "380",
+        "is_active": 0
     },
     {
         "id": "4",
@@ -493,7 +554,8 @@
         "coin_id": "USD",
         "country_code_2": "US",
         "country_code_3": "USA",
-        "phone_code": "1"
+        "phone_code": "1",
+        "is_active": 0
     },
     {
         "id": "76",
@@ -501,7 +563,8 @@
         "coin_id": "EUR",
         "country_code_2": "UZ",
         "country_code_3": "UZB",
-        "phone_code": "998"
+        "phone_code": "998",
+        "is_active": 0
     },
     {
         "id": "55",
@@ -509,6 +572,7 @@
         "coin_id": "VND",
         "country_code_2": "VN",
         "country_code_3": "VNM",
-        "phone_code": "84"
+        "phone_code": "84",
+        "is_active": 0
     }
 ]

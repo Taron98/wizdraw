@@ -379,6 +379,14 @@ class User extends AbstractModel implements
     {
         $this->lastLoginAt = $lastLoginAt;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasNoPassword()
+    {
+        return Hash::check($this->verifyCode, $this->password);
+    }
     //</editor-fold>
 
 }
