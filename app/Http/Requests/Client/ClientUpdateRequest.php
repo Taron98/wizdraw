@@ -29,7 +29,7 @@ class ClientUpdateRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'identityTypeId'    => 'integer',
+            'identityTypeId'    => 'integer|exists:identity_types,id',
             'identityNumber'    => 'min:5|max:20',
             'identityExpire'    => 'date|date_format:"Y-m-d"|after:today',
             'identityImage'     => 'base64image',
@@ -39,8 +39,8 @@ class ClientUpdateRequest extends AbstractRequest
             'birthDate'         => 'date_format:"Y-m-d"|before:18 years ago|after:100 years ago',
             'gender'            => 'in:male,female',
             'phone'             => 'phone:AUTO',
-            'defaultCountryId'  => 'integer',
-            'residentCountryId' => 'integer',
+            'defaultCountryId'  => 'integer|cacheExists:country',
+            'residentCountryId' => 'integer|cacheExists:country',
             'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
             'address'           => 'min:2|max:60',
