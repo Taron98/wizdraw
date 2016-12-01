@@ -64,8 +64,7 @@ return [
     |
     */
 
-    // todo: change to project default timezone
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jerusalem',
 
     /*
     |--------------------------------------------------------------------------

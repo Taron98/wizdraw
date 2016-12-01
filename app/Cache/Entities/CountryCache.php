@@ -33,6 +33,9 @@ class CountryCache extends AbstractCacheEntity
     /** @var  Collection */
     protected $commissions;
 
+    /** @var  int */
+    protected $timezoneOffset;
+
     /** @var  bool */
     protected $isActive = false;
 
@@ -172,6 +175,26 @@ class CountryCache extends AbstractCacheEntity
     public function setCommissions($commissions)
     {
         $this->commissions = $commissions;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimezoneOffset()
+    {
+        return $this->timezoneOffset;
+    }
+
+    /**
+     * @param int $timezoneOffset
+     *
+     * @return $this
+     */
+    public function setTimezoneOffset(int $timezoneOffset)
+    {
+        $this->timezoneOffset = $timezoneOffset;
 
         return $this;
     }

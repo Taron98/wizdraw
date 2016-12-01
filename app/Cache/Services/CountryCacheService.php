@@ -68,6 +68,10 @@ class CountryCacheService extends AbstractCacheService
             ->setPhoneCode($stdJson->phone_code)
             ->setIsActive($stdJson->is_active);
 
+        if (!empty($stdJson->timezone)) {
+            $entity->setTimezoneOffset($stdJson->timezone);
+        }
+
         return $entity;
     }
 
