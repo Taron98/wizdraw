@@ -216,7 +216,15 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function transfers(): HasMany
     {
-        return $this->hasMany(Transfer::class);
+        return $this->hasMany(Transfer::class)
+            ->with([
+                'client',
+                'receiverClient',
+                'bankAccount',
+                'natures',
+                'status',
+                'receipt',
+            ]);
     }
 
     /**

@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property integer $senderCountryId
  * @property float $amount
  * @property float $commission
+ * @property float $rate
  * @property integer $statusId
  * @property integer $receiptId
  * @property string $note
@@ -44,6 +45,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereNote($value)
@@ -64,6 +66,16 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $table = 'transfers';
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'total_amount',
+        'receiver_amount',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -78,6 +90,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'sender_country_id',
         'amount',
         'commission',
+        'rate',
         'status_id',
         'receipt_id',
         'note',
@@ -104,6 +117,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $casts = [
         'amount'     => 'real',
         'commission' => 'real',
+        'rate'       => 'real',
     ];
 
     /**
@@ -204,6 +218,28 @@ class Transfer extends AbstractModel implements AuthorizableContract
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
+    /**
+     * Total amount the receiver paid
+     *
+     * @return float
+     */
+    public function getTotalAmountAttribute()
+    {
+        return $this->attributes[ 'amount' ] + $this->attributes[ 'commission' ];
+    }
+
+    /**
+     * Total amount that the receiver get paid
+     *
+     * @return float
+     */
+    public function getReceiverAmountAttribute()
+    {
+        return $this->attributes[ 'amount' ] * $this->attributes[ 'rate' ];
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Getters & Setters">
     /**
      * @return string
      */
@@ -380,6 +416,26 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setCommission($commission): Transfer
     {
         $this->commission = $commission;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRate(): float
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param float $rate
+     *
+     * @return Transfer
+     */
+    public function setRate($rate): Transfer
+    {
+        $this->rate = $rate;
 
         return $this;
     }
