@@ -5,7 +5,9 @@ namespace Wizdraw\Http\Controllers;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\CountryCache;
+use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Cache\Services\CountryCacheService;
+use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
@@ -50,6 +52,9 @@ class TransferController extends AbstractController
     /** @var FeedbackService */
     private $feedbackService;
 
+    /** @var RateCacheService */
+    protected $rateCacheService;
+
     /**
      * TransferController constructor.
      *
@@ -60,6 +65,7 @@ class TransferController extends AbstractController
      * @param SmsService $smsService
      * @param CountryCacheService $countryCacheService
      * @param FeedbackService $feedbackService
+     * @param RateCacheService $rateCacheService
      */
     public function __construct(
         TransferService $transferService,
@@ -68,7 +74,8 @@ class TransferController extends AbstractController
         BankAccountService $bankAccountService,
         SmsService $smsService,
         CountryCacheService $countryCacheService,
-        FeedbackService $feedbackService
+        FeedbackService $feedbackService,
+        RateCacheService $rateCacheService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
@@ -77,6 +84,7 @@ class TransferController extends AbstractController
         $this->smsService = $smsService;
         $this->countryCacheService = $countryCacheService;
         $this->feedbackService = $feedbackService;
+        $this->rateCacheService = $rateCacheService;
     }
 
     /**
@@ -116,6 +124,8 @@ class TransferController extends AbstractController
         $totalAmount = $request->input('totalAmount');
         $receiverAmount = $request->input('receiverAmount');
         $receiverCountryId = $request->input('receiverCountryId');
+        /** @var RateCache $rate */
+        $rate = $this->rateCacheService->find($receiverCountryId);
 
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN);
@@ -125,7 +135,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if (!$this->transferService->validateTotals($receiverCountryId, $amount, $totalAmount, $receiverAmount)) {
+        if (!$this->transferService->validateTotals($rate, $amount, $totalAmount, $receiverAmount)) {
             return $this->respondWithError('totals_are_invalid', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -159,7 +169,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }
 
-        $transfer = $this->transferService->createTransfer($client, $bankAccount, $inputs);
+        $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
         return $this->respond(array_merge($transfer->toArray(), [
             'transactions' => $client->transfers->count(),
