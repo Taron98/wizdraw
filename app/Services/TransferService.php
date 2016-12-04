@@ -126,6 +126,7 @@ class TransferService extends AbstractService
     /**
      * @param RateCache $rate
      * @param float $amount
+     * @param float $commission
      * @param float $totalAmount
      * @param float $receiverAmount
      *
@@ -134,10 +135,10 @@ class TransferService extends AbstractService
     public function validateTotals(
         RateCache $rate,
         float $amount,
+        float $commission,
         float $totalAmount,
         float $receiverAmount
     ): bool {
-        $commission = 22;
         $calcTotalAmount = $amount + $commission;
 
         $calcReceiverAmount = $amount * $rate->getRate();

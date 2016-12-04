@@ -122,6 +122,7 @@ class TransferController extends AbstractController
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');
         $totalAmount = $request->input('totalAmount');
+        $commission = $request->input('commission');
         $receiverAmount = $request->input('receiverAmount');
         $receiverCountryId = $request->input('receiverCountryId');
         /** @var RateCache $rate */
@@ -135,7 +136,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if (!$this->transferService->validateTotals($rate, $amount, $totalAmount, $receiverAmount)) {
+        if (!$this->transferService->validateTotals($rate, $amount, $commission, $totalAmount, $receiverAmount)) {
             return $this->respondWithError('totals_are_invalid', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
