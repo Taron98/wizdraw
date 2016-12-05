@@ -41,9 +41,14 @@ class SmsService extends AbstractService
         $expireInMinutes = config('auth.verification.expire') / 60;
 
         if ($isFirstTime) {
-            $text = "Your Wizdraw verification code is {$verifyCode}.\nSimply open the app and enter the code to complete the process.\nThis code is valid for {$expireInMinutes} hours.";
+            $text = trans('sms.verification_first_time', [
+                'verifyCode'      => $verifyCode,
+                'expireInMinutes' => $expireInMinutes,
+            ]);
         } else {
-            $text = "Your verification code is {$verifyCode}.";
+            $text = trans('sms.verification', [
+                'verifyCode' => $verifyCode,
+            ]);
         }
 
         $text = urlencode($text);
@@ -61,17 +66,17 @@ class SmsService extends AbstractService
      */
     public function sendSmsTransferWaiting(Transfer $transfer, $phone, $receiverName)
     {
+        $attributes = [
+            'receiverName'      => $receiverName,
+            'transactionNumber' => $transfer->getTransactionNumber(),
+        ];
+
         if ($transfer->type->getType() === TransferType::TYPE_PICKUP_CASH) {
-            $text = "{$receiverName}\nsent you funds that are waiting for you to pick up. " .
-                "Your transaction number is {$transfer->getTransactionNumber()}. " .
-                "Open the Wizdraw app for more details.";
+            $text = trans('sms.transfer_receiver_pick_up', $attributes);
         } else {
-            $text = "{$receiverName}\ndeposited funds for you in your bank account. " .
-                "Your transaction number is {$transfer->getTransactionNumber()}. " .
-                "Open the Wizdraw app for more details.";
+            $text = trans('sms.transfer_receiver_deposit', $attributes);
         }
 
-//        $text = $transfer->getAmount() . ' ' . $currency . ' from ' . $receiverName . ' waiting for you to withdrawal.';
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 
@@ -87,7 +92,10 @@ class SmsService extends AbstractService
      */
     public function sendSmsTransferCompleted($phone, $senderName, string $transactionNumber = '')
     {
-        $text = "{$senderName}\nThe transaction has been successfully completed.\nThe transaction ID is: {$transactionNumber}\nThe Wizdraw team";
+        $text = trans('sms.transfer_sender', [
+            'senderName'        => $senderName,
+            'transactionNumber' => $transactionNumber,
+        ]);
         $text = urlencode($text);
         $response = $this->sendSms($phone, $text);
 
