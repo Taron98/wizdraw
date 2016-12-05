@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Cache\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -225,6 +226,23 @@ class CountryCache extends AbstractCacheEntity
     public function getKey(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @param Carbon $targetTime
+     *
+     * @return Carbon
+     */
+    public function getLocalTime(Carbon $targetTime = null)
+    {
+        if (is_null($targetTime)) {
+            $targetTime = Carbon::now();
+        }
+
+        $diffHoursUserProject = diff_hours_user_and_project($this->timezoneOffset);
+        $targetTime->addHours($diffHoursUserProject);
+
+        return $targetTime;
     }
 
 }

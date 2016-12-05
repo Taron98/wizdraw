@@ -53,7 +53,7 @@ class TransferCreateRequest extends AbstractRequest
 
             'deposit'                => 'required_without:pickup|array',
             'deposit.bankId'         => 'required_without:pickup|integer|cacheExists:bank',
-            'deposit.bankBranchId'   => 'integer',//cacheExists:bankBranch
+            'deposit.bankBranchId'   => 'integer',//todo:cacheExists:bankBranch
             'deposit.bankBranchName' => 'string',
             'deposit.accountNumber'  => 'required_without:pickup|string',
 

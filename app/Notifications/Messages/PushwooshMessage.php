@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Notifications\Messages;
 
+use Carbon\Carbon;
 use Gomoob\Pushwoosh\Model\Notification\Android;
 use Gomoob\Pushwoosh\Model\Notification\Notification;
 
@@ -14,6 +15,9 @@ class PushwooshMessage
 
     /** @var  string */
     protected $content;
+
+    /** @var  Carbon */
+    protected $sendDate;
 
     /** @var  string[] */
     protected $devices;
@@ -55,9 +59,29 @@ class PushwooshMessage
      *
      * @return PushwooshMessage
      */
-    public function setContent(string $content)
+    public function setContent(string $content): PushwooshMessage
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getSendDate()
+    {
+        return $this->sendDate;
+    }
+
+    /**
+     * @param Carbon $sendDate
+     *
+     * @return PushwooshMessage
+     */
+    public function setSendDate(Carbon $sendDate): PushwooshMessage
+    {
+        $this->sendDate = $sendDate;
 
         return $this;
     }
@@ -102,12 +126,21 @@ class PushwooshMessage
         return $this;
     }
 
+    /**
+     * @return Notification
+     */
     public function toNotification()
     {
-        return Notification::create()
+        $notification = Notification::create()
             ->setAndroid($this->android)
             ->setContent($this->content)
             ->setDevices($this->devices);
+
+        if ($this->sendDate instanceof Carbon) {
+            $notification->setSendDate($this->sendDate);
+        }
+
+        return $notification;
     }
 
 }

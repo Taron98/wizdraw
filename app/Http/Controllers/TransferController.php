@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\CountryCache;
@@ -17,6 +18,7 @@ use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\TransferType;
+use Wizdraw\Notifications\TransferMissingReceipt;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
@@ -113,9 +115,10 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function create(TransferCreateRequest $request) : JsonResponse
+    public function create(TransferCreateRequest $request): JsonResponse
     {
-        $client = $request->user()->client;
+        $user = $request->user();
+        $client = $user->client;
         $inputs = $request->inputs();
 
         $receiverClientId = $request->input('receiverClientId');
@@ -172,6 +175,11 @@ class TransferController extends AbstractController
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
+        $user->notify(
+            (new TransferMissingReceipt($transfer))
+                ->delay(Carbon::now()->addHour())
+        );
+
         return $this->respond(array_merge($transfer->toArray(), [
             'transactions' => $client->transfers->count(),
         ]));
@@ -183,7 +191,7 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer) : JsonResponse
+    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer): JsonResponse
     {
         $client = $request->user()->client;
 
@@ -235,7 +243,7 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function list(NoParamRequest $request) : JsonResponse
+    public function list(NoParamRequest $request): JsonResponse
     {
         $client = $request->user()->client;
 
@@ -249,7 +257,7 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function nearby(TransferNearbyRequest $request) : JsonResponse
+    public function nearby(TransferNearbyRequest $request): JsonResponse
     {
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
