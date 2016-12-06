@@ -14,7 +14,7 @@ use Wizdraw\Models\TransferType;
 class SmsService extends AbstractService
 {
 
-    const API_URL = 'https://188.138.96.222/VSServices/SendSms.ashx?login=1258965269888&pass=Test$WF@01!';
+    const API_URL = 'https://154.48.192.2/VSServices/SendSms.ashx?login=1258965269888&pass=Test$WF@01!';
 
     /** @var Client */
     private $guzzleClient;
