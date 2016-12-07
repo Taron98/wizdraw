@@ -35,6 +35,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
  * @property-read \Wizdraw\Models\TransferStatus $status
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
+ * @property-read mixed $totalAmount
+ * @property-read mixed $receiverAmount
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)

@@ -561,6 +561,9 @@ class Client extends AbstractModel implements AuthorizableContract
         $this->isApproved = $isApproved;
     }
 
+    /**
+     * @return bool
+     */
     public function canTransfer(): bool
     {
         return !(!$this->isApproved && $this->transfers->count() > 0);
@@ -571,7 +574,13 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getFullName()
     {
-        return "{$this->firstName} {$this->middleName} {$this->lastName}";
+        $fullName = implode(' ', array_filter([
+            $this->firstName,
+            $this->middleName,
+            $this->lastName,
+        ]));
+
+        return $fullName;
     }
     //</editor-fold>
 
