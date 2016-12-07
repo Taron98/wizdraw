@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'wicsms' => [
+        'from'  => 'Wizdraw',
+        'host'  => env('WIC_SMS_HOST'),
+        'login' => env('WIC_SMS_LOGIN'),
+        'pass'  => env('WIC_SMS_PASS'),
+    ],
+
 ];
