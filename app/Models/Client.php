@@ -144,7 +144,9 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         static::updating(function ($model) {
             /** @var Client $model */
-            $model->didSetup = 1;
+            if (!empty($model->identityNumber)) {
+                $model->didSetup = 1;
+            }
         });
     }
 

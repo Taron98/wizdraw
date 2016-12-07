@@ -169,7 +169,7 @@ Route::group(['prefix' => 'v1/'], function () {
         // Transfer
         Route::group(['prefix' => 'transfer/'], function () {
 
-            Route::get('/statuses', [
+            Route::get('/status', [
                 'as'   => 'transfer.statuses',
                 'uses' => 'TransferController@statuses',
             ]);
