@@ -13,9 +13,9 @@ use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
 use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
+use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
-use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
@@ -331,26 +331,36 @@ class TransferController extends AbstractController
     }
 
     /**
-     * @param NoParamRequest $request
+     * @param TransferStatusRequest $request
      * @param Transfer $transfer
      *
      * @return JsonResponse
      */
-    public function abort(NoParamRequest $request, Transfer $transfer)
+    public function status(TransferStatusRequest $request, Transfer $transfer)
     {
         $client = $request->user()->client;
 
-        if ($client->cannot('abort', $transfer)) {
+        if ($client->cannot('updateStatus', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
 
-        if (!$this->transferService->changeStatus($transfer, TransferStatus::STATUS_ABORTED)) {
+        if (!$this->transferService->changeStatus($transfer, $request->input('transferStatusId'))) {
             return $this->respondWithError('could_not_update_status', Response::HTTP_FORBIDDEN);
         }
 
         $canTransfer = $request->user()->client->canTransfer();
 
         return $this->respond(compact('canTransfer'));
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function statuses()
+    {
+        $statuses = $this->transferService->statuses();
+
+        return $this->respond($statuses);
     }
 
 }

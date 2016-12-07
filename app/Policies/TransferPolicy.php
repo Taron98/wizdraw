@@ -62,7 +62,7 @@ class TransferPolicy
      *
      * @return bool
      */
-    public function abort(Client $client, Transfer $transfer)
+    public function updateStatus(Client $client, Transfer $transfer)
     {
         return ($client->getId() === $transfer->client->getId());
     }
