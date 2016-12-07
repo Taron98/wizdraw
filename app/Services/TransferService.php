@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Illuminate\Database\Eloquent\Collection;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\BankAccount;
@@ -148,16 +149,24 @@ class TransferService extends AbstractService
 
     /**
      * @param Transfer $transfer
-     * @param string $statusName
+     * @param int $statusId
      *
      * @return bool
      */
-    public function changeStatus(Transfer $transfer, string $statusName): bool
+    public function changeStatus(Transfer $transfer, int $statusId) : bool
     {
-        $status = $this->transferStatusService->findByStatus($statusName);
+        $status = $this->transferStatusService->find($statusId);
         $isUpdated = $transfer->status()->associate($status)->save();
 
         return $isUpdated;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function statuses()
+    {
+        return $this->transferStatusService->all();
     }
 
 }
