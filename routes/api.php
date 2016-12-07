@@ -169,6 +169,11 @@ Route::group(['prefix' => 'v1/'], function () {
         // Transfer
         Route::group(['prefix' => 'transfer/'], function () {
 
+            Route::get('/statuses', [
+                'as'   => 'transfer.statuses',
+                'uses' => 'TransferController@statuses',
+            ]);
+
             Route::get('/able/', [
                 'as'   => 'transfer.able',
                 'uses' => 'TransferController@able',
@@ -189,9 +194,9 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@addReceipt',
             ]);
 
-            Route::post('/{transfer}/abort/', [
-                'as'   => 'transfer.abort',
-                'uses' => 'TransferController@abort',
+            Route::post('/{transfer}/status/', [
+                'as'   => 'transfer.status',
+                'uses' => 'TransferController@status',
             ]);
 
             Route::get('/', [
