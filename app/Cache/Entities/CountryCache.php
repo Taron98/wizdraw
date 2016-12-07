@@ -33,6 +33,9 @@ class CountryCache extends AbstractCacheEntity
     /** @var  Collection */
     protected $commissions;
 
+    /** @var  bool */
+    protected $isActive = false;
+
     /**
      * @return string
      */
@@ -163,16 +166,40 @@ class CountryCache extends AbstractCacheEntity
 
     /**
      * @param LengthAwarePaginator $commissions
+     *
+     * @return $this
      */
     public function setCommissions($commissions)
     {
         $this->commissions = $commissions;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return $this
+     */
+    public function setIsActive(bool $isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->id;
     }

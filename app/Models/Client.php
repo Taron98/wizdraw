@@ -172,7 +172,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function identityType() : BelongsTo
+    public function identityType(): BelongsTo
     {
         return $this->belongsTo(IdentityType::class);
     }
@@ -182,7 +182,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return HasOne
      */
-    public function user() : HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
@@ -192,7 +192,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsToMany
      */
-    public function groups() : BelongsToMany
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'group_clients')
             ->withPivot(['is_approved']);
@@ -203,7 +203,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return HasMany
      */
-    public function adminGroups() : HasMany
+    public function adminGroups(): HasMany
     {
         return $this->hasMany(Group::class, 'admin_client_id')
             ->with('memberClients');
@@ -214,9 +214,17 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return HasMany
      */
-    public function transfers() : HasMany
+    public function transfers(): HasMany
     {
-        return $this->hasMany(Transfer::class);
+        return $this->hasMany(Transfer::class)
+            ->with([
+                'client',
+                'receiverClient',
+                'bankAccount',
+                'natures',
+                'status',
+                'receipt',
+            ]);
     }
 
     /**
@@ -224,7 +232,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return HasMany
      */
-    public function receivedTransfers() : HasMany
+    public function receivedTransfers(): HasMany
     {
         return $this->hasMany(Transfer::class, 'receiver_client_id');
     }
@@ -278,7 +286,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return Collection
      */
-    public function senders() : Collection
+    public function senders(): Collection
     {
         /** @var Collection $transfers */
         $transfers = $this->receivedTransfers()->with('client')->get();
@@ -294,7 +302,7 @@ class Client extends AbstractModel implements AuthorizableContract
      *
      * @return Collection
      */
-    public function receivers() : Collection
+    public function receivers(): Collection
     {
         /** @var Collection $receivedTransfers */
         $receivedTransfers = $this->receivedTransfers()->with('receiverClient')->get();
@@ -308,7 +316,7 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return HasMany
      */
-    public function bankAccounts() : HasMany
+    public function bankAccounts(): HasMany
     {
         return $this->hasMany(BankAccount::class);
     }
@@ -551,11 +559,9 @@ class Client extends AbstractModel implements AuthorizableContract
         $this->isApproved = $isApproved;
     }
 
-    public function canTransfer() : bool
+    public function canTransfer(): bool
     {
-//        return !(!$this->isApproved && $this->transfers->count() > 0);
-        // todo: change
-        return true;
+        return !(!$this->isApproved && $this->transfers->count() > 0);
     }
 
     /**

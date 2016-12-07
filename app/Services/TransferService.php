@@ -4,7 +4,6 @@ namespace Wizdraw\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 use Wizdraw\Cache\Entities\RateCache;
-use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\BankAccount;
 use Wizdraw\Models\Client;
@@ -31,9 +30,6 @@ class TransferService extends AbstractService
     /** @var  NatureService */
     protected $natureService;
 
-    /** @var RateCacheService */
-    protected $rateCacheService;
-
     /**
      * TransferService constructor.
      *
@@ -41,20 +37,17 @@ class TransferService extends AbstractService
      * @param TransferReceiptService $transferReceiptService
      * @param TransferStatusService $transferStatusService
      * @param NatureService $natureService
-     * @param RateCacheService $rateCacheService
      */
     public function __construct(
         TransferRepository $transferRepository,
         TransferReceiptService $transferReceiptService,
         TransferStatusService $transferStatusService,
-        NatureService $natureService,
-        RateCacheService $rateCacheService
+        NatureService $natureService
     ) {
         $this->repository = $transferRepository;
         $this->transferReceiptService = $transferReceiptService;
         $this->transferStatusService = $transferStatusService;
         $this->natureService = $natureService;
-        $this->rateCacheService = $rateCacheService;
     }
 
     /**
@@ -76,17 +69,24 @@ class TransferService extends AbstractService
 
     /**
      * @param Client $senderClient
+     * @param RateCache $rate
      * @param BankAccount $bankAccount
      * @param array $attributes
      *
-     * @return void|AbstractModel
+     * @return AbstractModel
      */
-    public function createTransfer(Client $senderClient, BankAccount $bankAccount = null, array $attributes = [])
-    {
+    public function createTransfer(
+        Client $senderClient,
+        RateCache $rate,
+        BankAccount $bankAccount = null,
+        array $attributes = []
+    ) {
         $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
+
+        $attributes['rate'] = $rate->getRate();
 
         $transfer = $this->repository->createWithRelation($senderClient, $bankAccount, $initStatus, $defaultNatureIds,
             $attributes);
@@ -117,7 +117,7 @@ class TransferService extends AbstractService
      *
      * @return bool
      */
-    public function validateMonthly(float $amount) : bool
+    public function validateMonthly(float $amount): bool
     {
         $monthlyTotal = $amount + $this->repository->monthlyTransfer();
 
@@ -125,25 +125,23 @@ class TransferService extends AbstractService
     }
 
     /**
-     * @param int $receiverCountryId
+     * @param RateCache $rate
      * @param float $amount
+     * @param float $commission
      * @param float $totalAmount
      * @param float $receiverAmount
      *
      * @return bool
      */
     public function validateTotals(
-        int $receiverCountryId,
+        RateCache $rate,
         float $amount,
+        float $commission,
         float $totalAmount,
         float $receiverAmount
-    ) : bool
-    {
-        $commission = 22;
+    ): bool {
         $calcTotalAmount = $amount + $commission;
 
-        /** @var RateCache $rate */
-        $rate = $this->rateCacheService->find($receiverCountryId);
         $calcReceiverAmount = $amount * $rate->getRate();
 
         return (!bccomp($totalAmount, $calcTotalAmount, 3)) && !bccomp($receiverAmount, $calcReceiverAmount, 3);
