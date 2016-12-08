@@ -45,7 +45,15 @@ class ClientController extends AbstractController
     public function update(ClientUpdateRequest $request): JsonResponse
     {
         $clientId = $request->user()->client->getId();
-        $client = $this->clientService->update($request->inputs(), $clientId);
+
+        // todo: temporary fix for the bug in the application
+        // todo: change back after application upgrade
+        $inputs = $request->inputs();
+        if (isset($inputs[ 'identity_type_id' ])) {
+            $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
+        }
+
+        $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
             return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST);
