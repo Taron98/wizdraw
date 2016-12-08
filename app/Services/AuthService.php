@@ -35,7 +35,7 @@ class AuthService extends AbstractService
      *
      * @return string
      */
-    public function createTokenFromCredentials(array $credentials) : string
+    public function createTokenFromCredentials(array $credentials): string
     {
         $token = $this->jwtAuth->attempt($credentials);
 
@@ -47,7 +47,7 @@ class AuthService extends AbstractService
      *
      * @return string
      */
-    public function createTokenFromUser(User $user) : string
+    public function createTokenFromUser(User $user): string
     {
         return $this->jwtAuth->fromUser($user);
     }
@@ -57,11 +57,11 @@ class AuthService extends AbstractService
      *
      * @return string
      */
-    public function createTokenFromFbId(int $facebookId) : string
+    public function createTokenFromFbId(int $facebookId): string
     {
         $user = $this->userService->findByFacebookId($facebookId);
 
-        return $this->jwtAuth->fromUser($user);
+        return $this->createTokenFromUser($user);
     }
 
 }

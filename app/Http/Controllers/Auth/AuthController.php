@@ -15,12 +15,11 @@ use Wizdraw\Http\Requests\Auth\AuthLoginRequest;
 use Wizdraw\Http\Requests\Auth\AuthSignupRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
+use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FacebookService;
-use Wizdraw\Services\GroupService;
-use Wizdraw\Services\SmsService;
 use Wizdraw\Services\UserService;
 
 
@@ -46,12 +45,6 @@ class AuthController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
-    /** @var  SmsService */
-    private $smsService;
-
-    /** @var  GroupService */
-    private $groupService;
-
     /**
      * AuthController constructor.
      *
@@ -60,25 +53,19 @@ class AuthController extends AbstractController
      * @param UserRepository $userRepository
      * @param UserService $userService
      * @param ClientService $clientService
-     * @param SmsService $smsService
-     * @param GroupService $groupService
      */
     public function __construct(
         FacebookService $facebookService,
         AuthService $authService,
         UserRepository $userRepository,
         UserService $userService,
-        ClientService $clientService,
-        SmsService $smsService,
-        GroupService $groupService
+        ClientService $clientService
     ) {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
         $this->clientService = $clientService;
-        $this->smsService = $smsService;
-        $this->groupService = $groupService;
     }
 
     /**
@@ -146,11 +133,7 @@ class AuthController extends AbstractController
             return $this->respondWithError('could_not_create_user');
         }
 
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsNewClient($clientAttrs[ 'phone' ], $user[ 'verify_code' ], true);
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms');
-        }
+        $client->notify(new ClientVerify(true));
 
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),

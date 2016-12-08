@@ -5,9 +5,8 @@ namespace Wizdraw\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
-use Wizdraw\Models\TransferType;
-use Wizdraw\Models\User;
 use Wizdraw\Notifications\Channels\SmsChannel;
 use Wizdraw\Notifications\Messages\SmsMessage;
 
@@ -45,11 +44,11 @@ class TransferSent extends Notification implements ShouldQueue
     }
 
     /**
-     * @param User $notifiable
+     * @param Client $notifiable
      *
      * @return SmsMessage
      */
-    public function toSms(User $notifiable)
+    public function toSms(Client $notifiable)
     {
         $attributes = [
             'senderName'        => $this->transfer->client->getFullName(),

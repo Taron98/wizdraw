@@ -12,13 +12,13 @@ use Illuminate\Notifications\Notification;
 class SmsChannel
 {
 
-    const API_URL = 'https://%s/VSServices/SendSms.ashx?login=%s&pass=%s&to=%s&text=%s';
+    const API_URL = 'https://%s/VSServices/SendSms.ashx?login=%s&pass=%s&from=%s&to=%s&text=%s';
 
     /** @var Client */
     private $http;
 
     /**
-     * SmsService constructor.
+     * SmsChannel constructor.
      *
      * @param Client $http
      */
@@ -40,6 +40,7 @@ class SmsChannel
             config('services.wicsms.host'),
             config('services.wicsms.login'),
             config('services.wicsms.pass'),
+            config('services.wicsms.from'),
             $to,
             urlencode($text)
         );

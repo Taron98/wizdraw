@@ -5,7 +5,7 @@ namespace Wizdraw\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
-use Wizdraw\Models\User;
+use Wizdraw\Models\Client;
 use Wizdraw\Notifications\Channels\SmsChannel;
 use Wizdraw\Notifications\Messages\SmsMessage;
 
@@ -43,14 +43,14 @@ class ClientVerify extends Notification implements ShouldQueue
     }
 
     /**
-     * @param User $notifiable
+     * @param Client $notifiable
      *
      * @return SmsMessage
      */
-    public function toSms(User $notifiable)
+    public function toSms(Client $notifiable)
     {
         $attributes = [
-            'verifyCode' => $notifiable->getVerifyCode(),
+            'verifyCode' => $notifiable->user->getVerifyCode(),
             'expire'     => config('auth.verification.expire') / 60,
         ];
 

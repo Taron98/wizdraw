@@ -169,14 +169,6 @@ class User extends AbstractModel implements
         return $user;
     }
 
-    /**
-     * @return string
-     */
-    public function routeNotificationForSms()
-    {
-        return '+' . preg_replace('/[^0-9]/', '', $this->client->phone);
-    }
-
     //<editor-fold desc="Relationships">
     /**
      * One-to-one relationship with clients table
