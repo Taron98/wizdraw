@@ -5,9 +5,7 @@ namespace Wizdraw\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Entities\RateCache;
-use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
@@ -18,11 +16,12 @@ use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
+use Wizdraw\Notifications\TransferReceived;
+use Wizdraw\Notifications\TransferSent;
 use Wizdraw\Notifications\TransferMissingReceipt;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
-use Wizdraw\Services\SmsService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 
@@ -45,12 +44,6 @@ class TransferController extends AbstractController
     /** @var BankAccountService */
     private $bankAccountService;
 
-    /** @var  SmsService */
-    private $smsService;
-
-    /** @var  CountryCacheService */
-    private $countryCacheService;
-
     /** @var FeedbackService */
     private $feedbackService;
 
@@ -64,8 +57,6 @@ class TransferController extends AbstractController
      * @param ClientService $clientService
      * @param TransferReceiptService $transferReceiptService
      * @param BankAccountService $bankAccountService
-     * @param SmsService $smsService
-     * @param CountryCacheService $countryCacheService
      * @param FeedbackService $feedbackService
      * @param RateCacheService $rateCacheService
      */
@@ -74,8 +65,6 @@ class TransferController extends AbstractController
         ClientService $clientService,
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
-        SmsService $smsService,
-        CountryCacheService $countryCacheService,
         FeedbackService $feedbackService,
         RateCacheService $rateCacheService
     ) {
@@ -83,8 +72,6 @@ class TransferController extends AbstractController
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
         $this->bankAccountService = $bankAccountService;
-        $this->smsService = $smsService;
-        $this->countryCacheService = $countryCacheService;
         $this->feedbackService = $feedbackService;
         $this->rateCacheService = $rateCacheService;
     }
@@ -214,24 +201,9 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
-        $receiverPhone = $transfer->receiverClient->getPhone();
 
-        /** @var CountryCache $coin */
-        $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
-
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferWaiting($transfer, $receiverPhone, $client->getFullName(),
-            $country->getCoinCode());
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms_to_receiver');
-        }
-
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferCompleted($client->getPhone(), $client->getFullName(),
-            $transfer->getTransactionNumber());
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms_to_sender');
-        }
+        $transfer->client->notify(new TransferSent($transfer));
+        $transfer->receiverClient->notify(new TransferReceived($transfer));
 
         return $this->respond($transfer);
     }
