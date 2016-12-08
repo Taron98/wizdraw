@@ -47,7 +47,7 @@ class PushwooshChannel
             ->setDevices([$notifiable->routeNotificationForPushwoosh()])
             ->toNotification();
 
-        $request = CreateMessageRequest::create()
+        $request = (new CreateMessageRequest)
             ->addNotification($pushwooshNotification);
 
         $response = $this->pushwoosh->createMessage($request);

@@ -60,7 +60,7 @@ abstract class AbstractCacheService
     /**
      * @return Collection
      */
-    public function all() : Collection
+    public function all(): Collection
     {
         $entitiesKeys = $this->redis->keys(redis_key($this->keyPrefix, '*'));
         $entities = $this->transformIdsToEntities($entitiesKeys);
@@ -71,7 +71,7 @@ abstract class AbstractCacheService
     /**
      * @return LengthAwarePaginator
      */
-    public function allPaginated() : LengthAwarePaginator
+    public function allPaginated(): LengthAwarePaginator
     {
         $all = $this->all();
 
@@ -127,7 +127,7 @@ abstract class AbstractCacheService
      *
      * @return Collection
      */
-    private function cleanEntities(Collection $entities) : Collection
+    private function cleanEntities(Collection $entities): Collection
     {
         // Remove invalid data
         $entities = $entities->filter(function (AbstractCacheEntity $entity) {
@@ -188,7 +188,7 @@ abstract class AbstractCacheService
      *
      * @return Collection
      */
-    private function transformIdsToEntities(array $entityKeys = []) : Collection
+    private function transformIdsToEntities(array $entityKeys = []): Collection
     {
         $entities = collect($entityKeys)->map(function ($entityKey) {
             return $this->find(redis_unkey($entityKey));
@@ -202,7 +202,7 @@ abstract class AbstractCacheService
      *
      * @return LengthAwarePaginator
      */
-    protected function paginate(Collection $entities) : LengthAwarePaginator
+    protected function paginate(Collection $entities): LengthAwarePaginator
     {
         // todo: change implementation to get only $perPage from redis
         $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
@@ -216,7 +216,6 @@ abstract class AbstractCacheService
             'pageName' => self::PAGE_NAME,
         ]);
 
-        // todo: camel case?
         return $paginator;
     }
 

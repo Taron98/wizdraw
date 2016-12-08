@@ -57,7 +57,7 @@ class TransferSent extends Notification implements ShouldQueue
 
         $text = trans('sms.transfer_sender', $attributes);
 
-        return SmsMessage::create()
+        return (new SmsMessage)
             ->setText($text);
     }
 
