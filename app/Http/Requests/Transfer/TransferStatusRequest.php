@@ -29,7 +29,8 @@ class TransferStatusRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'transferStatusId' => 'required|integer|exists:transfer_statuses,id',
+            // todo: remove "in:9" when you need more statuses to be updated
+            'transferStatusId' => 'required|integer|exists:transfer_statuses,id|in:9',
         ];
     }
 

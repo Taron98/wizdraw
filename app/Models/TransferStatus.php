@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer $id
  * @property string $status
+ * @property string $original
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginal($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
@@ -27,17 +29,17 @@ class TransferStatus extends AbstractModel
 
     const STATUS_ABORTED = 'ABORTED';
     const STATUS_WAIT = 'WAIT';
-    const STATUS_WAIT_FOR_PROCESS_OBLIGO = 'WAIT FOR PROCESS(Obligo)';
+    const STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN = 'Pending for Payment at 7-Eleven';
     const STATUS_WAIT_FOR_PROCESS = 'WAIT FOR PROCESS';
     const STATUS_WAIT_FOR_PROCESS_COMPLIANCE = 'WAIT FOR PROCESS(Compliance)';
     const STATUS_CHECK_DOCUMENTS = 'CHECK DOCUMENTS';
     const STATUS_PENDING = 'PENDING';
-    const STATUS_POSTED = 'POSTED';
-    const STATUS_FAILED = 'FAILED';
+    const STATUS_AWAITING_WITHDRAWAL = 'Awaiting withdrawal';
+    const STATUS_CANCELLED = 'Cancelled';
     const STATUS_CHANGE = 'CHANGE';
     const STATUS_REQUEST_CANCEL = 'REQUEST CANCEL';
     const STATUS_FOR_VERIFICATION = 'FOR VERIFICATION';
-    const STATUS_CONFIRMED = 'CONFIRMED';
+    const STATUS_COMPLETED = 'Completed';
 
     /**
      * The table associated with the model.
@@ -53,6 +55,7 @@ class TransferStatus extends AbstractModel
      */
     protected $fillable = [
         'status',
+        'original',
         'deleted_at',
     ];
 
@@ -109,6 +112,22 @@ class TransferStatus extends AbstractModel
     public function setStatus(string $status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginal(): string
+    {
+        return $this->original;
+    }
+
+    /**
+     * @param string $original
+     */
+    public function setOriginal(string $original)
+    {
+        $this->original = $original;
     }
     //</editor-fold>
 
