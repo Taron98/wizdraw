@@ -17,14 +17,15 @@
         "arcanedev/log-viewer": "^3.10",
         "predis/predis": "^1.1",
         "guzzlehttp/guzzle": "^6.2",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "hoy/pushwoosh": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.0",
-        "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*",
+        "symfony/css-selector": "3.2.*",
+        "symfony/dom-crawler": "3.2.*",
         "barryvdh/laravel-ide-helper": "~2.2",
         "filp/whoops": "^2.1"
     },
@@ -67,5 +68,7 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

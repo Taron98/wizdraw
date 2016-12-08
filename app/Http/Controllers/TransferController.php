@@ -2,10 +2,10 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\RateCache;
-use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
@@ -18,6 +18,7 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
 use Wizdraw\Notifications\TransferReceived;
 use Wizdraw\Notifications\TransferSent;
+use Wizdraw\Notifications\TransferMissingReceipt;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
@@ -43,9 +44,6 @@ class TransferController extends AbstractController
     /** @var BankAccountService */
     private $bankAccountService;
 
-    /** @var  CountryCacheService */
-    private $countryCacheService;
-
     /** @var FeedbackService */
     private $feedbackService;
 
@@ -59,7 +57,6 @@ class TransferController extends AbstractController
      * @param ClientService $clientService
      * @param TransferReceiptService $transferReceiptService
      * @param BankAccountService $bankAccountService
-     * @param CountryCacheService $countryCacheService
      * @param FeedbackService $feedbackService
      * @param RateCacheService $rateCacheService
      */
@@ -68,7 +65,6 @@ class TransferController extends AbstractController
         ClientService $clientService,
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
-        CountryCacheService $countryCacheService,
         FeedbackService $feedbackService,
         RateCacheService $rateCacheService
     ) {
@@ -76,7 +72,6 @@ class TransferController extends AbstractController
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
         $this->bankAccountService = $bankAccountService;
-        $this->countryCacheService = $countryCacheService;
         $this->feedbackService = $feedbackService;
         $this->rateCacheService = $rateCacheService;
     }
@@ -109,7 +104,8 @@ class TransferController extends AbstractController
      */
     public function create(TransferCreateRequest $request): JsonResponse
     {
-        $client = $request->user()->client;
+        $user = $request->user();
+        $client = $user->client;
         $inputs = $request->inputs();
 
         $receiverClientId = $request->input('receiverClientId');
@@ -165,6 +161,11 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+
+        $user->notify(
+            (new TransferMissingReceipt($transfer))
+                ->delay(Carbon::now()->addHour())
+        );
 
         return $this->respond(array_merge($transfer->toArray(), [
             'transactions' => $client->transfers->count(),

@@ -84,7 +84,7 @@ class BankAccount extends AbstractModel
      *
      * @return HasMany
      */
-    public function transfers() : HasMany
+    public function transfers(): HasMany
     {
         return $this->hasMany(Transfer::class);
     }
@@ -94,7 +94,7 @@ class BankAccount extends AbstractModel
      *
      * @return BelongsTo
      */
-    public function bankBranch() : BelongsTo
+    public function bankBranch(): BelongsTo
     {
         return $this->belongsTo(BankBranch::class);
     }
@@ -104,7 +104,7 @@ class BankAccount extends AbstractModel
      *
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }

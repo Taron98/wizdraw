@@ -4,6 +4,7 @@ namespace Wizdraw\Services;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
+use Storage;
 
 /**
  * Class FileService
@@ -11,10 +12,10 @@ use Illuminate\Filesystem\FilesystemManager;
  */
 class FileService extends AbstractService
 {
-    const TYPE_PROFILE = 'profile/';
-    const TYPE_IDENTITY = 'identity/';
-    const TYPE_RECEIPT = 'receipt/';
-    const TYPE_ADDRESS = 'address/';
+    const TYPE_PROFILE = 'profile';
+    const TYPE_IDENTITY = 'identity';
+    const TYPE_RECEIPT = 'receipt';
+    const TYPE_ADDRESS = 'address';
 
     const DEFAULT_FILE_EXT = 'jpg';
 
@@ -38,9 +39,9 @@ class FileService extends AbstractService
      *
      * @return bool|void
      */
-    public function upload(string $type, string $name, string $data) : bool
+    public function upload(string $type, string $name, string $data): bool
     {
-        // todo: reduce image size and con
+        // todo: reduce image size and compress
         $file = $this->extractFile($data);
 
         if (is_null($file)) {
@@ -58,7 +59,7 @@ class FileService extends AbstractService
      *
      * @return bool
      */
-    public function uploadProfile(string $name, string $data) : bool
+    public function uploadProfile(string $name, string $data): bool
     {
         return $this->upload(self::TYPE_PROFILE, $name, $data);
     }
@@ -69,7 +70,7 @@ class FileService extends AbstractService
      *
      * @return bool
      */
-    public function uploadIdentity(string $name, string $data) : bool
+    public function uploadIdentity(string $name, string $data): bool
     {
         return $this->upload(self::TYPE_IDENTITY, $name, $data);
     }
@@ -80,7 +81,7 @@ class FileService extends AbstractService
      *
      * @return bool
      */
-    public function uploadReceipt(string $name, string $data) : bool
+    public function uploadReceipt(string $name, string $data): bool
     {
         return $this->upload(self::TYPE_RECEIPT, $name, $data);
     }
@@ -91,7 +92,7 @@ class FileService extends AbstractService
      *
      * @return bool
      */
-    public function uploadAddress(string $name, string $data) : bool
+    public function uploadAddress(string $name, string $data): bool
     {
         return $this->upload(self::TYPE_ADDRESS, $name, $data);
     }
@@ -119,6 +120,19 @@ class FileService extends AbstractService
      * @param string $type
      * @param string $name
      *
+     * @return bool
+     */
+    public static function exists(string $type, string $name): bool
+    {
+        $filePath = $type . '/' . $name . '.' . self::DEFAULT_FILE_EXT;
+
+        return Storage::cloud()->exists($filePath);
+    }
+
+    /**
+     * @param string $type
+     * @param string $name
+     *
      * @return null
      */
     public function getUrlIfExists(string $type, string $name)
@@ -140,7 +154,7 @@ class FileService extends AbstractService
      */
     private function getFilePath(string $type, string $name)
     {
-        return $type . $name . "." . self::DEFAULT_FILE_EXT;
+        return $type . '/' . $name . '.' . self::DEFAULT_FILE_EXT;
     }
 
 }
