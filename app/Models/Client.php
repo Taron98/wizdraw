@@ -352,6 +352,26 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         $this->attributes[ 'phone' ] = phone($phone);
     }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getIdentityExpireAttribute($value)
+    {
+        return Carbon::parse($value)->toDateString();
+    }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getBirthDateAttribute($value)
+    {
+        return Carbon::parse($value)->toDateString();
+    }
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
@@ -376,7 +396,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getIdentityExpire()
     {
-        return $this->identityExpire;
+        return Carbon::parse($this->identityExpire);
     }
 
     /**
@@ -440,7 +460,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getBirthDate()
     {
-        return $this->birthDate;
+        return Carbon::parse($this->birthDate);
     }
 
     /**
