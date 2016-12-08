@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Support\Collection;
+use Wizdraw\Cache\Entities\CountryCache;
+use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -561,9 +564,33 @@ class Client extends AbstractModel implements AuthorizableContract
         $this->isApproved = $isApproved;
     }
 
+    /**
+     * @return bool
+     */
     public function canTransfer(): bool
     {
         return !(!$this->isApproved && $this->transfers->count() > 0);
+    }
+
+    /**
+     * @param int|null $hour
+     * @param int|null $minute
+     * @param int|null $second
+     *
+     * @return Carbon
+     */
+    public function getTargetTime(int $hour = null, int $minute = null, int $second = null): Carbon
+    {
+        $targetTime = Carbon::createFromTime($hour, $minute, $second);
+
+        if (is_null($this->defaultCountryId)) {
+            return $targetTime;
+        }
+
+        /** @var CountryCache $defaultCountry */
+        $defaultCountry = resolve(CountryCacheService::class)->find($this->defaultCountryId);
+
+        return $defaultCountry->getLocalTime($targetTime);
     }
 
     /**

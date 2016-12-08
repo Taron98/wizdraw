@@ -71,7 +71,7 @@ class IdentityType extends AbstractModel
      *
      * @return HasMany
      */
-    public function clients() : HasMany
+    public function clients(): HasMany
     {
         return $this->hasMany(Client::class);
     }

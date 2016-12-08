@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Models\Client;
+use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\SmsService;
@@ -49,6 +51,7 @@ class ClientController extends AbstractController
      */
     public function update(ClientUpdateRequest $request): JsonResponse
     {
+        $user = $request->user();
         $clientId = $request->user()->client->getId();
 
         // todo: temporary fix for the bug in the application
@@ -58,6 +61,9 @@ class ClientController extends AbstractController
             $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
         }
 
+        $isSetup = !$user->client->isDidSetup();
+
+        /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
@@ -92,6 +98,14 @@ class ClientController extends AbstractController
             if (!$uploadStatus) {
                 return $this->respondWithError('could_not_upload_address_image', Response::HTTP_BAD_REQUEST);
             }
+        }
+
+        // todo: move to other place
+        if (!$isSetup) {
+            $user->notify(
+                (new ClientMissingInfo())
+                    ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
+            );
         }
 
         return $this->respond(array_merge($client->toArray(), [

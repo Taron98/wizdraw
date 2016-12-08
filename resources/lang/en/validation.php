@@ -87,6 +87,7 @@ return [
     'phone'         => 'The :attribute field contains an invalid number.',
     'base64image'   => 'The :attribute must be a valid base64 image.',
     'numeric_array' => 'The :attribute field must be an array of numeric values',
+    'cache_exists'  => 'The selected :attribute is invalid.',
 
     /*
     |--------------------------------------------------------------------------

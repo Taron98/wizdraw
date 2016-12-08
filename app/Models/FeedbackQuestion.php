@@ -69,7 +69,7 @@ class FeedbackQuestion extends AbstractModel
     /**
      * @return HasMany
      */
-    public function feedbacks() : HasMany
+    public function feedbacks(): HasMany
     {
         return $this->hasMany(Feedback::class);
     }

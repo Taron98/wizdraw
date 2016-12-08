@@ -85,7 +85,7 @@ class TransferStatus extends AbstractModel
      *
      * @return HasMany
      */
-    public function transfers() : HasMany
+    public function transfers(): HasMany
     {
         return $this->hasMany(Transfer::class);
     }

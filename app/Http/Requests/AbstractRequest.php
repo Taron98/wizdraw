@@ -33,7 +33,7 @@ abstract class AbstractRequest extends FormRequest
      *
      * @return JsonResponse
      */
-    public function response(array $errors) : JsonResponse
+    public function response(array $errors): JsonResponse
     {
         return new JsonResponse($errors, 422);
     }
@@ -45,7 +45,7 @@ abstract class AbstractRequest extends FormRequest
      *
      * @return array
      */
-    public function only($keys) : array
+    public function only($keys): array
     {
         $keys = is_array($keys) ? $keys : func_get_args();
 
@@ -99,7 +99,7 @@ abstract class AbstractRequest extends FormRequest
      *
      * @return array
      */
-    public function inputs() : array
+    public function inputs(): array
     {
         $inputs = [];
 
