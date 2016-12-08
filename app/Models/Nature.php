@@ -73,7 +73,7 @@ class Nature extends AbstractModel
      *
      * @return BelongsToMany
      */
-    public function transfers() : BelongsToMany
+    public function transfers(): BelongsToMany
     {
         return $this->belongsToMany(Transfer::class, 'transfer_natures');
     }

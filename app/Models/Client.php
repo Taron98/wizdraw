@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Wizdraw\Cache\Entities\CountryCache;
+use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Models\Pivots\GroupClient;
 use Wizdraw\Services\Entities\FacebookUser;
 
@@ -47,6 +50,12 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $readNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -72,7 +81,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  */
 class Client extends AbstractModel implements AuthorizableContract
 {
-    use SoftDeletes, Authorizable;
+    use SoftDeletes, Authorizable, Notifiable;
 
     /**
      * The table associated with the model.
@@ -167,6 +176,14 @@ class Client extends AbstractModel implements AuthorizableContract
         $client->birthDate = $facebookUser->getBirthday();
 
         return $client;
+    }
+
+    /**
+     * @return string
+     */
+    public function routeNotificationForSms()
+    {
+        return '+' . preg_replace('/[^0-9]/', '', $this->phone);
     }
 
     //<editor-fold desc="Relationships">
@@ -582,9 +599,33 @@ class Client extends AbstractModel implements AuthorizableContract
         $this->isApproved = $isApproved;
     }
 
+    /**
+     * @return bool
+     */
     public function canTransfer(): bool
     {
         return !(!$this->isApproved && $this->transfers->count() > 0);
+    }
+
+    /**
+     * @param int|null $hour
+     * @param int|null $minute
+     * @param int|null $second
+     *
+     * @return Carbon
+     */
+    public function getTargetTime(int $hour = null, int $minute = null, int $second = null): Carbon
+    {
+        $targetTime = Carbon::createFromTime($hour, $minute, $second);
+
+        if (is_null($this->defaultCountryId)) {
+            return $targetTime;
+        }
+
+        /** @var CountryCache $defaultCountry */
+        $defaultCountry = resolve(CountryCacheService::class)->find($this->defaultCountryId);
+
+        return $defaultCountry->getLocalTime($targetTime);
     }
 
     /**
@@ -592,7 +633,13 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getFullName()
     {
-        return "{$this->firstName} {$this->middleName} {$this->lastName}";
+        $fullName = implode(' ', array_filter([
+            $this->firstName,
+            $this->middleName,
+            $this->lastName,
+        ]));
+
+        return $fullName;
     }
     //</editor-fold>
 

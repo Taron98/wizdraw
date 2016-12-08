@@ -10,7 +10,7 @@ if (!function_exists('array_key_snake_case')) {
      *
      * @return array
      */
-    function array_key_snake_case($items = []) : array
+    function array_key_snake_case($items = []): array
     {
         $changedCase = [];
 
@@ -34,7 +34,7 @@ if (!function_exists('array_key_camel_case')) {
      *
      * @return array
      */
-    function array_key_camel_case($items = []) : array
+    function array_key_camel_case($items = []): array
     {
         $changedCase = [];
 
@@ -58,7 +58,7 @@ if (!function_exists('array_value_snake_case')) {
      *
      * @return array
      */
-    function array_value_snake_case($items = []) : array
+    function array_value_snake_case($items = []): array
     {
         $changedCase = array_map(function ($value) {
             if (is_array($value)) {
@@ -83,7 +83,7 @@ if (!function_exists('generate_code')) {
      *
      * @return int
      */
-    function generate_code() : int
+    function generate_code(): int
     {
         $length = config('auth.verification.length');
 
@@ -102,7 +102,7 @@ if (!function_exists('ucwords_upper')) {
      *
      * @return string
      */
-    function ucwords_upper(string $string = '') : string
+    function ucwords_upper(string $string = ''): string
     {
         return mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
     }
@@ -116,8 +116,27 @@ if (!function_exists('screaming_snake_case')) {
      *
      * @return string
      */
-    function screaming_snake_case(string $string = '') : string
+    function screaming_snake_case(string $string = ''): string
     {
         return Str::upper(Str::snake(Str::lower($string)));
+    }
+}
+
+if (!function_exists('parse_xml')) {
+    /**
+     * Parsing xml and fixing encoding issues
+     *
+     * @param string $xml
+     *
+     * @return SimpleXMLElement
+     */
+    function parse_xml(string $xml = ''): SimpleXMLElement
+    {
+        // Fix wic's sms api wrong charset encoding
+        $xml = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $xml);
+
+        $xml = simplexml_load_string($xml);
+
+        return $xml;
     }
 }

@@ -46,4 +46,21 @@ class ValidatorService extends Validator
         return true;
     }
 
+    /**
+     * @param $attribute
+     * @param $value
+     *
+     * @return bool
+     */
+    protected function validateCacheExists($attribute, $value, $parameters)
+    {
+        $this->requireParameterCount(1, $parameters, 'cacheExists');
+
+        $cacheServiceName = ucfirst($parameters[ 0 ]) . 'CacheService';
+        $cacheService = resolve(config('cache.namespace') . $cacheServiceName);
+        $cacheEntity = $cacheService->find($value);
+
+        return !is_null($cacheEntity);
+    }
+
 }

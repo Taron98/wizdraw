@@ -6,9 +6,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Models\Client;
+use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
-use Wizdraw\Services\SmsService;
 
 /**
  * Class ClientController
@@ -20,9 +22,6 @@ class ClientController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
-    /** @var  SmsService */
-    private $smsService;
-
     /** @var FileService */
     private $fileService;
 
@@ -30,13 +29,11 @@ class ClientController extends AbstractController
      * UserController constructor.
      *
      * @param ClientService $clientService
-     * @param SmsService $smsService
      * @param FileService $fileService
      */
-    public function __construct(ClientService $clientService, SmsService $smsService, FileService $fileService)
+    public function __construct(ClientService $clientService, FileService $fileService)
     {
         $this->clientService = $clientService;
-        $this->smsService = $smsService;
         $this->fileService = $fileService;
     }
 
@@ -49,6 +46,7 @@ class ClientController extends AbstractController
      */
     public function update(ClientUpdateRequest $request): JsonResponse
     {
+        $user = $request->user();
         $clientId = $request->user()->client->getId();
 
         // todo: temporary fix for the bug in the application
@@ -58,6 +56,9 @@ class ClientController extends AbstractController
             $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
         }
 
+        $isSetup = !$user->client->isDidSetup();
+
+        /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
@@ -94,6 +95,14 @@ class ClientController extends AbstractController
             }
         }
 
+        // todo: move to other place
+        if (!$isSetup) {
+            $user->notify(
+                (new ClientMissingInfo())
+                    ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
+            );
+        }
+
         return $this->respond(array_merge($client->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
@@ -112,13 +121,8 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
-        \Log::error('Got an error phone: ' . print_r($client->getPhone(), true));
-        \Log::error('Got an error verify: ' . print_r($user->getVerifyCode(), true));
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsNewClient($client->getPhone(), $user->getVerifyCode(), true);
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms');
-        }
+
+        $user->client->notify(new ClientVerify(true));
 
         return $this->respond($client);
     }
