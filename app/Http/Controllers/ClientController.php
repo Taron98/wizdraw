@@ -4,7 +4,6 @@ namespace Wizdraw\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
 use Wizdraw\Models\Client;
@@ -29,27 +28,18 @@ class ClientController extends AbstractController
     /** @var FileService */
     private $fileService;
 
-    /** @var CountryCacheService */
-    private $countryCacheService;
-
     /**
      * UserController constructor.
      *
      * @param ClientService $clientService
      * @param SmsService $smsService
      * @param FileService $fileService
-     * @param CountryCacheService $countryCacheService
      */
-    public function __construct(
-        ClientService $clientService,
-        SmsService $smsService,
-        FileService $fileService,
-        CountryCacheService $countryCacheService
-    ) {
+    public function __construct(ClientService $clientService, SmsService $smsService, FileService $fileService)
+    {
         $this->clientService = $clientService;
         $this->smsService = $smsService;
         $this->fileService = $fileService;
-        $this->countryCacheService = $countryCacheService;
     }
 
     /**
@@ -64,13 +54,17 @@ class ClientController extends AbstractController
         $user = $request->user();
         $clientId = $request->user()->client->getId();
 
-        $isSetup = false;
-        if (!$user->client->isDidSetup()) {
-            $isSetup = true;
+        // todo: temporary fix for the bug in the application
+        // todo: change back after application upgrade
+        $inputs = $request->inputs();
+        if (isset($inputs[ 'identity_type_id' ])) {
+            $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
         }
 
+        $isSetup = !$user->client->isDidSetup();
+
         /** @var Client $client */
-        $client = $this->clientService->update($request->inputs(), $clientId);
+        $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
             return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST);

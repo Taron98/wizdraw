@@ -16,6 +16,18 @@ class IdentityTypesTableSeeder extends AbstractTableSeeder
     {
         IdentityType::truncate();
 
-        factory(IdentityType::class, 3)->create();
+        $identityTypes = [
+            [
+                'type' => 'ID Card',
+            ],
+            [
+                'type' => 'Passport',
+            ],
+            [
+                'type' => 'Driver License',
+            ]
+        ];
+
+        IdentityType::insert($identityTypes);
     }
 }
