@@ -90,7 +90,7 @@ class BankCacheService extends AbstractCacheService
 
         $countryName = $this->getBankCountryName($stdJson);
 
-        if (!$this->countryCacheService->exists($countryName)) {
+        if (!$this->countryCacheService->existsByName($countryName)) {
             return null;
         }
 

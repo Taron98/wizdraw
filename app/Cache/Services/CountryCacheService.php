@@ -115,8 +115,9 @@ class CountryCacheService extends AbstractCacheService
      *
      * @return bool
      */
-    public function exists($name): bool
+    public function existsByName($name): bool
     {
+        // Returns 0 (false) if not found
         $id = $this->findIdByName($name);
 
         return parent::exists($id);
@@ -125,9 +126,9 @@ class CountryCacheService extends AbstractCacheService
     /**
      * @param string $name
      *
-     * @return null|int
+     * @return int
      */
-    public function findIdByName(string $name)
+    public function findIdByName(string $name): int
     {
         return (int)$this->redis->hget(self::INDEX_BY_NAME, ucwords_upper($name));
     }
@@ -135,9 +136,9 @@ class CountryCacheService extends AbstractCacheService
     /**
      * @param string $code
      *
-     * @return string
+     * @return int
      */
-    public function findIdByCode(string $code)
+    public function findIdByCode(string $code): int
     {
         return (int)$this->redis->hget(self::INDEX_BY_COUNTRY_CODE, $code);
     }
