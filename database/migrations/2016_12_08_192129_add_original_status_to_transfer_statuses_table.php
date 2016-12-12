@@ -4,7 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOriginalToTransferStatusTable extends Migration
+/**
+ * Class AddOriginalStatusToTransferStatusesTable
+ */
+class AddOriginalStatusToTransferStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +17,7 @@ class AddOriginalToTransferStatusTable extends Migration
     public function up()
     {
         Schema::table('transfer_statuses', function (Blueprint $table) {
-            $table->string('original', 40)->after('status');
+            $table->string('original_status', 40)->after('status');
         });
     }
 
@@ -26,7 +29,7 @@ class AddOriginalToTransferStatusTable extends Migration
     public function down()
     {
         Schema::table('transfer_statuses', function (Blueprint $table) {
-            $table->dropColumn('original');
+            $table->dropColumn('original_status');
         });
     }
 }

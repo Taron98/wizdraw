@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer $id
  * @property string $status
- * @property string $original
+ * @property string $originalStatus
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginal($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginalStatus($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
@@ -55,7 +55,7 @@ class TransferStatus extends AbstractModel
      */
     protected $fillable = [
         'status',
-        'original',
+        'original_status',
         'deleted_at',
     ];
 
@@ -117,17 +117,17 @@ class TransferStatus extends AbstractModel
     /**
      * @return string
      */
-    public function getOriginal(): string
+    public function getOriginalStatus(): string
     {
-        return $this->original;
+        return $this->originalStatus;
     }
 
     /**
-     * @param string $original
+     * @param string $originalStatus
      */
-    public function setOriginal(string $original)
+    public function setOriginalStatus(string $originalStatus)
     {
-        $this->original = $original;
+        $this->originalStatus = $originalStatus;
     }
     //</editor-fold>
 
