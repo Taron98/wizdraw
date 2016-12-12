@@ -2,12 +2,10 @@
 
 namespace Wizdraw\Cache\Services;
 
-use Illuminate\Support\Collection;
 use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\BankCache;
-use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Traits\GroupByCountryTrait;
 
 /**
@@ -19,6 +17,8 @@ class BankCacheService extends AbstractCacheService
     use GroupByCountryTrait;
 
     const INDEX_BY_COUNTRY_ID = 'banks:country';
+    const INDEX_SORT_BY = ['BY' => 'bank:*->name', 'ALPHA' => true];
+    const INDEX_ALL = 'banks';
 
     const TYPE_BDO = 'BDO';
     const TYPE_IME = 'IME';
@@ -35,8 +35,8 @@ class BankCacheService extends AbstractCacheService
     /** @var  string */
     protected $keyPrefix = 'bank';
 
-    /** @var  Collection */
-    protected $countries;
+    /** @var  CountryCacheService */
+    protected $countryCacheService;
 
     /**
      * RateCacheService constructor
@@ -48,7 +48,7 @@ class BankCacheService extends AbstractCacheService
     {
         parent::__construct($redis);
 
-        $this->countries = $this->formatCountries($countryCacheService->all());
+        $this->countryCacheService = $countryCacheService;
     }
 
     /**
@@ -90,11 +90,12 @@ class BankCacheService extends AbstractCacheService
 
         $countryName = $this->getBankCountryName($stdJson);
 
-        if (!$this->countries->has($countryName)) {
+        if (!$this->countryCacheService->exists($countryName)) {
             return null;
         }
 
-        $entity->setCountryId($this->countries->get($countryName)->getId());
+        $countryId = $this->countryCacheService->findIdByName($countryName);
+        $entity->setCountryId($countryId);
 
         return $entity;
     }
@@ -133,18 +134,6 @@ class BankCacheService extends AbstractCacheService
         }
 
         return self::TYPE_GLOBAL;
-    }
-
-    /**
-     * @param Collection $countries
-     *
-     * @return Collection
-     */
-    private function formatCountries(Collection $countries) : Collection
-    {
-        return $countries->mapWithKeys(function (CountryCache $country) {
-            return [screaming_snake_case($country->getName()) => $country];
-        });
     }
 
 }
