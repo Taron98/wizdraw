@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Group\GroupAddClientRequest;
 use Wizdraw\Http\Requests\Group\GroupCreateRequest;
@@ -92,7 +93,7 @@ class GroupController extends AbstractController
      * @param GroupUpdateRequest $request
      * @param Group $group
      *
-     * @return AbstractModel
+     * @return JsonResponse|AbstractModel
      */
     public function update(GroupUpdateRequest $request, Group $group)
     {
@@ -109,9 +110,9 @@ class GroupController extends AbstractController
      * @param GroupAddClientRequest $request
      * @param Group $group
      *
-     * @return AbstractModel
+     * @return JsonResponse|AbstractModel
      */
-    public function addClient(GroupAddClientRequest $request, Group $group) : AbstractModel
+    public function addClient(GroupAddClientRequest $request, Group $group)
     {
         $adminClient = $request->user()->client;
 
@@ -128,9 +129,9 @@ class GroupController extends AbstractController
      * @param GroupRemoveClientRequest $request
      * @param Group $group
      *
-     * @return AbstractModel
+     * @return JsonResponse|AbstractModel
      */
-    public function removeClient(GroupRemoveClientRequest $request, Group $group) : AbstractModel
+    public function removeClient(GroupRemoveClientRequest $request, Group $group)
     {
         $adminClient = $request->user()->client;
 

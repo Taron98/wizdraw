@@ -20,54 +20,67 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
             [
                 'status'          => TransferStatus::STATUS_ABORTED,
                 'original_status' => TransferStatus::STATUS_ABORTED,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_WAIT,
                 'original_status' => TransferStatus::STATUS_WAIT,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN,
                 'original_status' => 'WAIT FOR PROCESS(Obligo)',
+                'color'           => '#f7a54f',
             ],
             [
                 'status'          => TransferStatus::STATUS_WAIT_FOR_PROCESS,
                 'original_status' => TransferStatus::STATUS_WAIT_FOR_PROCESS,
+                'color'           => '',
             ],
             [
-                'status'          => TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE,
-                'original_status' => TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE,
+                'status'          => TransferStatus::STATUS_ON_HOLD,
+                'original_status' => 'WAIT FOR PROCESS(Compliance)',
+                'color'           => '#f66360',
             ],
             [
                 'status'          => TransferStatus::STATUS_CHECK_DOCUMENTS,
                 'original_status' => TransferStatus::STATUS_CHECK_DOCUMENTS,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_PENDING,
                 'original_status' => TransferStatus::STATUS_PENDING,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_AWAITING_WITHDRAWAL,
                 'original_status' => 'POSTED',
+                'color'           => '#f0dd26',
             ],
             [
                 'status'          => TransferStatus::STATUS_CANCELLED,
                 'original_status' => 'FAILED',
+                'color'           => '#7e7e7e',
             ],
             [
-                'status'          => TransferStatus::STATUS_CHANGE,
-                'original_status' => TransferStatus::STATUS_CHANGE,
+                'status'          => TransferStatus::STATUS_REQUEST_AMENDMENT,
+                'original_status' => 'CHANGE',
+                'color'           => '#d190e0',
             ],
             [
                 'status'          => TransferStatus::STATUS_REQUEST_CANCEL,
                 'original_status' => TransferStatus::STATUS_REQUEST_CANCEL,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_FOR_VERIFICATION,
                 'original_status' => TransferStatus::STATUS_FOR_VERIFICATION,
+                'color'           => '',
             ],
             [
                 'status'          => TransferStatus::STATUS_COMPLETED,
                 'original_status' => 'CONFIRMED',
+                'color'           => '#6fca56',
             ],
         ];
 
