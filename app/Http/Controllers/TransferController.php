@@ -239,8 +239,8 @@ class TransferController extends AbstractController
             $distance = $this->distance(
                 (float)$request->input('latitude'),
                 (float)$request->input('longitude'),
-                (float)$branch[ 'lat_location' ],
-                (float)$branch[ 'lng_location' ]
+                (float)$branch[ 'latitude' ],
+                (float)$branch[ 'longitude' ]
             );
 
             if ($distance <= 10) {
