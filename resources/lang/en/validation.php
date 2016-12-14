@@ -88,6 +88,8 @@ return [
     'base64image'   => 'The :attribute must be a valid base64 image.',
     'numeric_array' => 'The :attribute field must be an array of numeric values',
     'cache_exists'  => 'The selected :attribute is invalid.',
+    'latitude'      => 'The :attribute format is invalid.',
+    'longitude'     => 'The :attribute format is invalid.',
 
     /*
     |--------------------------------------------------------------------------
