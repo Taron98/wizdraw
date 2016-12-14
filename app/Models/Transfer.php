@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use stdClass;
+use Wizdraw\Services\TransferService;
 
 /**
  * Wizdraw\Models\Transfer
@@ -24,6 +26,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property float $rate
  * @property integer $statusId
  * @property integer $receiptId
+ * @property float $latitude
+ * @property float $longitude
  * @property string $note
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
@@ -50,6 +54,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereLatitude($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereLongitude($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
@@ -75,6 +81,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $appends = [
         'total_amount',
         'receiver_amount',
+        'nearby_branch',
     ];
 
     /**
@@ -95,6 +102,8 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'rate',
         'status_id',
         'receipt_id',
+        'latitude',
+        'longitude',
         'note',
     ];
 
@@ -109,6 +118,8 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'type_id',
         'status_id',
         'receipt_id',
+        'latitude',
+        'longitude',
     ];
 
     /**
@@ -120,6 +131,8 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'amount'     => 'real',
         'commission' => 'real',
         'rate'       => 'real',
+        'latitude'   => 'real',
+        'longitude'  => 'real',
     ];
 
     /**
@@ -238,6 +251,39 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function getReceiverAmountAttribute()
     {
         return $this->attributes[ 'amount' ] * $this->attributes[ 'rate' ];
+    }
+
+    /**
+     * Leaves only 6 decimal places
+     *
+     * @param $value
+     */
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes[ 'latitude' ] = bcdiv($value, 1, 6);
+    }
+
+    /**
+     * Leaves only 6 decimal places
+     *
+     * @param $value
+     */
+    public function setLongitudeAttribute($value)
+    {
+        $this->attributes[ 'longitude' ] = bcdiv($value, 1, 6);
+    }
+
+    /**
+     * Closest branch to the saved latitude and longitude
+     *
+     * @return null|stdClass
+     */
+    public function getNearbyBranchAttribute()
+    {
+        /** @var TransferService $transferService */
+        $transferService = resolve(TransferService::class);
+
+        return $transferService->nearby($this->latitude, $this->longitude);
     }
     //</editor-fold>
 
@@ -478,6 +524,46 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setReceiptId($receiptId): Transfer
     {
         $this->receiptId = $receiptId;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     *
+     * @return Transfer
+     */
+    public function setLatitude($latitude): Transfer
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $longitude
+     *
+     * @return Transfer
+     */
+    public function setLongitude($longitude): Transfer
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

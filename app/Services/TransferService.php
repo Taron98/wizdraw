@@ -169,4 +169,55 @@ class TransferService extends AbstractService
         return $this->transferStatusService->all();
     }
 
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     *
+     * @return mixed
+     */
+    public function nearby(float $latitude, float $longitude)
+    {
+        // todo: this solution is hardcoded for the 1st version
+        $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
+
+        $branches = collect();
+        foreach ($branchesJson as $branch) {
+            $distance = $this->distance(
+                (float)$latitude,
+                (float)$longitude,
+                (float)$branch[ 'latitude' ],
+                (float)$branch[ 'longitude' ]
+            );
+
+            if ($distance <= 10) {
+                $branch[ 'distance' ] = (float)$distance;
+
+                $branches->put($branch[ 'id' ], $branch);
+            }
+        }
+
+        return $branches->sortBy('distance')->first();
+    }
+
+    /**
+     * todo: refactor
+     *
+     * @param $lat1
+     * @param $lon1
+     * @param $lat2
+     * @param $lon2
+     *
+     * @return float
+     */
+    private function distance($lat1, $lon1, $lat2, $lon2)
+    {
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+
+        return ($miles * 1.609344);
+    }
+
 }

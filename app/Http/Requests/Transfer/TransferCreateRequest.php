@@ -57,6 +57,9 @@ class TransferCreateRequest extends AbstractRequest
             'deposit.bankBranchName' => 'string',
             'deposit.accountNumber'  => 'required_without:pickup|string',
 
+            'latitude'  => 'required|latitude',
+            'longitude' => 'required|longitude',
+
             'note' => 'string',
 
             // 'natures', current is const
