@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
-use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\ClientMissingInfo;
+use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 
@@ -48,13 +48,7 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $clientId = $request->user()->client->getId();
-
-        // todo: temporary fix for the bug in the application
-        // todo: change back after application upgrade
         $inputs = $request->inputs();
-        if (isset($inputs[ 'identity_type_id' ])) {
-            $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
-        }
 
         $isSetup = !$user->client->isDidSetup();
 
