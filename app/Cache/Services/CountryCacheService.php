@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Cache\Services;
 
+use Illuminate\Support\Collection;
 use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
@@ -16,6 +17,8 @@ class CountryCacheService extends AbstractCacheService
 {
     const INDEX_BY_NAME = 'countries:name';
     const INDEX_BY_COUNTRY_CODE = 'countries:code';
+    const INDEX_SORT_BY = ['BY' => 'country:*->name', 'ALPHA' => true];
+    const INDEX_ALL = 'countries';
 
     /** @var string */
     protected static $entity = CountryCache::class;
@@ -76,41 +79,68 @@ class CountryCacheService extends AbstractCacheService
     }
 
     /**
-     * @param CountryCache $country
+     * @param Collection $countries
      */
-    protected function postSave(CountryCache $country)
+    protected function postSave(Collection $countries)
     {
-        $this->redis->hset(
+        parent::postSave($countries);
+
+        // ['countryName' => id, ...]
+        $countryNames = $countries->mapWithKeys(function (CountryCache $country) {
+            return [
+                $country->getName() => $country->getId(),
+            ];
+        });
+
+        $this->redis->hmset(
             self::INDEX_BY_NAME,
-            $country->getName(),
-            $country->getId()
+            $countryNames->toArray()
         );
 
-        $this->redis->hset(
+        // ['countryCode' => id, ...]
+        $countryCodes = $countries->mapWithKeys(function (CountryCache $country) {
+            return [
+                $country->getCountryCode2() => $country->getId(),
+            ];
+        });
+
+        $this->redis->hmset(
             self::INDEX_BY_COUNTRY_CODE,
-            $country->getCountryCode2(),
-            $country->getId()
+            $countryCodes->toArray()
         );
     }
 
     /**
      * @param string $name
      *
-     * @return null|int
+     * @return bool
      */
-    public function findCountryIdByName(string $name)
+    public function existsByName($name): bool
     {
-        return $this->redis->hget(self::INDEX_BY_NAME, ucwords_upper($name));
+        // Returns 0 (false) if not found
+        $id = $this->findIdByName($name);
+
+        return parent::exists($id);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return int
+     */
+    public function findIdByName(string $name): int
+    {
+        return (int)$this->redis->hget(self::INDEX_BY_NAME, ucwords_upper($name));
     }
 
     /**
      * @param string $code
      *
-     * @return string
+     * @return int
      */
-    public function findCountryIdByCode(string $code)
+    public function findIdByCode(string $code): int
     {
-        return $this->redis->hget(self::INDEX_BY_COUNTRY_CODE, $code);
+        return (int)$this->redis->hget(self::INDEX_BY_COUNTRY_CODE, $code);
     }
 
     /**
@@ -120,7 +150,7 @@ class CountryCacheService extends AbstractCacheService
      */
     public function findByName(string $name)
     {
-        $countryId = $this->findCountryIdByName($name);
+        $countryId = $this->findIdByName($name);
 
         return $this->find($countryId);
     }
@@ -134,7 +164,7 @@ class CountryCacheService extends AbstractCacheService
     public function findByLocation(float $latitude, float $longitude)
     {
         $countryCode = $this->googleService->get($latitude, $longitude);
-        $countryId = $this->findCountryIdByCode($countryCode);
+        $countryId = $this->findIdByCode($countryCode);
 
         return $this->find($countryId);
     }

@@ -49,6 +49,7 @@ class ValidatorService extends Validator
     /**
      * @param $attribute
      * @param $value
+     * @param $parameters
      *
      * @return bool
      */
@@ -58,9 +59,8 @@ class ValidatorService extends Validator
 
         $cacheServiceName = ucfirst($parameters[ 0 ]) . 'CacheService';
         $cacheService = resolve(config('cache.namespace') . $cacheServiceName);
-        $cacheEntity = $cacheService->find($value);
 
-        return !is_null($cacheEntity);
+        return $cacheService->exists($value);
     }
 
 }
