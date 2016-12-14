@@ -23,9 +23,9 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'color'           => '',
             ],
             [
-                'status'          => TransferStatus::STATUS_WAIT,
-                'original_status' => TransferStatus::STATUS_WAIT,
-                'color'           => '',
+                'status'          => TransferStatus::STATUS_POSTED,
+                'original_status' => 'WAIT',
+                'color'           => '#50b9f1',
             ],
             [
                 'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN,
