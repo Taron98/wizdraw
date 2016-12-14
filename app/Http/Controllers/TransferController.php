@@ -219,7 +219,7 @@ class TransferController extends AbstractController
     {
         $client = $request->user()->client;
 
-        return $this->respond($client->transfers);
+        return $this->respond($client->transfers()->paginate());
     }
 
     /**
