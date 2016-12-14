@@ -17,7 +17,7 @@ class FeedbackQuestionsTableSeeder extends AbstractTableSeeder
     {
         FeedbackQuestion::truncate();
 
-        $users = [
+        $feedbacks = [
             [
                 'question' => 'How likely are you to recommend Wizdraw to friends or colleagues?',
             ],
@@ -35,6 +35,6 @@ class FeedbackQuestionsTableSeeder extends AbstractTableSeeder
             ],
         ];
 
-        FeedbackQuestion::insert($users);
+        FeedbackQuestion::insert($feedbacks);
     }
 }
