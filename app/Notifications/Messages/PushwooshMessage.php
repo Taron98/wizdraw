@@ -37,16 +37,6 @@ class PushwooshMessage
     }
 
     /**
-     * @param string $content
-     *
-     * @return static
-     */
-    public static function create(string $content = '')
-    {
-        return new static($content);
-    }
-
-    /**
      * @return string
      */
     public function getContent(): string
@@ -131,7 +121,7 @@ class PushwooshMessage
      */
     public function toNotification()
     {
-        $notification = Notification::create()
+        $notification = (new Notification)
             ->setAndroid($this->android)
             ->setContent($this->content)
             ->setDevices($this->devices);

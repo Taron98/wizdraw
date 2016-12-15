@@ -36,7 +36,8 @@ class PushwooshChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $pushwooshNotification = $notification
+        // todo: revert the comment to enable pushwoosh
+        /*$pushwooshNotification = $notification
             ->toPushwoosh($notifiable);
 
         if (is_null($pushwooshNotification)) {
@@ -47,14 +48,14 @@ class PushwooshChannel
             ->setDevices([$notifiable->routeNotificationForPushwoosh()])
             ->toNotification();
 
-        $request = CreateMessageRequest::create()
+        $request = (new CreateMessageRequest)
             ->addNotification($pushwooshNotification);
 
         $response = $this->pushwoosh->createMessage($request);
 
         if (!$response->isOk()) {
             \Log::error('Could not creating a notification in Pushwoosh');
-        }
+        }*/
     }
 
 }

@@ -11,6 +11,7 @@ use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
+use Wizdraw\Services\UserService;
 
 /**
  * Class ClientController
@@ -22,6 +23,9 @@ class ClientController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
+    /** @var  UserService */
+    private $userService;
+
     /** @var FileService */
     private $fileService;
 
@@ -29,11 +33,13 @@ class ClientController extends AbstractController
      * UserController constructor.
      *
      * @param ClientService $clientService
+     * @param UserService $userService
      * @param FileService $fileService
      */
-    public function __construct(ClientService $clientService, FileService $fileService)
+    public function __construct(ClientService $clientService, UserService $userService, FileService $fileService)
     {
         $this->clientService = $clientService;
+        $this->userService = $userService;
         $this->fileService = $fileService;
     }
 
@@ -115,6 +121,7 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
+        $this->userService->generateVerifyCode($user);
 
         $user->client->notify(new ClientVerify(true));
 

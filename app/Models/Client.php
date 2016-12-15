@@ -179,11 +179,23 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Route notifications for the sms channel.
+     *
      * @return string
      */
     public function routeNotificationForSms()
     {
         return '+' . preg_replace('/[^0-9]/', '', $this->phone);
+    }
+
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->user->email;
     }
 
     //<editor-fold desc="Relationships">

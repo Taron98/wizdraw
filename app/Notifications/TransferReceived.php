@@ -62,7 +62,7 @@ class TransferReceived extends Notification implements ShouldQueue
             $text = trans('sms.transfer_receiver_deposit', $attributes);
         }
 
-        return SmsMessage::create()
+        return (new SmsMessage)
             ->setText($text);
     }
 
