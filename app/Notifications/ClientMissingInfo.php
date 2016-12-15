@@ -59,7 +59,7 @@ class ClientMissingInfo extends Notification implements ShouldQueue
             return null;
         }
 
-        return PushwooshMessage::create()
+        return (new PushwooshMessage)
             ->setContent($content);
     }
 

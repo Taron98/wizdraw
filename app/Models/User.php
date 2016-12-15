@@ -170,6 +170,8 @@ class User extends AbstractModel implements
     }
 
     /**
+     * Route notifications for the pushwoosh channel.
+     *
      * @return string
      */
     public function routeNotificationForPushwoosh()

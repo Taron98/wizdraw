@@ -4,6 +4,8 @@ namespace Wizdraw\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Channels\MailChannel;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\Channels\SmsChannel;
@@ -20,6 +22,9 @@ class ClientVerify extends Notification implements ShouldQueue
     /** @var  bool */
     protected $isFirstTime;
 
+    /** @var  int */
+    protected $expire;
+
     /**
      * ClientVerify constructor.
      *
@@ -28,6 +33,7 @@ class ClientVerify extends Notification implements ShouldQueue
     public function __construct($isFirstTime = false)
     {
         $this->isFirstTime = $isFirstTime;
+        $this->expire = config('auth.verification.expire') / 60;
     }
 
     /**
@@ -39,7 +45,7 @@ class ClientVerify extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [SmsChannel::class];
+        return [MailChannel::class, SmsChannel::class];
     }
 
     /**
@@ -51,7 +57,7 @@ class ClientVerify extends Notification implements ShouldQueue
     {
         $attributes = [
             'verifyCode' => $notifiable->user->getVerifyCode(),
-            'expire'     => config('auth.verification.expire') / 60,
+            'expire'     => $this->expire,
         ];
 
         if ($this->isFirstTime) {
@@ -60,8 +66,27 @@ class ClientVerify extends Notification implements ShouldQueue
             $text = trans('sms.verification', $attributes);
         }
 
-        return SmsMessage::create()
+        return (new SmsMessage)
             ->setText($text);
+    }
+
+    /**
+     * @param Client $notifiable
+     *
+     * @return $this
+     */
+    public function toMail(Client $notifiable)
+    {
+        $subject = trans('mail.title_client_verify');
+        $attributes = [
+            'firstName'  => $notifiable->getFirstName(),
+            'verifyCode' => $notifiable->user->getVerifyCode(),
+            'expire'     => $this->expire,
+        ];
+
+        return (new MailMessage)
+            ->subject($subject)
+            ->view('emails.verification', $attributes);
     }
 
 }

@@ -68,10 +68,7 @@ class UserController extends AbstractController
     public function code(NoParamRequest $request): JsonResponse
     {
         $user = $request->user();
-
-        if (is_null($user->getVerifyExpire()) || $user->getVerifyExpire()->isPast()) {
-            $this->userService->generateVerifyCode($user);
-        }
+        $this->userService->generateVerifyCode($user);
 
         $user->client->notify(new ClientVerify());
 

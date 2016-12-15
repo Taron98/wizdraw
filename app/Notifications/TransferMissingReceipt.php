@@ -65,7 +65,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
 
         $this->addReminder($notifiable);
 
-        return PushwooshMessage::create()
+        return (new PushwooshMessage)
             ->setContent($content);
     }
 
