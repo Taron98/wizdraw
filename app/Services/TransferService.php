@@ -81,12 +81,12 @@ class TransferService extends AbstractService
         BankAccount $bankAccount = null,
         array $attributes = []
     ) {
-        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT_FOR_PROCESS_COMPLIANCE);
+        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
 
-        $attributes['rate'] = $rate->getRate();
+        $attributes[ 'rate' ] = $rate->getRate();
 
         $transfer = $this->repository->createWithRelation($senderClient, $bankAccount, $initStatus, $defaultNatureIds,
             $attributes);
@@ -102,7 +102,7 @@ class TransferService extends AbstractService
      */
     public function addReceipt(Transfer $transfer, TransferReceipt $transferReceipt)
     {
-        $statusWait = $this->transferStatusService->findByStatus(TransferStatus::STATUS_WAIT);
+        $statusWait = $this->transferStatusService->findByStatus(TransferStatus::STATUS_POSTED);
 
         $transfer
             ->receipt()->associate($transferReceipt)
@@ -153,7 +153,7 @@ class TransferService extends AbstractService
      *
      * @return bool
      */
-    public function changeStatus(Transfer $transfer, int $statusId) : bool
+    public function changeStatus(Transfer $transfer, int $statusId): bool
     {
         $status = $this->transferStatusService->find($statusId);
         $isUpdated = $transfer->status()->associate($status)->save();

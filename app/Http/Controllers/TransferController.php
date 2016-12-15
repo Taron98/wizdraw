@@ -218,8 +218,9 @@ class TransferController extends AbstractController
     public function list(NoParamRequest $request): JsonResponse
     {
         $client = $request->user()->client;
+        $transferByLatest = $client->transfers()->latest();
 
-        return $this->respond($client->transfers);
+        return $this->respond($transferByLatest->paginate());
     }
 
     /**

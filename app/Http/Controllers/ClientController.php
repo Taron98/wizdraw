@@ -54,13 +54,7 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $clientId = $request->user()->client->getId();
-
-        // todo: temporary fix for the bug in the application
-        // todo: change back after application upgrade
         $inputs = $request->inputs();
-        if (isset($inputs[ 'identity_type_id' ])) {
-            $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
-        }
 
         $isSetup = !$user->client->isDidSetup();
 

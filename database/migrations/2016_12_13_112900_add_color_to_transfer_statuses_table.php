@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class AddRateToTransfersTable
+ * Class AddColorToTransferStatusesTable
  */
-class AddRateToTransfersTable extends Migration
+class AddColorToTransferStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class AddRateToTransfersTable extends Migration
      */
     public function up()
     {
-        Schema::table('transfers', function (Blueprint $table) {
-            $table->decimal('rate', 10, 4)->after('commission');
+        Schema::table('transfer_statuses', function (Blueprint $table) {
+            $table->string('color', 7)->after('original_status');
         });
     }
 
@@ -28,8 +28,8 @@ class AddRateToTransfersTable extends Migration
      */
     public function down()
     {
-        Schema::table('transfers', function (Blueprint $table) {
-            $table->dropColumn('rate');
+        Schema::table('transfer_statuses', function (Blueprint $table) {
+            $table->dropColumn('color');
         });
     }
 }

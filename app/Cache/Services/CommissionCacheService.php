@@ -17,6 +17,7 @@ class CommissionCacheService extends AbstractCacheService
     use GroupByCountryTrait;
 
     const INDEX_BY_COUNTRY_ID = 'commissions:country';
+    const INDEX_SORT_BY = ['BY' => 'commission:*->minRange', 'ALPHA' => false];
 
     /** @var string */
     protected static $entity = CommissionCache::class;
@@ -58,7 +59,7 @@ class CommissionCacheService extends AbstractCacheService
      */
     public function mapFromQueue(stdClass $stdJson)
     {
-        $countryId = $this->countryCacheService->findCountryIdByName($stdJson->country);
+        $countryId = $this->countryCacheService->findIdByName($stdJson->country);
 
         if (is_null($countryId)) {
             return null;

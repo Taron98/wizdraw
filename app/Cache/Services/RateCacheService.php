@@ -54,7 +54,7 @@ class RateCacheService extends AbstractCacheService
      */
     public function mapFromQueue(stdClass $stdJson)
     {
-        $countryId = $this->countryCacheService->findCountryIdByName($stdJson->country);
+        $countryId = $this->countryCacheService->findIdByName($stdJson->country);
 
         /** @var RateCache $entity */
         $entity = parent::mapFromQueue($stdJson);
