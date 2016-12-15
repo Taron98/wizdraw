@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Tests;
 
-use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase;
@@ -13,7 +12,7 @@ use Illuminate\Foundation\Testing\TestCase;
  */
 abstract class AbstractTestCase extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseMigrations, DatabaseTransactions, CreatesApplication;
 
     /**
      * The base URL to use while testing the application.
@@ -21,20 +20,6 @@ abstract class AbstractTestCase extends TestCase
      * @var string
      */
     protected $baseUrl = 'http://localhost';
-
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-
-        return $app;
-    }
 
     /**
      * Assert that a given where condition exists in the database
@@ -45,7 +30,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @return TestCase|AbstractTestCase
      */
-    protected function seeInDatabase($table, array $data, $connection = null) : AbstractTestCase
+    protected function seeInDatabase($table, array $data, $connection = null): AbstractTestCase
     {
         return parent::seeInDatabase($table, array_key_snake_case($data), $connection);
     }
@@ -59,7 +44,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @return TestCase|AbstractTestCase
      */
-    protected function notSeeInDatabase($table, array $data, $connection = null) : AbstractTestCase
+    protected function notSeeInDatabase($table, array $data, $connection = null): AbstractTestCase
     {
         return parent::notSeeInDatabase($table, array_key_snake_case($data), $connection);
     }

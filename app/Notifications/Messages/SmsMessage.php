@@ -24,14 +24,6 @@ class SmsMessage
     }
 
     /**
-     * @return static
-     */
-    public static function create()
-    {
-        return new static();
-    }
-
-    /**
      * @return string
      */
     public function getText(): string
