@@ -298,28 +298,6 @@ abstract class AbstractCacheService
     }
 
     /**
-     * @param Collection $entities
-     *
-     * @return LengthAwarePaginator
-     */
-    protected function paginate(Collection $entities): LengthAwarePaginator
-    {
-        // todo: change implementation to get only $perPage from redis
-        $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
-        $perPage = config('cache.pagination.perPage');
-
-        $total = $entities->count();
-        $paginateEntities = $entities->forPage($page, $perPage);
-
-        $paginator = new LengthAwarePaginator($paginateEntities, $total, $perPage, $page, [
-            'path'     => Paginator::resolveCurrentPath(),
-            'pageName' => self::PAGE_NAME,
-        ]);
-
-        return $paginator;
-    }
-
-    /**
      * @param AbstractCacheEntity $entity
      *
      * @return boolean
