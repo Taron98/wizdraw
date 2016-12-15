@@ -36,7 +36,8 @@ class PushwooshChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $pushwooshNotification = $notification
+        // todo: revert the comment to enable pushwoosh
+        /*$pushwooshNotification = $notification
             ->toPushwoosh($notifiable);
 
         if (is_null($pushwooshNotification)) {
@@ -54,7 +55,7 @@ class PushwooshChannel
 
         if (!$response->isOk()) {
             \Log::error('Could not creating a notification in Pushwoosh');
-        }
+        }*/
     }
 
 }
