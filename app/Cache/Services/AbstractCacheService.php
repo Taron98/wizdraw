@@ -15,7 +15,6 @@ use Wizdraw\Cache\Entities\AbstractCacheEntity;
  */
 abstract class AbstractCacheService
 {
-    const PAGE_NAME = 'page';
 
     /** @var  Client */
     protected $redis;
@@ -60,32 +59,37 @@ abstract class AbstractCacheService
     /**
      * @return Collection
      */
-    public function all() : Collection
+    public function all(): Collection
     {
-        $entitiesKeys = $this->redis->keys(redis_key($this->keyPrefix, '*'));
-        $entities = $this->transformIdsToEntities($entitiesKeys);
+        if (defined('static::INDEX_ALL')) {
+            return $this->sort(static::INDEX_ALL);
+        }
 
-        return $entities;
+        return $this->keys();
     }
 
     /**
-     * @return LengthAwarePaginator
+     * @param string $sortOrder
+     *
+     * @return LengthAwarePaginator|null
      */
-    public function allPaginated() : LengthAwarePaginator
+    public function allPaginated($sortOrder = 'ASC')
     {
-        $all = $this->all();
+        if (!defined('static::INDEX_ALL')) {
+            return null;
+        }
 
-        return $this->paginate($all);
+        return $this->paginate(static::INDEX_ALL, $sortOrder);
     }
 
     /**
-     * @param string|int $key
+     * @param string|int $id
      *
      * @return null|AbstractCacheEntity
      */
-    public function find($key)
+    public function find($id)
     {
-        $entityJson = $this->redis->hgetall(redis_key($this->keyPrefix, $key));
+        $entityJson = $this->redis->hgetall(redis_key($this->keyPrefix, $id));
 
         if (is_null($entityJson)) {
             return null;
@@ -94,6 +98,16 @@ abstract class AbstractCacheService
         $entity = $this->entityFromArray($entityJson);
 
         return $entity;
+    }
+
+    /**
+     * @param string|int $id
+     *
+     * @return bool
+     */
+    public function exists($id): bool
+    {
+        return $this->redis->exists(redis_key($this->keyPrefix, $id));
     }
 
     /**
@@ -114,12 +128,26 @@ abstract class AbstractCacheService
                 redis_key($this->keyPrefix, $cleanedEntity->getKey()),
                 $cleanedEntity->toArray(false)
             );
-
-            // Call the method if defined, to run after saving an entity
-            if (method_exists($this, 'postSave')) {
-                $this->postSave($cleanedEntity);
-            }
         });
+
+        // Call the method if defined, to run after saving an entity
+        if (method_exists($this, 'postSave')) {
+            $this->postSave($cleanedEntities);
+        }
+    }
+
+    /**
+     * @param Collection $entities
+     */
+    protected function postSave(Collection $entities)
+    {
+        if (defined('static::INDEX_ALL')) {
+            $entityIds = $entities->map(function (AbstractCacheEntity $entity) {
+                return $entity->getId();
+            });
+
+            $this->redis->lpush(static::INDEX_ALL, $entityIds->toArray());
+        }
     }
 
     /**
@@ -127,7 +155,7 @@ abstract class AbstractCacheService
      *
      * @return Collection
      */
-    private function cleanEntities(Collection $entities) : Collection
+    private function cleanEntities(Collection $entities): Collection
     {
         // Remove invalid data
         $entities = $entities->filter(function (AbstractCacheEntity $entity) {
@@ -183,41 +211,90 @@ abstract class AbstractCacheService
         return $entity;
     }
 
+
+    /**
+     * @param string $key
+     * @param string $sortOrder
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate(string $key, string $sortOrder): LengthAwarePaginator
+    {
+        $perPage = config('cache.pagination.perPage');
+        $startIndex = $perPage * (Paginator::resolveCurrentPage() - 1);
+
+        $total = $this->total($key);
+
+        // Get current page's items sorted asc
+        $entities = $this->sort(
+            $key,
+            $sortOrder,
+            [$startIndex, $perPage]
+        );
+
+        $paginator = new LengthAwarePaginator($entities, $total, $perPage, null, [
+            'path' => Paginator::resolveCurrentPath(),
+        ]);
+
+        return $paginator;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return int
+     */
+    protected function total(string $key)
+    {
+        $count = $this->redis->llen($key);
+
+        return $count;
+    }
+
+    /**
+     * @param string $key
+     * @param string $sortOrder
+     * @param array $limit
+     *
+     * @return Collection
+     */
+    protected function sort(string $key, $sortOrder = 'ASC', $limit = [0, -1])
+    {
+        $entityIds = $this->redis->sort(
+            $key,
+            array_merge([
+                'SORT'  => $sortOrder,
+                'LIMIT' => $limit,
+            ], static::INDEX_SORT_BY)
+        );
+        $entities = $this->transformIdsToEntities($entityIds);
+
+        return $entities;
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function keys()
+    {
+        $entityKeys = $this->redis->keys(redis_key($this->keyPrefix, '*'));
+        $entities = $this->transformIdsToEntities($entityKeys);
+
+        return $entities;
+    }
+
     /**
      * @param array $entityKeys
      *
      * @return Collection
      */
-    private function transformIdsToEntities(array $entityKeys = []) : Collection
+    protected function transformIdsToEntities(array $entityKeys = []): Collection
     {
         $entities = collect($entityKeys)->map(function ($entityKey) {
             return $this->find(redis_unkey($entityKey));
         });
 
         return $entities;
-    }
-
-    /**
-     * @param Collection $entities
-     *
-     * @return LengthAwarePaginator
-     */
-    protected function paginate(Collection $entities) : LengthAwarePaginator
-    {
-        // todo: change implementation to get only $perPage from redis
-        $page = Paginator::resolveCurrentPage(self::PAGE_NAME);
-        $perPage = config('cache.pagination.perPage');
-
-        $total = $entities->count();
-        $paginateEntities = $entities->forPage($page, $perPage);
-
-        $paginator = new LengthAwarePaginator($paginateEntities, $total, $perPage, $page, [
-            'path'     => Paginator::resolveCurrentPath(),
-            'pageName' => self::PAGE_NAME,
-        ]);
-
-        // todo: camel case?
-        return $paginator;
     }
 
     /**

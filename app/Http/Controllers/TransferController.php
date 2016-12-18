@@ -2,23 +2,26 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Wizdraw\Cache\Entities\CountryCache;
-use Wizdraw\Cache\Services\CountryCacheService;
+use Wizdraw\Cache\Entities\RateCache;
+use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\Transfer\TransferAddReceiptRequest;
 use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
 use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
+use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
-use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\TransferType;
+use Wizdraw\Notifications\TransferReceived;
+use Wizdraw\Notifications\TransferSent;
+use Wizdraw\Notifications\TransferMissingReceipt;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
-use Wizdraw\Services\SmsService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 
@@ -41,14 +44,11 @@ class TransferController extends AbstractController
     /** @var BankAccountService */
     private $bankAccountService;
 
-    /** @var  SmsService */
-    private $smsService;
-
-    /** @var  CountryCacheService */
-    private $countryCacheService;
-
     /** @var FeedbackService */
     private $feedbackService;
+
+    /** @var RateCacheService */
+    protected $rateCacheService;
 
     /**
      * TransferController constructor.
@@ -57,26 +57,23 @@ class TransferController extends AbstractController
      * @param ClientService $clientService
      * @param TransferReceiptService $transferReceiptService
      * @param BankAccountService $bankAccountService
-     * @param SmsService $smsService
-     * @param CountryCacheService $countryCacheService
      * @param FeedbackService $feedbackService
+     * @param RateCacheService $rateCacheService
      */
     public function __construct(
         TransferService $transferService,
         ClientService $clientService,
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
-        SmsService $smsService,
-        CountryCacheService $countryCacheService,
-        FeedbackService $feedbackService
+        FeedbackService $feedbackService,
+        RateCacheService $rateCacheService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
         $this->bankAccountService = $bankAccountService;
-        $this->smsService = $smsService;
-        $this->countryCacheService = $countryCacheService;
         $this->feedbackService = $feedbackService;
+        $this->rateCacheService = $rateCacheService;
     }
 
     /**
@@ -105,17 +102,21 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function create(TransferCreateRequest $request) : JsonResponse
+    public function create(TransferCreateRequest $request): JsonResponse
     {
-        $client = $request->user()->client;
+        $user = $request->user();
+        $client = $user->client;
         $inputs = $request->inputs();
 
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');
         $totalAmount = $request->input('totalAmount');
+        $commission = $request->input('commission');
         $receiverAmount = $request->input('receiverAmount');
         $receiverCountryId = $request->input('receiverCountryId');
+        /** @var RateCache $rate */
+        $rate = $this->rateCacheService->find($receiverCountryId);
 
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN);
@@ -125,7 +126,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if (!$this->transferService->validateTotals($receiverCountryId, $amount, $totalAmount, $receiverAmount)) {
+        if (!$this->transferService->validateTotals($rate, $amount, $commission, $totalAmount, $receiverAmount)) {
             return $this->respondWithError('totals_are_invalid', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -159,7 +160,12 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST);
         }
 
-        $transfer = $this->transferService->createTransfer($client, $bankAccount, $inputs);
+        $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+
+        $user->notify(
+            (new TransferMissingReceipt($transfer))
+                ->delay(Carbon::now()->addHour())
+        );
 
         return $this->respond(array_merge($transfer->toArray(), [
             'transactions' => $client->transfers->count(),
@@ -172,7 +178,7 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer) : JsonResponse
+    public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer): JsonResponse
     {
         $client = $request->user()->client;
 
@@ -195,24 +201,9 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
-        $receiverPhone = $transfer->receiverClient->getPhone();
 
-        /** @var CountryCache $coin */
-        $country = $this->countryCacheService->find($transfer->getReceiverCountryId());
-
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferWaiting($transfer, $receiverPhone, $client->getFullName(),
-            $country->getCoinCode());
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms_to_receiver');
-        }
-
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsTransferCompleted($client->getPhone(), $client->getFullName(),
-            $transfer->getTransactionNumber());
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms_to_sender');
-        }
+        $transfer->client->notify(new TransferSent($transfer));
+        $transfer->receiverClient->notify(new TransferReceived($transfer));
 
         return $this->respond($transfer);
     }
@@ -224,11 +215,12 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function list(NoParamRequest $request) : JsonResponse
+    public function list(NoParamRequest $request): JsonResponse
     {
         $client = $request->user()->client;
+        $transferByLatest = $client->transfers()->latest();
 
-        return $this->respond($client->transfers);
+        return $this->respond($transferByLatest->paginate());
     }
 
     /**
@@ -238,7 +230,7 @@ class TransferController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function nearby(TransferNearbyRequest $request) : JsonResponse
+    public function nearby(TransferNearbyRequest $request): JsonResponse
     {
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
@@ -320,26 +312,36 @@ class TransferController extends AbstractController
     }
 
     /**
-     * @param NoParamRequest $request
+     * @param TransferStatusRequest $request
      * @param Transfer $transfer
      *
      * @return JsonResponse
      */
-    public function abort(NoParamRequest $request, Transfer $transfer)
+    public function status(TransferStatusRequest $request, Transfer $transfer)
     {
         $client = $request->user()->client;
 
-        if ($client->cannot('abort', $transfer)) {
+        if ($client->cannot('updateStatus', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
         }
 
-        if (!$this->transferService->changeStatus($transfer, TransferStatus::STATUS_ABORTED)) {
+        if (!$this->transferService->changeStatus($transfer, $request->input('transferStatusId'))) {
             return $this->respondWithError('could_not_update_status', Response::HTTP_FORBIDDEN);
         }
 
         $canTransfer = $request->user()->client->canTransfer();
 
         return $this->respond(compact('canTransfer'));
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function statuses()
+    {
+        $statuses = $this->transferService->statuses();
+
+        return $this->respond($statuses);
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Cache\Traits;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 
@@ -14,42 +14,37 @@ trait GroupByCountryTrait
 {
 
     /**
-     * @param AbstractCacheEntity $entity
+     * @param Collection $entities
      */
-    protected function postSave(AbstractCacheEntity $entity)
+    protected function postSave(Collection $entities)
     {
-        $this->redis->lpush(
-            redis_key(self::INDEX_BY_COUNTRY_ID, $entity->getCountryId()),
-            [$entity->getId()]
-        );
+        parent::postSave($entities);
+
+        $entitiesByCountries = $entities->groupBy(function ($entity) {
+            return $entity->getCountryId();
+        });
+
+        $entitiesByCountries->each(function (Collection $entitiesCountry, int $countryId) {
+            $entitiesIds = $entitiesCountry->map(function (AbstractCacheEntity $entity) {
+                return $entity->getId();
+            });
+
+            $this->redis->lpush(
+                redis_key(self::INDEX_BY_COUNTRY_ID, $countryId),
+                $entitiesIds->toArray()
+            );
+        });
     }
 
     /**
      * @param int $countryId
-     *
-     * @return Collection
-     */
-    public function findIdsByCountryId(int $countryId) : Collection
-    {
-        $entityIds = $this->redis->lrange(redis_key(self::INDEX_BY_COUNTRY_ID, $countryId), 0, -1);
-
-        return collect($entityIds);
-    }
-
-    /**
-     * @param int $countryId
+     * @param string $sortOrder
      *
      * @return LengthAwarePaginator
      */
-    public function findByCountryId(int $countryId) : LengthAwarePaginator
+    public function findByCountryId(int $countryId, $sortOrder = 'ASC'): LengthAwarePaginator
     {
-        $entityIds = $this->findIdsByCountryId($countryId);
-
-        $entities = $entityIds->map(function ($entityId) {
-            return $this->find($entityId);
-        });
-
-        return $this->paginate($entities);
+        return $this->paginate(redis_key(self::INDEX_BY_COUNTRY_ID, $countryId), $sortOrder);
     }
 
 }

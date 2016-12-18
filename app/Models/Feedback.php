@@ -83,7 +83,7 @@ class Feedback extends AbstractModel
     /**
      * @return BelongsTo
      */
-    public function transfer() : BelongsTo
+    public function transfer(): BelongsTo
     {
         return $this->belongsTo(Transfer::class);
     }
@@ -91,7 +91,7 @@ class Feedback extends AbstractModel
     /**
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -99,7 +99,7 @@ class Feedback extends AbstractModel
     /**
      * @return BelongsTo
      */
-    public function feedbackQuestion() : BelongsTo
+    public function feedbackQuestion(): BelongsTo
     {
         return $this->belongsTo(FeedbackQuestion::class);
     }

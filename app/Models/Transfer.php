@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property integer $senderCountryId
  * @property float $amount
  * @property float $commission
+ * @property float $rate
  * @property integer $statusId
  * @property integer $receiptId
  * @property string $note
@@ -34,6 +35,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
  * @property-read \Wizdraw\Models\TransferStatus $status
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
+ * @property-read mixed $totalAmount
+ * @property-read mixed $receiverAmount
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
@@ -44,6 +47,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereNote($value)
@@ -64,6 +68,16 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $table = 'transfers';
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'total_amount',
+        'receiver_amount',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -78,6 +92,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'sender_country_id',
         'amount',
         'commission',
+        'rate',
         'status_id',
         'receipt_id',
         'note',
@@ -104,6 +119,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     protected $casts = [
         'amount'     => 'real',
         'commission' => 'real',
+        'rate'       => 'real',
     ];
 
     /**
@@ -139,7 +155,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -147,7 +163,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     /**
      * The client that received the transfer
      */
-    public function receiverClient() : BelongsTo
+    public function receiverClient(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'receiver_client_id');
     }
@@ -157,7 +173,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function type() : BelongsTo
+    public function type(): BelongsTo
     {
         return $this->belongsTo(TransferType::class);
     }
@@ -167,7 +183,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function bankAccount() : BelongsTo
+    public function bankAccount(): BelongsTo
     {
         return $this->belongsTo(BankAccount::class);
     }
@@ -177,7 +193,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsToMany
      */
-    public function natures() : BelongsToMany
+    public function natures(): BelongsToMany
     {
         return $this->belongsToMany(Nature::class, 'transfer_natures');
     }
@@ -187,7 +203,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function status() : BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(TransferStatus::class);
     }
@@ -197,13 +213,35 @@ class Transfer extends AbstractModel implements AuthorizableContract
      *
      * @return BelongsTo
      */
-    public function receipt() : BelongsTo
+    public function receipt(): BelongsTo
     {
         return $this->belongsTo(TransferReceipt::class);
     }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
+    /**
+     * Total amount the receiver paid
+     *
+     * @return float
+     */
+    public function getTotalAmountAttribute()
+    {
+        return $this->attributes[ 'amount' ] + $this->attributes[ 'commission' ];
+    }
+
+    /**
+     * Total amount that the receiver get paid
+     *
+     * @return float
+     */
+    public function getReceiverAmountAttribute()
+    {
+        return $this->attributes[ 'amount' ] * $this->attributes[ 'rate' ];
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Getters & Setters">
     /**
      * @return string
      */
@@ -380,6 +418,26 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setCommission($commission): Transfer
     {
         $this->commission = $commission;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRate(): float
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param float $rate
+     *
+     * @return Transfer
+     */
+    public function setRate($rate): Transfer
+    {
+        $this->rate = $rate;
 
         return $this;
     }

@@ -8,7 +8,7 @@ use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Http\Requests\User\UserUpdateRequest;
 use Wizdraw\Models\User;
-use Wizdraw\Services\SmsService;
+use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\UserService;
 
 /**
@@ -21,19 +21,14 @@ class UserController extends AbstractController
     /** @var  UserService */
     private $userService;
 
-    /** @var  SmsService */
-    private $smsService;
-
     /**
      * UserController constructor.
      *
      * @param UserService $userService
-     * @param SmsService $smsService
      */
-    public function __construct(UserService $userService, SmsService $smsService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->smsService = $smsService;
     }
 
     /**
@@ -73,16 +68,9 @@ class UserController extends AbstractController
     public function code(NoParamRequest $request): JsonResponse
     {
         $user = $request->user();
+        $this->userService->generateVerifyCode($user);
 
-        if (is_null($user->getVerifyExpire()) || $user->getVerifyExpire()->isPast()) {
-            $this->userService->generateVerifyCode($user);
-        }
-
-        // todo: relocation?
-        $sms = $this->smsService->sendSmsNewClient($user->client->getPhone(), $user->getVerifyCode());
-        if (!$sms) {
-            return $this->respondWithError('could_not_send_sms');
-        }
+        $user->client->notify(new ClientVerify());
 
         return $this->respond([
             'verifyCode'   => $user->getVerifyCode(),

@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Wizdraw\Services\Entities\FacebookUser;
 
 /**
@@ -32,6 +33,12 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $readNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
@@ -54,7 +61,7 @@ class User extends AbstractModel implements
     AuthenticatableContract,
     CanResetPasswordContract
 {
-    use SoftDeletes, Authenticatable, CanResetPassword;
+    use SoftDeletes, Authenticatable, CanResetPassword, Notifiable;
 
     /**
      * The table associated with the model.
@@ -162,6 +169,16 @@ class User extends AbstractModel implements
         return $user;
     }
 
+    /**
+     * Route notifications for the pushwoosh channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForPushwoosh()
+    {
+        return $this->deviceId;
+    }
+
     //<editor-fold desc="Relationships">
     /**
      * One-to-one relationship with clients table
@@ -195,7 +212,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -211,7 +228,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -243,7 +260,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getFacebookToken(): string
+    public function getFacebookToken()
     {
         return $this->facebookToken;
     }
@@ -259,7 +276,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getFacebookTokenExpire(): Carbon
+    public function getFacebookTokenExpire()
     {
         return $this->facebookTokenExpire;
     }
@@ -275,7 +292,7 @@ class User extends AbstractModel implements
     /**
      * @return string
      */
-    public function getDeviceId(): string
+    public function getDeviceId()
     {
         return $this->deviceId;
     }
@@ -339,7 +356,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getPasswordChangedAt(): Carbon
+    public function getPasswordChangedAt()
     {
         return $this->passwordChangedAt;
     }
@@ -355,7 +372,7 @@ class User extends AbstractModel implements
     /**
      * @return Carbon
      */
-    public function getLastLoginAt(): Carbon
+    public function getLastLoginAt()
     {
         return $this->lastLoginAt;
     }

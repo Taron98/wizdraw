@@ -89,13 +89,22 @@ class TransferReceipt extends AbstractModel
      *
      * @return HasOne
      */
-    public function transfer() : HasOne
+    public function transfer(): HasOne
     {
         return $this->hasOne(Transfer::class);
     }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getIssuedAtAttribute($value)
+    {
+        return Carbon::parse($value)->toDateString();
+    }
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
@@ -204,7 +213,7 @@ class TransferReceipt extends AbstractModel
      */
     public function getIssuedAt()
     {
-        return $this->issuedAt;
+        return Carbon::parse($this->issuedAt);
     }
 
     /**
