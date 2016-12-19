@@ -73,7 +73,7 @@ class ClientVerify extends Notification implements ShouldQueue
     /**
      * @param Client $notifiable
      *
-     * @return $this
+     * @return MailMessage
      */
     public function toMail(Client $notifiable)
     {
