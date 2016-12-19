@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\BankAccount
  *
- * @property integer $id
- * @property integer $bankId
- * @property integer $bankBranchId
- * @property integer $clientId
+ * @property int $id
+ * @property int $bankId
+ * @property int $bankBranchId
+ * @property int $clientId
  * @property string $accountNumber
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
