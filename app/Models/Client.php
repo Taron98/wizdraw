@@ -22,24 +22,24 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\Client
  *
- * @property integer $id
- * @property integer $identityTypeId
+ * @property int $id
+ * @property int $identityTypeId
  * @property string $identityNumber
- * @property \Carbon\Carbon $identityExpire
+ * @property string $identityExpire
  * @property string $firstName
  * @property string $middleName
  * @property string $lastName
- * @property \Carbon\Carbon $birthDate
+ * @property string $birthDate
  * @property string $gender
  * @property string $phone
- * @property integer $defaultCountryId
- * @property integer $residentCountryId
+ * @property int $defaultCountryId
+ * @property int $residentCountryId
  * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
- * @property boolean $didSetup
- * @property boolean $isApproved
+ * @property bool $didSetup
+ * @property bool $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -50,12 +50,9 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $readNotifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $unreadNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
@@ -179,11 +176,23 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * Route notifications for the sms channel.
+     *
      * @return string
      */
     public function routeNotificationForSms()
     {
         return '+' . preg_replace('/[^0-9]/', '', $this->phone);
+    }
+
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->user->email;
     }
 
     //<editor-fold desc="Relationships">

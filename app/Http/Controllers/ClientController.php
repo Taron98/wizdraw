@@ -6,11 +6,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
-use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\ClientMissingInfo;
+use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
+use Wizdraw\Services\UserService;
 
 /**
  * Class ClientController
@@ -22,6 +23,9 @@ class ClientController extends AbstractController
     /** @var  ClientService */
     private $clientService;
 
+    /** @var  UserService */
+    private $userService;
+
     /** @var FileService */
     private $fileService;
 
@@ -29,11 +33,13 @@ class ClientController extends AbstractController
      * UserController constructor.
      *
      * @param ClientService $clientService
+     * @param UserService $userService
      * @param FileService $fileService
      */
-    public function __construct(ClientService $clientService, FileService $fileService)
+    public function __construct(ClientService $clientService, UserService $userService, FileService $fileService)
     {
         $this->clientService = $clientService;
+        $this->userService = $userService;
         $this->fileService = $fileService;
     }
 
@@ -48,13 +54,7 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $clientId = $request->user()->client->getId();
-
-        // todo: temporary fix for the bug in the application
-        // todo: change back after application upgrade
         $inputs = $request->inputs();
-        if (isset($inputs[ 'identity_type_id' ])) {
-            $inputs[ 'identity_type_id' ] = ($inputs[ 'identity_type_id' ] === '1') ? '2' : '1';
-        }
 
         $isSetup = !$user->client->isDidSetup();
 
@@ -121,6 +121,7 @@ class ClientController extends AbstractController
     {
         $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
+        $this->userService->generateVerifyCode($user);
 
         $user->client->notify(new ClientVerify(true));
 

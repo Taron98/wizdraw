@@ -16,29 +16,26 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\User
  *
- * @property integer $id
- * @property integer $clientId
+ * @property int $id
+ * @property int $clientId
  * @property string $email
  * @property string $password
  * @property string $facebookId
  * @property string $facebookToken
  * @property \Carbon\Carbon $facebookTokenExpire
  * @property string $deviceId
- * @property integer $verifyCode
+ * @property int $verifyCode
  * @property \Carbon\Carbon $verifyExpire
- * @property boolean $isPending
+ * @property bool $isPending
  * @property \Carbon\Carbon $passwordChangedAt
  * @property \Carbon\Carbon $lastLoginAt
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $readNotifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $unreadNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
@@ -170,6 +167,8 @@ class User extends AbstractModel implements
     }
 
     /**
+     * Route notifications for the pushwoosh channel.
+     *
      * @return string
      */
     public function routeNotificationForPushwoosh()

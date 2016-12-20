@@ -13,17 +13,19 @@ use Wizdraw\Services\TransferService;
 /**
  * Wizdraw\Models\Transfer
  *
- * @property integer $id
+ * @property int $id
  * @property string $transactionNumber
- * @property integer $clientId
- * @property integer $receiverClientId
- * @property integer $typeId
- * @property integer $bankAccountId
- * @property integer $receiverCountryId
- * @property integer $senderCountryId
+ * @property int $clientId
+ * @property int $receiverClientId
+ * @property int $typeId
+ * @property int $bankAccountId
+ * @property int $receiverCountryId
+ * @property int $senderCountryId
  * @property float $amount
  * @property float $commission
  * @property float $rate
+ * @property int $statusId
+ * @property int $receiptId
  * @property integer $statusId
  * @property integer $receiptId
  * @property float $latitude
@@ -39,8 +41,8 @@ use Wizdraw\Services\TransferService;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
  * @property-read \Wizdraw\Models\TransferStatus $status
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
- * @property-read mixed $totalAmount
- * @property-read mixed $receiverAmount
+ * @property-read float $totalAmount
+ * @property-read float $receiverAmount
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)

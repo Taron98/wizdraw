@@ -12,9 +12,9 @@ use Wizdraw\Models\Pivots\GroupClient;
 /**
  * Wizdraw\Models\Group
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
- * @property integer $adminClientId
+ * @property int $adminClientId
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt

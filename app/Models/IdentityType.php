@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\IdentityType
  *
- * @property integer $id
+ * @property int $id
  * @property string $type
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
