@@ -18,9 +18,9 @@ class ValidatorService extends Validator
      *
      * @return bool
      */
-    protected function validateBase64Image($attribute, $value)
+    protected function validateBase64Image($attribute, $value): bool
     {
-        preg_match("/^data:image\/(.*);base64/", $value, $match);
+        preg_match('/^data:image\/(.*);base64/', $value, $match);
 
         return isset($match[ 1 ]) && in_array($match[ 1 ], self::ALLOWED_IMAGE_TYPE);
     }
@@ -31,7 +31,7 @@ class ValidatorService extends Validator
      *
      * @return bool
      */
-    protected function validateNumericArray($attribute, $values)
+    protected function validateNumericArray($attribute, $values): bool
     {
         if (!is_array($values)) {
             return false;
@@ -61,6 +61,28 @@ class ValidatorService extends Validator
         $cacheService = resolve(config('cache.namespace') . $cacheServiceName);
 
         return $cacheService->exists($value);
+    }
+
+    /**
+     * @param $attribute
+     * @param $value
+     *
+     * @return bool
+     */
+    protected function validateLatitude($attribute, $value): bool
+    {
+        return preg_match('/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d+$/', $value);
+    }
+
+    /**
+     * @param $attribute
+     * @param $value
+     *
+     * @return bool
+     */
+    protected function validateLongitude($attribute, $value): bool
+    {
+        return preg_match('/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d+$/', $value);
     }
 
 }
