@@ -26,8 +26,6 @@ use Wizdraw\Services\TransferService;
  * @property float $rate
  * @property int $statusId
  * @property int $receiptId
- * @property integer $statusId
- * @property integer $receiptId
  * @property float $latitude
  * @property float $longitude
  * @property string $note
@@ -43,6 +41,7 @@ use Wizdraw\Services\TransferService;
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
  * @property-read float $totalAmount
  * @property-read float $receiverAmount
+ * @property-read mixed $nearbyBranch
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
