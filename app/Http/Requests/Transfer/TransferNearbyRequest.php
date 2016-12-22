@@ -29,8 +29,8 @@ class TransferNearbyRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'latitude'  => ['required', 'regex:/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/'],
-            'longitude' => ['required', 'regex:/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/'],
+            'latitude'  => 'required|latitude',
+            'longitude' => 'required|longitude',
         ];
     }
 
