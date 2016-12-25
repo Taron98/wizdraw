@@ -16,7 +16,9 @@ class FileService extends AbstractService
     const TYPE_IDENTITY = 'identity';
     const TYPE_RECEIPT = 'receipt';
     const TYPE_ADDRESS = 'address';
+    const TYPE_QR_VIP = 'vip';
 
+    const DEFAULT_QR_EXT = 'png';
     const DEFAULT_FILE_EXT = 'jpg';
 
     /** @var  Filesystem */
@@ -29,7 +31,7 @@ class FileService extends AbstractService
      */
     public function __construct(FilesystemManager $fileSystem)
     {
-        $this->fileSystem = $fileSystem->disk('s3');
+        $this->fileSystem = $fileSystem->cloud();
     }
 
     /**
@@ -37,11 +39,11 @@ class FileService extends AbstractService
      * @param string $name
      * @param string $data
      *
-     * @return bool|void
+     * @return bool
      */
     public function upload(string $type, string $name, string $data): bool
     {
-        // todo: reduce image size and compress
+        // todo: reduce image size and compress.
         $file = $this->extractFile($data);
 
         if (is_null($file)) {
@@ -95,6 +97,19 @@ class FileService extends AbstractService
     public function uploadAddress(string $name, string $data): bool
     {
         return $this->upload(self::TYPE_ADDRESS, $name, $data);
+    }
+
+    /**
+     * @param string $name
+     * @param string $vipNumber
+     *
+     * @return bool
+     */
+    public function uploadQrVip(string $name, string $vipNumber)
+    {
+        $qrCode = generate_qr_code($vipNumber);
+
+        return $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
     }
 
     /**

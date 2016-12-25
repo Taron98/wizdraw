@@ -49,6 +49,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
+ * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
@@ -264,6 +265,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function receivedTransfers(): HasMany
     {
         return $this->hasMany(Transfer::class, 'receiver_client_id');
+    }
+
+    /**
+     * The vip number of the client
+     *
+     * @return HasOne
+     */
+    public function vip(): HasOne
+    {
+        return $this->hasOne(Vip::class);
     }
 
     /**
@@ -577,7 +588,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDidSetup()
     {
@@ -585,7 +596,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $didSetup
+     * @param bool $didSetup
      */
     public function setDidSetup($didSetup)
     {
@@ -593,7 +604,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isApproved()
     {
@@ -601,7 +612,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $isApproved
+     * @param bool $isApproved
      */
     public function setIsApproved($isApproved)
     {

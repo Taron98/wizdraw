@@ -335,7 +335,7 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPending(): bool
     {
@@ -343,7 +343,7 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @param boolean $isPending
+     * @param bool $isPending
      */
     public function setIsPending(bool $isPending)
     {
