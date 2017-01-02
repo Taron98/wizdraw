@@ -410,7 +410,9 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getVipNumberAttribute($value)
     {
-        return $this->vip->getVipNumber();
+        if (!is_null($this->vip)) {
+            return $this->vip->getVipNumber();
+        }
     }
     //</editor-fold>
 
