@@ -22,24 +22,24 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\Client
  *
- * @property int $id
- * @property int $identityTypeId
+ * @property integer $id
+ * @property integer $identityTypeId
  * @property string $identityNumber
- * @property string $identityExpire
+ * @property \Carbon\Carbon $identityExpire
  * @property string $firstName
  * @property string $middleName
  * @property string $lastName
- * @property string $birthDate
+ * @property \Carbon\Carbon $birthDate
  * @property string $gender
  * @property string $phone
- * @property int $defaultCountryId
- * @property int $residentCountryId
+ * @property integer $defaultCountryId
+ * @property integer $residentCountryId
  * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
- * @property bool $didSetup
- * @property bool $isApproved
+ * @property boolean $didSetup
+ * @property boolean $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -51,6 +51,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
+ * @property-read mixed $vipNumber
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
