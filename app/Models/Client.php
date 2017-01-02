@@ -89,6 +89,15 @@ class Client extends AbstractModel implements AuthorizableContract
     protected $table = 'clients';
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'vip_number',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -254,7 +263,8 @@ class Client extends AbstractModel implements AuthorizableContract
                 'natures',
                 'status',
                 'receipt',
-            ]);
+            ])
+            ->latest();
     }
 
     /**
@@ -391,6 +401,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function getBirthDateAttribute($value)
     {
         return Carbon::parse($value)->toDateString();
+    }
+
+    /**
+     * @param $value
+     *
+     * @return int
+     */
+    public function getVipNumberAttribute($value)
+    {
+        return $this->vip->getVipNumber();
     }
     //</editor-fold>
 

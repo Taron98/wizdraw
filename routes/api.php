@@ -174,6 +174,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@statuses',
             ]);
 
+            Route::get('/last', [
+                'as'   => 'transfer.last',
+                'uses' => 'TransferController@last',
+            ]);
+
             Route::get('/able/', [
                 'as'   => 'transfer.able',
                 'uses' => 'TransferController@able',
