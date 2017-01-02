@@ -77,6 +77,7 @@ class Vip extends AbstractModel
     /**
      * Perform a model insert operation.
      * This override comes to avoid saving a vip number that already in use in the back office.
+     * Used numbers: 9606153, 9665643, 9710371
      *
      * @param  Builder $query
      *
@@ -87,7 +88,7 @@ class Vip extends AbstractModel
         $performInsert = parent::performInsert($query);
 
         // If this is the used vip number, delete and recreate
-        if ($performInsert && $this->id === 106153) {
+        if ($performInsert && ($this->id === 106153 || $this->id === 165643 || $this->id === 210371)) {
             $this->forceDelete();
             $this->setId(0);
 
