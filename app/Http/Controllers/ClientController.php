@@ -97,7 +97,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $addressImage = $request->input('addressImage');
-        if (!empty($identityImage)) {
+        if (!empty($addressImage)) {
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {

@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url'      => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -189,6 +189,7 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Hoy\Pushwoosh\PushwooshServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Approached\LaravelImageOptimizer\ServiceProvider::class,
 
         /*
          * Application Service Providers...
