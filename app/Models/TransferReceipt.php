@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\TransferReceipt
  *
- * @property int $id
+ * @property integer $id
  * @property string $number
  * @property string $expense
  * @property string $expenseType
  * @property string $remark
  * @property string $note
- * @property string $issuedAt
+ * @property \Carbon\Carbon $issuedAt
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
