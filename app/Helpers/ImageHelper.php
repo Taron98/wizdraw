@@ -23,3 +23,23 @@ if (!function_exists('generate_qr_code')) {
         return $qrCode;
     }
 }
+
+if (!function_exists('convert_base64_to_jpeg')) {
+    /**
+     * @param string $data
+     *
+     * @return mixed
+     */
+    function convert_base64_to_jpeg(string $data)
+    {
+        ob_start();
+        imagejpeg(imagecreatefromstring($data));
+        $jpegImage = ob_get_contents();
+        ob_end_clean();
+
+        $filePath = 'temp/' . time() . '.jpg';
+        Storage::disk()->put($filePath, $jpegImage);
+
+        return $filePath;
+    }
+}
