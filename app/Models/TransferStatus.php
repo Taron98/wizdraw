@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\TransferStatus
  *
- * @property int $id
+ * @property integer $id
  * @property string $status
  * @property string $originalStatus
  * @property string $color

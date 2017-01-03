@@ -22,24 +22,24 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\Client
  *
- * @property int $id
- * @property int $identityTypeId
+ * @property integer $id
+ * @property integer $identityTypeId
  * @property string $identityNumber
- * @property string $identityExpire
+ * @property \Carbon\Carbon $identityExpire
  * @property string $firstName
  * @property string $middleName
  * @property string $lastName
- * @property string $birthDate
+ * @property \Carbon\Carbon $birthDate
  * @property string $gender
  * @property string $phone
- * @property int $defaultCountryId
- * @property int $residentCountryId
+ * @property integer $defaultCountryId
+ * @property integer $residentCountryId
  * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
- * @property bool $didSetup
- * @property bool $isApproved
+ * @property boolean $didSetup
+ * @property boolean $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -49,7 +49,9 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
+ * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
+ * @property-read mixed $vipNumber
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -86,6 +88,15 @@ class Client extends AbstractModel implements AuthorizableContract
      * @var string
      */
     protected $table = 'clients';
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'vip_number',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -253,7 +264,8 @@ class Client extends AbstractModel implements AuthorizableContract
                 'natures',
                 'status',
                 'receipt',
-            ]);
+            ])
+            ->latest();
     }
 
     /**
@@ -264,6 +276,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function receivedTransfers(): HasMany
     {
         return $this->hasMany(Transfer::class, 'receiver_client_id');
+    }
+
+    /**
+     * The vip number of the client
+     *
+     * @return HasOne
+     */
+    public function vip(): HasOne
+    {
+        return $this->hasOne(Vip::class);
     }
 
     /**
@@ -380,6 +402,18 @@ class Client extends AbstractModel implements AuthorizableContract
     public function getBirthDateAttribute($value)
     {
         return Carbon::parse($value)->toDateString();
+    }
+
+    /**
+     * @param $value
+     *
+     * @return int
+     */
+    public function getVipNumberAttribute($value)
+    {
+        if (!is_null($this->vip)) {
+            return $this->vip->getVipNumber();
+        }
     }
     //</editor-fold>
 
@@ -577,7 +611,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDidSetup()
     {
@@ -585,7 +619,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $didSetup
+     * @param bool $didSetup
      */
     public function setDidSetup($didSetup)
     {
@@ -593,7 +627,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isApproved()
     {
@@ -601,7 +635,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $isApproved
+     * @param bool $isApproved
      */
     public function setIsApproved($isApproved)
     {

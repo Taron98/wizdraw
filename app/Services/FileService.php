@@ -2,8 +2,9 @@
 
 namespace Wizdraw\Services;
 
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Approached\LaravelImageOptimizer\ImageOptimizer;
 use Illuminate\Filesystem\FilesystemManager;
+use League\Flysystem\Filesystem;
 use Storage;
 
 /**
@@ -16,20 +17,31 @@ class FileService extends AbstractService
     const TYPE_IDENTITY = 'identity';
     const TYPE_RECEIPT = 'receipt';
     const TYPE_ADDRESS = 'address';
+    const TYPE_QR_VIP = 'vip';
 
+    const DEFAULT_QR_EXT = 'png';
     const DEFAULT_FILE_EXT = 'jpg';
 
     /** @var  Filesystem */
     private $fileSystem;
 
+    /** @var  Filesystem */
+    private $localFileSystem;
+
+    /** @var ImageOptimizer */
+    private $imageOptimizer;
+
     /**
      * FileService constructor.
      *
      * @param FilesystemManager $fileSystem
+     * @param ImageOptimizer $imageOptimizer
      */
-    public function __construct(FilesystemManager $fileSystem)
+    public function __construct(FilesystemManager $fileSystem, ImageOptimizer $imageOptimizer)
     {
-        $this->fileSystem = $fileSystem->disk('s3');
+        $this->localFileSystem = $fileSystem->disk();
+        $this->fileSystem = $fileSystem->cloud();
+        $this->imageOptimizer = $imageOptimizer;
     }
 
     /**
@@ -37,11 +49,10 @@ class FileService extends AbstractService
      * @param string $name
      * @param string $data
      *
-     * @return bool|void
+     * @return bool
      */
     public function upload(string $type, string $name, string $data): bool
     {
-        // todo: reduce image size and compress
         $file = $this->extractFile($data);
 
         if (is_null($file)) {
@@ -50,7 +61,7 @@ class FileService extends AbstractService
 
         $filePath = $this->getFilePath($type, $name);
 
-        return $this->fileSystem->put($filePath, $file[ 'content' ]);
+        return $this->fileSystem->put($filePath, $file);
     }
 
     /**
@@ -98,9 +109,22 @@ class FileService extends AbstractService
     }
 
     /**
+     * @param string $name
+     * @param string $vipNumber
+     *
+     * @return bool
+     */
+    public function uploadQrVip(string $name, string $vipNumber)
+    {
+        $qrCode = generate_qr_code($vipNumber);
+
+        return $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
+    }
+
+    /**
      * @param string $data
      *
-     * @return array|null
+     * @return bool|false|null|string
      */
     public function extractFile(string $data)
     {
@@ -110,10 +134,9 @@ class FileService extends AbstractService
             return null;
         }
 
-        return [
-            'type'    => $fileMeta[ 1 ],
-            'content' => base64_decode($fileMeta[ 2 ]),
-        ];
+        $file = $this->convertAndOptimize(base64_decode($fileMeta[ 2 ]));
+
+        return $file;
     }
 
     /**
@@ -155,6 +178,20 @@ class FileService extends AbstractService
     private function getFilePath(string $type, string $name)
     {
         return $type . '/' . $name . '.' . self::DEFAULT_FILE_EXT;
+    }
+
+    /**
+     * @param string $file
+     *
+     * @return bool|false|string
+     */
+    private function convertAndOptimize(string $file)
+    {
+        $filePath = convert_base64_to_jpeg($file);
+        $fullFilePath = config('filesystems.disks.local.root') . '/' . $filePath;
+        $this->imageOptimizer->optimizeImage($fullFilePath);
+
+        return $this->localFileSystem->readAndDelete($filePath);
     }
 
 }

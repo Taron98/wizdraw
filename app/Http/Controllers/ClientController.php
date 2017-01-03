@@ -12,6 +12,7 @@ use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\UserService;
+use Wizdraw\Services\VipService;
 
 /**
  * Class ClientController
@@ -26,6 +27,9 @@ class ClientController extends AbstractController
     /** @var  UserService */
     private $userService;
 
+    /** @var VipService */
+    private $vipService;
+
     /** @var FileService */
     private $fileService;
 
@@ -34,12 +38,18 @@ class ClientController extends AbstractController
      *
      * @param ClientService $clientService
      * @param UserService $userService
+     * @param VipService $vipService
      * @param FileService $fileService
      */
-    public function __construct(ClientService $clientService, UserService $userService, FileService $fileService)
-    {
+    public function __construct(
+        ClientService $clientService,
+        UserService $userService,
+        VipService $vipService,
+        FileService $fileService
+    ) {
         $this->clientService = $clientService;
         $this->userService = $userService;
+        $this->vipService = $vipService;
         $this->fileService = $fileService;
     }
 
@@ -87,7 +97,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $addressImage = $request->input('addressImage');
-        if (!empty($identityImage)) {
+        if (!empty($addressImage)) {
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {
@@ -96,11 +106,13 @@ class ClientController extends AbstractController
         }
 
         // todo: move to other place
-        if (!$isSetup) {
+        if ($isSetup) {
             $user->notify(
                 (new ClientMissingInfo())
                     ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
             );
+
+            $this->vipService->createVip($client);
         }
 
         return $this->respond(array_merge($client->toArray(), [

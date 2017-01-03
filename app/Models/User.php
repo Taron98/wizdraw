@@ -16,17 +16,17 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\User
  *
- * @property int $id
- * @property int $clientId
+ * @property integer $id
+ * @property integer $clientId
  * @property string $email
  * @property string $password
  * @property string $facebookId
  * @property string $facebookToken
  * @property \Carbon\Carbon $facebookTokenExpire
  * @property string $deviceId
- * @property int $verifyCode
+ * @property integer $verifyCode
  * @property \Carbon\Carbon $verifyExpire
- * @property bool $isPending
+ * @property boolean $isPending
  * @property \Carbon\Carbon $passwordChangedAt
  * @property \Carbon\Carbon $lastLoginAt
  * @property \Carbon\Carbon $createdAt
@@ -335,7 +335,7 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPending(): bool
     {
@@ -343,7 +343,7 @@ class User extends AbstractModel implements
     }
 
     /**
-     * @param boolean $isPending
+     * @param bool $isPending
      */
     public function setIsPending(bool $isPending)
     {

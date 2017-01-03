@@ -31,7 +31,7 @@ class ClientService extends AbstractService
      *
      * @return Client
      */
-    public function createClient(array $attributes) : Client
+    public function createClient(array $attributes): Client
     {
         return $this->createClients([0 => $attributes])->first();
     }
@@ -43,7 +43,7 @@ class ClientService extends AbstractService
      *
      * @return Collection
      */
-    public function createClients(array $clients) : Collection
+    public function createClients(array $clients): Collection
     {
         $clientModels = new Collection();
 
@@ -78,6 +78,18 @@ class ClientService extends AbstractService
         $client = $this->repository->makeModel()->fromFacebookUser($facebookUser);
 
         return $this->createClient($client->toArray());
+    }
+
+    /**
+     * @param Client $client
+     *
+     * @return array
+     */
+    public function lastTransfer(Client $client)
+    {
+        $lastTransfer = $client->transfers->first();
+
+        return $lastTransfer;
     }
 
     /**

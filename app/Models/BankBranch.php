@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\BankBranch
  *
- * @property int $id
- * @property int $bankBranchId
+ * @property integer $id
+ * @property integer $bankBranchId
  * @property string $name
  * @property string $address
  * @property \Carbon\Carbon $createdAt
