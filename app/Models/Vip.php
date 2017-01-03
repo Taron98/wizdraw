@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Wizdraw\Models\Vip
  *
  * @property integer $id
+ * @property integer $number
  * @property integer $credits
  * @property integer $clientId
  * @property \Carbon\Carbon $createdAt
@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCredits($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCreatedAt($value)
@@ -42,6 +43,7 @@ class Vip extends AbstractModel
      */
     protected $fillable = [
         'id',
+        'number',
         'credits',
         'client_id',
         'deleted_at',
@@ -75,27 +77,13 @@ class Vip extends AbstractModel
     ];
 
     /**
-     * Perform a model insert operation.
-     * This override comes to avoid saving a vip number that already in use in the back office.
-     * Used numbers: 9606153, 9665643, 9710371
+     * The "booting" method of the model.
      *
-     * @param  Builder $query
-     *
-     * @return bool
+     * @return void
      */
-    protected function performInsert(Builder $query)
+    protected static function boot()
     {
-        $performInsert = parent::performInsert($query);
-
-        // If this is the used vip number, delete and recreate
-        if ($performInsert && ($this->id === 106153 || $this->id === 165643 || $this->id === 210371)) {
-            $this->forceDelete();
-            $this->setId(0);
-
-            return parent::performInsert($query);
-        }
-
-        return $performInsert;
+        Vip::observe(VipObserver::class);
     }
 
     //<editor-fold desc="Relationships">
@@ -157,10 +145,21 @@ class Vip extends AbstractModel
     /**
      * @return int
      */
-    public function getVipNumber(): int
+    public function getNumber()
     {
-        // The application vip numbers starts from 9500000
-        return 9500000 + $this->id;
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     *
+     * @return Vip
+     */
+    public function setNumber($number): Vip
+    {
+        $this->number = $number;
+
+        return $this;
     }
     //</editor-fold>
 
