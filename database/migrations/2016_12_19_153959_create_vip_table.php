@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVipTable extends Migration
 {
@@ -16,6 +16,7 @@ class CreateVipTable extends Migration
         Schema::create('vip', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->mediumInteger('number')->unsigned();
             $table->mediumInteger('credits')->unsigned()->default(5);
             $table->integer('client_id')->unsigned()->index();
 
