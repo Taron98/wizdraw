@@ -325,6 +325,10 @@ class TransferController extends AbstractController
         $client = $request->user()->client;
         $lastTransfer = $this->clientService->lastTransfer($client);
 
+        if (is_null($lastTransfer)) {
+            return $this->respondWithError('transfer_not_found', Response::HTTP_NOT_FOUND);
+        }
+
         return $this->respond($lastTransfer);
     }
 
