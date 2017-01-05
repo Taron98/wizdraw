@@ -96,5 +96,6 @@ class UserService extends AbstractService
 
         $this->updateModel($user);
     }
-
+    
+    
 }

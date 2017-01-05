@@ -6,9 +6,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Services\AffiliateService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\UserService;
@@ -33,6 +35,9 @@ class ClientController extends AbstractController
     /** @var FileService */
     private $fileService;
 
+    /** @var AffiliateService */
+    private $affiliateService;
+
     /**
      * UserController constructor.
      *
@@ -45,12 +50,14 @@ class ClientController extends AbstractController
         ClientService $clientService,
         UserService $userService,
         VipService $vipService,
-        FileService $fileService
+        FileService $fileService,
+        AffiliateService $affiliateService
     ) {
         $this->clientService = $clientService;
         $this->userService = $userService;
         $this->vipService = $vipService;
         $this->fileService = $fileService;
+        $this->affiliateService = $affiliateService;
     }
 
     /**
@@ -117,8 +124,8 @@ class ClientController extends AbstractController
 
         return $this->respond(array_merge($client->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
-            'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
-            'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
+            'addressImage' => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
+            'profileImage' => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
     }
 
@@ -139,5 +146,25 @@ class ClientController extends AbstractController
 
         return $this->respond($client);
     }
+
+    /**
+     * Add affiliate code for user
+     *
+     * @param NoParamRequest $request
+     *
+     * @param $affiliateCode
+     *
+     * @return mixed
+     */
+    public function affiliate(NoParamRequest $request, $affiliateCode)
+    {
+
+        $affiliate = $this->affiliateService->getAffilaiteCodeId($affiliateCode);
+        if(is_null($affiliate)){
+            return $this->respondWithError('code_not_exist', Response::HTTP_BAD_REQUEST);
+        }
+        return $affiliate;
+    }
+
 
 }

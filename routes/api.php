@@ -87,7 +87,9 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/verify/{verifyCode}/', [
                 'as'   => 'user.verify',
                 'uses' => 'UserController@verify',
-            ]);
+            ]);        
+            
+
 
         });
 
@@ -102,6 +104,11 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/phone/', [
                 'as'   => 'client.phone',
                 'uses' => 'ClientController@phone',
+            ]);
+
+            Route::post('/affiliate/{affiliateCode}', [
+                'as'   => 'client.affiliate',
+                'uses' => 'ClientController@affiliate',
             ]);
 
         });

@@ -106,6 +106,7 @@ class UserController extends AbstractController
 
         return $this->respond($user);
     }
+    
 
     /**
      * User details by device id route
@@ -114,7 +115,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function device(string $deviceId): JsonResponse
+        public function device(string $deviceId): JsonResponse
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);

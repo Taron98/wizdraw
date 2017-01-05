@@ -43,6 +43,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property integer $affiliateId
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
@@ -51,7 +52,6 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
- * @property-read mixed $vipNumber
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -113,6 +113,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'did_setup',
         'is_approved',
         'deleted_at',
+        'affiliate_id'
     ];
 
     /**
@@ -128,7 +129,7 @@ class Client extends AbstractModel implements AuthorizableContract
      * @var array
      */
     protected $casts = [
-        'did_setup'   => 'boolean',
+        'did_setup' => 'boolean',
         'is_approved' => 'boolean',
     ];
 
@@ -372,7 +373,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function setPhoneAttribute(string $phone)
     {
-        $this->attributes[ 'phone' ] = phone($phone);
+        $this->attributes['phone'] = phone($phone);
     }
 
     /**
@@ -665,4 +666,29 @@ class Client extends AbstractModel implements AuthorizableContract
     }
     //</editor-fold>
 
+    /**
+     * @return string
+     */
+    public function getAffiliateId()
+    {
+        return $this->affiliateId;
+    }
+
+    /**
+     * @param integer $affiliateId
+     */
+    public function setAffiliateId($affiliateId)
+    {
+        $this->affiliateId = $affiliateId;
+    }
+
+    /**
+     * Affiliate Code of the client
+     *
+     * @return BelongsTo
+     */
+    public function affiliate(): BelongsTo
+    {
+        return $this->belongsTo(Affiliate::class);
+    }
 }
