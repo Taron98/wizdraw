@@ -116,9 +116,7 @@ class ClientController extends AbstractController
         }
 
         // Quick fix: For some reason, vip isn't shown in the client
-        if (!is_null($client->vip)) {
-            $client->vip->fresh();
-        }
+        $client->vip->fresh();
 
         return $this->respond(array_merge($client->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
