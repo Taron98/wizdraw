@@ -22,34 +22,37 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\Client
  *
- * @property int $id
- * @property int $identityTypeId
+ * @property integer $id
+ * @property integer $identityTypeId
  * @property string $identityNumber
- * @property string $identityExpire
+ * @property \Carbon\Carbon $identityExpire
  * @property string $firstName
  * @property string $middleName
  * @property string $lastName
- * @property string $birthDate
+ * @property \Carbon\Carbon $birthDate
  * @property string $gender
  * @property string $phone
- * @property int $defaultCountryId
- * @property int $residentCountryId
+ * @property integer $defaultCountryId
+ * @property integer $residentCountryId
  * @property string $state
  * @property string $city
  * @property string $address
  * @property string $clientType
- * @property bool $didSetup
- * @property bool $isApproved
+ * @property boolean $didSetup
+ * @property boolean $isApproved
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property integer $affiliateId
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
+ * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
+ * @property-read \Wizdraw\Models\Affiliate $affiliate
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -74,6 +77,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
  * @mixin \Eloquent
  */
 class Client extends AbstractModel implements AuthorizableContract
@@ -110,6 +114,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'client_type',
         'did_setup',
         'is_approved',
+        'affiliate_id',
         'deleted_at',
     ];
 
@@ -253,7 +258,8 @@ class Client extends AbstractModel implements AuthorizableContract
                 'natures',
                 'status',
                 'receipt',
-            ]);
+            ])
+            ->latest();
     }
 
     /**
@@ -264,6 +270,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function receivedTransfers(): HasMany
     {
         return $this->hasMany(Transfer::class, 'receiver_client_id');
+    }
+
+    /**
+     * The vip number of the client
+     *
+     * @return HasOne
+     */
+    public function vip(): HasOne
+    {
+        return $this->hasOne(Vip::class);
     }
 
     /**
@@ -348,6 +364,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function bankAccounts(): HasMany
     {
         return $this->hasMany(BankAccount::class);
+    }
+
+    /**
+     * Affiliate Code of the client
+     *
+     * @return BelongsTo
+     */
+    public function affiliate(): BelongsTo
+    {
+        return $this->belongsTo(Affiliate::class);
     }
     //</editor-fold>
 
@@ -577,7 +603,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDidSetup()
     {
@@ -585,7 +611,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $didSetup
+     * @param bool $didSetup
      */
     public function setDidSetup($didSetup)
     {
@@ -593,7 +619,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isApproved()
     {
@@ -601,7 +627,7 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
-     * @param boolean $isApproved
+     * @param bool $isApproved
      */
     public function setIsApproved($isApproved)
     {
@@ -609,11 +635,31 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * @return string
+     */
+    public function getAffiliateId()
+    {
+        return $this->affiliateId;
+    }
+
+    /**
+     * @param integer $affiliateId
+     */
+    public function setAffiliateId($affiliateId)
+    {
+        $this->affiliateId = $affiliateId;
+    }
+
+    /**
      * @return bool
      */
     public function canTransfer(): bool
     {
-        return !(!$this->isApproved && $this->transfers->count() > 0);
+        $transfers = $this
+            ->transfers
+            ->where('status.status', '!=', TransferStatus::STATUS_CANCELLED);
+
+        return !(!$this->isApproved && $transfers->count() > 0);
     }
 
     /**

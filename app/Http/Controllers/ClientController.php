@@ -6,12 +6,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Services\AffiliateService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\UserService;
+use Wizdraw\Services\VipService;
 
 /**
  * Class ClientController
@@ -26,21 +29,36 @@ class ClientController extends AbstractController
     /** @var  UserService */
     private $userService;
 
+    /** @var VipService */
+    private $vipService;
+
     /** @var FileService */
     private $fileService;
+
+    /** @var AffiliateService */
+    private $affiliateService;
 
     /**
      * UserController constructor.
      *
      * @param ClientService $clientService
      * @param UserService $userService
+     * @param VipService $vipService
      * @param FileService $fileService
+     * @param AffiliateService $affiliateService
      */
-    public function __construct(ClientService $clientService, UserService $userService, FileService $fileService)
-    {
+    public function __construct(
+        ClientService $clientService,
+        UserService $userService,
+        VipService $vipService,
+        FileService $fileService,
+        AffiliateService $affiliateService
+    ) {
         $this->clientService = $clientService;
         $this->userService = $userService;
+        $this->vipService = $vipService;
         $this->fileService = $fileService;
+        $this->affiliateService = $affiliateService;
     }
 
     /**
@@ -87,7 +105,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $addressImage = $request->input('addressImage');
-        if (!empty($identityImage)) {
+        if (!empty($addressImage)) {
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {
@@ -96,11 +114,18 @@ class ClientController extends AbstractController
         }
 
         // todo: move to other place
-        if (!$isSetup) {
+        if ($isSetup) {
             $user->notify(
                 (new ClientMissingInfo())
                     ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
             );
+
+            $this->vipService->createVip($client);
+        }
+
+        // Quick fix: For some reason, vip isn't shown in the client
+        if (!is_null($client->vip)) {
+            $client->vip->fresh();
         }
 
         return $this->respond(array_merge($client->toArray(), [
@@ -126,6 +151,28 @@ class ClientController extends AbstractController
         $user->client->notify(new ClientVerify(true));
 
         return $this->respond($client);
+    }
+
+    /**
+     * Add affiliate code for user
+     *
+     * @param NoParamRequest $request
+     * @param $affiliateCode
+     *
+     * @return mixed
+     */
+    public function affiliate(NoParamRequest $request, $affiliateCode)
+    {
+        $client = $request->user()->client;
+        $affiliate = $this->affiliateService->findByCode($affiliateCode);
+
+        if (is_null($affiliate)) {
+            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND);
+        }
+
+        $this->clientService->updateAffiliate($affiliate, $client);
+
+        return $affiliate;
     }
 
 }

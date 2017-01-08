@@ -104,6 +104,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@phone',
             ]);
 
+            Route::post('/affiliate/{affiliateCode}', [
+                'as'   => 'client.affiliate',
+                'uses' => 'ClientController@affiliate',
+            ]);
+
         });
 
         // Group
@@ -172,6 +177,11 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/status', [
                 'as'   => 'transfer.statuses',
                 'uses' => 'TransferController@statuses',
+            ]);
+
+            Route::get('/last', [
+                'as'   => 'transfer.last',
+                'uses' => 'TransferController@last',
             ]);
 
             Route::get('/able/', [

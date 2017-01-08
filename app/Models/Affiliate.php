@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Wizdraw\Models\IdentityType
+ * Wizdraw\Models\Affiliate
  *
  * @property integer $id
- * @property string $type
+ * @property string $code
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereDeletedAt($value)
  * @mixin \Eloquent
  */
-class IdentityType extends AbstractModel
+class Affiliate extends AbstractModel
 {
     use SoftDeletes;
 
@@ -30,7 +30,7 @@ class IdentityType extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'identity_types';
+    protected $table = 'affiliates';
 
     /**
      * The attributes that are mass assignable.
@@ -38,23 +38,8 @@ class IdentityType extends AbstractModel
      * @var array
      */
     protected $fillable = [
-        'type',
-        'deleted_at',
+        'code',
     ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
 
     /**
      * The attributes that should be mutated to dates.
@@ -69,11 +54,11 @@ class IdentityType extends AbstractModel
     /**
      * One-to-many relationship with clients table
      *
-     * @return HasMany
+     * @return hasMany
      */
     public function clients(): HasMany
     {
-        return $this->hasMany(Client::class);
+        return $this->hasMany(Client::class, 'clients');
     }
     //</editor-fold>
 
@@ -84,17 +69,21 @@ class IdentityType extends AbstractModel
     /**
      * @return string
      */
-    public function getType(): string
+    public function getCode()
     {
-        return $this->type;
+        return $this->code;
     }
 
     /**
-     * @param string $type
+     * @param string $code
+     *
+     * @return Affiliate
      */
-    public function setType(string $type)
+    public function setCode($code)
     {
-        $this->type = $type;
+        $this->code = $code;
+
+        return $this;
     }
     //</editor-fold>
 

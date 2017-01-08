@@ -3,6 +3,8 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Support\Collection;
+use Wizdraw\Models\AbstractModel;
+use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Services\Entities\FacebookUser;
@@ -31,7 +33,7 @@ class ClientService extends AbstractService
      *
      * @return Client
      */
-    public function createClient(array $attributes) : Client
+    public function createClient(array $attributes): Client
     {
         return $this->createClients([0 => $attributes])->first();
     }
@@ -43,7 +45,7 @@ class ClientService extends AbstractService
      *
      * @return Collection
      */
-    public function createClients(array $clients) : Collection
+    public function createClients(array $clients): Collection
     {
         $clientModels = new Collection();
 
@@ -81,6 +83,18 @@ class ClientService extends AbstractService
     }
 
     /**
+     * @param Client $client
+     *
+     * @return array
+     */
+    public function lastTransfer(Client $client)
+    {
+        $lastTransfer = $client->transfers->first();
+
+        return $lastTransfer;
+    }
+
+    /**
      * @param string $phone
      *
      * @return Client|null
@@ -90,6 +104,18 @@ class ClientService extends AbstractService
         $phone = phone($phone);
 
         return $this->repository->findByPhone($phone)->first();
+    }
+
+    /**
+     * @param Affiliate $affiliate
+     *
+     * @param Client $client
+     *
+     * @return AbstractModel
+     */
+    public function updateAffiliate(Affiliate $affiliate, Client $client): AbstractModel
+    {
+        return $this->repository->updateAffiliate($affiliate, $client);
     }
 
 }
