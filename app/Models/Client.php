@@ -43,6 +43,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property integer $affiliateId
  * @property-read \Wizdraw\Models\IdentityType $identityType
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
@@ -51,7 +52,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
- * @property-read mixed $vipNumber
+ * @property-read \Wizdraw\Models\Affiliate $affiliate
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -76,6 +77,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
  * @mixin \Eloquent
  */
 class Client extends AbstractModel implements AuthorizableContract
@@ -112,6 +114,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'client_type',
         'did_setup',
         'is_approved',
+        'affiliate_id',
         'deleted_at',
     ];
 
@@ -361,6 +364,16 @@ class Client extends AbstractModel implements AuthorizableContract
     public function bankAccounts(): HasMany
     {
         return $this->hasMany(BankAccount::class);
+    }
+
+    /**
+     * Affiliate Code of the client
+     *
+     * @return BelongsTo
+     */
+    public function affiliate(): BelongsTo
+    {
+        return $this->belongsTo(Affiliate::class);
     }
     //</editor-fold>
 
@@ -619,6 +632,22 @@ class Client extends AbstractModel implements AuthorizableContract
     public function setIsApproved($isApproved)
     {
         $this->isApproved = $isApproved;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAffiliateId()
+    {
+        return $this->affiliateId;
+    }
+
+    /**
+     * @param integer $affiliateId
+     */
+    public function setAffiliateId($affiliateId)
+    {
+        $this->affiliateId = $affiliateId;
     }
 
     /**

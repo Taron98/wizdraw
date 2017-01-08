@@ -6,9 +6,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Services\AffiliateService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\UserService;
@@ -33,6 +35,9 @@ class ClientController extends AbstractController
     /** @var FileService */
     private $fileService;
 
+    /** @var AffiliateService */
+    private $affiliateService;
+
     /**
      * UserController constructor.
      *
@@ -40,17 +45,20 @@ class ClientController extends AbstractController
      * @param UserService $userService
      * @param VipService $vipService
      * @param FileService $fileService
+     * @param AffiliateService $affiliateService
      */
     public function __construct(
         ClientService $clientService,
         UserService $userService,
         VipService $vipService,
-        FileService $fileService
+        FileService $fileService,
+        AffiliateService $affiliateService
     ) {
         $this->clientService = $clientService;
         $this->userService = $userService;
         $this->vipService = $vipService;
         $this->fileService = $fileService;
+        $this->affiliateService = $affiliateService;
     }
 
     /**
@@ -143,6 +151,28 @@ class ClientController extends AbstractController
         $user->client->notify(new ClientVerify(true));
 
         return $this->respond($client);
+    }
+
+    /**
+     * Add affiliate code for user
+     *
+     * @param NoParamRequest $request
+     * @param $affiliateCode
+     *
+     * @return mixed
+     */
+    public function affiliate(NoParamRequest $request, $affiliateCode)
+    {
+        $client = $request->user()->client;
+        $affiliate = $this->affiliateService->findByCode($affiliateCode);
+
+        if (is_null($affiliate)) {
+            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND);
+        }
+
+        $this->clientService->updateAffiliate($affiliate, $client);
+
+        return $affiliate;
     }
 
 }

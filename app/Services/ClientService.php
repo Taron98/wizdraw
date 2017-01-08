@@ -3,6 +3,8 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Support\Collection;
+use Wizdraw\Models\AbstractModel;
+use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Services\Entities\FacebookUser;
@@ -102,6 +104,18 @@ class ClientService extends AbstractService
         $phone = phone($phone);
 
         return $this->repository->findByPhone($phone)->first();
+    }
+
+    /**
+     * @param Affiliate $affiliate
+     *
+     * @param Client $client
+     *
+     * @return AbstractModel
+     */
+    public function updateAffiliate(Affiliate $affiliate, Client $client): AbstractModel
+    {
+        return $this->repository->updateAffiliate($affiliate, $client);
     }
 
 }

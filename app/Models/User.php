@@ -185,7 +185,10 @@ class User extends AbstractModel implements
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class)
-            ->with('vip');
+            ->with([
+                'vip',
+                'affiliate',
+            ]);
     }
     //</editor-fold>
 
