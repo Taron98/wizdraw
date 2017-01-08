@@ -107,7 +107,6 @@ class UserController extends AbstractController
         return $this->respond($user);
     }
 
-
     /**
      * User details by device id route
      *
