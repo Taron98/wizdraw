@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class AddAffiliateIdClientsTable
  */
-class AddAffiliateIdClientsTable extends Migration
+class AddAffiliateIdToClientsTable extends Migration
 {
     /**
      * Run the migrations.
