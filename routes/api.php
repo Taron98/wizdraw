@@ -87,9 +87,7 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/verify/{verifyCode}/', [
                 'as'   => 'user.verify',
                 'uses' => 'UserController@verify',
-            ]);        
-            
-
+            ]);
 
         });
 
