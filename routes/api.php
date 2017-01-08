@@ -104,6 +104,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@phone',
             ]);
 
+            Route::post('/affiliate/{affiliateCode}', [
+                'as'   => 'client.affiliate',
+                'uses' => 'ClientController@affiliate',
+            ]);
+
         });
 
         // Group
