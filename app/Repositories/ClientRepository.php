@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Repositories;
 
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 
@@ -15,7 +16,7 @@ class ClientRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model() : string
+    public function model(): string
     {
         return Client::class;
     }
@@ -34,11 +35,10 @@ class ClientRepository extends AbstractRepository
      * @param $affiliate
      *
      * @param Client $client
-     * 
-     * @return mixed
      *
+     * @return AbstractModel
      */
-    public function createAffiliate(Affiliate $affiliate, Client $client)
+    public function updateAffiliate(Affiliate $affiliate, Client $client): AbstractModel
     {
         $client->setAffiliateId($affiliate->getId());
 

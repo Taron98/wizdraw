@@ -125,8 +125,8 @@ class ClientController extends AbstractController
 
         return $this->respond(array_merge($client->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
-            'addressImage' => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
-            'profileImage' => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
+            'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
+            'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
     }
 
@@ -152,7 +152,6 @@ class ClientController extends AbstractController
      * Add affiliate code for user
      *
      * @param NoParamRequest $request
-     *
      * @param $affiliateCode
      *
      * @return mixed
@@ -160,17 +159,15 @@ class ClientController extends AbstractController
     public function affiliate(NoParamRequest $request, $affiliateCode)
     {
         $client = $request->user()->client;
-        $affiliate = $this->affiliateService->getAffiliateCodeId($affiliateCode);
-        
-        if(is_null($affiliate)){
-            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_BAD_REQUEST);
+        $affiliate = $this->affiliateService->findByCode($affiliateCode);
+
+        if (is_null($affiliate)) {
+            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND);
         }
-        
-        $this->clientService->createAffiliate($affiliate ,$client);
+
+        $this->clientService->updateAffiliate($affiliate, $client);
+
         return $affiliate;
     }
-
-
-
 
 }

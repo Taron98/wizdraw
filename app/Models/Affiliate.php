@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Affiliate extends AbstractModel
 {
     use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -34,7 +35,9 @@ class Affiliate extends AbstractModel
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'code',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -42,18 +45,16 @@ class Affiliate extends AbstractModel
      * @var array
      */
     protected $dates = [
-        'created_at',
-        'updated_at',
         'deleted_at',
     ];
 
     //<editor-fold desc="Relationships">
     /**
-     * one-to-many relationship with clients table
+     * One-to-many relationship with clients table
      *
      * @return hasMany
      */
-    public function clients() : HasMany
+    public function clients(): HasMany
     {
         return $this->hasMany(Client::class, 'clients');
     }
@@ -73,11 +74,13 @@ class Affiliate extends AbstractModel
 
     /**
      * @param string $code
+     *
      * @return Affiliate
      */
     public function setCode($code)
     {
         $this->code = $code;
+
         return $this;
     }
     //</editor-fold>

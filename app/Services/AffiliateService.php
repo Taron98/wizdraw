@@ -21,9 +21,14 @@ class AffiliateService extends AbstractService
         $this->repository = $affiliateRepository;
     }
 
-    public function getAffiliateCodeId($affiliateCode)
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function findByCode($code)
     {
-        return $this->repository->findByAffiliateCode($affiliateCode);
+        return $this->repository->findByCode($code);
     }
 
 }

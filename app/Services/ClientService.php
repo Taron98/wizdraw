@@ -3,6 +3,7 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Support\Collection;
+use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
@@ -109,12 +110,12 @@ class ClientService extends AbstractService
      * @param Affiliate $affiliate
      *
      * @param Client $client
-     * @return mixed
      *
+     * @return AbstractModel
      */
-    public function createAffiliate(Affiliate $affiliate, Client $client)
+    public function updateAffiliate(Affiliate $affiliate, Client $client): AbstractModel
     {
-        return $this->repository->createAffiliate($affiliate,$client);
+        return $this->repository->updateAffiliate($affiliate, $client);
     }
-    
+
 }

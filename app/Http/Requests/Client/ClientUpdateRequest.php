@@ -47,7 +47,6 @@ class ClientUpdateRequest extends AbstractRequest
             'addressImage'      => 'base64image',
             'clientType'        => 'in:sender,receiver',
             'profileImage'      => 'base64image',
-            'affiliateCode'     => 'integer|exists:affiliates,code'
         ];
     }
 
