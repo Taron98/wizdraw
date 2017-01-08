@@ -654,7 +654,11 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function canTransfer(): bool
     {
-        return !(!$this->isApproved && $this->transfers->count() > 0);
+        $transfers = $this
+            ->transfers
+            ->where('status.status', '!=', TransferStatus::STATUS_CANCELLED);
+
+        return !(!$this->isApproved && $transfers->count() > 0);
     }
 
     /**
