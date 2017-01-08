@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class AddAlterAffiliateIdClientsTable
+ * Class AddAffiliateIdClientsTable
  */
-class AddAlterAffiliateIdClientsTable extends Migration
+class AddAffiliateIdClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class AddAlterAffiliateIdClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->integer('affiliate_id')->unsigned()->nullable()->index();
+            $table->integer('affiliate_id')->unsigned()->nullable()->index()->after('is_approved');
 
             $table->foreign('affiliate_id')
                 ->references('id')->on('affiliates')
