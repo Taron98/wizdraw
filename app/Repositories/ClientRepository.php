@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Repositories;
 
+use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 
 /**
@@ -29,4 +30,18 @@ class ClientRepository extends AbstractRepository
         return $this->findByField('phone', $phone);
     }
 
+    /**
+     * @param $affiliate
+     *
+     * @param Client $client
+     * 
+     * @return mixed
+     *
+     */
+    public function createAffiliate(Affiliate $affiliate, Client $client)
+    {
+        $client->setAffiliateId($affiliate->getId());
+
+        return $this->updateModel($client);
+    }
 }

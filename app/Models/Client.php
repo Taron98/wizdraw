@@ -52,6 +52,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Wizdraw\Models\Vip $vip
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
+ * @property-read \Wizdraw\Models\Affiliate $affiliate
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -76,6 +77,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
  * @mixin \Eloquent
  */
 class Client extends AbstractModel implements AuthorizableContract
@@ -363,6 +365,16 @@ class Client extends AbstractModel implements AuthorizableContract
     {
         return $this->hasMany(BankAccount::class);
     }
+
+    /**
+     * Affiliate Code of the client
+     *
+     * @return BelongsTo
+     */
+    public function affiliate(): BelongsTo
+    {
+        return $this->belongsTo(Affiliate::class);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Accessors & Mutators">
@@ -623,6 +635,22 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * @return string
+     */
+    public function getAffiliateId()
+    {
+        return $this->affiliateId;
+    }
+
+    /**
+     * @param integer $affiliateId
+     */
+    public function setAffiliateId($affiliateId)
+    {
+        $this->affiliateId = $affiliateId;
+    }
+
+    /**
      * @return bool
      */
     public function canTransfer(): bool
@@ -666,29 +694,4 @@ class Client extends AbstractModel implements AuthorizableContract
     }
     //</editor-fold>
 
-    /**
-     * @return string
-     */
-    public function getAffiliateId()
-    {
-        return $this->affiliateId;
-    }
-
-    /**
-     * @param integer $affiliateId
-     */
-    public function setAffiliateId($affiliateId)
-    {
-        $this->affiliateId = $affiliateId;
-    }
-
-    /**
-     * Affiliate Code of the client
-     *
-     * @return BelongsTo
-     */
-    public function affiliate(): BelongsTo
-    {
-        return $this->belongsTo(Affiliate::class);
-    }
 }

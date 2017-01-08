@@ -13,8 +13,7 @@ use Wizdraw\Models\Affiliate;
  */
 class AffiliateRepository extends AbstractRepository
 {
-
-
+    
     /**
      * Specify Model class name
      *
@@ -25,10 +24,8 @@ class AffiliateRepository extends AbstractRepository
         return Affiliate::class;
     }
     
-    public function getAffilaiteCodeId($affiliateCode){
-        
+    public function findByAffiliateCode($affiliateCode){
         return $this->findByField('code', $affiliateCode)->first();
-
     }
 
 }

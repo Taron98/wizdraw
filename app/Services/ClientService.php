@@ -3,6 +3,7 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Support\Collection;
+use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Services\Entities\FacebookUser;
@@ -104,4 +105,16 @@ class ClientService extends AbstractService
         return $this->repository->findByPhone($phone)->first();
     }
 
+    /**
+     * @param Affiliate $affiliate
+     *
+     * @param Client $client
+     * @return mixed
+     *
+     */
+    public function createAffiliate(Affiliate $affiliate, Client $client)
+    {
+        return $this->repository->createAffiliate($affiliate,$client);
+    }
+    
 }

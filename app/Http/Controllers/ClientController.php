@@ -45,6 +45,7 @@ class ClientController extends AbstractController
      * @param UserService $userService
      * @param VipService $vipService
      * @param FileService $fileService
+     * @param AffiliateService $affiliateService
      */
     public function __construct(
         ClientService $clientService,
@@ -158,13 +159,18 @@ class ClientController extends AbstractController
      */
     public function affiliate(NoParamRequest $request, $affiliateCode)
     {
-
-        $affiliate = $this->affiliateService->getAffilaiteCodeId($affiliateCode);
+        $client = $request->user()->client;
+        $affiliate = $this->affiliateService->getAffiliateCodeId($affiliateCode);
+        
         if(is_null($affiliate)){
-            return $this->respondWithError('code_not_exist', Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_BAD_REQUEST);
         }
+        
+        $this->clientService->createAffiliate($affiliate ,$client);
         return $affiliate;
     }
+
+
 
 
 }
