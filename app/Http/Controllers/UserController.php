@@ -152,11 +152,12 @@ class UserController extends AbstractController
         $email = $request->input('email');
         $user = $this->userService->findByEmail($email);
         if (is_null($user)) {
+
             return $this->respondWithError('email_not_found', Response::HTTP_NOT_FOUND);
         }
 
         $this->userService->generateVerifyCode($user);
-        $user->client->notify(new UserResetPassword($email));
+        $user->notify(new UserResetPassword($email));
         return $user;
     }
 

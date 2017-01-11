@@ -5,7 +5,7 @@ namespace Wizdraw\Http\Requests\User;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class UserUpdateRequest
+ * Class UserResetPasswordRequest
  * @package Wizdraw\Http\Requests\User
  */
 class UserResetPasswordRequest extends AbstractRequest

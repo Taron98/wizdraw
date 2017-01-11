@@ -8,10 +8,10 @@ use Illuminate\Notifications\Channels\MailChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Client;
-use Wizdraw\Notifications\Messages\SmsMessage;
+use Wizdraw\Models\User;
 
 /**
- * Class ClientVerify
+ * Class UserResetPassword
  * @package Wizdraw\Notifications
  */
 class UserResetPassword extends Notification implements ShouldQueue
@@ -48,18 +48,17 @@ class UserResetPassword extends Notification implements ShouldQueue
     }
 
 
-
     /**
-     * @param Client $notifiable
+     * @param User $notifiable
      *
      * @return MailMessage
      */
-    public function toMail(Client $notifiable)
+    public function toMail(User $notifiable)
     {
         $subject = trans('passwords.reset');
         $attributes = [
-            'firstName'  => $notifiable->getFirstName(),
-            'verifyCode' => $notifiable->user->getVerifyCode(),
+            'firstName'  => $notifiable->client->getFirstName(),
+            'verifyCode' => $notifiable->getVerifyCode(),
             'expire'     => $this->expire,
         ];
 
