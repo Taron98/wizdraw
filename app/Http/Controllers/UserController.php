@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Http\Requests\User\UserPasswordRequest;
 use Wizdraw\Http\Requests\User\UserUpdateRequest;
+use Wizdraw\Http\Requests\User\UserResetPasswordRequest;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Notifications\UserResetPassword;
 use Wizdraw\Services\UserService;
 
 /**
@@ -138,6 +140,26 @@ class UserController extends AbstractController
                 'lastName'   => ($client->getLastName()) ?: '',
             ],
         ]);
+    }
+
+    /**
+     * @param UserResetPasswordRequest $request
+     *
+     * @return mixed|JsonResponse
+     */
+    public function reset(UserResetPasswordRequest $request)
+    {
+        $email = $request->input('email');
+        $user = $this->userService->findByEmail($email);
+
+        if (is_null($user)) {
+
+            return $this->respondWithError('email_not_found', Response::HTTP_NOT_FOUND);
+        }
+
+        $this->userService->generateVerifyCode($user);
+        $user->notify(new UserResetPassword($email));
+        return $user;
     }
 
 }
