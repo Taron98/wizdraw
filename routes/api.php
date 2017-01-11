@@ -238,4 +238,12 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
+    Route::group(['prefix' => 'user/'], function () {
+
+        Route::post('/reset/', [
+            'as'   => 'user.reset',
+            'uses' => 'UserController@reset',
+        ]);
+    });
+
 });
