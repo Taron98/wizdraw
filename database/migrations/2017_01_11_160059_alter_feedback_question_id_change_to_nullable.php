@@ -14,7 +14,9 @@ class AlterFeedbackQuestionIdChangeToNullable extends Migration
     public function up()
     {
         Schema::table('feedbacks', function (Blueprint $table) {
-            $table->integer('feedback_question_id')->unsigned()->index()->nullable()->change();
+            $table->integer('feedback_question_id')
+                ->unsigned()
+                ->index()->nullable()->change();
         });
     }
 
@@ -26,6 +28,10 @@ class AlterFeedbackQuestionIdChangeToNullable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('feedbacks', function (Blueprint $table) {
+            $table->integer('feedback_question_id')
+                ->unsigned()
+                ->index();
+        });
     }
 }
