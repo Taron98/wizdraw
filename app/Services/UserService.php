@@ -50,7 +50,8 @@ class UserService extends AbstractService
     public function generateVerifyCode(User $user)
     {
         $user->generateVerifyCode();
-        $this->updateModel($user);
+        //$this->updateModel($user);
+        $user->save();
     }
 
     /**
@@ -65,7 +66,7 @@ class UserService extends AbstractService
         $user->setIsPending(false);
         $user->setPassword($password);
 
-//        $this->updateModel($user);
+        //        $this->updateModel($user);
         // todo: that's a temp solution, can't update attributes that are hidden
         // todo: maybe it will be fixed when we'll use repository presenter
         $user->save();
@@ -95,6 +96,16 @@ class UserService extends AbstractService
         $user->setVerifyExpire(null);
 
         $this->updateModel($user);
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return mixed
+     */
+    public function findByEmail(string $email)
+    {
+        return $this->repository->findByField('email', $email)->first();
     }
 
 }

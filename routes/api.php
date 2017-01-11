@@ -47,7 +47,13 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'UserController@device',
         ]);
 
+        Route::post('/reset/', [
+            'as'   => 'user.reset',
+            'uses' => 'UserController@reset',
+        ]);
+
     });
+
 
     // Country
     Route::group(['prefix' => 'country/'], function () {
@@ -237,5 +243,7 @@ Route::group(['prefix' => 'v1/'], function () {
         });
 
     });
+
+
 
 });
