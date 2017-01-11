@@ -257,9 +257,9 @@ class TransferController extends AbstractController
             return $this->respondWithError('transfer_already_feedbacked', Response::HTTP_BAD_REQUEST);
         }
 
-        if (!$this->feedbackService->questionExists($request->input('feedbackQuestionId'))) {
-            return $this->respondWithError('feedback_question_not_found', Response::HTTP_FORBIDDEN);
-        }
+//        if (!$this->feedbackService->questionExists($request->input('feedbackQuestionId'))) {
+//            return $this->respondWithError('feedback_question_not_found', Response::HTTP_FORBIDDEN);
+//        }
 
         if ($client->cannot('feedback', $transfer)) {
             return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN);
