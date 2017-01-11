@@ -47,7 +47,6 @@ class UserResetPassword extends Notification implements ShouldQueue
         return [MailChannel::class];
     }
 
-
     /**
      * @param User $notifiable
      *

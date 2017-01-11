@@ -176,7 +176,6 @@ class User extends AbstractModel implements
         return $this->deviceId;
     }
 
-
     //<editor-fold desc="Relationships">
     /**
      * One-to-one relationship with clients table
