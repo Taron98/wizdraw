@@ -61,7 +61,7 @@ class FileService extends AbstractService
 
         $filePath = $this->getFilePath($type, $name);
 
-        return $this->localFileSystem->put($filePath, $file);
+        return $this->fileSystem->put($filePath, $file);
     }
 
     /**

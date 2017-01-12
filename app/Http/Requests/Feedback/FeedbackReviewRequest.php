@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 1/12/2017
- * Time: 10:49
- */
+
 
 namespace Wizdraw\Http\Requests\Feedback;
 
@@ -34,7 +29,7 @@ class FeedbackReviewRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'note' => 'required|string|max:150',
+            'note' => 'required|string|min:4|max:150',
         ];
     }
 }

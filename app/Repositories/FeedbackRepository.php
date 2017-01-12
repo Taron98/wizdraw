@@ -28,15 +28,19 @@ class FeedbackRepository extends AbstractRepository
      *
      * @return Feedback
      */
-    public function createWithRelation(Client $client, Transfer $transfer, array $attributes)
+    public function createWithRelation(Client $client, $transfer, array $attributes)
     {
         /** @var Feedback $newFeedback */
         $newFeedback = $this->makeModel()->fill($attributes);
 
-        $newFeedback
-            ->transfer()->associate($transfer)
-            ->client()->associate($client);
-
+        if (!is_null($transfer)) {
+            $newFeedback
+                ->transfer()->associate($transfer)
+                ->client()->associate($client);
+        } else {
+            $newFeedback
+                ->client()->associate($client);
+        }
         $newFeedback->save();
 
         return (is_null($newFeedback)) ?: $newFeedback;
@@ -51,24 +55,6 @@ class FeedbackRepository extends AbstractRepository
     public function alreadyFeedbacked(int $clientId, int $transferId): bool
     {
         return $this->exists(['client_id' => $clientId, 'transfer_id' => $transferId]);
-    }
-
-    /**
-     * @param Client $client
-     * @param array $attributes
-     *
-     * @return $this
-     */
-    public function createReview(Client $client, array $attributes)
-    {
-        /** @var Feedback $newFeedback */
-        $newFeedback = $this->makeModel()->fill($attributes);
-        $newFeedback
-            ->client()->associate($client);
-
-        $newFeedback->save();
-
-        return (is_null($newFeedback)) ?: $newFeedback;
     }
 
 }

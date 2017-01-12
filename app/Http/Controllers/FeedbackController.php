@@ -42,7 +42,8 @@ class FeedbackController extends AbstractController
     {
         $client = $request->user()->client;
         $inputs = $request->inputs();
-        return $this->feedbackService->createReview($client, $inputs);
+        $review = $this->feedbackService->createReview($client, $inputs);
+        return $this->respond($review);
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AlterFeedbackRatingChangeToNullable extends Migration
 {
@@ -15,10 +15,8 @@ class AlterFeedbackRatingChangeToNullable extends Migration
     {
         Schema::table('feedbacks', function (Blueprint $table) {
             $table->smallInteger('rating')->nullable()->change();
-
         });
     }
-
 
     /**
      * Reverse the migrations.
