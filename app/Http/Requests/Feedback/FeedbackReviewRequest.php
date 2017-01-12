@@ -1,16 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: user
+ * Date: 1/12/2017
+ * Time: 10:49
+ */
 
-namespace Wizdraw\Http\Requests\Transfer;
+namespace Wizdraw\Http\Requests\Feedback;
 
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class TransferFeedbackRequest
+ * Class FeedbackReviewRequest
  * @package Wizdraw\Http\Requests\Feedback
  */
-class TransferFeedbackRequest extends AbstractRequest
+class FeedbackReviewRequest extends AbstractRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,10 +34,7 @@ class TransferFeedbackRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'feedbackQuestionId' => 'required|integer|exists:feedback_questions,id',
-            'rating'             => 'required|integer|min:1|max:10',
-            'note'               => 'string|max:150',
+            'note' => 'required|string|max:150',
         ];
     }
-
 }

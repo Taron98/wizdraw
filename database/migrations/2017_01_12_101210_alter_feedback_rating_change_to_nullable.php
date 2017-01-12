@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterFeedbackQuestionIdChangeToNullable extends Migration
+class AlterFeedbackRatingChangeToNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AlterFeedbackQuestionIdChangeToNullable extends Migration
     public function up()
     {
         Schema::table('feedbacks', function (Blueprint $table) {
-            $table->integer('feedback_question_id')
-                ->unsigned()->nullable()->change();
+            $table->smallInteger('rating')->nullable()->change();
+
         });
     }
 
@@ -27,10 +27,8 @@ class AlterFeedbackQuestionIdChangeToNullable extends Migration
      */
     public function down()
     {
-//        Schema::table('feedbacks', function (Blueprint $table) {
-//            $table->integer('feedback_question_id')
-//                ->unsigned()
-//                ->index();
-//        });
+        Schema::table('feedbacks', function (Blueprint $table) {
+            $table->smallInteger('rating')->change();
+        });
     }
 }

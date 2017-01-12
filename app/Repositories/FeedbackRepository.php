@@ -16,7 +16,7 @@ class FeedbackRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function model() : string
+    public function model(): string
     {
         return Feedback::class;
     }
@@ -48,9 +48,27 @@ class FeedbackRepository extends AbstractRepository
      *
      * @return bool
      */
-    public function alreadyFeedbacked(int $clientId, int $transferId) : bool
+    public function alreadyFeedbacked(int $clientId, int $transferId): bool
     {
         return $this->exists(['client_id' => $clientId, 'transfer_id' => $transferId]);
+    }
+
+    /**
+     * @param Client $client
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function createReview(Client $client, array $attributes)
+    {
+        /** @var Feedback $newFeedback */
+        $newFeedback = $this->makeModel()->fill($attributes);
+        $newFeedback
+            ->client()->associate($client);
+
+        $newFeedback->save();
+
+        return (is_null($newFeedback)) ?: $newFeedback;
     }
 
 }
