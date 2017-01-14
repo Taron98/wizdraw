@@ -45,7 +45,7 @@ class FeedbackService extends AbstractService
      *
      * @return bool
      */
-    public function questionExists(int $feedbackQuestionId) : bool
+    public function questionExists(int $feedbackQuestionId): bool
     {
         try {
             $feedbackQuestion = $this->feedbackQuestionRepository->find($feedbackQuestionId);
@@ -76,9 +76,22 @@ class FeedbackService extends AbstractService
      *
      * @return bool
      */
-    public function alreadyFeedbacked(Client $client, Transfer $transfer) : bool
+    public function alreadyFeedbacked(Client $client, Transfer $transfer): bool
     {
         return $this->repository->alreadyFeedbacked($client->getId(), $transfer->getId());
+    }
+
+    /**
+     * @param Client $client
+     * @param array $attributes
+     *
+     * @return mixed
+     */
+    public function createReview(Client $client, array $attributes)
+    {
+        $review = $this->repository->createWithRelation($client, null, $attributes);
+
+        return $review;
     }
 
 }

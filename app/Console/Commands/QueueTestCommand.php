@@ -7,6 +7,7 @@ use Wizdraw\Cache\Jobs\BankQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Services\FileService;
 
 /**
  * Class QueueTestCommand
