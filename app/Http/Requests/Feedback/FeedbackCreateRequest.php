@@ -1,15 +1,14 @@
 <?php
 
-
 namespace Wizdraw\Http\Requests\Feedback;
 
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class FeedbackReviewRequest
+ * Class FeedbackCreateRequest
  * @package Wizdraw\Http\Requests\Feedback
  */
-class FeedbackReviewRequest extends AbstractRequest
+class FeedbackCreateRequest extends AbstractRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,4 +31,5 @@ class FeedbackReviewRequest extends AbstractRequest
             'note' => 'required|string|min:4|max:150',
         ];
     }
+
 }

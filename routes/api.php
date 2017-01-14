@@ -234,9 +234,9 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'FeedbackController@questions',
             ]);
 
-            Route::post('/review/', [
-                'as' => 'feedback.review',
-                'uses' => 'FeedbackController@review'
+            Route::post('/', [
+                'as' => 'feedback.create',
+                'uses' => 'FeedbackController@create'
             ]);
 
         });
