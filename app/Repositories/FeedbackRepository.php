@@ -37,7 +37,7 @@ class FeedbackRepository extends AbstractRepository
         if (!is_null($transfer)) {
             $newFeedback->transfer()->associate($transfer);
         }
-        
+
         $newFeedback->save();
 
         return (is_null($newFeedback)) ?: $newFeedback;
