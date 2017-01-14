@@ -33,14 +33,11 @@ class FeedbackRepository extends AbstractRepository
         /** @var Feedback $newFeedback */
         $newFeedback = $this->makeModel()->fill($attributes);
 
+        $newFeedback->client()->associate($client);
         if (!is_null($transfer)) {
-            $newFeedback
-                ->transfer()->associate($transfer)
-                ->client()->associate($client);
-        } else {
-            $newFeedback
-                ->client()->associate($client);
+            $newFeedback->transfer()->associate($transfer);
         }
+        
         $newFeedback->save();
 
         return (is_null($newFeedback)) ?: $newFeedback;
