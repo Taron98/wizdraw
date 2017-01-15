@@ -5,7 +5,6 @@ namespace Wizdraw\Notifications\Channels;
 use Gomoob\Pushwoosh\Client\Pushwoosh;
 use Gomoob\Pushwoosh\Model\Request\CreateMessageRequest;
 use Illuminate\Notifications\Notification;
-use Wizdraw\Notifications\Messages\PushwooshMessage;
 
 /**
  * Class PushwooshChannel
