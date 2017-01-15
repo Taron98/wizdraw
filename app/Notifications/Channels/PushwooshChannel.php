@@ -5,6 +5,7 @@ namespace Wizdraw\Notifications\Channels;
 use Gomoob\Pushwoosh\Client\Pushwoosh;
 use Gomoob\Pushwoosh\Model\Request\CreateMessageRequest;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Notifications\Messages\PushwooshMessage;
 
 /**
  * Class PushwooshChannel
@@ -36,8 +37,7 @@ class PushwooshChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        // todo: revert the comment to enable pushwoosh
-        /*$pushwooshNotification = $notification
+        $pushwooshNotification = $notification
             ->toPushwoosh($notifiable);
 
         if (is_null($pushwooshNotification)) {
@@ -55,7 +55,7 @@ class PushwooshChannel
 
         if (!$response->isOk()) {
             \Log::error('Could not creating a notification in Pushwoosh');
-        }*/
+        }
     }
 
 }
