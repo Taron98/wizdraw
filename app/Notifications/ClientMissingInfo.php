@@ -21,6 +21,12 @@ class ClientMissingInfo extends Notification implements ShouldQueue
 
     const REMIND_EVERY_HOURS = 24;
     const REMIND_TIME = 21;
+    const APPLICATION_STATE = 'setup.tutorial-setup';
+    const FILE_TYPES = [
+        FileService::TYPE_ADDRESS,
+        FileService::TYPE_IDENTITY,
+        FileService::TYPE_PROFILE,
+    ];
 
     /**
      * Get the notification channels.
@@ -43,24 +49,24 @@ class ClientMissingInfo extends Notification implements ShouldQueue
     {
         $missing = $this->checkMissing($notifiable->client);
 
-        if (!count($missing)) {
-            return null;
-        }
-
         $content = trans('notification.missing_multiple');
-        if (count($missing) == 1) {
-            $content = $missing[ 0 ];
+        if (count($missing[ 0 ]) === 1) {
+            $content = trans('notification.missing_' . $missing[ 0 ][ 0 ]);
         }
 
         $this->addReminder($notifiable);
 
         // Most of the time it means that the user registered after 9pm
-        if ($this->delay->diffInMinutes(null, false) > 5) {
+        if (is_null($this->delay) || $this->delay->diffInMinutes(null, false) > 5) {
             return null;
         }
 
         return (new PushwooshMessage)
-            ->setContent($content);
+            ->setContent($content)
+            ->setData([
+                'state' => self::APPLICATION_STATE,
+                'data'  => $missing[ 1 ],
+            ]);
     }
 
     /**
@@ -68,22 +74,18 @@ class ClientMissingInfo extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function checkMissing(Client $client): array
+    private function checkMissing(Client $client): array
     {
-        $types = [
-            FileService::TYPE_ADDRESS  => trans("notification.missing_address"),
-            FileService::TYPE_IDENTITY => trans("notification.missing_id"),
-            FileService::TYPE_PROFILE  => trans("notification.missing_profile"),
-        ];
-        $missing = [];
+        $missing = $data = [];
 
-        foreach ($types as $type) {
+        foreach (self::FILE_TYPES as $type) {
             if (!FileService::exists($type, $client->getId())) {
                 $missing[] = $type;
+                $data[] = "{$type}Image";
             }
         }
 
-        return $missing;
+        return [$missing, $data];
     }
 
     /**
