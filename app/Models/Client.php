@@ -218,7 +218,9 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function user(): HasOne
     {
-        return $this->hasOne(User::class);
+        // todo: fix the signup flow, and then remove the latest()
+        return $this->hasOne(User::class)
+            ->latest();
     }
 
     /**
