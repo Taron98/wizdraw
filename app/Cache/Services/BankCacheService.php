@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Cache\Services;
 
+use Illuminate\Support\Collection;
 use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
@@ -19,6 +20,7 @@ class BankCacheService extends AbstractCacheService
     const INDEX_BY_COUNTRY_ID = 'banks:country';
     const INDEX_SORT_BY = ['BY' => 'bank:*->name', 'ALPHA' => true];
     const INDEX_ALL = 'banks';
+    const INDEX_BY_NAME ='banks:name';
 
     const TYPE_BDO = 'BDO';
     const TYPE_IME = 'IME';
@@ -136,4 +138,30 @@ class BankCacheService extends AbstractCacheService
         return self::TYPE_GLOBAL;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return int
+     */
+    public function findIdByName(string $name): int
+    {
+        return (int)$this->redis->hget(self::INDEX_BY_NAME, ucwords_upper($name));
+    }
+
+
+    protected function postSave(Collection $entities)
+    {
+        parent::postSave($entities);
+
+        $banksNames = $entities->mapWithKeys(function (BankCache $bank) {
+            return [
+                $bank->getName() => $bank->getId(),
+            ];
+        });
+
+        $this->redis->hmset(
+            self::INDEX_BY_NAME,
+            $banksNames->toArray()
+        );
+    }
 }
