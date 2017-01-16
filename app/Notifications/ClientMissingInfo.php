@@ -49,6 +49,10 @@ class ClientMissingInfo extends Notification implements ShouldQueue
     {
         $missing = $this->checkMissing($notifiable->client);
 
+        if (!count($missing[ 0 ])) {
+            return null;
+        }
+
         $content = trans('notification.missing_multiple');
         if (count($missing[ 0 ]) === 1) {
             $content = trans('notification.missing_' . $missing[ 0 ][ 0 ]);
