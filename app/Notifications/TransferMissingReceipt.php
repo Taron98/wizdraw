@@ -20,6 +20,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
     use Queueable;
 
     const REMIND_EVERY_HOURS = 5;
+    const APPLICATION_STATE = 'money-transfer.finish-transaction';
 
     /** @var  Transfer */
     protected $transfer;
@@ -66,7 +67,13 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         $this->addReminder($notifiable);
 
         return (new PushwooshMessage)
-            ->setContent($content);
+            ->setContent($content)
+            ->setData([
+                'state' => self::APPLICATION_STATE,
+                'data'  => [
+                    'transferId' => $this->transfer->getId(),
+                ],
+            ]);
     }
 
     /**
