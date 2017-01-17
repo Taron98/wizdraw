@@ -99,7 +99,7 @@ class ClientService extends AbstractService
      *
      * @return Client|null
      */
-    private function findByPhone(string $phone)
+    public function findByPhone(string $phone)
     {
         $phone = phone($phone);
 
