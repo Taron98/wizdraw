@@ -141,8 +141,9 @@ class TransferController extends AbstractController
             default:
                 $deposit = $request->input('deposit');
                 $bankBranchName = $request->input('deposit.bankBranchName');
+                $bankBranchId = $request->input('deposit.bankBranchId');
                 $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit,
-                    $bankBranchName);
+                    $bankBranchName, $bankBranchId);
 
                 if (is_null($bankAccount)) {
                     return $this->respondWithError('could_not_create_bank_account', Response::HTTP_BAD_REQUEST);
