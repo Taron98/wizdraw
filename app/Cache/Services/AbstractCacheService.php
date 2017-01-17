@@ -158,9 +158,9 @@ abstract class AbstractCacheService
     private function cleanEntities(Collection $entities): Collection
     {
         // Remove invalid data
-        $entities = $entities->filter(function (AbstractCacheEntity $entity) {
-            return $this->validate($entity);
-        });
+      $entities = $entities->filter(function (AbstractCacheEntity $entity) {
+          return $this->validate($entity);
+      });
 
         $entities = $entities->mapWithKeys(function (AbstractCacheEntity $entity) {
             return [$entity->getId() => $entity];

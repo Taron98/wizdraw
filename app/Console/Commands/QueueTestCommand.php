@@ -44,6 +44,7 @@ class QueueTestCommand extends Command
         $this->writeRates();
         $this->writeCommissions();
         $this->writeIfsc();
+        $this->writeIfsc2();
     }
 
     private function writeCountries()
@@ -81,8 +82,23 @@ class QueueTestCommand extends Command
 
     private function writeIfsc()
     {
-        $data = file_get_contents(database_path('cache/ifsc1000.json'));
+        $data = file_get_contents(database_path('cache/ifscFirst.json'));
         dispatch(new BrancheQueueJob($data));
+    }
+
+    private function writeIfsc2()
+    {
+        $data = file_get_contents(database_path('cache/ifscSecond.json'));
+        dispatch(new BrancheQueueJob($data));
+    }
+
+    function stripslashes_deep($value)
+    {
+        $value = is_array($value) ?
+            array_map('stripslashes_deep', $value) :
+            stripslashes($value);
+
+        return str_replace("\\", '', $value);
     }
 
 }
