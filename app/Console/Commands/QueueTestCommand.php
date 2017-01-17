@@ -92,13 +92,4 @@ class QueueTestCommand extends Command
         dispatch(new BrancheQueueJob($data));
     }
 
-    function stripslashes_deep($value)
-    {
-        $value = is_array($value) ?
-            array_map('stripslashes_deep', $value) :
-            stripslashes($value);
-
-        return str_replace("\\", '', $value);
-    }
-
 }
