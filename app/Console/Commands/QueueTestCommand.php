@@ -8,7 +8,6 @@ use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
-use Wizdraw\Services\FileService;
 
 /**
  * Class QueueTestCommand
@@ -44,7 +43,6 @@ class QueueTestCommand extends Command
         $this->writeRates();
         $this->writeCommissions();
         $this->writeIfsc();
-        $this->writeIfsc2();
     }
 
     private function writeCountries()
@@ -82,13 +80,16 @@ class QueueTestCommand extends Command
 
     private function writeIfsc()
     {
-        $data = file_get_contents(database_path('cache/ifscFirst.json'));
+        $data = file_get_contents(database_path('cache/ifsc1.json'));
         dispatch(new BrancheQueueJob($data));
-    }
 
-    private function writeIfsc2()
-    {
-        $data = file_get_contents(database_path('cache/ifscSecond.json'));
+        $data = file_get_contents(database_path('cache/ifsc2.json'));
+        dispatch(new BrancheQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/ifsc3.json'));
+        dispatch(new BrancheQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/ifsc4.json'));
         dispatch(new BrancheQueueJob($data));
     }
 
