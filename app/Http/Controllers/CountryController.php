@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Controllers;
 use Illuminate\Http\Response;
 use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Services\BankCacheService;
+use Wizdraw\Cache\Services\BranchCacheService;
 use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
@@ -28,6 +29,9 @@ class CountryController extends AbstractController
     /** @var  BankCacheService */
     private $bankCacheService;
 
+    /** @var  BranchCacheService */
+    private $branchCacheService;
+
     /**
      * GroupController constructor.
      *
@@ -35,17 +39,20 @@ class CountryController extends AbstractController
      * @param RateCacheService $rateCacheService
      * @param CommissionCacheService $commissionCacheService
      * @param BankCacheService $bankCacheService
+     * @param BranchCacheService $branchCacheService
      */
     public function __construct(
         CountryCacheService $countryCacheService,
         RateCacheService $rateCacheService,
         CommissionCacheService $commissionCacheService,
-        BankCacheService $bankCacheService
+        BankCacheService $bankCacheService,
+        BranchCacheService $branchCacheService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
         $this->commissionCacheService = $commissionCacheService;
         $this->bankCacheService = $bankCacheService;
+        $this->branchCacheService = $branchCacheService;
     }
 
     /**
@@ -116,6 +123,18 @@ class CountryController extends AbstractController
     public function banks(int $id)
     {
         return $this->bankCacheService->findByCountryId($id);
+    }
+
+    /**
+     * showing list of branches of the selected bank
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function branches(int $id)
+    {
+        return $this->branchCacheService->findByBankId($id);
     }
 
 }

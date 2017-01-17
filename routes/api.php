@@ -175,6 +175,12 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@banks',
             ]);
 
+            Route::get('/bank/{bankId}', [
+                'as'   => 'country.branches',
+                'uses' => 'CountryController@branches',
+            ]);
+
+
         });
 
         // Transfer
