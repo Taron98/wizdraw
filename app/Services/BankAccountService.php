@@ -30,15 +30,18 @@ class BankAccountService extends AbstractService
     /**
      * @param int $clientId
      * @param array $attributes
-     * @param string $bankBranchName
+     * @param null $bankBranchName
+     * @param null $bankBranchId
      *
-     * @return BankAccount|null
+     * @return null|BankAccount
      */
-    public function createBankAccount(int $clientId, array $attributes, $bankBranchName = null)
+    public function createBankAccount(int $clientId, array $attributes, $bankBranchName = null, $bankBranchId = null)
     {
         $bankBranch = null;
         if (!is_null($bankBranchName)) {
             $bankBranch = $this->bankBranchService->createBankBranch($bankBranchName);
+        } else if (!is_null($bankBranchId)){
+            $bankBranch = $this->bankBranchService->createBankBranchById($bankBranchId);
         }
 
         return $this->repository->createWithRelation($clientId, $attributes, $bankBranch);
