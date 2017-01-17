@@ -39,9 +39,17 @@ class BankAccountService extends AbstractService
     {
         $bankBranch = null;
         if (!is_null($bankBranchName)) {
-            $bankBranch = $this->bankBranchService->createBankBranch($bankBranchName);
-        } else if (!is_null($bankBranchId)){
-            $bankBranch = $this->bankBranchService->createBankBranchById($bankBranchId);
+            $bankBranch = $this->bankBranchService->findByName($bankBranchName);
+            if (is_null($bankBranch)) {
+                $bankBranch = $this->bankBranchService->createBankBranch($bankBranchName);
+            }
+        } else {
+            if (!is_null($bankBranchId)) {
+                $bankBranch = $this->bankBranchService->findByBranchId($bankBranchId);
+                if (is_null($bankBranch)) {
+                    $bankBranch = $this->bankBranchService->createBankBranchById($bankBranchId);
+                }
+            }
         }
 
         return $this->repository->createWithRelation($clientId, $attributes, $bankBranch);

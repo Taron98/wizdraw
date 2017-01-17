@@ -42,4 +42,24 @@ class BankBranchService extends AbstractService
         return $this->repository->create(compact('bank_branch_id'));
     }
 
+    /**
+     * @param string $name
+     *
+     * @return BankBranch
+     */
+    public function findByName(string $name)
+    {
+        return $this->repository->findByField('name', $name)->first();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return BankBranch
+     */
+    public function findByBranchId(string $id)
+    {
+        return $this->repository->findByField('bank_branch_id', $id)->first();
+    }
+
 }
