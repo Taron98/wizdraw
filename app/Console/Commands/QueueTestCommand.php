@@ -42,7 +42,7 @@ class QueueTestCommand extends Command
         $this->writeBanks();
         $this->writeRates();
         $this->writeCommissions();
-        $this->writeIfsc();
+//        $this->writeIfsc();
     }
 
     private function writeCountries()
