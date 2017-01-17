@@ -95,22 +95,11 @@ class BranchCacheService extends AbstractCacheService
     {
         parent::postSave($branches);
 
-        $blabanks = $branches->groupBy(function ($entity) {
+        $banks = $branches->groupBy(function ($entity) {
             return $entity->getBankId();
         });
 
-//        $bankNames = $branches->mapWithKeys(function (BranchCache $branch) {
-//            return [
-//                $branch->getBranch() => $branch->getBank(),
-//            ];
-//        });
-
-//        $this->redis->hmset(
-//            self::INDEX_BY_BANK,
-//            $branchNames->toArray()
-//        );
-
-        $blabanks->each(function (Collection $entitiesBank, int $bankId) {
+        $banks->each(function (Collection $entitiesBank, int $bankId) {
             $entitiesIds = $entitiesBank->map(function (AbstractCacheEntity $entity) {
                 return $entity->getId();
             });
@@ -123,7 +112,7 @@ class BranchCacheService extends AbstractCacheService
     }
 
     /**
-     * @param int $branchId
+     * @param int $id
      * @param string $sortOrder
      *
      * @return LengthAwarePaginator

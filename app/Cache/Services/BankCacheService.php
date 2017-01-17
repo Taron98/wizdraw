@@ -153,7 +153,7 @@ class BankCacheService extends AbstractCacheService
     {
         parent::postSave($entities);
 
-        $banksNames = $entities->mapWithKeys(function (BankCache $bank) {
+        $bankNames = $entities->mapWithKeys(function (BankCache $bank) {
             return [
                 $bank->getName() => $bank->getId(),
             ];
@@ -161,7 +161,7 @@ class BankCacheService extends AbstractCacheService
 
         $this->redis->hmset(
             self::INDEX_BY_NAME,
-            $banksNames->toArray()
+            $bankNames->toArray()
         );
     }
 }
