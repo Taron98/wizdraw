@@ -99,8 +99,12 @@ class ClientService extends AbstractService
      *
      * @return Client|null
      */
-    public function findByPhone(string $phone)
+    public function findByPhone($phone)
     {
+        if (empty($phone)) {
+            return null;
+        }
+
         $phone = phone($phone);
 
         return $this->repository->findByPhone($phone)->first();
