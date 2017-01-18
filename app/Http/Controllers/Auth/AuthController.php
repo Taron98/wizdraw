@@ -116,8 +116,9 @@ class AuthController extends AbstractController
     ): JsonResponse {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
+        $phone = $request->only('phone')['phone'];
 
-        if ($this->userRepository->exists($request->only('email'))) {
+        if ($this->userRepository->exists($request->only('email')) || $this->clientService->findByPhone($phone)) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
