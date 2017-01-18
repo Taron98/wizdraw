@@ -73,8 +73,13 @@ class ClientController extends AbstractController
         $user = $request->user();
         $clientId = $request->user()->client->getId();
         $inputs = $request->inputs();
+        $phone = $request->input('phone');
 
         $isSetup = !$user->client->isDidSetup();
+
+        if ($this->clientService->findByPhone($phone)) {
+            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+        }
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
@@ -145,6 +150,12 @@ class ClientController extends AbstractController
     public function phone(ClientPhoneRequest $request): JsonResponse
     {
         $user = $request->user();
+        $phone = $request->input('phone');
+
+        if ($this->clientService->findByPhone($phone)) {
+            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+        }
+
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
         $this->userService->generateVerifyCode($user);
 
