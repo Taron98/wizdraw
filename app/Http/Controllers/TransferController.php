@@ -140,6 +140,15 @@ class TransferController extends AbstractController
             case TransferType::TYPE_DEPOSIT:
             default:
                 $deposit = $request->input('deposit');
+
+                // TODO: REMOVE!!!!!!!
+                // TODO: REMOVE!!!!!!!
+                // TODO: REMOVE!!!!!!!
+                // TODO: REMOVE!!!!!!!
+                // TODO: REMOVE!!!!!!!
+                // TODO: REMOVE!!!!!!!
+                unset($deposit['ifsc']);
+
                 $bankBranchName = $request->input('deposit.bankBranchName');
                 $bankBranchId = $request->input('deposit.bankBranchId');
                 $bankAccount = $this->bankAccountService->createBankAccount($receiverClientId, $deposit,
