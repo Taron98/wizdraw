@@ -102,7 +102,7 @@ class TransferService extends AbstractService
      */
     public function addReceipt(Transfer $transfer, TransferReceipt $transferReceipt)
     {
-        $statusWait = $this->transferStatusService->findByStatus(TransferStatus::STATUS_POSTED);
+        $statusWait = $this->transferStatusService->findByStatus(TransferStatus::STATUS_PENDING);
 
         $transfer
             ->receipt()->associate($transferReceipt)
