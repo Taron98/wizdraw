@@ -4,10 +4,10 @@ namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
 use Wizdraw\Cache\Jobs\BankQueueJob;
+use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
-use Wizdraw\Services\FileService;
 
 /**
  * Class QueueTestCommand
@@ -42,6 +42,7 @@ class QueueTestCommand extends Command
         $this->writeBanks();
         $this->writeRates();
         $this->writeCommissions();
+//        $this->writeIfsc();
     }
 
     private function writeCountries()
@@ -75,6 +76,21 @@ class QueueTestCommand extends Command
     {
         $data = file_get_contents(database_path('cache/commissions.json'));
         dispatch(new CommissionQueueJob($data));
+    }
+
+    private function writeIfsc()
+    {
+        $data = file_get_contents(database_path('cache/ifsc1.json'));
+        dispatch(new BrancheQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/ifsc2.json'));
+        dispatch(new BrancheQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/ifsc3.json'));
+        dispatch(new BrancheQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/ifsc4.json'));
+        dispatch(new BrancheQueueJob($data));
     }
 
 }
