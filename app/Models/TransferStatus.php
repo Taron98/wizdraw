@@ -35,7 +35,7 @@ class TransferStatus extends AbstractModel
     const STATUS_WAIT_FOR_PROCESS = 'WAIT FOR PROCESS';
     const STATUS_ON_HOLD = 'On hold';
     const STATUS_CHECK_DOCUMENTS = 'CHECK DOCUMENTS';
-    const STATUS_PENDING = 'PENDING';
+    const STATUS_PENDING = 'Pending';
     const STATUS_AWAITING_WITHDRAWAL = 'Awaiting withdrawal';
     const STATUS_CANCELLED = 'Cancelled';
     const STATUS_REQUEST_AMENDMENT = 'Request amendment';
