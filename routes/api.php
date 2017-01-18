@@ -240,6 +240,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'FeedbackController@questions',
             ]);
 
+            Route::post('/', [
+                'as' => 'feedback.create',
+                'uses' => 'FeedbackController@create'
+            ]);
+
         });
 
     });

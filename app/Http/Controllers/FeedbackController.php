@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Wizdraw\Http\Requests\Feedback\FeedbackCreateRequest;
 use Wizdraw\Services\FeedbackService;
 
 /**
@@ -30,6 +31,21 @@ class FeedbackController extends AbstractController
     public function questions()
     {
         return $this->feedbackService->questions();
+    }
+
+    /**
+     * @param FeedbackCreateRequest $request
+     *
+     * @return mixed
+     */
+    public function create(FeedbackCreateRequest $request)
+    {
+        $client = $request->user()->client;
+        $inputs = $request->inputs();
+
+        $review = $this->feedbackService->createReview($client, $inputs);
+
+        return $this->respond($review);
     }
 
 }
