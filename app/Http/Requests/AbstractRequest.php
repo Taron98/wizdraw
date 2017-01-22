@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Wizdraw\Models\User;
 
 /**
@@ -35,6 +36,7 @@ abstract class AbstractRequest extends FormRequest
      */
     public function response(array $errors): JsonResponse
     {
+        Log::info($errors);
         return new JsonResponse($errors, 422);
     }
 

@@ -144,7 +144,8 @@ class TransferService extends AbstractService
 
         $calcReceiverAmount = $amount * $rate->getRate();
 
-        return (!bccomp($totalAmount, $calcTotalAmount, 3)) && !bccomp($receiverAmount, $calcReceiverAmount, 3);
+        //todo: need to figure out what to do if the client not send round amount, temporary fix
+        return (!bccomp($totalAmount, $calcTotalAmount, 3)) /*&& !bccomp($receiverAmount, $calcReceiverAmount, 3)*/;
     }
 
     /**
