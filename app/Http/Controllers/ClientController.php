@@ -75,6 +75,7 @@ class ClientController extends AbstractController
         $clientId = $request->user()->client->getId();
         $inputs = $request->inputs();
         $phone = $request->input('phone');
+        $identityNumber = $request->input('identityNumber');
         $birthDate = $request->input('birthDate');
         Log::info('birth date:' . $birthDate);
         $fixedBirth = $this->handleBirthDate($birthDate);
@@ -83,9 +84,11 @@ class ClientController extends AbstractController
 
         Log::info('phone: ' . $phone);
 
-        if (!is_null($phone) || $phone!='') {
-            if ($this->clientService->findByPhone($phone)) {
-                return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+        if(is_null($identityNumber)) {
+            if (!is_null($phone) || $phone != '') {
+                if ($this->clientService->findByPhone($phone)) {
+                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+                }
             }
         }
 
