@@ -81,11 +81,14 @@ class ClientController extends AbstractController
         $inputs['birth_date'] = $fixedBirth;
         $isSetup = !$user->client->isDidSetup();
 
+        Log::info('phone: ' . $phone);
+
         if (!is_null($phone)) {
             if ($this->clientService->findByPhone($phone)) {
                 return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
             }
         }
+
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
