@@ -76,14 +76,16 @@ class ClientController extends AbstractController
         $inputs = $request->inputs();
         $phone = $request->input('phone');
         $birthDate = $request->input('birthDate');
-        Log::info('birth date:'. $birthDate);
-
+        Log::info('birth date:' . $birthDate);
+        $fixedBirth = $this->handleBirthDate($birthDate);
+        $inputs['birth_date'] = $fixedBirth;
         $isSetup = !$user->client->isDidSetup();
 
-        if ($this->clientService->findByPhone($phone)) {
-            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+        if (!is_null($phone)) {
+            if ($this->clientService->findByPhone($phone)) {
+                return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+            }
         }
-
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
@@ -141,6 +143,21 @@ class ClientController extends AbstractController
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
             'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
+    }
+
+    /**
+     * @param $birth
+     *
+     * @return string
+     */
+    function handleBirthDate($birth)
+    {
+        $birthParts = explode('-', $birth);
+        if (strlen($birthParts[ 0 ]) == 4) {
+            return $birth;
+        } else {
+            return $birthParts[2].'-'.$birthParts[1].'-'.$birthParts[0];
+        }
     }
 
     /**
