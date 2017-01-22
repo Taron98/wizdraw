@@ -60,7 +60,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         ]);
 
         // A receipt was added
-        if (!is_null($this->transfer->receipt)) {
+        if (!is_null($this->transfer->receipt) || $this->transfer->statusId!=3) {
             return;
         }
 
