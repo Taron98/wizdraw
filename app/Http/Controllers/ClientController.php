@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
@@ -74,6 +75,8 @@ class ClientController extends AbstractController
         $clientId = $request->user()->client->getId();
         $inputs = $request->inputs();
         $phone = $request->input('phone');
+        $birthDate = $request->input('birthDate');
+        Log::info('birth date:'. $birthDate);
 
         $isSetup = !$user->client->isDidSetup();
 
