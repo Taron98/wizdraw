@@ -44,7 +44,6 @@ abstract class AbstractController extends Controller
         if (empty($content)) {
             return new JsonResponse();
         }
-        Log::info("response" . $content);
         return response()->json($content);
     }
 
