@@ -44,7 +44,7 @@ class ClientUpdateRequest extends AbstractRequest
             'residentCountryId' => 'integer|cacheExists:country',
             'state'             => 'min:2|max:35',
             'city'              => 'min:2|max:30',
-            'address'           => 'min:2|max:60',
+            'address'           => 'min:2',
             'addressImage'      => 'base64image',
             'clientType'        => 'in:sender,receiver',
             'profileImage'      => 'base64image',
