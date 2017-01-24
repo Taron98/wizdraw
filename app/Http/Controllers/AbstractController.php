@@ -30,7 +30,7 @@ abstract class AbstractController extends Controller
         int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR
     ) : JsonResponse
     {
-        Log::info("response with error" . $message);
+        Log::info("response with error " . $message);
         return response()->json(['error' => $message], $statusCode);
     }
 
