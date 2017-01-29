@@ -93,7 +93,8 @@ class UserController extends AbstractController
         $user = $request->user();
 
         if (is_null($user->getVerifyCode())) {
-            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
+            $resInputs = ['user' => $user];
+            return $this->respondWithError('user_already_verified', $resInputs, Response::HTTP_BAD_REQUEST);
         }
 
         if ($user->getVerifyCode() != $verifyCode) {
