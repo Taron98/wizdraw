@@ -180,7 +180,7 @@ class ClientController extends AbstractController
         $phone = $request->input('phone');
 
         if ($this->clientService->findByPhone($phone)) {
-            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('phone_already_used',$phone, Response::HTTP_BAD_REQUEST);
         }
 
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
@@ -205,7 +205,7 @@ class ClientController extends AbstractController
         $affiliate = $this->affiliateService->findByCode($affiliateCode);
 
         if (is_null($affiliate)) {
-            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND);
+            return $this->respondWithError('affiliate_code_not_found', $affiliateCode, Response::HTTP_NOT_FOUND);
         }
 
         $this->clientService->updateAffiliate($affiliate, $client);

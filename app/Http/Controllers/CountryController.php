@@ -68,7 +68,7 @@ class CountryController extends AbstractController
         $country = $this->countryCacheService->find($id);
 
         if (is_null($country)) {
-            return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND);
+            return $this->respondWithError('country_not_found', ['id' => $id], Response::HTTP_NOT_FOUND);
         }
 
         $rate = $this->rateCacheService->find($country->getId());
@@ -97,7 +97,7 @@ class CountryController extends AbstractController
         $country = $this->countryCacheService->findByLocation($latitude, $longitude);
 
         if (is_null($country)) {
-            return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND);
+            return $this->respondWithError('country_not_found', $inputs, Response::HTTP_NOT_FOUND);
         }
 
         return $country;
