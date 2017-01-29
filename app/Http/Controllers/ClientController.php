@@ -74,13 +74,16 @@ class ClientController extends AbstractController
         $user = $request->user();
         $clientId = $request->user()->client->getId();
         $inputs = $request->inputs();
-        $sss = strlen($request->input('address'));
         $phone = $request->input('phone');
         $identityNumber = $request->input('identityNumber');
         $birthDate = $request->input('birthDate');
-        $fixedBirth = $this->handleBirthDate($birthDate);
-        $inputs['birth_date'] = $fixedBirth;
+        Log::info('birth date:' . $birthDate);
+        if(!is_null($birthDate)) {
+            $fixedBirth = $this->handleBirthDate($birthDate);
+            $inputs['birth_date'] = $fixedBirth;
+        }
         $isSetup = !$user->client->isDidSetup();
+        Log::info('phone:' . $phone);
 
         if(is_null($identityNumber)) {
             if (!is_null($phone) || $phone != '') {
