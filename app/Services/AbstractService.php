@@ -58,7 +58,7 @@ abstract class AbstractService
         try {
             $model = $this->repository->update($data, $id);
         } catch (Exception $exception) {
-            Log::info($exception);
+            Log::info($exception->getMessage());
             return null;
         }
 
