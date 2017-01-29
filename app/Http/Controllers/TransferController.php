@@ -91,7 +91,7 @@ class TransferController extends AbstractController
         if ($client->cannot('show', $transfer)) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
 
-            return $this->respondWithError('transfer_not_owned', $resInputs, Response::HTTP_FORBIDDEN);
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN, $resInputs);
         }
 
         return $this->transferService->find($transfer->getId());
@@ -121,7 +121,7 @@ class TransferController extends AbstractController
         $rate = $this->rateCacheService->find($receiverCountryId);
 
         if (!$client->canTransfer()) {
-            return $this->respondWithError('could_not_transfer_unapproved_client', $client, Response::HTTP_FORBIDDEN);
+            return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
         }
 
         if (!$this->transferService->validateMonthly($amount)) {
@@ -169,7 +169,8 @@ class TransferController extends AbstractController
                 $this->bankAccountService->delete($bankAccount->getId());
             }
             $resInputs = ['receiver' => $receiver];
-            return $this->respondWithError('could_not_update_receiver', $resInputs, Response::HTTP_BAD_REQUEST);
+
+            return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
@@ -196,12 +197,14 @@ class TransferController extends AbstractController
 
         if (!is_null($transfer->receipt)) {
             $resInputs = ['transfer' => $transfer];
-            return $this->respondWithError('transfer_has_receipt', $resInputs, Response::HTTP_BAD_REQUEST);
+
+            return $this->respondWithError('transfer_has_receipt', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         if ($client->cannot('addReceipt', $transfer)) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
-            return $this->respondWithError('transfer_not_owned', $resInputs, Response::HTTP_FORBIDDEN);
+
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDE, $resInputs);
         }
 
         $inputs = $request->except('image');
@@ -212,7 +215,8 @@ class TransferController extends AbstractController
 
         if (is_null($receipt)) {
             $resInputs = ['inputs' => $inputs];
-            return $this->respondWithError('could_not_create_receipt', $resInputs, Response::HTTP_BAD_REQUEST);
+
+            return $this->respondWithError('could_not_create_receipt', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
@@ -271,7 +275,7 @@ class TransferController extends AbstractController
         if ($this->feedbackService->alreadyFeedbacked($client, $transfer)) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
 
-            return $this->respondWithError('transfer_already_feedbacked', $resInputs, Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('transfer_already_feedbacked', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         if (!$this->feedbackService->questionExists($request->input('feedbackQuestionId'))) {
@@ -281,7 +285,7 @@ class TransferController extends AbstractController
         if ($client->cannot('feedback', $transfer)) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
 
-            return $this->respondWithError('transfer_not_owned', $resInputs, Response::HTTP_FORBIDDEN);
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN, $resInputs);
         }
 
         $inputs = $request->inputs();
@@ -314,7 +318,7 @@ class TransferController extends AbstractController
         if ($client->cannot('updateStatus', $transfer)) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
 
-            return $this->respondWithError('transfer_not_owned', $resInputs, Response::HTTP_FORBIDDEN);
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN, $resInputs);
         }
 
         if (!$this->transferService->changeStatus($transfer, $request->input('transferStatusId'))) {

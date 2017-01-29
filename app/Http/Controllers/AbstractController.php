@@ -28,8 +28,8 @@ abstract class AbstractController extends Controller
      */
     protected function respondWithError(
         string $message,
-        $inputs = null,
-        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR
+        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
+        $inputs = null
     ) : JsonResponse
     {
         if(is_null($inputs)){
