@@ -91,6 +91,7 @@ class ClientController extends AbstractController
                 }
             }
         }
+        Log::info('phone: ' . json_encode($inputs) . "clientId" . $clientId);
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
