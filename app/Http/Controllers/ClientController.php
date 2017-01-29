@@ -82,22 +82,26 @@ class ClientController extends AbstractController
             $fixedBirth = $this->handleBirthDate($birthDate);
             $inputs['birth_date'] = $fixedBirth;
         }
+
         $isSetup = !$user->client->isDidSetup();
-        Log::info('phone: ' . $phone);
+
         if(is_null($identityNumber)) {
             if (!is_null($phone) || $phone != '') {
                 if ($this->clientService->findByPhone($phone)) {
-                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+
+                    $resInputs = ['phone' => $phone];
+                    return $this->respondWithError('phone_already_used',$resInputs, Response::HTTP_BAD_REQUEST);
                 }
             }
         }
+
         Log::info('phone: ' . json_encode($inputs) . "clientId" . $clientId);
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
-            return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('could_not_create_client',$inputs, Response::HTTP_BAD_REQUEST);
         }
 
         // todo: refactor
@@ -106,7 +110,9 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadProfile($clientId, $profileImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_profile_image', Response::HTTP_BAD_REQUEST);
+
+                $resInputs = ['profileImage' => $profileImage];
+                return $this->respondWithError('could_not_upload_profile_image',$resInputs, Response::HTTP_BAD_REQUEST);
             }
         }
 
@@ -116,7 +122,9 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadIdentity($clientId, $identityImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_identity_image', Response::HTTP_BAD_REQUEST);
+
+                $resInputs = ['identityImage' => $identityImage];
+                return $this->respondWithError('could_not_upload_identity_image', $resInputs, Response::HTTP_BAD_REQUEST);
             }
         }
 
@@ -126,7 +134,9 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_address_image', Response::HTTP_BAD_REQUEST);
+
+                $resInputs = ['addressImage' => $addressImage];
+                return $this->respondWithError('could_not_upload_address_image', $resInputs, Response::HTTP_BAD_REQUEST);
             }
         }
 
