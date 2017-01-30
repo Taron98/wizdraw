@@ -93,7 +93,9 @@ class UserController extends AbstractController
         $user = $request->user();
 
         if (is_null($user->getVerifyCode())) {
-            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST);
+            $resInputs = ['user' => $user];
+
+            return $this->respondWithError('user_already_verified', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         if ($user->getVerifyCode() != $verifyCode) {
@@ -153,8 +155,9 @@ class UserController extends AbstractController
         $user = $this->userService->findByEmail($email);
 
         if (is_null($user)) {
+            $resInputs = ['email' => $email];
 
-            return $this->respondWithError('email_not_found', Response::HTTP_NOT_FOUND);
+            return $this->respondWithError('email_not_found', Response::HTTP_NOT_FOUND, $resInputs);
         }
 
         $this->userService->generateVerifyCode($user);

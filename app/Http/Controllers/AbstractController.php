@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class AbstractController
@@ -20,15 +21,22 @@ abstract class AbstractController extends Controller
 
     /**
      * @param string $message
+     * @param string $inputs
      * @param int $statusCode
      *
      * @return JsonResponse
      */
     protected function respondWithError(
         string $message,
-        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR
+        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
+        $inputs = null
     ) : JsonResponse
     {
+        if(is_null($inputs)){
+            Log::info(json_encode(['error' => $message]));
+        }else{
+            Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
+        }
         return response()->json(['error' => $message], $statusCode);
     }
 
