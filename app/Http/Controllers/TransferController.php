@@ -175,6 +175,7 @@ class TransferController extends AbstractController
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
+        /** @var Transfer $transfer */
         $user->notify(
             (new TransferMissingReceipt($transfer))
                 ->delay(Carbon::now()->addHour())

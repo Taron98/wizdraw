@@ -19,7 +19,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    const REMIND_EVERY_HOURS = 10;
+    const REMIND_EVERY_HOURS = 5;
     const APPLICATION_STATE = 'money-transfer.finish-transaction';
 
     /** @var  Transfer */
@@ -81,12 +81,17 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      */
     private function addReminder(User $notifiable)
     {
+        $target = Carbon::now()->addHours(self::REMIND_EVERY_HOURS);
+        $target5pm = $notifiable->client->getTargetTime(17);
+
+        if ($target > $target5pm) {
+            $target = $notifiable->client->getTargetTime(8)->addDay();
+        }
+
         // Add a reminder
-        $tenHoursForward = Carbon::now()->addHours(self::REMIND_EVERY_HOURS);
         $notifiable->notify(
             (new TransferMissingReceipt($this->transfer))
-                ->delay($tenHoursForward)
+                ->delay($target)
         );
     }
-
 }
