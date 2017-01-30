@@ -3,6 +3,7 @@
 namespace Wizdraw\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Repositories\AbstractRepository;
 
@@ -57,6 +58,7 @@ abstract class AbstractService
         try {
             $model = $this->repository->update($data, $id);
         } catch (Exception $exception) {
+            Log::info($exception->getMessage());
             return null;
         }
 

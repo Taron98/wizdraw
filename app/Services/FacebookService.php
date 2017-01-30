@@ -4,6 +4,7 @@ namespace Wizdraw\Services;
 
 use Facebook\Authentication\AccessToken;
 use Facebook\Exceptions\FacebookSDKException;
+use Illuminate\Support\Facades\Log;
 use League\Flysystem\Exception;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Wizdraw\Exceptions\FacebookInvalidTokenException;

@@ -8,6 +8,9 @@ use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Models\Transfer;
+use Wizdraw\Models\User;
+use Wizdraw\Notifications\TransferMissingReceipt;
 
 /**
  * Class QueueTestCommand
@@ -38,6 +41,26 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
+        $user = User::find(11);
+        $transfer = Transfer::find(58);
+        $user->notify(new TransferMissingReceipt($transfer));
+        die;
+//        $client = Client::find(1);
+//        $targetTIme = $client->getTargetTime(8);
+//        die;
+//
+//        $now = Carbon::now();
+//        $tomorrow = Carbon::tomorrow();
+//
+//        $bla = $now > $tomorrow;
+//        $bla2 = $now < $tomorrow;
+//
+//        // $next = $now + 5
+//        // if $next > 8pm
+//        // $next = 8am
+//        // else
+//        // $next = $next
+
         $this->writeCountries();
         $this->writeBanks();
         $this->writeRates();
