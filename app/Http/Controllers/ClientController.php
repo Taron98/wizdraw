@@ -79,7 +79,7 @@ class ClientController extends AbstractController
         $birthDate = $request->input('birthDate');
         if (!is_null($birthDate)) {
             $fixedBirth = $this->handleBirthDate($birthDate);
-            $inputs['birth_date'] = $fixedBirth;
+            $inputs[ 'birth_date' ] = $fixedBirth;
         }
 
         $isSetup = !$user->client->isDidSetup();
