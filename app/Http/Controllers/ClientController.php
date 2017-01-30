@@ -77,7 +77,6 @@ class ClientController extends AbstractController
         $phone = $request->input('phone');
         $identityNumber = $request->input('identityNumber');
         $birthDate = $request->input('birthDate');
-        Log::info('birth date:' . $birthDate);
         if (!is_null($birthDate)) {
             $fixedBirth = $this->handleBirthDate($birthDate);
             $inputs[ 'birth_date' ] = $fixedBirth;
@@ -95,8 +94,6 @@ class ClientController extends AbstractController
                 }
             }
         }
-
-        Log::info('phone: ' . json_encode($inputs) . "clientId: " . $clientId);
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
