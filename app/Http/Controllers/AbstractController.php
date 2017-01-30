@@ -21,16 +21,22 @@ abstract class AbstractController extends Controller
 
     /**
      * @param string $message
+     * @param string $inputs
      * @param int $statusCode
      *
      * @return JsonResponse
      */
     protected function respondWithError(
         string $message,
-        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR
+        int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
+        $inputs = null
     ) : JsonResponse
     {
-        Log::info("response with error " . $message);
+        if(is_null($inputs)){
+            Log::info(json_encode(['error' => $message]));
+        }else{
+            Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
+        }
         return response()->json(['error' => $message], $statusCode);
     }
 
@@ -44,6 +50,7 @@ abstract class AbstractController extends Controller
         if (empty($content)) {
             return new JsonResponse();
         }
+
         return response()->json($content);
     }
 

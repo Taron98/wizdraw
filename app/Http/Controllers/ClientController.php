@@ -77,27 +77,29 @@ class ClientController extends AbstractController
         $phone = $request->input('phone');
         $identityNumber = $request->input('identityNumber');
         $birthDate = $request->input('birthDate');
-        Log::info('birth date:' . $birthDate);
-        if(!is_null($birthDate)) {
+        if (!is_null($birthDate)) {
             $fixedBirth = $this->handleBirthDate($birthDate);
             $inputs['birth_date'] = $fixedBirth;
         }
+
         $isSetup = !$user->client->isDidSetup();
-        Log::info('phone: ' . $phone);
-        if(is_null($identityNumber)) {
+
+        if (is_null($identityNumber)) {
             if (!is_null($phone) || $phone != '') {
                 if ($this->clientService->findByPhone($phone)) {
-                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+
+                    $resInputs = ['phone' => $phone];
+
+                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST, $resInputs);
                 }
             }
         }
-        Log::info('phone: ' . json_encode($inputs) . "clientId" . $clientId);
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
 
         if (is_null($client)) {
-            return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST, $inputs);
         }
 
         // todo: refactor
@@ -106,7 +108,10 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadProfile($clientId, $profileImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_profile_image', Response::HTTP_BAD_REQUEST);
+                $resInputs = ['profileImage' => $profileImage];
+
+                return $this->respondWithError('could_not_upload_profile_image', Response::HTTP_BAD_REQUEST,
+                    $resInputs);
             }
         }
 
@@ -116,7 +121,10 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadIdentity($clientId, $identityImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_identity_image', Response::HTTP_BAD_REQUEST);
+                $resInputs = ['identityImage' => $identityImage];
+
+                return $this->respondWithError('could_not_upload_identity_image', Response::HTTP_BAD_REQUEST,
+                    $resInputs);
             }
         }
 
@@ -126,7 +134,10 @@ class ClientController extends AbstractController
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {
-                return $this->respondWithError('could_not_upload_address_image', Response::HTTP_BAD_REQUEST);
+                $resInputs = ['addressImage' => $addressImage];
+
+                return $this->respondWithError('could_not_upload_address_image', Response::HTTP_BAD_REQUEST,
+                    $resInputs);
             }
         }
 
@@ -163,7 +174,7 @@ class ClientController extends AbstractController
         if (strlen($birthParts[ 0 ]) == 4) {
             return $birth;
         } else {
-            return $birthParts[2].'-'.$birthParts[1].'-'.$birthParts[0];
+            return $birthParts[ 2 ] . '-' . $birthParts[ 1 ] . '-' . $birthParts[ 0 ];
         }
     }
 
@@ -180,7 +191,10 @@ class ClientController extends AbstractController
         $phone = $request->input('phone');
 
         if ($this->clientService->findByPhone($phone)) {
-            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST);
+
+            $resInputs = ['phone' => $phone];
+
+            return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
@@ -205,7 +219,10 @@ class ClientController extends AbstractController
         $affiliate = $this->affiliateService->findByCode($affiliateCode);
 
         if (is_null($affiliate)) {
-            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND);
+
+            $resInputs = ['affiliateCode' => $affiliateCode];
+
+            return $this->respondWithError('affiliate_code_not_found', Response::HTTP_NOT_FOUND, $resInputs);
         }
 
         $this->clientService->updateAffiliate($affiliate, $client);
