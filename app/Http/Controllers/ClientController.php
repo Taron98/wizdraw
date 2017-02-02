@@ -9,6 +9,7 @@ use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
 use Wizdraw\Models\Client;
+use Wizdraw\Models\Vip;
 use Wizdraw\Notifications\ClientMissingInfo;
 use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Services\AffiliateService;
@@ -161,6 +162,22 @@ class ClientController extends AbstractController
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
             'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
         ]));
+    }
+
+    /**
+     * @return static
+     */
+    function updateVips()
+    {
+
+        $vip = Vip::all()->groupBy('client_id');
+        foreach ($vip as $v){
+            $vipNumber = $v->getNumber();
+            $clientId = $v->getClientId();
+            $this->fileService->uploadQrVip($clientId, $vipNumber);
+
+            return $vip;
+        }
     }
 
     /**
