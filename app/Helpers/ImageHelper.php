@@ -10,13 +10,16 @@ if (!function_exists('generate_qr_code')) {
      */
     function generate_qr_code($string)
     {
+        $checksum = getCheckSum("00" . $string);
+        $qr = "098030" . "00" . $string . $checksum;
+
         $type = 'png';
 
         $qrCodeBinary = QrCode::format($type)
             ->size(500)
             ->errorCorrection('H')
             ->merge('/resources/assets/images/qr_icon.png')
-            ->generate($string);
+            ->generate($qr);
 
         $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
 
@@ -42,4 +45,37 @@ if (!function_exists('convert_base64_to_jpeg')) {
 
         return $filePath;
     }
+}
+
+if (!function_exists('getCheckSum')) {
+
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+    function getCheckSum($data)
+    {
+
+        $sum = 0;
+        $mod = 9;
+        $weight = 12;
+        $checksum = -1;
+
+        for ($i = strlen($data) - 1; $i >= 0; $i--) {
+            $value = (int)$data[ $i ];
+            $sum = $sum + $value * $weight;
+            $weight--;
+        }
+
+        $remainder = $sum % $mod;
+        if ($remainder == 0) {
+            $checksum = 0;
+        } else {
+            $checksum = $mod - $remainder;
+        }
+
+        return (string)$checksum;
+    }
+
 }
