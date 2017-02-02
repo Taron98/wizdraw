@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
@@ -168,13 +169,13 @@ class ClientController extends AbstractController
      */
     function updateVips()
     {
+
         $vip = Vip::all();
 
-        foreach ($vip as $v) {
-            //$s = $v->groupBy('client_id');
+        foreach ($vip as $v){
             $vipNumber = $v->getNumber();
             $clientId = $v->getClientId();
-            $this->fileService->uploadQrVip($clientId, $vipNumber);
+           $this->fileService->uploadQrVip($clientId, $vipNumber);
         }
     }
 
