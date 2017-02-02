@@ -115,6 +115,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@affiliate',
             ]);
 
+            Route::post('/updatevip/', [
+                'as'   => 'client.vip',
+                'uses' => 'ClientController@updateVips',
+            ]);
+
         });
 
         // Group

@@ -170,13 +170,12 @@ class ClientController extends AbstractController
     function updateVips()
     {
 
-        $vip = Vip::all()->groupBy('client_id');
+        $vip = Vip::all();
+
         foreach ($vip as $v){
             $vipNumber = $v->getNumber();
             $clientId = $v->getClientId();
-            $this->fileService->uploadQrVip($clientId, $vipNumber);
-
-            return $vip;
+           $this->fileService->uploadQrVip($clientId, $vipNumber);
         }
     }
 
