@@ -116,7 +116,8 @@ class FileService extends AbstractService
      */
     public function uploadQrVip(string $name, string $vipNumber)
     {
-        $qrCode = generate_qr_code($vipNumber);
+
+        $qrCode = generate_qr_code(substr($vipNumber,1));
 
         return $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
     }

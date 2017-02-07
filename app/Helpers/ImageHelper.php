@@ -11,7 +11,7 @@ if (!function_exists('generate_qr_code')) {
     function generate_qr_code($string)
     {
         $checksum = getCheckSum("00" . $string);
-        $qr = "098030" . "00" . $string . $checksum;
+        $qr = "098030" . "000" . $string . $checksum;
 
         $type = 'png';
 
