@@ -129,7 +129,7 @@ class FacebookService extends AbstractService
      * @param int $expire
      * @param string $deviceId
      *
-     * @return FacebookUser
+     * @return array
      */
     public function connect(string $token, int $expire, string $deviceId)
     {
@@ -147,11 +147,14 @@ class FacebookService extends AbstractService
         if (is_null($user)) {
             $client = $this->clientService->createByFacebook($facebookUser);
             $user = $this->userRepository->createByFacebook($client, $facebookUser, $deviceId);
+            $existingFacebookUser = 0;
         } else {
             $this->userService->updateFacebook($user->getId(), $facebookUser);
+            $existingFacebookUser = 1;
         }
 
-        return $facebookUser;
+        return ['facebookUser' => $facebookUser , 'exist' => $existingFacebookUser];
+;
     }
 
     /**

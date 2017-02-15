@@ -156,8 +156,10 @@ class AuthController extends AbstractController
 
         try {
             // todo: device_id?
-            $facebookUser = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
+            $facebookUserConnect = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
                 $requestAttr[ 'device_id' ]);
+
+            $facebookUser = $facebookUserConnect['facebookUser'];
         } catch (FacebookInvalidTokenException $exception) {
             return $this->respondWithError($exception->getMessage(), $exception->getStatusCode());
         }
@@ -177,6 +179,7 @@ class AuthController extends AbstractController
             'token'     => $token,
             'didSetup'  => $client->isDidSetup(),
             'isPending' => $user->isPending(),
+            'facebookUserAlreadyExist' => $facebookUserConnect['exist'],
         ], $facebookUser->toArray()));
     }
 
