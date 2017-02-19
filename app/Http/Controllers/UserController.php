@@ -153,7 +153,7 @@ class UserController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function deviceAndVersion(string $deviceId, string $versionId): JsonResponse
+    public function version(string $deviceId, string $versionId): JsonResponse
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
