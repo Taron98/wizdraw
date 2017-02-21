@@ -8,8 +8,10 @@ use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
+use Wizdraw\Models\Vip;
 use Wizdraw\Notifications\TransferMissingReceipt;
 
 /**
@@ -41,10 +43,12 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
-        $user = User::find(11);
-        $transfer = Transfer::find(58);
-        $user->notify(new TransferMissingReceipt($transfer));
-        die;
+
+
+//        $user = User::find(11);
+//        $transfer = Transfer::find(58);
+//        $user->notify(new TransferMissingReceipt($transfer));
+//        die;
 //        $client = Client::find(1);
 //        $targetTIme = $client->getTargetTime(8);
 //        die;
@@ -61,11 +65,13 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->writeCountries();
-        $this->writeBanks();
-        $this->writeRates();
-        $this->writeCommissions();
-//        $this->writeIfsc();
+       $this->writeCountries();
+       $this->writeBanks();
+       $this->writeRates();
+      // $this->writeCommissions();
+      // $this->writeIfsc();
+       $this->writeOriginToDestinationCommissions();
+      // $this->addOrigin();
     }
 
     private function writeCountries()
@@ -98,6 +104,26 @@ class QueueTestCommand extends Command
     private function writeCommissions()
     {
         $data = file_get_contents(database_path('cache/commissions.json'));
+        dispatch(new CommissionQueueJob($data));
+    }
+
+    private function addOrigin()
+    {
+        $data = file_get_contents(database_path('cache/commissions.json'));
+        $country = json_decode($data);
+        foreach ($country as $c){
+            $c->{'origin'}= 13;
+        }
+        $json_data = json_encode($country);
+        file_put_contents(database_path('cache/commissionsOriginIsrael.json'), $json_data);
+    }
+
+    private function writeOriginToDestinationCommissions()
+    {
+        $data = file_get_contents(database_path('cache/commissionsOriginIsrael.json'));
+        dispatch(new CommissionQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
         dispatch(new CommissionQueueJob($data));
     }
 
