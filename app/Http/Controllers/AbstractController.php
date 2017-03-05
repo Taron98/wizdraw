@@ -33,7 +33,7 @@ abstract class AbstractController extends Controller
     ) : JsonResponse
     {
         if(is_null($inputs)){
-            //Log::info(json_encode(['error' => $message]));
+            Log::info(json_encode(['error' => $message]));
         }else{
             //Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
         }
