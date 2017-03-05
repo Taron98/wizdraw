@@ -40,7 +40,7 @@ class ChangeColumnsLengthClientTable extends Migration
             $table->string('last_name', 35)->change();
             $table->string('state', 35)->change();
             $table->string('city', 30)->change();
-            $table->string('address', 60)->change();
+            $table->string('address', 120)->change();
         });
     }
 }
