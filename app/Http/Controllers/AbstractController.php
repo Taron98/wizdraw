@@ -35,7 +35,7 @@ abstract class AbstractController extends Controller
         if(is_null($inputs)){
             Log::info(json_encode(['error' => $message]));
         }else{
-            //Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
+            Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
         }
         return response()->json(['error' => $message], $statusCode);
     }
