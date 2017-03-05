@@ -220,7 +220,6 @@ class AuthController extends AbstractController
         array $credentials = [],
         string $facebookId = ''
     ) {
-        Log::info(json_encode(['error' => 'try authenticate', 'inputs' => $credentials]));
 
         try {
             if (!empty($credentials)) {
@@ -229,13 +228,11 @@ class AuthController extends AbstractController
                 $token = $this->authService->createTokenFromFbId($facebookId);
             }
         } catch (JWTException $exception) {
-            Log::info(json_encode(['error' => 'catch authenticate', 'inputs' => $credentials]));
 
             return $this->respondWithError('could_not_create_token', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         if (empty($token)) {
-            Log::info(json_encode(['error' => 'catch authenticate', 'inputs' => $credentials]));
 
             return $this->respondWithError('invalid_credentials', Response::HTTP_UNAUTHORIZED);
         }
