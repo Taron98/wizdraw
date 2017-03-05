@@ -6,9 +6,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
+use Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class AbstractController
@@ -33,9 +33,9 @@ abstract class AbstractController extends Controller
     ) : JsonResponse
     {
         if(is_null($inputs)){
-           // Log::info(json_encode(['error' => $message]));
+            Log::info(json_encode(['error' => $message]));
         }else{
-           // Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
+            Log::info(json_encode(['error' => $message, 'inputs' => $inputs]));
         }
         return response()->json(['error' => $message], $statusCode);
     }
