@@ -105,7 +105,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $profileImage = $request->input('profileImage');
-        if (!empty($profileImage)) {
+        if (!empty($profileImage) && !$client->isApproved()) {
             $uploadStatus = $this->fileService->uploadProfile($clientId, $profileImage);
 
             if (!$uploadStatus) {
@@ -118,7 +118,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $identityImage = $request->input('identityImage');
-        if (!empty($identityImage)) {
+        if (!empty($identityImage) && !$client->isApproved()) {
             $uploadStatus = $this->fileService->uploadIdentity($clientId, $identityImage);
 
             if (!$uploadStatus) {
@@ -131,7 +131,7 @@ class ClientController extends AbstractController
 
         // todo: refactor
         $addressImage = $request->input('addressImage');
-        if (!empty($addressImage)) {
+        if (!empty($addressImage) && !$client->isApproved()) {
             $uploadStatus = $this->fileService->uploadAddress($clientId, $addressImage);
 
             if (!$uploadStatus) {
