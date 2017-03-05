@@ -47,6 +47,11 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'UserController@device',
         ]);
 
+        Route::get('/device/{deviceId}/version/{versionId}', [
+            'as'   => 'user.version',
+            'uses' => 'UserController@version',
+        ]);
+
         Route::post('/reset/', [
             'as'   => 'user.reset',
             'uses' => 'UserController@reset',
