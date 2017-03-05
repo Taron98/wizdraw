@@ -43,13 +43,13 @@ class ChangeColumnsLengthClientTable extends Migration
 //            $table->string('address', 60)->change();
 //        });
 
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('first_name', 70)->change();
-            $table->string('middle_name', 70)->change();
-            $table->string('last_name', 70)->change();
-            $table->string('state', 120)->change();
-            $table->string('city', 120)->change();
-            $table->string('address', 120)->change();
-        });
+//        Schema::table('clients', function (Blueprint $table) {
+//            $table->string('first_name', 70)->change();
+//            $table->string('middle_name', 70)->change();
+//            $table->string('last_name', 70)->change();
+//            $table->string('state', 120)->change();
+//            $table->string('city', 120)->change();
+//            $table->string('address', 120)->change();
+//        });
     }
 }
