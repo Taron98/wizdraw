@@ -32,6 +32,8 @@ class ChangeColumnsLengthClientTable extends Migration
      */
     public function down()
     {
+        Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+
         Schema::table('clients', function (Blueprint $table) {
             $table->string('first_name', 40)->change();
             $table->string('middle_name', 25)->change();
