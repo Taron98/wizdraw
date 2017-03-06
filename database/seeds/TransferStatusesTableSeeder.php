@@ -33,6 +33,11 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'color'           => '#f7a54f',
             ],
             [
+                'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K,
+                'original_status' => 'WAIT FOR PROCESS(Obligo)',
+                'color'           => '#f7a54f',
+            ],
+            [
                 'status'          => TransferStatus::STATUS_WAIT_FOR_PROCESS,
                 'original_status' => TransferStatus::STATUS_WAIT_FOR_PROCESS,
                 'color'           => '',
