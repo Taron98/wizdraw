@@ -81,7 +81,13 @@ class TransferService extends AbstractService
         BankAccount $bankAccount = null,
         array $attributes = []
     ) {
-        $initStatus = $this->transferStatusService->findByStatus(TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN);
+        if($attributes['paymentAgency'] == '7-eleven'){
+            $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
+        }else{
+            $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
+        }
+
+        $initStatus = $this->transferStatusService->findByStatus($transferStatus);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
@@ -173,14 +179,18 @@ class TransferService extends AbstractService
     /**
      * @param float $latitude
      * @param float $longitude
+     * @param string $agency
      *
      * @return mixed
      */
-    public function nearby(float $latitude, float $longitude)
+    public function nearby(float $latitude, float $longitude, string $agency)
     {
+        if($agency == "7-eleven"){
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-
+        }else{
+            $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
+        }
         $branches = collect();
         foreach ($branchesJson as $branch) {
             $distance = $this->distance(

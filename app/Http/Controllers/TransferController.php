@@ -147,8 +147,6 @@ class TransferController extends AbstractController
                 // TODO: REMOVE!!!!!!!
                 // TODO: REMOVE!!!!!!!
                 // TODO: REMOVE!!!!!!!
-                // TODO: REMOVE!!!!!!!
-                // TODO: REMOVE!!!!!!!
                 unset($deposit[ 'ifsc' ]);
 
                 $bankBranchName = $request->input('deposit.bankBranchName');
@@ -253,8 +251,9 @@ class TransferController extends AbstractController
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
+        $agency = $request->input('agency');
 
-        $branch = $this->transferService->nearby($latitude, $longitude);
+        $branch = $this->transferService->nearby($latitude, $longitude, $agency);
 
         if (is_null($branch)) {
             return $this->respondWithError('no_branch_found');
