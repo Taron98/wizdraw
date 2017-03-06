@@ -38,15 +38,10 @@ if (!function_exists('generate_qr_code_circle_k')) {
     function generate_qr_code_circle_k($wf,$amount)
     {
         $billType = "00";
-        $invoice = substr($wf,2,12);
+        $invoice = substr($wf,3,12);
         $amountDigit = substr($amount,0,1);
-        $amountLength = strlen($amount);
-        $amountPrefix = "";
-        for($i=0;$i<7-$amountLength;$i++){
-            $amountPrefix.="0";
-        }
-        $amountPrefix = $amountPrefix . $amount;
-        $qr = "9091111001" . $billType . $invoice . "000000009479769" . $amountPrefix . $amountDigit;
+        $amountFormatted = handleFloatAmount($amount);
+        $qr = "9091111001" . $billType . $invoice . "000000009479769" . $amountFormatted . $amountDigit;
 
         $type = 'png';
 
@@ -113,4 +108,23 @@ if (!function_exists('getCheckSum')) {
         return (string)$checksum;
     }
 
+}
+
+if (!function_exists('handleFloatAmount')) {
+
+    function handleFloatAmount($amount)
+    {
+        $amountFormatted = number_format($amount,1,'.','');
+        $amountFormatted = str_replace('.','',$amountFormatted);
+        $amountLength = strlen($amountFormatted);
+        $amountPrefix = "";
+        for($i=0;$i<7-$amountLength;$i++){
+            $amountPrefix.="0";
+        }
+
+        return $amountPrefix . $amountFormatted;
+
+
+
+    }
 }
