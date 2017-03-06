@@ -106,7 +106,7 @@ class UserController extends AbstractController
             return $this->respondWithError('verification_code_expired', Response::HTTP_BAD_REQUEST);
         }
 
-        $this->userService->resetVerification($user);
+        //$this->userService->resetVerification($user);
 
         return $this->respond($user);
     }
