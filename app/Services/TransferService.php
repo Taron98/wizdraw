@@ -179,11 +179,11 @@ class TransferService extends AbstractService
     /**
      * @param float $latitude
      * @param float $longitude
-     * @param string $agency
+     * @param $agency
      *
      * @return mixed
      */
-    public function nearby(float $latitude, float $longitude, string $agency)
+    public function nearby(float $latitude, float $longitude, $agency)
     {
         if($agency == "7-eleven"){
         // todo: this solution is hardcoded for the 1st version
