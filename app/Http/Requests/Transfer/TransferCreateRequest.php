@@ -45,6 +45,7 @@ class TransferCreateRequest extends AbstractRequest
             'totalAmount'    => 'required|numeric',
             'receiverAmount' => 'required|numeric',
 
+            'paymentAgency' => 'required|string',
             'typeId' => 'required|exists:transfer_types,id',
 
             'pickup'       => 'required_without:deposit|array',
