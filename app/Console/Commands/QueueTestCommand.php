@@ -126,18 +126,26 @@ class QueueTestCommand extends Command
 
         $Clients = DB::table('clients')
                     ->join('users','clients.id','=','users.client_id')
-                    ->select('first_name','last_name','phone')
+                    ->select('clients.id','first_name','last_name','phone')
                     ->whereNotNull('phone')
                     ->groupBy('users.client_id')
                     ->get();
 
         $i=0;
+        $ids = array();
+        $phones = array();
               foreach ($Clients as $client){
-                  $client->notify(new UpdateApplication($client));
+                  $myClient = new Client;
+                  $myClient->id = $client->id;
+                  $myClient->phone = $client->phone;
+                  $myClient->firstName = $client->first_name;
+                  $myClient->lastName = $client->last_name;
+                  $myClient->notify(new UpdateApplication($myClient));
                   $i++;
+                  array_push($ids,$client->id);
+                  array_push($phones,$client->phone);
               }
 
-        Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients']));
-
+        Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients', 'Phones' => $phones, 'DB IDs' => $ids]));
     }
 }
