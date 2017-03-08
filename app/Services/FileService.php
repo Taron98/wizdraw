@@ -18,6 +18,7 @@ class FileService extends AbstractService
     const TYPE_RECEIPT = 'receipt';
     const TYPE_ADDRESS = 'address';
     const TYPE_QR_VIP = 'vip';
+    const TYPE_QR_CIRCLE_K = 'circle-k';
 
     const DEFAULT_QR_EXT = 'png';
     const DEFAULT_FILE_EXT = 'jpg';
@@ -120,6 +121,21 @@ class FileService extends AbstractService
         $qrCode = generate_qr_code(substr($vipNumber,1));
 
         return $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
+    }
+
+    /**
+     * @param $wf
+     * @param $amount
+     *
+     * @return array
+     */
+    public function uploadQrCircleK($wf, $amount)
+    {
+        $qrCode = generate_qr_code_circle_k($wf, $amount);
+
+        $res = $this->upload(self::TYPE_QR_CIRCLE_K, $wf, $qrCode);
+
+        return ['result' => $res, 'qr' => $qrCode];
     }
 
     /**

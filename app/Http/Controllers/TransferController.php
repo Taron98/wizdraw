@@ -22,6 +22,7 @@ use Wizdraw\Notifications\TransferSent;
 use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
+use Wizdraw\Services\FileService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 
@@ -50,6 +51,8 @@ class TransferController extends AbstractController
     /** @var RateCacheService */
     protected $rateCacheService;
 
+    /** @var FileService */
+    private $fileService;
     /**
      * TransferController constructor.
      *
@@ -59,6 +62,7 @@ class TransferController extends AbstractController
      * @param BankAccountService $bankAccountService
      * @param FeedbackService $feedbackService
      * @param RateCacheService $rateCacheService
+     * @param FileService $fileService
      */
     public function __construct(
         TransferService $transferService,
@@ -66,7 +70,8 @@ class TransferController extends AbstractController
         TransferReceiptService $transferReceiptService,
         BankAccountService $bankAccountService,
         FeedbackService $feedbackService,
-        RateCacheService $rateCacheService
+        RateCacheService $rateCacheService,
+        FileService $fileService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
@@ -74,6 +79,7 @@ class TransferController extends AbstractController
         $this->bankAccountService = $bankAccountService;
         $this->feedbackService = $feedbackService;
         $this->rateCacheService = $rateCacheService;
+        $this->fileService = $fileService;
     }
 
     /**
@@ -117,6 +123,8 @@ class TransferController extends AbstractController
         $commission = $request->input('commission');
         $receiverAmount = $request->input('receiverAmount');
         $receiverCountryId = $request->input('receiverCountryId');
+        $paymentAgency = $request->input('paymentAgency');
+
         /** @var RateCache $rate */
         $rate = $this->rateCacheService->find($receiverCountryId);
 
@@ -147,8 +155,6 @@ class TransferController extends AbstractController
                 // TODO: REMOVE!!!!!!!
                 // TODO: REMOVE!!!!!!!
                 // TODO: REMOVE!!!!!!!
-                // TODO: REMOVE!!!!!!!
-                // TODO: REMOVE!!!!!!!
                 unset($deposit[ 'ifsc' ]);
 
                 $bankBranchName = $request->input('deposit.bankBranchName');
@@ -175,6 +181,11 @@ class TransferController extends AbstractController
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
+        $qr = ['result' => false, 'qr' => ''];
+        if($paymentAgency == 'circle-k'){
+            $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getAmount());
+        }
+
         /** @var Transfer $transfer */
         $user->notify(
             (new TransferMissingReceipt($transfer))
@@ -182,7 +193,7 @@ class TransferController extends AbstractController
         );
 
         return $this->respond(array_merge($transfer->toArray(), [
-            'transactions' => $client->transfers->count(),
+            'transactions' => $client->transfers->count(), 'qrCode' => $qr
         ]));
     }
 
@@ -253,11 +264,12 @@ class TransferController extends AbstractController
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
+        $agency = $request->input('agency');
 
-        $branch = $this->transferService->nearby($latitude, $longitude);
+        $branch = $this->transferService->nearby($latitude, $longitude, $agency);
 
         if (is_null($branch)) {
-            return $this->respondWithError('no_branch_found');
+            return $this->respondWithError('no_branch_found', Response::HTTP_NOT_FOUND);
         }
 
         return $this->respond($branch);

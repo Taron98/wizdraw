@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Controllers\Auth;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use JWTAuth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -219,6 +220,7 @@ class AuthController extends AbstractController
         array $credentials = [],
         string $facebookId = ''
     ) {
+
         try {
             if (!empty($credentials)) {
                 $token = $this->authService->createTokenFromCredentials($credentials);
@@ -226,10 +228,12 @@ class AuthController extends AbstractController
                 $token = $this->authService->createTokenFromFbId($facebookId);
             }
         } catch (JWTException $exception) {
+
             return $this->respondWithError('could_not_create_token', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         if (empty($token)) {
+
             return $this->respondWithError('invalid_credentials', Response::HTTP_UNAUTHORIZED);
         }
 

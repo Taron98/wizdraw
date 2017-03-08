@@ -27,6 +27,36 @@ if (!function_exists('generate_qr_code')) {
     }
 }
 
+if (!function_exists('generate_qr_code_circle_k')) {
+    /**
+     * @param $wf
+     *
+     * @param $amount
+     *
+     * @return mixed
+     */
+    function generate_qr_code_circle_k($wf,$amount)
+    {
+        $billType = "00";
+        $invoice = substr($wf,3,12);
+        $amountDigit = substr($amount,0,1);
+        $amountFormatted = handleFloatAmount($amount);
+        $qr = "9091111001" . $billType . $invoice . "000000009479769" . $amountFormatted . $amountDigit;
+
+        $type = 'png';
+
+        $qrCodeBinary = QrCode::format($type)
+            ->size(500)
+            ->errorCorrection('H')
+            ->merge('/resources/assets/images/qr_icon.png')
+            ->generate($qr);
+
+        $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
+
+        return $qrCode;
+    }
+}
+
 if (!function_exists('convert_base64_to_jpeg')) {
     /**
      * @param string $data
@@ -78,4 +108,23 @@ if (!function_exists('getCheckSum')) {
         return (string)$checksum;
     }
 
+}
+
+if (!function_exists('handleFloatAmount')) {
+
+    function handleFloatAmount($amount)
+    {
+        $amountFormatted = number_format($amount,1,'.','');
+        $amountFormatted = str_replace('.','',$amountFormatted);
+        $amountLength = strlen($amountFormatted);
+        $amountPrefix = "";
+        for($i=0;$i<7-$amountLength;$i++){
+            $amountPrefix.="0";
+        }
+
+        return $amountPrefix . $amountFormatted;
+
+
+
+    }
 }

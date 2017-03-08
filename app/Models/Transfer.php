@@ -17,6 +17,7 @@ use Wizdraw\Services\TransferService;
  * @property string $transactionNumber
  * @property integer $clientId
  * @property integer $receiverClientId
+ * @property string $paymentAgency
  * @property integer $typeId
  * @property integer $bankAccountId
  * @property integer $receiverCountryId
@@ -94,6 +95,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'transaction_number',
         'client_id',
         'receiver_client_id',
+        'payment_agency',
         'type_id',
         'bank_account_id',
         'receiver_country_id',
@@ -284,7 +286,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         /** @var TransferService $transferService */
         $transferService = resolve(TransferService::class);
 
-        return $transferService->nearby($this->latitude, $this->longitude);
+        return $transferService->nearby($this->latitude, $this->longitude, $this->paymentAgency);
     }
     //</editor-fold>
 
@@ -345,6 +347,26 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setReceiverClientId($receiverClientId): Transfer
     {
         $this->receiverClientId = $receiverClientId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentAgency()
+    {
+        return $this->paymentAgency;
+    }
+
+    /**
+     * @param string $paymentAgency
+     *
+     * @return Transfer
+     */
+    public function setPaymentAgency($paymentAgency): Transfer
+    {
+        $this->paymentAgency = $paymentAgency;
 
         return $this;
     }

@@ -31,6 +31,7 @@ class TransferNearbyRequest extends AbstractRequest
         return [
             'latitude'  => 'required|latitude',
             'longitude' => 'required|longitude',
+            'agency' => 'required'
         ];
     }
 
