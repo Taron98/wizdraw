@@ -3,14 +3,18 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Wizdraw\Cache\Jobs\BankQueueJob;
 use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\TransferMissingReceipt;
+use Wizdraw\Notifications\UpdateApplication;
 
 /**
  * Class QueueTestCommand
@@ -41,10 +45,10 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
-        $user = User::find(11);
-        $transfer = Transfer::find(58);
-        $user->notify(new TransferMissingReceipt($transfer));
-        die;
+       // $user = User::find(11);
+       // $transfer = Transfer::find(58);
+       // $user->notify(new TransferMissingReceipt($transfer));
+       // die;
 //        $client = Client::find(1);
 //        $targetTIme = $client->getTargetTime(8);
 //        die;
@@ -61,10 +65,11 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->writeCountries();
-        $this->writeBanks();
-        $this->writeRates();
-        $this->writeCommissions();
+        $this->UpdateAppNotification();
+//        $this->writeCountries();
+//        $this->writeBanks();
+//        $this->writeRates();
+//        $this->writeCommissions();
 //        $this->writeIfsc();
     }
 
@@ -116,4 +121,23 @@ class QueueTestCommand extends Command
         dispatch(new BrancheQueueJob($data));
     }
 
+    private function UpdateAppNotification()
+    {
+
+        $Clients = DB::table('clients')
+                    ->join('users','clients.id','=','users.client_id')
+                    ->select('first_name','last_name','phone')
+                    ->whereNotNull('phone')
+                    ->groupBy('users.client_id')
+                    ->get();
+
+        $i=0;
+              foreach ($Clients as $client){
+                  $client->notify(new UpdateApplication($client));
+                  $i++;
+              }
+
+        Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients']));
+
+    }
 }
