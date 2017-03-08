@@ -61,7 +61,7 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->UpdateAppNotification();
+       // $this->UpdateAppNotification();
 //        $this->writeCountries();
 //        $this->writeBanks();
 //        $this->writeRates();
