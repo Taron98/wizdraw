@@ -121,6 +121,14 @@ class QueueTestCommand extends Command
         dispatch(new BrancheQueueJob($data));
     }
 
+    /**
+     * this function send SMS to all the clients in the application to inform them there's new version of the application.
+     * #### IMPORTANT ####
+     * Instructions: change the 'strict' configuration under \config\database.php to false! (instead of true value), the groupBy query won't
+     * work since the server is using 'ONLY_FULL_GROUP_BY' mode and we need to shut it down.
+     * my suggestion is to run this on the pre-prod server, just export the production DB to the pre-prod server and run it over there.
+     * Don't forget to change the strict value back to true again after you finished.
+     */
     private function UpdateAppNotification()
     {
 
