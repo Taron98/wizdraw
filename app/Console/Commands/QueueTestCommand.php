@@ -139,6 +139,8 @@ class QueueTestCommand extends Command
                     ->groupBy('users.client_id')
                     ->get();
 
+        //$clients = Client::hydrate($Clients->toArray());
+
         $i=0;
         $ids = array();
         $phones = array();
