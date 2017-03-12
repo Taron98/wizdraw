@@ -3,14 +3,18 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Wizdraw\Cache\Jobs\BankQueueJob;
 use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\TransferMissingReceipt;
+use Wizdraw\Notifications\UpdateApplication;
 
 /**
  * Class QueueTestCommand
@@ -41,10 +45,10 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
-        $user = User::find(11);
-        $transfer = Transfer::find(58);
-        $user->notify(new TransferMissingReceipt($transfer));
-        die;
+       // $user = User::find(11);
+       // $transfer = Transfer::find(58);
+       // $user->notify(new TransferMissingReceipt($transfer));
+       // die;
 //        $client = Client::find(1);
 //        $targetTIme = $client->getTargetTime(8);
 //        die;
@@ -61,10 +65,11 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->writeCountries();
-        $this->writeBanks();
-        $this->writeRates();
-        $this->writeCommissions();
+        $this->UpdateAppNotification();
+//        $this->writeCountries();
+//        $this->writeBanks();
+//        $this->writeRates();
+//        $this->writeCommissions();
 //        $this->writeIfsc();
     }
 
@@ -116,4 +121,41 @@ class QueueTestCommand extends Command
         dispatch(new BrancheQueueJob($data));
     }
 
+    /**
+     * this function send SMS to all the clients in the application to inform them there's new version of the application.
+     * #### IMPORTANT ####
+     * Instructions: change the 'strict' configuration under \config\database.php to false! (instead of true value), the groupBy query won't
+     * work since the server is using 'ONLY_FULL_GROUP_BY' mode and we need to shut it down.
+     * my suggestion is to run this on the pre-prod server, just export the production DB to the pre-prod server and run it over there.
+     * Don't forget to change the strict value back to true again after you finished.
+     */
+    private function UpdateAppNotification()
+    {
+
+        $Clients = DB::table('clients')
+                    ->join('users','clients.id','=','users.client_id')
+                    ->select('clients.id','first_name','last_name','phone')
+                    ->whereNotNull('phone')
+                    ->groupBy('users.client_id')
+                    ->get();
+
+        //$clients = Client::hydrate($Clients->toArray());
+
+        $i=0;
+        $ids = array();
+        $phones = array();
+              foreach ($Clients as $client){
+                  $myClient = new Client;
+                  $myClient->id = $client->id;
+                  $myClient->phone = $client->phone;
+                  $myClient->firstName = $client->first_name;
+                  $myClient->lastName = $client->last_name;
+                  $myClient->notify(new UpdateApplication($myClient));
+                  $i++;
+                  array_push($ids,$client->id);
+                  array_push($phones,$client->phone);
+              }
+
+        Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients', 'Phones' => $phones, 'DB IDs' => $ids]));
+    }
 }
