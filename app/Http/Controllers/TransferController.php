@@ -183,7 +183,7 @@ class TransferController extends AbstractController
 
         $qr = ['result' => false, 'qr' => ''];
         if($paymentAgency == 'circle-k'){
-            $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getAmount());
+            $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
         }
 
         /** @var Transfer $transfer */
