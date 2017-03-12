@@ -140,7 +140,8 @@ class QueueTestCommand extends Command
                     ->get();
 
         //$clients = Client::hydrate($Clients->toArray());
-
+        $url = 'https://play.google.com/store/apps/details?id=com.ionicframework.wicapp652054';
+        $tinyUrl = createTinyUrl($url);
         $i=0;
         $ids = array();
         $phones = array();
@@ -150,7 +151,7 @@ class QueueTestCommand extends Command
                   $myClient->phone = $client->phone;
                   $myClient->firstName = $client->first_name;
                   $myClient->lastName = $client->last_name;
-                  $myClient->notify(new UpdateApplication($myClient));
+                  $myClient->notify(new UpdateApplication($myClient,$tinyUrl));
                   $i++;
                   array_push($ids,$client->id);
                   array_push($phones,$client->phone);
@@ -158,4 +159,16 @@ class QueueTestCommand extends Command
 
         Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients', 'Phones' => $phones, 'DB IDs' => $ids]));
     }
+
+    function createTinyUrl($strURL) {
+        $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=" . $strURL);
+        return $tinyurl;
+    }
+
+    private function TestQueue()
+    {
+
+    }
+
+
 }
