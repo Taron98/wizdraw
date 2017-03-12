@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'wizdraw@cheap2speak.com',
+        'address' => 'No-reply@wizdrawapp.com',
         'name'    => 'Wizdraw',
     ],
 
