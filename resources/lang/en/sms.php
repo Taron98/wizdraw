@@ -8,5 +8,5 @@ return [
     'transfer_receiver_pick_up' => ":senderName\nsent you funds that are waiting for you to pick up. Your transaction number is :transactionNumber. Open the Wizdraw app for more details.",
     'transfer_receiver_deposit' => ":senderName\ndeposited funds for you in your bank account. Your transaction number is :transactionNumber. Open the Wizdraw app for more details.",
     'transfer_sender'           => ":senderName\nThe transaction has been successfully completed.\nThe transaction ID is: :transactionNumber\nThe Wizdraw team",
-    'application_update' => "Dear :senderName,\nWe are pleased to announce the launch of our newer version of Wizdraw.\n Visit app store or use https://tinyurl.com/jp42y7l to check updates.",
+    'application_update' => "Dear :senderName,\nWe are pleased to announce the launch of our newer version of Wizdraw.\n Visit app store or use :url to check updates.",
 ];
