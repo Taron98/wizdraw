@@ -3,18 +3,14 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Wizdraw\Cache\Jobs\BankQueueJob;
 use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
-use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\TransferMissingReceipt;
-use Wizdraw\Notifications\UpdateApplication;
 
 /**
  * Class QueueTestCommand
@@ -65,12 +61,14 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->UpdateAppNotification();
-//        $this->writeCountries();
-//        $this->writeBanks();
-//        $this->writeRates();
+       // $this->UpdateAppNotification();
+        $this->writeCountries();
+        $this->writeBanks();
+        $this->writeRates();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
+        $this->writeOriginToDestinationCommissions();
+
     }
 
     private function writeCountries()
@@ -103,6 +101,26 @@ class QueueTestCommand extends Command
     private function writeCommissions()
     {
         $data = file_get_contents(database_path('cache/commissions.json'));
+        dispatch(new CommissionQueueJob($data));
+    }
+
+    private function addOrigin()
+    {
+        $data = file_get_contents(database_path('cache/commissions.json'));
+        $country = json_decode($data);
+        foreach ($country as $c){
+            $c->{'origin'}= 13;
+        }
+        $json_data = json_encode($country);
+        file_put_contents(database_path('cache/commissionsOriginIsrael.json'), $json_data);
+    }
+
+    private function writeOriginToDestinationCommissions()
+    {
+        $data = file_get_contents(database_path('cache/commissionsOriginIsrael.json'));
+        dispatch(new CommissionQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
         dispatch(new CommissionQueueJob($data));
     }
 

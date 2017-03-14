@@ -10,6 +10,7 @@ use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
+use Wizdraw\Http\Requests\NoParamRequest;
 
 /**
  * Class CountryController
@@ -60,10 +61,15 @@ class CountryController extends AbstractController
      *
      * @param int $id
      *
+     * @param NoParamRequest $request
+     *
      * @return mixed
      */
-    public function show(int $id)
+    public function show(int $id, NoParamRequest $request)
     {
+        $client = $request->user()->client;
+
+
         /** @var CountryCache $country */
         $country = $this->countryCacheService->find($id);
 
@@ -76,7 +82,7 @@ class CountryController extends AbstractController
         $rate = $this->rateCacheService->find($country->getId());
         $country->setRate($rate);
 
-        $commissions = $this->commissionCacheService->findByCountryId($country->getId());
+        $commissions = $this->commissionCacheService->findByCountryId($country->getId(),'ASC',$client->defaultCountryId);
         $country->setCommissions($commissions);
 
         return $country;
