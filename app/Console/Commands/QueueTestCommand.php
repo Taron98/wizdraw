@@ -62,9 +62,9 @@ class QueueTestCommand extends Command
 //        // $next = $next
 
        // $this->UpdateAppNotification();
-//        $this->writeCountries();
-//        $this->writeBanks();
-//        $this->writeRates();
+        $this->writeCountries();
+        $this->writeBanks();
+        $this->writeRates();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
         $this->writeOriginToDestinationCommissions();
