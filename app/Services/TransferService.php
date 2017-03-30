@@ -19,7 +19,7 @@ use Wizdraw\Repositories\TransferRepository;
  */
 class TransferService extends AbstractService
 {
-    const MAX_MONTHLY_TRANSFER = 5000;
+    const MAX_MONTHLY_TRANSFER = 8000;
 
     /** @var TransferReceiptService */
     protected $transferReceiptService;
