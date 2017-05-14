@@ -633,5 +633,15 @@
     "phone_code": "84",
     "is_active": 0,
     "timezone": 7
+  },
+  {
+    "id": "119",
+    "description": "TAIWAN",
+    "coin_id": "TWD",
+    "country_code_2": "TW",
+    "country_code_3": "TWN",
+    "phone_code": "886",
+    "is_active": 1,
+    "timezone": 8
   }
 ]
