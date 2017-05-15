@@ -8,27 +8,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\Feedback
  *
- * @property integer $id
- * @property integer $transferId
- * @property integer $clientId
- * @property integer $feedbackQuestionId
- * @property integer $rating
+ * @property int $id
+ * @property int $transferId
+ * @property int $clientId
+ * @property int $feedbackQuestionId
+ * @property int $rating
  * @property string $note
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property-read \Wizdraw\Models\Transfer $transfer
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Wizdraw\Models\FeedbackQuestion $feedbackQuestion
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereTransferId($value)
+ * @property-read \Wizdraw\Models\Transfer $transfer
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereFeedbackQuestionId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereRating($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereFeedbackQuestionId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereNote($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereRating($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereTransferId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Feedback extends AbstractModel

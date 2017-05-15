@@ -13,55 +13,56 @@ use Wizdraw\Services\TransferService;
 /**
  * Wizdraw\Models\Transfer
  *
- * @property integer $id
+ * @property int $id
  * @property string $transactionNumber
- * @property integer $clientId
- * @property integer $receiverClientId
+ * @property int $clientId
+ * @property int $receiverClientId
  * @property string $paymentAgency
- * @property integer $typeId
- * @property integer $bankAccountId
- * @property integer $receiverCountryId
- * @property integer $senderCountryId
+ * @property int $typeId
+ * @property int $bankAccountId
+ * @property int $receiverCountryId
+ * @property int $senderCountryId
  * @property float $amount
  * @property float $commission
  * @property float $rate
- * @property integer $statusId
- * @property integer $receiptId
+ * @property int $statusId
+ * @property int $receiptId
  * @property float $latitude
  * @property float $longitude
  * @property string $note
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property-read \Wizdraw\Models\Client $client
- * @property-read \Wizdraw\Models\Client $receiverClient
- * @property-read \Wizdraw\Models\TransferType $type
  * @property-read \Wizdraw\Models\BankAccount $bankAccount
+ * @property-read \Wizdraw\Models\Client $client
+ * @property-read null|stdClass $nearbyBranch
+ * @property-read float $receiverAmount
+ * @property-read float $totalAmount
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures
- * @property-read \Wizdraw\Models\TransferStatus $status
  * @property-read \Wizdraw\Models\TransferReceipt $receipt
- * @property-read mixed $totalAmount
- * @property-read mixed $receiverAmount
- * @property-read mixed $nearbyBranch
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTypeId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
+ * @property-read \Wizdraw\Models\Client $receiverClient
+ * @property-read \Wizdraw\Models\TransferStatus $status
+ * @property-read \Wizdraw\Models\TransferType $type
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereLatitude($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereLongitude($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereNote($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer wherePaymentAgency($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTransactionNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereTypeId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Transfer extends AbstractModel implements AuthorizableContract

@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\Nature
  *
- * @property integer $id
+ * @property int $id
  * @property string $nature
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereNature($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Nature whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Nature extends AbstractModel
