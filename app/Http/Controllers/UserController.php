@@ -202,7 +202,8 @@ class UserController extends AbstractController
         }
 
         $this->userService->generateVerifyCode($user);
-        $user->notify(new UserResetPassword($email));
+        $user->client->notify(new UserResetPassword($email));
+        //$user->notify(new UserResetPassword($email));
         return $user;
     }
 

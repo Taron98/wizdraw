@@ -9,4 +9,6 @@ return [
     'transfer_receiver_deposit' => ":senderName\ndeposited funds for you in your bank account. Your transaction number is :transactionNumber. Open the Wizdraw app for more details.",
     'transfer_sender'           => ":senderName\nThe transaction has been successfully completed.\nThe transaction ID is: :transactionNumber\nThe Wizdraw team",
     'application_update' => "Dear :senderName,\nWe are pleased to announce the launch of our newer version of Wizdraw.\n Visit app store or use :url to check updates.",
+
+    'reset_password' => "Hey :firstName,\nYour Wizdraw verification code is :verifyCode.\n Open the app and log in, the code is valid for :expire hours."
 ];
