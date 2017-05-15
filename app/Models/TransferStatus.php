@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\TransferStatus
  *
- * @property integer $id
+ * @property int $id
  * @property string $status
  * @property string $originalStatus
  * @property string $color
@@ -16,13 +16,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginalStatus($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereColor($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginalStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class TransferStatus extends AbstractModel

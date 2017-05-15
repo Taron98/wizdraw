@@ -3,14 +3,12 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Jobs\BankQueueJob;
 use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
-use Wizdraw\Models\Transfer;
-use Wizdraw\Models\User;
-use Wizdraw\Notifications\TransferMissingReceipt;
 
 /**
  * Class QueueTestCommand
@@ -41,10 +39,10 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
-       // $user = User::find(11);
-       // $transfer = Transfer::find(58);
-       // $user->notify(new TransferMissingReceipt($transfer));
-       // die;
+        // $user = User::find(11);
+        // $transfer = Transfer::find(58);
+        // $user->notify(new TransferMissingReceipt($transfer));
+        // die;
 //        $client = Client::find(1);
 //        $targetTIme = $client->getTargetTime(8);
 //        die;
@@ -61,7 +59,8 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-       // $this->UpdateAppNotification();
+        // $this->UpdateAppNotification();
+        $this->manageActiveCountries();
         $this->writeCountries();
         $this->writeBanks();
         $this->writeRates();
@@ -108,8 +107,8 @@ class QueueTestCommand extends Command
     {
         $data = file_get_contents(database_path('cache/commissions.json'));
         $country = json_decode($data);
-        foreach ($country as $c){
-            $c->{'origin'}= 13;
+        foreach ($country as $c) {
+            $c->{'origin'} = 13;
         }
         $json_data = json_encode($country);
         file_put_contents(database_path('cache/commissionsOriginIsrael.json'), $json_data);
@@ -151,41 +150,56 @@ class QueueTestCommand extends Command
     {
 
         $Clients = DB::table('clients')
-                    ->join('users','clients.id','=','users.client_id')
-                    ->select('clients.id','first_name','last_name','phone')
-                    ->whereNotNull('phone')
-                    ->groupBy('users.client_id')
-                    ->get();
+            ->join('users', 'clients.id', '=', 'users.client_id')
+            ->select('clients.id', 'first_name', 'last_name', 'phone')
+            ->whereNotNull('phone')
+            ->groupBy('users.client_id')
+            ->get();
 
         //$clients = Client::hydrate($Clients->toArray());
         $url = 'https://play.google.com/store/apps/details?id=com.ionicframework.wicapp652054';
         $tinyUrl = createTinyUrl($url);
-        $i=0;
-        $ids = array();
-        $phones = array();
-              foreach ($Clients as $client){
-                  $myClient = new Client;
-                  $myClient->id = $client->id;
-                  $myClient->phone = $client->phone;
-                  $myClient->firstName = $client->first_name;
-                  $myClient->lastName = $client->last_name;
-                  $myClient->notify(new UpdateApplication($myClient,$tinyUrl));
-                  $i++;
-                  array_push($ids,$client->id);
-                  array_push($phones,$client->phone);
-              }
+        $i = 0;
+        $ids = [];
+        $phones = [];
+        foreach ($Clients as $client) {
+            $myClient = new Client;
+            $myClient->id = $client->id;
+            $myClient->phone = $client->phone;
+            $myClient->firstName = $client->first_name;
+            $myClient->lastName = $client->last_name;
+            $myClient->notify(new UpdateApplication($myClient, $tinyUrl));
+            $i++;
+            array_push($ids, $client->id);
+            array_push($phones, $client->phone);
+        }
 
-        Log::info(json_encode(['UpdateAppNotification' => 'finish sending notification to '.$i.' clients', 'Phones' => $phones, 'DB IDs' => $ids]));
+        Log::info(json_encode([
+            'UpdateAppNotification' => 'finish sending notification to ' . $i . ' clients',
+            'Phones'                => $phones,
+            'DB IDs'                => $ids,
+        ]));
     }
 
-    function createTinyUrl($strURL) {
+    function createTinyUrl($strURL)
+    {
         $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=" . $strURL);
+
         return $tinyurl;
     }
 
-    private function TestQueue()
+    private function manageActiveCountries()
     {
+        $json[] = ['119' => ['NEPAL', 'SRI LANKA', 'THAILAND', 'PHILIPPINES', 'INDIA'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA']];
 
+        $redis = Redis::connection();
+        $origins = [13, 90, 119];
+        foreach ($origins as $o) {
+            if(isset($json[0][$o])){
+            $redis->lpush(redis_key('origin', $o, 'activeCountries'), $json[0][$o]);
+            //$values = Redis::command('hset', ['origin:', 5, 10]);
+            }
+        }
     }
 
 

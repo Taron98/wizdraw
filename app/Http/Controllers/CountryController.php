@@ -74,6 +74,7 @@ class CountryController extends AbstractController
         $country = $this->countryCacheService->find($id);
 
         if (is_null($country)) {
+
             $resInputs = ['id' => $id];
 
             return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND, $resInputs);
@@ -82,7 +83,8 @@ class CountryController extends AbstractController
         $rate = $this->rateCacheService->find($country->getId());
         $country->setRate($rate);
 
-        $commissions = $this->commissionCacheService->findByCountryId($country->getId(),'ASC',$client->defaultCountryId);
+        $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',
+            $client->defaultCountryId);
         $country->setCommissions($commissions);
 
         return $country;
@@ -114,11 +116,18 @@ class CountryController extends AbstractController
     /**
      * Showing list of countries route
      *
+     * @param NoParamRequest $request
+     *
      * @return mixed
      */
-    public function list()
+    public function list(NoParamRequest $request)
     {
-        return $this->countryCacheService->allPaginated();
+        $user = $request->user();
+        if (is_null($user)) {
+            return $this->countryCacheService->allPaginated();
+        } else {
+            return $this->countryCacheService->activeCountriesForOrigin($user->client->getDefaultCountry());
+        }
     }
 
     /**
