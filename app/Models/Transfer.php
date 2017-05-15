@@ -592,6 +592,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         return $this;
     }
 
+
     /**
      * @return string
      */
