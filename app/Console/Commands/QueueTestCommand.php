@@ -39,10 +39,10 @@ class QueueTestCommand extends Command
      */
     public function handle()
     {
-        // $user = User::find(11);
-        // $transfer = Transfer::find(58);
-        // $user->notify(new TransferMissingReceipt($transfer));
-        // die;
+//        $user = User::find(11);
+//        $transfer = Transfer::find(58);
+//        $user->notify(new TransferMissingReceipt($transfer));
+//        die;
 //        $client = Client::find(1);
 //        $targetTIme = $client->getTargetTime(8);
 //        die;
@@ -59,14 +59,15 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        // $this->UpdateAppNotification();
-        $this->manageActiveCountries();
+//        $this->UpdateAppNotification();
         $this->writeCountries();
         $this->writeBanks();
         $this->writeRates();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
         $this->writeOriginToDestinationCommissions();
+        $this->manageActiveCountries();
+
 
     }
 
@@ -120,6 +121,9 @@ class QueueTestCommand extends Command
         dispatch(new CommissionQueueJob($data));
 
         $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
+        dispatch(new CommissionQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/commissionsOriginSingapore.json'));
         dispatch(new CommissionQueueJob($data));
     }
 
@@ -190,10 +194,10 @@ class QueueTestCommand extends Command
 
     private function manageActiveCountries()
     {
-        $json[] = ['119' => ['NEPAL', 'SRI LANKA', 'THAILAND', 'PHILIPPINES', 'INDIA'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA']];
+        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA'], '91' => ['PHILIPPINES']];
 
         $redis = Redis::connection();
-        $origins = [13, 90, 119];
+        $origins = [13, 90, 119, 91];
         foreach ($origins as $o) {
             if(isset($json[0][$o])){
             $redis->lpush(redis_key('origin', $o, 'activeCountries'), $json[0][$o]);
