@@ -29,8 +29,8 @@ class CountryShowByLocationRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'latitude'  => 'required',
-            'longitude' => 'required',
+            'latitude'  => 'required|latitude',
+            'longitude' => 'required|longitude',
         ];
     }
 
