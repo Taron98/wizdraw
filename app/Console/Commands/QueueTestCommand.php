@@ -125,6 +125,9 @@ class QueueTestCommand extends Command
 
         $data = file_get_contents(database_path('cache/commissionsOriginSingapore.json'));
         dispatch(new CommissionQueueJob($data));
+
+        $data = file_get_contents(database_path('cache/commissionsOriginTaiwan.json'));
+        dispatch(new CommissionQueueJob($data));
     }
 
     private function writeIfsc()
@@ -194,7 +197,7 @@ class QueueTestCommand extends Command
 
     private function manageActiveCountries()
     {
-        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA'], '91' => ['PHILIPPINES']];
+        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES']];
 
         $redis = Redis::connection();
         $origins = [13, 90, 119, 91];
