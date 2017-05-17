@@ -11,6 +11,7 @@ use Wizdraw\Http\Requests\User\UserResetPasswordRequest;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Notifications\UserResetPassword;
+use Wizdraw\Services\ClientService;
 use Wizdraw\Services\UserService;
 
 /**
@@ -22,15 +23,19 @@ class UserController extends AbstractController
 
     /** @var  UserService */
     private $userService;
+    /** @var  ClientService */
+    private $clientService;
 
     /**
      * UserController constructor.
      *
      * @param UserService $userService
+     * @param ClientService $clientService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, ClientService $clientService)
     {
         $this->userService = $userService;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -193,8 +198,13 @@ class UserController extends AbstractController
     public function reset(UserResetPasswordRequest $request)
     {
         $email = $request->input('email');
-        $user = $this->userService->findByEmail($email);
-
+        $phone = $request->input('phone');
+        if($email){
+            $user = $this->userService->findByEmail($email);
+        }else{
+            $client = $this->clientService->findByPhone($phone);
+            $user = $client->user;
+        }
         if (is_null($user)) {
             $resInputs = ['email' => $email];
 
@@ -202,7 +212,8 @@ class UserController extends AbstractController
         }
 
         $this->userService->generateVerifyCode($user);
-        $user->notify(new UserResetPassword($email));
+        $user->client->notify(new UserResetPassword($email));
+        //$user->notify(new UserResetPassword($email));
         return $user;
     }
 

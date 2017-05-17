@@ -29,7 +29,8 @@ class UserResetPasswordRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required_without:phone',
+            'phone' => 'required_without:email'
         ];
     }
 
