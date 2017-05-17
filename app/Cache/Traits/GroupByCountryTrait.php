@@ -24,9 +24,9 @@ trait GroupByCountryTrait
             return $entity->getCountryId();
         });
 
-        $entitiesByOrigin = $entities->groupBy(function ($entity) {
-            return $entity->getOrigin();
-        });
+       // $entitiesByOrigin = $entities->groupBy(function ($entity) {
+       //     return $entity->getOrigin();
+       // });
 
         $entitiesByCountries->each(function (Collection $entitiesCountry, int $countryId) {
             $entitiesIds = $entitiesCountry->map(function (AbstractCacheEntity $entity) {
