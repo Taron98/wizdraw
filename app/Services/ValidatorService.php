@@ -71,7 +71,8 @@ class ValidatorService extends Validator
      */
     protected function validateLatitude($attribute, $value): bool
     {
-        return preg_match('/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d+$/', $value);
+        //return preg_match('/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d+$/', $value);
+        return preg_match('/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/', number_format((float)$value, 6, '.', ''));
     }
 
     /**
@@ -82,7 +83,8 @@ class ValidatorService extends Validator
      */
     protected function validateLongitude($attribute, $value): bool
     {
-        return preg_match('/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d+$/', $value);
+        //return preg_match('/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d+$/', $value);
+        return preg_match('/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/', number_format((float)$value, 6, '.', ''));
     }
 
 }

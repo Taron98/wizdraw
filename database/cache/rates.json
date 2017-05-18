@@ -78,5 +78,15 @@
     "id": "66",
     "country": "AUSTRIA",
     "rate": "2.2000"
+  },
+  {
+    "id": "67",
+    "country": "TAIWAN",
+    "rate" : "30.2084"
+  },
+  {
+    "id": "68",
+    "country": "SINGAPORE",
+    "rate": "1.3982"
   }
 ]

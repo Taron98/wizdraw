@@ -7,6 +7,7 @@ use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\CommissionCache;
 use Wizdraw\Cache\Traits\GroupByCountryTrait;
+use Wizdraw\Cache\Traits\GroupByOriginCountryTrait;
 
 /**
  * Class CommissionCacheService
@@ -14,9 +15,12 @@ use Wizdraw\Cache\Traits\GroupByCountryTrait;
  */
 class CommissionCacheService extends AbstractCacheService
 {
-    use GroupByCountryTrait;
+    use GroupByOriginCountryTrait;
 
     const INDEX_BY_COUNTRY_ID = 'commissions:country';
+
+    const INDEX_BY_ORIGIN_ID = 'commissions:origin';
+
     const INDEX_SORT_BY = ['BY' => 'commission:*->minRange', 'ALPHA' => false];
 
     /** @var string */
@@ -72,7 +76,8 @@ class CommissionCacheService extends AbstractCacheService
             ->setPercentage($stdJson->percentage)
             ->setConst($stdJson->const)
             ->setMinRange($stdJson->min_range)
-            ->setMaxRange($stdJson->max_range);
+            ->setMaxRange($stdJson->max_range)
+            ->setOrigin($stdJson->origin);
 
         return $entity;
     }

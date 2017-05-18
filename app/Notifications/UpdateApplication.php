@@ -21,15 +21,19 @@ class UpdateApplication extends Notification implements ShouldQueue
     use Queueable;
 
     protected $client;
+    protected $url;
 
     /**
      * UpdateApplication constructor.
      *
+     * @param $client
+     * @param $url
      */
 
-    public function __construct($client)
+    public function __construct($client, $url)
     {
         $this->client = $client;
+        $this->url = $url;
     }
 
     /**
@@ -53,6 +57,7 @@ class UpdateApplication extends Notification implements ShouldQueue
     {
         $attributes = [
             'senderName'        => $this->client->getFirstName(),
+            'url' => $this->url,
             ];
 
         $text = trans('sms.application_update', $attributes);

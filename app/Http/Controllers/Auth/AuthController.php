@@ -119,12 +119,22 @@ class AuthController extends AbstractController
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
         $phone = $request->only('phone')['phone'];
 
-        if ($this->userRepository->exists($request->only('email')) || $this->clientService->findByPhone($phone)) {
+        if ($this->userRepository->exists($request->only('email')) /*|| $this->clientService->findByPhone($phone)*/) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
+        if ($this->clientService->findByPhone($phone)) {
+            $client = $this->clientService->findByPhone($phone);
+            if($client->user){
+                return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
+            }
+        }
 
+        if(isset($client) && !is_null($client)){
+            $client = $this->clientService->update($clientAttrs, $client->id);
+        }else{
+            $client = $this->clientService->createClient($clientAttrs);
+        }
         /** @var Client $client */
-        $client = $this->clientService->createClient($clientAttrs);
         if (!$client instanceof Client) {
             return $this->respondWithError('could_not_create_client');
         }

@@ -169,4 +169,15 @@ class CountryCacheService extends AbstractCacheService
         return $this->find($countryId);
     }
 
+    public function activeCountriesForOrigin($origin)
+    {
+        $activeCountriesList = $this->redis->lrange(redis_key('origin', $origin, 'activeCountries'), 0, -1);
+        $activeCountries = [];
+        foreach ($activeCountriesList as $country){
+            array_push($activeCountries, $this->findByName($country));
+        }
+
+        return $activeCountries;
+    }
+
 }

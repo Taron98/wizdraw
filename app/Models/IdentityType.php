@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\IdentityType
  *
- * @property integer $id
+ * @property int $id
  * @property string $type
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class IdentityType extends AbstractModel

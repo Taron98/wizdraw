@@ -24,6 +24,9 @@ class CommissionCache extends AbstractCacheEntity
     /** @var  int */
     protected $maxRange;
 
+    /** @var  int */
+    protected $origin;
+
     /**
      * @return mixed
      */
@@ -120,6 +123,26 @@ class CommissionCache extends AbstractCacheEntity
     public function setMaxRange($maxRange): CommissionCache
     {
         $this->maxRange = (int)$maxRange;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
+    }
+
+    /**
+     * @param mixed $origin
+     *
+     * @return CommissionCache
+     */
+    public function setOrigin($origin): CommissionCache
+    {
+        $this->origin = $origin;
 
         return $this;
     }

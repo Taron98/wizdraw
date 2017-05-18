@@ -16,17 +16,17 @@ use Wizdraw\Services\Entities\FacebookUser;
 /**
  * Wizdraw\Models\User
  *
- * @property integer $id
- * @property integer $clientId
+ * @property int $id
+ * @property int $clientId
  * @property string $email
  * @property string $password
  * @property string $facebookId
  * @property string $facebookToken
  * @property \Carbon\Carbon $facebookTokenExpire
  * @property string $deviceId
- * @property integer $verifyCode
+ * @property int $verifyCode
  * @property \Carbon\Carbon $verifyExpire
- * @property boolean $isPending
+ * @property bool $isPending
  * @property \Carbon\Carbon $passwordChangedAt
  * @property \Carbon\Carbon $lastLoginAt
  * @property \Carbon\Carbon $createdAt
@@ -34,24 +34,22 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeviceId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePassword($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookToken($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereFacebookTokenExpire($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeviceId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereIsPending($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereLastLoginAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePasswordChangedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereVerifyCode($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereVerifyExpire($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereIsPending($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User wherePasswordChangedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereLastLoginAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class User extends AbstractModel implements
