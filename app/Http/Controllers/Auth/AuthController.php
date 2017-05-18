@@ -129,7 +129,7 @@ class AuthController extends AbstractController
             }
         }
 
-        if(!is_null($client)){
+        if(isset($client) && !is_null($client)){
             $client = $this->clientService->update($clientAttrs, $client->id);
         }else{
             $client = $this->clientService->createClient($clientAttrs);
