@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\FeedbackQuestion
  *
- * @property integer $id
+ * @property int $id
  * @property string $question
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Feedback[] $feedbacks
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class FeedbackQuestion extends AbstractModel

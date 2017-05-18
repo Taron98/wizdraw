@@ -15,7 +15,9 @@ use Wizdraw\Cache\Traits\GroupByCountryTrait;
  */
 class BankCacheService extends AbstractCacheService
 {
-    use GroupByCountryTrait;
+    use GroupByCountryTrait {
+        postSave as countryGroupTrait;
+    }
 
     const INDEX_BY_COUNTRY_ID = 'banks:country';
     const INDEX_SORT_BY = ['BY' => 'bank:*->name', 'ALPHA' => true];
@@ -148,11 +150,15 @@ class BankCacheService extends AbstractCacheService
         return (int)$this->redis->hget(self::INDEX_BY_NAME, ucwords_upper($name));
     }
 
+//    public function countryGroup()
+//    {
+//        return $this->countryGroupTrait();
+//    }
 
     protected function postSave(Collection $entities)
     {
         parent::postSave($entities);
-
+        $this->countryGroupTrait($entities);
         $bankNames = $entities->mapWithKeys(function (BankCache $bank) {
             return [
                 $bank->getName() => $bank->getId(),

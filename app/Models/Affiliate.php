@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\Affiliate
  *
- * @property integer $id
+ * @property int $id
  * @property string $code
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCode($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Affiliate extends AbstractModel

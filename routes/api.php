@@ -175,6 +175,11 @@ Route::group(['prefix' => 'v1/'], function () {
         // Country
         Route::group(['prefix' => 'country/'], function () {
 
+            Route::get('/active/' , [
+                'as' => 'country.active',
+                'uses' => 'CountryController@list'
+            ]);
+
             Route::get('/{id}/', [
                 'as'   => 'country.show',
                 'uses' => 'CountryController@show',
@@ -189,7 +194,6 @@ Route::group(['prefix' => 'v1/'], function () {
                 'as'   => 'country.branches',
                 'uses' => 'CountryController@branches',
             ]);
-
 
         });
 
@@ -262,6 +266,7 @@ Route::group(['prefix' => 'v1/'], function () {
             ]);
 
         });
+
 
     });
 

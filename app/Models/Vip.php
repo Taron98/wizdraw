@@ -8,21 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\Vip
  *
- * @property integer $id
- * @property integer $number
- * @property integer $credits
- * @property integer $clientId
+ * @property int $id
+ * @property int $number
+ * @property int $credits
+ * @property int $clientId
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCredits($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCredits($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Vip extends AbstractModel

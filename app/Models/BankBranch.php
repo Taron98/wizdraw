@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\BankBranch
  *
- * @property integer $id
- * @property integer $bankBranchId
+ * @property int $id
+ * @property int $bankBranchId
  * @property string $name
  * @property string $address
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereBankBranchId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereAddress($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereBankBranchId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankBranch whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class BankBranch extends AbstractModel
