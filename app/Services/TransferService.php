@@ -188,8 +188,10 @@ class TransferService extends AbstractService
         if($agency == "7-eleven"){
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-        }else{
+        }elseif ($agency == "Circle-K"){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
+        }else{
+            $branchesJson = json_decode(file_get_contents(database_path('cache/branchesWicStore.json')), true);
         }
         $branches = collect();
         foreach ($branchesJson as $branch) {
