@@ -34,6 +34,8 @@ class TransferCreateRequest extends AbstractRequest
             'receiver.firstName'  => 'required|min:1|max:70',
             'receiver.middleName' => 'min:1|max:70',
             'receiver.lastName'   => 'required|min:1|max:70',
+            'receiver.city'       => 'required_without:deposit|min:2|max:120',
+            'receiver.state'      => 'required_without:deposit|min:2|max:120',
 
             'receiverClientId'  => 'required|integer|exists:clients,id',
             'receiverCountryId' => 'required|integer|cacheExists:country',
@@ -49,8 +51,8 @@ class TransferCreateRequest extends AbstractRequest
             'typeId' => 'required|exists:transfer_types,id',
 
             'pickup'       => 'required_without:deposit|array',
-            'pickup.city'  => 'required_without:deposit|min:2|max:120',
-            'pickup.state' => 'required_without:deposit|min:2|max:120',
+            //'pickup.city'  => 'required_without:deposit|min:2|max:120',
+            //'pickup.state' => 'required_without:deposit|min:2|max:120',
 
             'deposit'                => 'required_without:pickup|array',
             'deposit.bankId'         => 'required_without:pickup|integer|cacheExists:bank',
@@ -108,10 +110,10 @@ class TransferCreateRequest extends AbstractRequest
      */
     public function getTransferType(): string
     {
-        if (is_array($this->input('pickup'))) {
-            $type = TransferType::TYPE_PICKUP_CASH;
-        } else {
+        if (is_array($this->input('deposit'))) {
             $type = TransferType::TYPE_DEPOSIT;
+        } else {
+            $type = TransferType::TYPE_PICKUP_CASH;
         }
 
         return $type;
