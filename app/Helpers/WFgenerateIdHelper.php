@@ -17,7 +17,7 @@ if (!function_exists('getWfId')) {
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"localhost/wic/html/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
+        curl_setopt($ch, CURLOPT_URL,"52.21.225.207/wic/html/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         // receive server response ...
