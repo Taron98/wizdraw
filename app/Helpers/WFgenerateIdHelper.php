@@ -26,8 +26,7 @@ if (!function_exists('getWfId')) {
         $server_output = curl_exec ($ch);
         $response = json_decode($server_output);
         curl_close ($ch);
+        return $response['response'];
     }
 
 }
-
-getWfId();
