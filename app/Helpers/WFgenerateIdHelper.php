@@ -17,7 +17,11 @@ if (!function_exists('getWfId')) {
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"52.21.225.207/wic/html/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
+        /* local host */
+        //curl_setopt($ch, CURLOPT_URL,"localhost/wic/html/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
+
+        /* wic test env */
+        curl_setopt($ch, CURLOPT_URL,"52.21.225.207/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         // receive server response ...
@@ -26,7 +30,7 @@ if (!function_exists('getWfId')) {
         $server_output = curl_exec ($ch);
         $response = json_decode($server_output);
         curl_close ($ch);
-        return $response['response'];
+        return $response->{'response'};
     }
 
 }
