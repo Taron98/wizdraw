@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 8/16/2017
- * Time: 16:28
- */
 
 namespace Wizdraw\Http\Requests\Client;
 
