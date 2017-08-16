@@ -29,11 +29,13 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property bool $isPending
  * @property \Carbon\Carbon $passwordChangedAt
  * @property \Carbon\Carbon $lastLoginAt
+ * @property int $appId
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereAppId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereClientId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
