@@ -40,6 +40,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property string $clientType
  * @property bool $didSetup
  * @property bool $isApproved
+ * @property bool $isChanged
  * @property int $affiliateId
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
@@ -56,6 +57,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property-read \Wizdraw\Models\Vip $vip
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsChanged($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereBirthDate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
@@ -113,6 +115,7 @@ class Client extends AbstractModel implements AuthorizableContract
         'did_setup',
         'is_approved',
         'affiliate_id',
+        'is_changed',
         'deleted_at',
     ];
 
@@ -656,6 +659,22 @@ class Client extends AbstractModel implements AuthorizableContract
     public function setAffiliateId($affiliateId)
     {
         $this->affiliateId = $affiliateId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isChanged()
+    {
+        return $this->isChanged;
+    }
+
+    /**
+     * @param bool $isChanged
+     */
+    public function setIsChanged($isChanged)
+    {
+        $this->isChanged = $isChanged;
     }
 
     /**
