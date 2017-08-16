@@ -31,9 +31,9 @@ class ChangeNameRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'firstName'         => 'min:1|max:70',
+            'firstName'         => 'required|min:1|max:70',
             'middleName'        => 'min:1|max:70',
-            'lastName'          => 'min:1|max:70',
+            'lastName'          => 'required|min:1|max:70',
             'receiverId'        => 'required|integer|exists:clients,id',
         ];
     }
