@@ -197,7 +197,7 @@ class QueueTestCommand extends Command
 
     private function manageActiveCountries()
     {
-        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA']];
+        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA', 'GEORGIA']];
 
         $redis = Redis::connection();
         $origins = [13, 90, 119, 91];
