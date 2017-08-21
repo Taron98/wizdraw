@@ -157,14 +157,14 @@ class CountryController extends AbstractController
         return $this->branchCacheService->findByBankId($id);
     }
 
+
     /**
-     * @param NoParamRequest $request
+     * @param int $countryId
      *
      * @return array
      */
-    public function stores(NoParamRequest $request)
+    public function stores(int $countryId)
     {
-        $countryId = $request->input('countryId');
         return get_country_stores($countryId);
     }
 }
