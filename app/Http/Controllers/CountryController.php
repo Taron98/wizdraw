@@ -158,11 +158,11 @@ class CountryController extends AbstractController
     }
 
     /**
-     * @param CountryStoresRequest $request
+     * @param NoParamRequest $request
      *
      * @return array
      */
-    public function stores(CountryStoresRequest $request)
+    public function stores(NoParamRequest $request)
     {
         $countryId = $request->input('countryId');
         return get_country_stores($countryId);
