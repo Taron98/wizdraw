@@ -109,6 +109,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'latitude',
         'longitude',
         'note',
+        'status_id',
     ];
 
     /**
@@ -120,7 +121,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'client_id',
         'receiver_client_id',
         'type_id',
-        'status_id',
         'receipt_id',
         'latitude',
         'longitude',
