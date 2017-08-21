@@ -10,6 +10,7 @@ use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
+use Wizdraw\Http\Requests\Country\CountryStoresRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
 
 /**
@@ -156,4 +157,14 @@ class CountryController extends AbstractController
         return $this->branchCacheService->findByBankId($id);
     }
 
+    /**
+     * @param CountryStoresRequest $request
+     *
+     * @return array
+     */
+    public function stores(CountryStoresRequest $request)
+    {
+        $countryId = $request->input('countryId');
+        return get_country_stores($countryId);
+    }
 }

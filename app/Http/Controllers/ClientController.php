@@ -161,7 +161,6 @@ class ClientController extends AbstractController
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
             'profileImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_PROFILE, $clientId),
-            'storesAvailable' => get_country_stores($client->defaultCountryId),
         ]));
     }
 

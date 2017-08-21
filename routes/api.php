@@ -195,6 +195,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@branches',
             ]);
 
+            Route::get('/stores/{countryId}', [
+                'as'   => 'country.stores',
+                'uses' => 'CountryController@stores',
+            ]);
+
         });
 
         // Transfer

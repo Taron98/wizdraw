@@ -101,7 +101,6 @@ class AuthController extends AbstractController
             'hasGroup'    => $hasGroup,
             'canTransfer' => $user->client->canTransfer(),
             'noPassword'  => $user->hasNoPassword(),
-            'storesAvailable' => get_country_stores($user->client->defaultCountryId),
         ], $user->toArray()));
     }
 
