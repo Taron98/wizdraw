@@ -6,6 +6,7 @@ use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\RateCache;
+use Wizdraw\Http\Requests\NoParamRequest;
 
 /**
  * Class RateCacheService
@@ -65,4 +66,15 @@ class RateCacheService extends AbstractCacheService
         return $entity;
     }
 
+    /**
+     * @param NoParamRequest $request
+     */
+    public function setKeyPrefix(NoParamRequest $request)
+    {
+        $client = $request->user()->client;
+        $country = $client->getAttribute('default_country_id');
+        if($country == 13){
+            $this->keyPrefix = 'rateNis';
+        }
+    }
 }

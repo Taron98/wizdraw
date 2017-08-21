@@ -80,6 +80,8 @@ class CountryController extends AbstractController
             return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND, $resInputs);
         }
 
+        /* get NIS rates if necessary for request made from israel application */
+        $this->rateCacheService->setKeyPrefix($request);
         $rate = $this->rateCacheService->find($country->getId());
         $country->setRate($rate);
 
