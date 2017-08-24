@@ -6,7 +6,7 @@ use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\RateCache;
-use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
  * Class RateCacheService
@@ -67,9 +67,9 @@ class RateCacheService extends AbstractCacheService
     }
 
     /**
-     * @param NoParamRequest $request
+     * @param AbstractRequest $request
      */
-    public function setKeyPrefix(NoParamRequest $request)
+    public function setKeyPrefix(AbstractRequest $request)
     {
         $client = $request->user()->client;
         $country = $client->getAttribute('default_country_id');

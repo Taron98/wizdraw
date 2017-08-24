@@ -125,6 +125,8 @@ class TransferController extends AbstractController
         $receiverCountryId = $request->input('receiverCountryId');
         $paymentAgency = $request->input('paymentAgency');
 
+        /** get NIS rates if necessary for request made from israel application */
+        $this->rateCacheService->setKeyPrefix($request);
         /** @var RateCache $rate */
         $rate = $this->rateCacheService->find($receiverCountryId);
 
