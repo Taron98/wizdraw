@@ -74,6 +74,13 @@ class CountryCacheService extends AbstractCacheService
         if (!empty($stdJson->timezone)) {
             $entity->setTimezoneOffset($stdJson->timezone);
         }
+        if(!empty($stdJson->is_pickup)) {
+            $entity->setIsPickup($stdJson->is_pickup);
+        }
+        if(!empty($stdJson->is_deposit)) {
+        $entity->setIsDeposit($stdJson->is_deposit);
+        }
+
 
         return $entity;
     }

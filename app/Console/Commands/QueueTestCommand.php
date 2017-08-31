@@ -59,7 +59,6 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-//        $this->UpdateAppNotification();
         $this->writeCountries();
         $this->writeBanks();
         $this->writeRates();
@@ -145,55 +144,7 @@ class QueueTestCommand extends Command
         dispatch(new BrancheQueueJob($data));
     }
 
-    /**
-     * this function send SMS to all the clients in the application to inform them there's new version of the application.
-     * #### IMPORTANT ####
-     * Instructions: change the 'strict' configuration under \config\database.php to false! (instead of true value), the groupBy query won't
-     * work since the server is using 'ONLY_FULL_GROUP_BY' mode and we need to shut it down.
-     * my suggestion is to run this on the pre-prod server, just export the production DB to the pre-prod server and run it over there.
-     * Don't forget to change the strict value back to true again after you finished.
-     */
-    private function UpdateAppNotification()
-    {
 
-        $Clients = DB::table('clients')
-            ->join('users', 'clients.id', '=', 'users.client_id')
-            ->select('clients.id', 'first_name', 'last_name', 'phone')
-            ->whereNotNull('phone')
-            ->groupBy('users.client_id')
-            ->get();
-
-        //$clients = Client::hydrate($Clients->toArray());
-        $url = 'https://play.google.com/store/apps/details?id=com.ionicframework.wicapp652054';
-        $tinyUrl = createTinyUrl($url);
-        $i = 0;
-        $ids = [];
-        $phones = [];
-        foreach ($Clients as $client) {
-            $myClient = new Client;
-            $myClient->id = $client->id;
-            $myClient->phone = $client->phone;
-            $myClient->firstName = $client->first_name;
-            $myClient->lastName = $client->last_name;
-            $myClient->notify(new UpdateApplication($myClient, $tinyUrl));
-            $i++;
-            array_push($ids, $client->id);
-            array_push($phones, $client->phone);
-        }
-
-        Log::info(json_encode([
-            'UpdateAppNotification' => 'finish sending notification to ' . $i . ' clients',
-            'Phones'                => $phones,
-            'DB IDs'                => $ids,
-        ]));
-    }
-
-    function createTinyUrl($strURL)
-    {
-        $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=" . $strURL);
-
-        return $tinyurl;
-    }
 
     private function manageActiveCountries()
     {

@@ -372,4 +372,17 @@ class TransferController extends AbstractController
         return $this->respond($lastTransfer);
     }
 
+    /**
+     * @param $defaultCountryId
+     *
+     * @return string
+     */
+    public function limit($defaultCountryId)
+    {
+        $limit = $this->transferService->getLimit($defaultCountryId);
+        if (is_null($limit) || sizeof($limit) === 0) {
+            return $this->respondWithError('limit_not_found', Response::HTTP_NOT_FOUND);
+        }
+        return $this->respond(['limit' => $limit]);
+    }
 }

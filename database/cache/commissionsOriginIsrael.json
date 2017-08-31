@@ -628,5 +628,65 @@
     "min_range": "9001",
     "max_range": "10000",
     "origin": 13
+  },
+  {
+    "id": "2075",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13
+  },
+  {
+    "id": "2076",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13
+  },
+  {
+    "id": "2077",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13
+  },
+  {
+    "id": "2078",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13
+  },
+  {
+    "id": "525",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "7",
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13
+  },
+  {
+    "id": "526",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "10",
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13
   }
 ]
