@@ -76,5 +76,8 @@ class RateCacheService extends AbstractCacheService
         if($country == 13){
             $this->keyPrefix = 'rateNis';
         }
+        elseif($country == 119){
+            $this->keyPrefix = 'rateTwd';
+        }
     }
 }
