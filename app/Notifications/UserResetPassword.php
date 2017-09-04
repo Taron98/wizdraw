@@ -59,7 +59,7 @@ class UserResetPassword extends Notification implements ShouldQueue
         $subject = trans('passwords.reset');
         $attributes = [
             'firstName'  => $notifiable->getFirstName(),
-            'verifyCode' => $notifiable->user->getVerifyCode(),
+            'verifyCode' => $notifiable->user->verifyCode,
             'expire'     => $this->expire,
         ];
 
@@ -72,7 +72,7 @@ class UserResetPassword extends Notification implements ShouldQueue
     {
         $attributes = [
             'firstName'  => $notifiable->getFirstName(),
-            'verifyCode' => $notifiable->user->getVerifyCode(),
+            'verifyCode' => $notifiable->user->verifyCode,
             'expire'     => $this->expire,
         ];
 

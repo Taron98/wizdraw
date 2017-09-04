@@ -260,6 +260,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@limit',
             ]);
 
+            Route::post('/usedPaymentAgency/', [
+                'as'   => 'transfer.usedPaymentAgency',
+                'uses' => 'TransferController@alreadyUsedPaymentAgency',
+            ]);
+
         });
 
         // Feedback

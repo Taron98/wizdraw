@@ -13,6 +13,7 @@ use Wizdraw\Http\Requests\Transfer\TransferCreateRequest;
 use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
+use Wizdraw\Http\Requests\Transfer\TransferUsedAgencyRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
@@ -370,6 +371,26 @@ class TransferController extends AbstractController
         }
 
         return $this->respond($lastTransfer);
+    }
+
+    /**
+     * @param TransferUsedAgencyRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function alreadyUsedPaymentAgency(TransferUsedAgencyRequest $request)
+    {
+        $paymentAgency = $request->input('paymentAgency');
+        $client = $request->user()->client;
+        $transfers = $client->transfers;
+        foreach ($transfers as $transfer){
+            $transferCheck = collect($transfer->toArray());
+            $usedAgency = $transferCheck->contains($paymentAgency);
+            if($usedAgency){
+               return $this->respond([$paymentAgency => true]);
+            }
+        }
+        return $this->respondWithError('agency_not_found', Response::HTTP_NOT_FOUND);
     }
 
     /**
