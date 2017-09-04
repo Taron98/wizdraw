@@ -3,6 +3,7 @@
 namespace Wizdraw\Services;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Models\AbstractModel;
 use Wizdraw\Models\BankAccount;
@@ -188,8 +189,10 @@ class TransferService extends AbstractService
         if($agency == "7-eleven"){
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-        }else{
+        }elseif ($agency == "Circle-K"){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
+        }else{
+            $branchesJson = json_decode(file_get_contents(database_path('cache/branchesWicStore.json')), true);
         }
         $branches = collect();
         foreach ($branchesJson as $branch) {
@@ -229,6 +232,18 @@ class TransferService extends AbstractService
         $miles = $dist * 60 * 1.1515;
 
         return ($miles * 1.609344);
+    }
+
+    /**
+     * @param $defaultCountryId
+     *
+     * @return string
+     */
+    public function getLimit($defaultCountryId)
+    {
+        $redis = Redis::connection();
+        return $redis->lrange(redis_key('origin',$defaultCountryId,'amountLimits'), 0, -1);
+
     }
 
 }

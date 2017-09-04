@@ -126,6 +126,8 @@ class TransferController extends AbstractController
         $receiverCountryId = $request->input('receiverCountryId');
         $paymentAgency = $request->input('paymentAgency');
 
+        /** get NIS rates if necessary for request made from israel application */
+        $this->rateCacheService->setKeyPrefix($request);
         /** @var RateCache $rate */
         $rate = $this->rateCacheService->find($receiverCountryId);
 
@@ -389,5 +391,19 @@ class TransferController extends AbstractController
             }
         }
         return $this->respondWithError('agency_not_found', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param $defaultCountryId
+     *
+     * @return string
+     */
+    public function limit($defaultCountryId)
+    {
+        $limit = $this->transferService->getLimit($defaultCountryId);
+        if (is_null($limit) || sizeof($limit) === 0) {
+            return $this->respondWithError('limit_not_found', Response::HTTP_NOT_FOUND);
+        }
+        return $this->respond(['limit' => $limit]);
     }
 }
