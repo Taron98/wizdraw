@@ -196,7 +196,9 @@
     "country_code_3": "GEO",
     "phone_code": "995",
     "is_active": 0,
-    "timezone": 4
+    "timezone": 4,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "103",
@@ -246,7 +248,9 @@
     "country_code_3": "IND",
     "phone_code": "91",
     "is_active": 1,
-    "timezone": 5
+    "timezone": 5,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "80",
@@ -260,7 +264,7 @@
   {
     "id": "13",
     "description": "ISRAEL",
-    "coin_id": "NIS",
+    "coin_id": "ILS",
     "country_code_2": "IL",
     "country_code_3": "ISR",
     "phone_code": "972",
@@ -394,7 +398,9 @@
     "country_code_3": "NPL",
     "phone_code": "977",
     "is_active": 1,
-    "timezone": 5
+    "timezone": 5,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "81",
@@ -444,7 +450,9 @@
     "country_code_3": "PHL",
     "phone_code": "63",
     "is_active": 1,
-    "timezone": 8
+    "timezone": 8,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "92",
@@ -533,7 +541,9 @@
     "phone_code": "94",
     "country_code_2": "LK",
     "is_active": 0,
-    "timezone": 5
+    "timezone": 5,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "84",
@@ -573,7 +583,9 @@
     "country_code_3": "THA",
     "phone_code": "66",
     "is_active": 1,
-    "timezone": 7
+    "timezone": 7,
+    "is_pickup": 0,
+    "is_deposit": 1
   },
   {
     "id": "97",

@@ -180,9 +180,9 @@ Route::group(['prefix' => 'v1/'], function () {
         // Country
         Route::group(['prefix' => 'country/'], function () {
 
-            Route::get('/active/' , [
-                'as' => 'country.active',
-                'uses' => 'CountryController@list'
+            Route::get('/active/', [
+                'as'   => 'country.active',
+                'uses' => 'CountryController@list',
             ]);
 
             Route::get('/{id}/', [
@@ -198,6 +198,11 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/bank/{bankId}', [
                 'as'   => 'country.branches',
                 'uses' => 'CountryController@branches',
+            ]);
+
+            Route::get('/stores/{countryId}', [
+                'as'   => 'country.stores',
+                'uses' => 'CountryController@stores',
             ]);
 
         });
@@ -255,6 +260,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@feedback',
             ]);
 
+            Route::get('/limit/{countryId}/', [
+                'as'   => 'transfer.limit',
+                'uses' => 'TransferController@limit',
+            ]);
+
             Route::post('/usedPaymentAgency/', [
                 'as'   => 'transfer.usedPaymentAgency',
                 'uses' => 'TransferController@alreadyUsedPaymentAgency',
@@ -271,15 +281,14 @@ Route::group(['prefix' => 'v1/'], function () {
             ]);
 
             Route::post('/', [
-                'as' => 'feedback.create',
-                'uses' => 'FeedbackController@create'
+                'as'   => 'feedback.create',
+                'uses' => 'FeedbackController@create',
             ]);
 
         });
 
 
     });
-
 
 
 });
