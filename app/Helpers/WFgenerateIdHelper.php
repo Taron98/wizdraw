@@ -21,9 +21,9 @@ if (!function_exists('getWfId')) {
         //curl_setopt($ch, CURLOPT_URL,"localhost/wic/html/transfers/new_wic_files/Server/initTransactionID.php?XDEBUG_SESSION_START=PHPSTORM");
 
         /* wic test env */
-        //curl_setopt($ch, CURLOPT_URL,"52.21.225.207/transfers/new_wic_files/Server/initTransactionID.php");
+        curl_setopt($ch, CURLOPT_URL,"52.21.225.207/transfers/new_wic_files/Server/initTransactionID.php");
         /* wic production env */
-        curl_setopt($ch, CURLOPT_URL,"54.86.248.41/transfers/new_wic_files/Server/initTransactionID.php");
+        //curl_setopt($ch, CURLOPT_URL,"54.86.248.41/transfers/new_wic_files/Server/initTransactionID.php");
 
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);

@@ -654,6 +654,8 @@
     "country_code_3": "TWN",
     "phone_code": "886",
     "is_active": 1,
-    "timezone": 8
+    "timezone": 8,
+    "is_pickup": 1,
+    "is_deposit": 0
   }
 ]
