@@ -125,6 +125,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@updateVips',
             ]);
 
+            Route::post('/changename/', [
+                'as'   => 'client.changename',
+                'uses' => 'ClientController@changeName',
+            ]);
+
         });
 
         // Group
