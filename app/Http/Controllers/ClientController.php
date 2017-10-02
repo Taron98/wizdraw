@@ -258,6 +258,14 @@ class ClientController extends AbstractController
     public function changeName(ChangeNameRequest $request)
     {
         $receiver = $this->clientService->find($request->input('receiverId'));
+        $receiverTransfers = $receiver->receivedTransfers()->get()->toArray();
+        $collection = collect($receiverTransfers);
+
+        /* if receiver already received one or more transactions and these transactions already payed (posted or confirmed) don't change name */
+        if(sizeof($receiverTransfers) > 0 && ($collection->contains('statusId', 8) || $collection->contains('statusId', 13))){
+                return $this->respondWithError('receiver_has_transfers', Response::HTTP_NOT_MODIFIED);
+        }
+
         $inputs = $request->inputs();
         $inputs['is_changed'] = 1;
         $receiver = $this->clientService->update($inputs, $receiver->getId());
