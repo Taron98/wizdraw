@@ -5,6 +5,7 @@ namespace Wizdraw\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Wizdraw\Http\Requests\Client\ChangeNameRequest;
 use Wizdraw\Http\Requests\Client\ClientPhoneRequest;
 use Wizdraw\Http\Requests\Client\ClientUpdateRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
@@ -246,4 +247,28 @@ class ClientController extends AbstractController
         return $affiliate;
     }
 
+
+    /**
+     * Change Receiver name request
+     *
+     * @param ChangeNameRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function changeName(ChangeNameRequest $request)
+    {
+        $receiver = $this->clientService->find($request->input('receiverId'));
+        $receiverTransfers = $receiver->receivedTransfers()->get()->toArray();
+        $collection = collect($receiverTransfers);
+
+        /* if receiver already received one or more transactions and these transactions already payed (posted or confirmed) don't change name */
+        if(sizeof($receiverTransfers) > 0 && ($collection->contains('statusId', 8) || $collection->contains('statusId', 13))){
+                return $this->respondWithError('receiver_has_transfers', Response::HTTP_NOT_MODIFIED);
+        }
+
+        $inputs = $request->inputs();
+        $inputs['is_changed'] = 1;
+        $receiver = $this->clientService->update($inputs, $receiver->getId());
+        return $this->respond($receiver);
+    }
 }

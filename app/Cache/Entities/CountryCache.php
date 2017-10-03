@@ -40,6 +40,12 @@ class CountryCache extends AbstractCacheEntity
     /** @var  bool */
     protected $isActive = false;
 
+    /** @var  int */
+    protected $isPickup;
+
+    /** @var  int */
+    protected $isDeposit;
+
     /**
      * @return string
      */
@@ -218,6 +224,38 @@ class CountryCache extends AbstractCacheEntity
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function isDeposit()
+    {
+        return $this->isDeposit;
+    }
+
+    /**
+     * @param int $isDeposit
+     */
+    public function setIsDeposit(int $isDeposit)
+    {
+        $this->isDeposit = $isDeposit;
+    }
+
+    /**
+     * @return int
+     */
+    public function isPickup()
+    {
+        return $this->isPickup;
+    }
+
+    /**
+     * @param int $isPickup
+     */
+    public function setIsPickup(int $isPickup)
+    {
+        $this->isPickup = $isPickup;
     }
 
     /**

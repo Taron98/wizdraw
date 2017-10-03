@@ -10,6 +10,7 @@ use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
+use Wizdraw\Http\Requests\Country\CountryStoresRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
 
 /**
@@ -80,6 +81,8 @@ class CountryController extends AbstractController
             return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND, $resInputs);
         }
 
+        /* get NIS rates if necessary for request made from israel application */
+        $this->rateCacheService->setKeyPrefix($request);
         $rate = $this->rateCacheService->find($country->getId());
         $country->setRate($rate);
 
@@ -154,4 +157,14 @@ class CountryController extends AbstractController
         return $this->branchCacheService->findByBankId($id);
     }
 
+
+    /**
+     * @param int $countryId
+     *
+     * @return array
+     */
+    public function stores(int $countryId)
+    {
+        return get_country_stores($countryId);
+    }
 }

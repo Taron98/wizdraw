@@ -59,7 +59,8 @@ class ClientService extends AbstractService
             if (is_null($clientModel)) {
                 $clientModel = $this->repository->create($client);
             } else {
-                $clientModel = $this->repository->update($client, $clientModel->getId());
+                /* This situation is not longer available, receivers names now updating through change name endpoint */
+               // $clientModel = $this->repository->update($client, $clientModel->getId());
             }
 
             $clientModels->push($clientModel);
