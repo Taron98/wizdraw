@@ -85,7 +85,13 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'total_amount',
         'receiver_amount',
         'nearby_branch',
+        'qr_code_url',
     ];
+
+    public function getQrCodeUrlAttribute()
+    {
+        return $this->paymentAgency . '/' . $this->transactionNumber . '.jpg';
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -132,11 +138,11 @@ class Transfer extends AbstractModel implements AuthorizableContract
      * @var array
      */
     protected $casts = [
-        'amount'     => 'real',
+        'amount' => 'real',
         'commission' => 'real',
-        'rate'       => 'real',
-        'latitude'   => 'real',
-        'longitude'  => 'real',
+        'rate' => 'real',
+        'latitude' => 'real',
+        'longitude' => 'real',
     ];
 
     /**
@@ -245,7 +251,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     public function getTotalAmountAttribute()
     {
-        return $this->attributes[ 'amount' ] + $this->attributes[ 'commission' ];
+        return $this->attributes['amount'] + $this->attributes['commission'];
     }
 
     /**
@@ -255,7 +261,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     public function getReceiverAmountAttribute()
     {
-        return $this->attributes[ 'amount' ] * $this->attributes[ 'rate' ];
+        return $this->attributes['amount'] * $this->attributes['rate'];
     }
 
     /**
@@ -265,7 +271,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     public function setLatitudeAttribute($value)
     {
-        $this->attributes[ 'latitude' ] = bcdiv($value, 1, 6);
+        $this->attributes['latitude'] = bcdiv($value, 1, 6);
     }
 
     /**
@@ -275,7 +281,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
      */
     public function setLongitudeAttribute($value)
     {
-        $this->attributes[ 'longitude' ] = bcdiv($value, 1, 6);
+        $this->attributes['longitude'] = bcdiv($value, 1, 6);
     }
 
     /**
