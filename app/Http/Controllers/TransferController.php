@@ -187,6 +187,8 @@ class TransferController extends AbstractController
         $qr = ['result' => false, 'qr' => ''];
         if($paymentAgency == 'circle-k'){
             $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
+        }else if($paymentAgency == 'pay-to-agent'){
+            $qr = $this->fileService->uploadQrCodeTaiwan($transfer->getAmount(), $transfer->getCommission(), $transfer->getTransactionNumber());
         }
 
         /** @var Transfer $transfer */
