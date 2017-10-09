@@ -90,7 +90,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
 
     public function getQrCodeUrlAttribute()
     {
-        $type = null;
+        $type = '';
         switch ($this->paymentAgency) {
             case 'wicstore':
                 break;
@@ -102,7 +102,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
                 break;
         }
 
-        return ($type != null) ? $this->paymentAgency . '/' . $this->transactionNumber . '.jpg' : $type;
+        return ($type != '') ? $type . '/' . $this->transactionNumber . '.jpg' : $type;
     }
 
     /**
