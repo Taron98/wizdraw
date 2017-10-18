@@ -21,5 +21,4 @@
 * **php artisan db:seed**
 * **php artisan wiz:cache:test**
 * **php artisan wiz:cache:transaction:limit**
-* **php artisan wiz:cache:update:app**
 * **composer dump-autoload**
