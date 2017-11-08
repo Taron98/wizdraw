@@ -3,29 +3,27 @@
 namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
-
+use Illuminate\Support\Facades\Redis;
 
 class CommissionAndActiveCommand extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'wiz:cache:commission:active';
+    protected $signature = 'wiz:cache:commission';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Cache tables queue tester';
+    protected $description = 'Cache commissions';
 
     /**
-     * Execute the console command
+     * Execute the console command.
      *
      * @return mixed
      */
@@ -33,9 +31,7 @@ class CommissionAndActiveCommand extends Command
     {
         $this->writeOriginToDestinationCommissions();
         $this->manageActiveCountries();
-
     }
-
 
     private function writeOriginToDestinationCommissions()
     {
@@ -60,12 +56,10 @@ class CommissionAndActiveCommand extends Command
         $redis = Redis::connection();
         $origins = [13, 90, 119, 91];
         foreach ($origins as $o) {
-            if(isset($json[0][$o])){
+            if (isset($json[0][$o])) {
                 $redis->lpush(redis_key('origin', $o, 'activeCountries'), $json[0][$o]);
                 //$values = Redis::command('hset', ['origin:', 5, 10]);
             }
         }
     }
-
-
 }

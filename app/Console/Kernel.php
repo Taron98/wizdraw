@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\QueueTestCommand::class,
         Commands\TransactionLimitCommand::class,
-        Commands\UpdateAppNotificationCommand::class
+        Commands\UpdateAppNotificationCommand::class,
+        Commands\CommissionAndActiveCommand::class
     ];
 
     /**
