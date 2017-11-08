@@ -4,11 +4,7 @@ namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
-use Wizdraw\Cache\Jobs\BankQueueJob;
-use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
-use Wizdraw\Cache\Jobs\CountryQueueJob;
-use Wizdraw\Cache\Jobs\RateQueueJob;
 
 
 class CommissionAndActiveCommand extends Command
