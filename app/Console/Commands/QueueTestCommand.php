@@ -59,9 +59,9 @@ class QueueTestCommand extends Command
 //        // else
 //        // $next = $next
 
-        $this->writeCountries();
+        /*$this->writeCountries();
         $this->writeBanks();
-        $this->writeRates();
+        $this->writeRates();*/
 //        $this->writeCommissions();
 //        $this->writeIfsc();
         $this->writeOriginToDestinationCommissions();
