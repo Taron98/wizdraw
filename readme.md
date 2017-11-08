@@ -20,5 +20,6 @@
 * **php artisan migrate**
 * **php artisan db:seed**
 * **php artisan wiz:cache:test**
+* **php artisan wiz:cache:commission:active**
 * **php artisan wiz:cache:transaction:limit**
 * **composer dump-autoload**
