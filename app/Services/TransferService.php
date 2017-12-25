@@ -82,10 +82,10 @@ class TransferService extends AbstractService
         BankAccount $bankAccount = null,
         array $attributes = []
     ) {
-        if($attributes['payment_agency'] == '7-eleven'){
-            $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
-        }else{
+        if($attributes['payment_agency'] == 'circle-k'){
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
+        }else{
+            $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
         }
 
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
