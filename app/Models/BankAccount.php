@@ -11,23 +11,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property int $bankId
- * @property int $bankBranchId
+ * @property int|null $bankBranchId
  * @property int $clientId
- * @property string $accountNumber
+ * @property string|null $accountNumber
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
- * @property-read \Wizdraw\Models\BankBranch $bankBranch
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
+ * @property-read \Wizdraw\Models\BankBranch|null $bankBranch
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereAccountNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereBankBranchId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereBankId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereAccountNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereBankBranchId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereBankId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\BankAccount whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\BankAccount withoutTrashed()
  * @mixin \Eloquent
  */
 class BankAccount extends AbstractModel
