@@ -11,14 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $question
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Feedback[] $feedbacks
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion withoutTrashed()
  * @mixin \Eloquent
  */
 class FeedbackQuestion extends AbstractModel
