@@ -191,6 +191,9 @@ class TransferController extends AbstractController
         if ($paymentAgency == '7-eleven') {
             $qr['result'] = true ;
         }
+        if($paymentAgency == 'pay-to-agent'){
+            $qr = $this->fileService->uploadQrPayToAgent($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
+        }
         /** @var Transfer $transfer */
         $user->notify(
             (new TransferMissingReceipt($transfer))
