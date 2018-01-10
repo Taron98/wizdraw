@@ -68,7 +68,7 @@ if (!function_exists('generate_qr_code_pay_to_agent')) {
     function generate_qr_code_pay_to_agent($wf,$amount)
     {
 
-        $qr = 'amount:' . $amount . 'transaction_id:' . $wf;
+        $qr = 'amount:' . $amount . 'transaction id:' . $wf;
 
         $type = 'png';
 
