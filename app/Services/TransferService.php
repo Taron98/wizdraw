@@ -84,8 +84,12 @@ class TransferService extends AbstractService
     ) {
         if($attributes['payment_agency'] == 'circle-k'){
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
-        }else{
+        }elseif($attributes['payment_agency'] == '7-eleven'){
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
+        }elseif($attributes['payment_agency'] == 'pay-to-agent'){
+            $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT;
+        } else{
+            $transferStatus = TransferStatus::STATUS_PENDING;
         }
 
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
