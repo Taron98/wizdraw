@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TransferStatus extends AbstractModel
 {
     use SoftDeletes;
-//
+
     const STATUS_ABORTED = 'ABORTED';
     const STATUS_POSTED = 'Posted';
     const STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN = 'Pending for Payment at 7-Eleven';
