@@ -38,6 +38,7 @@ class TransferStatus extends AbstractModel
     const STATUS_POSTED = 'Posted';
     const STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN = 'Pending for Payment at 7-Eleven';
     const STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K = 'Pending for Payment at Circle-K';
+    const STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT = 'Pending for Payment at Pay-To-Agent';
     const STATUS_WAIT_FOR_PROCESS = 'WAIT FOR PROCESS';
     const STATUS_ON_HOLD = 'On hold';
     const STATUS_CHECK_DOCUMENTS = 'CHECK DOCUMENTS';
