@@ -21,6 +21,9 @@ use Wizdraw\Repositories\TransferRepository;
 class TransferService extends AbstractService
 {
     const MAX_MONTHLY_TRANSFER = 8000;
+    const AGENCY_7_ELEVEN = '7-eleven';
+    const AGENCY_CIRCLE_K = 'Circle-K';
+    const AGENCY_WIC_STORE = 'Wic-Store';
 
     /** @var TransferReceiptService */
     protected $transferReceiptService;
@@ -190,13 +193,15 @@ class TransferService extends AbstractService
      */
     public function nearby(float $latitude, float $longitude, $agency)
     {
-        if($agency == "7-eleven"){
+        if($agency == self::AGENCY_7_ELEVEN){
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-        }elseif ($agency == "Circle-K"){
+        }elseif ($agency == self::AGENCY_CIRCLE_K){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
-        }else{
+        }elseif($agency == self::AGENCY_WIC_STORE){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesWicStore.json')), true);
+        }else{
+            $branchesJson = json_decode(file_get_contents(database_path('cache/branchesPayToAgent.json')), true);
         }
         $branches = collect();
         foreach ($branchesJson as $branch) {
