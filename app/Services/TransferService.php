@@ -189,12 +189,12 @@ class TransferService extends AbstractService
      */
     public function nearby(float $latitude, float $longitude, $agency)
     {
-        if($agency == AGENCY_7_ELEVEN){
+        if($agency == self::AGENCY_7_ELEVEN){
         // todo: this solution is hardcoded for the 1st version
         $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-        }elseif ($agency == AGENCY_CIRCLE_K){
+        }elseif ($agency == self::AGENCY_CIRCLE_K){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
-        }elseif($agency == AGENCY_WIC_STORE){
+        }elseif($agency == self::AGENCY_WIC_STORE){
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesWicStore.json')), true);
         }else{
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesPayToAgent.json')), true);
