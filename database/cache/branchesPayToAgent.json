@@ -1,0 +1,21 @@
+[
+  {
+    "id": "1486",
+    "branch_name": "Rudson Aquino",
+    "address": "333 Keelung Road",
+    "country": "Taiwan",
+    "city": "Manila",
+    "start_mid_week_hour": "08:00",
+    "end_mid_week_hour": "19:00",
+    "start_friday_hour": "08:00",
+    "end_friday_hour": "14:00",
+    "start_sat_hour": "",
+    "end_sat_hour": "",
+    "phone": "+639067726254",
+    "latitude": "25.065988",
+    "longitude": "121.661749",
+    "created_at": "0000-00-00 00:00:00",
+    "updated_at": "0000-00-00 00:00:00",
+    "deleted_at": "0000-00-00 00:00:00"
+  }
+]
