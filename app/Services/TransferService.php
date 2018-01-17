@@ -22,8 +22,8 @@ class TransferService extends AbstractService
 {
     const MAX_MONTHLY_TRANSFER = 8000;
     const AGENCY_7_ELEVEN = '7-eleven';
-    const AGENCY_CIRCLE_K = 'Circle-K';
-    const AGENCY_WIC_STORE = 'Wic-Store';
+    const AGENCY_CIRCLE_K = 'circle-k';
+    const AGENCY_WIC_STORE = 'wic-store';
 
     /** @var TransferReceiptService */
     protected $transferReceiptService;
