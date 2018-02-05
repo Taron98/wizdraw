@@ -202,6 +202,7 @@ class UserController extends AbstractController
         if($email){
             $user = $this->userService->findByEmail($email);
         }else{
+            $phone = substr($phone, 0, 1) == '+' ?  $phone : '+' . $phone;
             $client = $this->clientService->findByPhone($phone);
             $user = $client->user;
         }
