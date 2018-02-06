@@ -65,10 +65,10 @@ if (!function_exists('generate_qr_code_pay_to_agent')) {
      *
      * @return mixed
      */
-    function generate_qr_code_pay_to_agent($wf,$amount)
+    function generate_qr_code_pay_to_agent($wf,$amount,$date,$senderFullName)
     {
 
-        $qr = 'amount:' . $amount . 'transaction id:' . $wf;
+        $qr = 'Amount to charge:' . $amount . 'Transaction ID:' . $wf . 'Transaction Date:' . $date . 'Sender full name:' . $senderFullName;
 
         $type = 'png';
 

@@ -192,7 +192,13 @@ class TransferController extends AbstractController
             $qr['result'] = true ;
         }
         if($paymentAgency == 'pay-to-agent'){
-            $qr = $this->fileService->uploadQrPayToAgent($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
+            //@todo - send also affiliate code to qr code
+            $affiliateId = $client->getAffiliateId() ? $client->getAffiliateId() : null;
+            $affiliate = $client->affiliate()->getRelated();
+            $qr = $this->fileService->uploadQrPayToAgent($transfer->getTransactionNumber(),
+                $transfer->getTotalAmountAttribute(),
+                $transfer->getTransactionCreationDateAndTime(),
+                $client->firstName . $client->middleName . $client->lastName);
         }
         /** @var Transfer $transfer */
         $user->notify(
