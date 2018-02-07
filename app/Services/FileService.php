@@ -144,9 +144,9 @@ class FileService extends AbstractService
      * @param $amount
      * @return array
      */
-    public function uploadQrPayToAgent($wf, $amount)
+    public function uploadQrPayToAgent($wf, $amount, $date, $senderFullName, $affiliateCode)
     {
-        $qrCode = generate_qr_code_pay_to_agent($wf, $amount);
+        $qrCode = generate_qr_code_pay_to_agent($wf, $amount, $date, $senderFullName, $affiliateCode);
 
         $res = $this->upload(self::TYPE_QR_PAY_TO_AGENT, $wf, $qrCode);
 

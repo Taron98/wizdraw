@@ -319,6 +319,14 @@ class Transfer extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * @return \Carbon\Carbon
+     */
+    public function getTransactionCreationDateAndTime()
+    {
+        return $this->createdAt->format('Y-m-d');
+    }
+
+    /**
      * @return int
      */
     public function getClientId()
