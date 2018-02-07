@@ -68,7 +68,7 @@ if (!function_exists('generate_qr_code_pay_to_agent')) {
     function generate_qr_code_pay_to_agent($wf,$amount,$date,$senderFullName,$affiliateCode)
     {
         $affiliateCode = $affiliateCode ? $affiliateCode : 'No Affiliator';
-        $qr = 'Amount to charge:' . $amount . 'Transaction ID:' . $wf . 'Transaction Date:' . $date . 'Sender full name:' . $senderFullName . 'Affiliate code:' . $affiliateCode;
+        $qr = 'Amount to charge:' . $amount . '\n Transaction ID:' . $wf . '\n Transaction Date:' . $date . '\n Sender full name:' . $senderFullName . '\n Affiliate code:' . $affiliateCode;
 
         $type = 'png';
 
