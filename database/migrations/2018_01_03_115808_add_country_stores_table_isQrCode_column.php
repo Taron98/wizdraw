@@ -15,7 +15,7 @@ class AddCountryStoresTableIsQrCodeColumn extends Migration
     {
         Schema::table('countries_stores', function (Blueprint $table) {
 
-            $table->boolean('use_qr_code')->after('active');;
+            $table->boolean('use_qr_code')->after('active')->default(true);
         });
     }
 
