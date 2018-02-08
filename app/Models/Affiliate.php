@@ -9,16 +9,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Wizdraw\Models\Affiliate
  *
  * @property int $id
- * @property string $code
+ * @property string|null $code
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Affiliate whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Affiliate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Affiliate whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Affiliate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Affiliate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Affiliate withoutTrashed()
  * @mixin \Eloquent
  */
 class Affiliate extends AbstractModel

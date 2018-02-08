@@ -14,22 +14,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $expense
  * @property string $expenseType
  * @property string $remark
- * @property string $note
+ * @property string|null $note
  * @property string $issuedAt
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Wizdraw\Models\Transfer $transfer
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpense($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereExpenseType($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereIssuedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereNote($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereRemark($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereExpense($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereExpenseType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereIssuedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferReceipt whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferReceipt withoutTrashed()
  * @mixin \Eloquent
  */
 class TransferReceipt extends AbstractModel

@@ -81,6 +81,33 @@ if (!function_exists('generate_qr_code_circle_k')) {
     }
 }
 
+if (!function_exists('generate_qr_code_pay_to_agent')) {
+    /**
+     * @param $wf
+     *
+     * @param $amount
+     *
+     * @return mixed
+     */
+    function generate_qr_code_pay_to_agent($wf,$amount,$date,$senderFullName,$affiliateCode)
+    {
+        $affiliateCode = $affiliateCode ? $affiliateCode : 'No Affiliator';
+        $qr = 'Amount to charge:' . $amount . ' Transaction ID:' . $wf . ' Transaction Date:' . $date . ' Sender full name:' . $senderFullName . ' Affiliate code:' . $affiliateCode;
+
+        $type = 'png';
+
+        $qrCodeBinary = QrCode::format($type)
+            ->size(500)
+            ->errorCorrection('H')
+            ->merge('/resources/assets/images/qr_icon.png')
+            ->generate($qr);
+
+        $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
+
+        return $qrCode;
+    }
+}
+
 if (!function_exists('convert_base64_to_jpeg')) {
     /**
      * @param string $data
