@@ -64,8 +64,6 @@ class QueueTestCommand extends Command
         $this->writeRates();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
-        $this->writeOriginToDestinationCommissions();
-        $this->manageActiveCountries();
 
 
     }
@@ -114,20 +112,7 @@ class QueueTestCommand extends Command
         file_put_contents(database_path('cache/commissionsOriginIsrael.json'), $json_data);
     }
 
-    private function writeOriginToDestinationCommissions()
-    {
-        $data = file_get_contents(database_path('cache/commissionsOriginIsrael.json'));
-        dispatch(new CommissionQueueJob($data));
 
-        $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
-        dispatch(new CommissionQueueJob($data));
-
-        $data = file_get_contents(database_path('cache/commissionsOriginSingapore.json'));
-        dispatch(new CommissionQueueJob($data));
-
-        $data = file_get_contents(database_path('cache/commissionsOriginTaiwan.json'));
-        dispatch(new CommissionQueueJob($data));
-    }
 
     private function writeIfsc()
     {
@@ -143,22 +128,5 @@ class QueueTestCommand extends Command
         $data = file_get_contents(database_path('cache/ifsc4.json'));
         dispatch(new BrancheQueueJob($data));
     }
-
-
-
-    private function manageActiveCountries()
-    {
-        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA', 'GEORGIA']];
-
-        $redis = Redis::connection();
-        $origins = [13, 90, 119, 91];
-        foreach ($origins as $o) {
-            if(isset($json[0][$o])){
-            $redis->lpush(redis_key('origin', $o, 'activeCountries'), $json[0][$o]);
-            //$values = Redis::command('hset', ['origin:', 5, 10]);
-            }
-        }
-    }
-
 
 }

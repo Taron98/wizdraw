@@ -13,16 +13,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $originalStatus
  * @property string $color
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereColor($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereOriginalStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereOriginalStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferStatus whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferStatus withoutTrashed()
  * @mixin \Eloquent
  */
 class TransferStatus extends AbstractModel
@@ -33,6 +38,7 @@ class TransferStatus extends AbstractModel
     const STATUS_POSTED = 'Posted';
     const STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN = 'Pending for Payment at 7-Eleven';
     const STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K = 'Pending for Payment at Circle-K';
+    const STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT = 'Pending for Payment at Pay-To-Agent';
     const STATUS_WAIT_FOR_PROCESS = 'WAIT FOR PROCESS';
     const STATUS_ON_HOLD = 'On hold';
     const STATUS_CHECK_DOCUMENTS = 'CHECK DOCUMENTS';

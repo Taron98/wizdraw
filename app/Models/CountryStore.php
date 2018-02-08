@@ -12,9 +12,15 @@ namespace Wizdraw\Models;
  * Wizdraw\Models\CountryStore
  *
  * @property int $id
- * @property int country_id
- * @property string store
- * @property int active
+ * @property int $countryId
+ * @property string $store
+ * @property int $active
+ * @property int $useQrCode
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereStore($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereUseQrCode($value)
  * @mixin \Eloquent
  */
 class CountryStore extends AbstractModel

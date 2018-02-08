@@ -144,9 +144,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "6",
+    "const": "14",
     "min_range": "1",
-    "max_range": "200",
+    "max_range": "700",
     "origin": 13
   },
   {
@@ -154,9 +154,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "8",
-    "min_range": "201",
-    "max_range": "400",
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
     "origin": 13
   },
   {
@@ -164,9 +164,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "12",
-    "min_range": "401",
-    "max_range": "600",
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
     "origin": 13
   },
   {
@@ -174,199 +174,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "13",
-    "min_range": "601",
-    "max_range": "800",
-    "origin": 13
-  },
-  {
-    "id": "2031",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "14",
-    "min_range": "801",
-    "max_range": "1000",
-    "origin": 13
-  },
-  {
-    "id": "2032",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "16",
-    "min_range": "1001",
-    "max_range": "1400",
-    "origin": 13
-  },
-  {
-    "id": "2033",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "22",
-    "min_range": "1401",
-    "max_range": "2400",
-    "origin": 13
-  },
-  {
-    "id": "1853",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "26",
-    "min_range": "2401",
-    "max_range": "5000",
-    "origin": 13
-  },
-  {
-    "id": "2034",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "35",
-    "min_range": "5001",
-    "max_range": "7500",
-    "origin": 13
-  },
-  {
-    "id": "2035",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "45",
-    "min_range": "7501",
-    "max_range": "10000",
-    "origin": 13
-  },
-  {
-    "id": "2036",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "6",
-    "min_range": "1",
-    "max_range": "200",
-    "origin": 13
-  },
-  {
-    "id": "1857",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "8",
-    "min_range": "201",
-    "max_range": "400",
-    "origin": 13
-  },
-  {
-    "id": "2037",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "12",
-    "min_range": "401",
-    "max_range": "600",
-    "origin": 13
-  },
-  {
-    "id": "2038",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "13",
-    "min_range": "601",
-    "max_range": "800",
-    "origin": 13
-  },
-  {
-    "id": "2039",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "14",
-    "min_range": "801",
-    "max_range": "1000",
-    "origin": 13
-  },
-  {
-    "id": "2040",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "16",
-    "min_range": "1001",
-    "max_range": "1200",
-    "origin": 13
-  },
-  {
-    "id": "2041",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "22",
-    "min_range": "1201",
-    "max_range": "1800",
-    "origin": 13
-  },
-  {
-    "id": "2042",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "26",
-    "min_range": "1801",
-    "max_range": "2400",
-    "origin": 13
-  },
-  {
-    "id": "2043",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "35",
-    "min_range": "2401",
-    "max_range": "3500",
-    "origin": 13
-  },
-  {
-    "id": "2044",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "45",
-    "min_range": "3501",
-    "max_range": "4000",
-    "origin": 13
-  },
-  {
-    "id": "2045",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "62",
-    "min_range": "4001",
-    "max_range": "7500",
-    "origin": 13
-  },
-  {
-    "id": "2046",
-    "country": "PHILIPPINES",
-    "currency": "EUR",
-    "percentage": "0",
-    "const": "82",
-    "min_range": "7501",
-    "max_range": "10000",
-    "origin": 13
-  },
-  {
-    "id": "2047",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": "0",
-    "const": "100",
-    "min_range": "10001",
-    "max_range": "1000000",
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "8750",
     "origin": 13
   },
   {

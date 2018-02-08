@@ -167,4 +167,14 @@ class CountryController extends AbstractController
     {
         return get_country_stores($countryId);
     }
+
+    /**
+     * @param int $countryId
+     *
+     * @return mixed
+     */
+    public function use_qr_stores(int $countryId)
+    {
+        return use_qr_stores($countryId);
+    }
 }

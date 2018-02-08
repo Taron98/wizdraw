@@ -23,61 +23,66 @@ use Wizdraw\Services\Entities\FacebookUser;
  * Wizdraw\Models\Client
  *
  * @property int $id
- * @property int $identityTypeId
- * @property string $identityNumber
+ * @property int|null $identityTypeId
+ * @property string|null $identityNumber
  * @property string $identityExpire
- * @property string $firstName
- * @property string $middleName
- * @property string $lastName
+ * @property string|null $firstName
+ * @property string|null $middleName
+ * @property string|null $lastName
  * @property string $birthDate
- * @property string $gender
- * @property string $phone
- * @property int $defaultCountryId
- * @property int $residentCountryId
- * @property string $state
- * @property string $city
- * @property string $address
+ * @property string|null $gender
+ * @property string|null $phone
+ * @property int|null $defaultCountryId
+ * @property int|null $residentCountryId
+ * @property string|null $state
+ * @property string|null $city
+ * @property string|null $address
  * @property string $clientType
  * @property bool $didSetup
  * @property bool $isApproved
- * @property bool $isChanged
- * @property int $affiliateId
+ * @property int|null $affiliateId
+ * @property int $isChanged
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $adminGroups
- * @property-read \Wizdraw\Models\Affiliate $affiliate
+ * @property-read \Wizdraw\Models\Affiliate|null $affiliate
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\BankAccount[] $bankAccounts
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Group[] $groups
- * @property-read \Wizdraw\Models\IdentityType $identityType
+ * @property-read \Wizdraw\Models\IdentityType|null $identityType
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $receivedTransfers
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
  * @property-read \Wizdraw\Models\User $user
  * @property-read \Wizdraw\Models\Vip $vip
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsChanged($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereBirthDate($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCity($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereClientType($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDefaultCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDidSetup($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereFirstName($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereGender($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityExpire($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsApproved($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereLastName($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereMiddleName($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client wherePhone($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereState($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereBirthDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereClientType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereDefaultCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereDidSetup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereIdentityExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereIdentityNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereIdentityTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereIsApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereIsChanged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereMiddleName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereResidentCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client withoutTrashed()
  * @mixin \Eloquent
  */
 class Client extends AbstractModel implements AuthorizableContract
