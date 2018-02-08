@@ -2,29 +2,6 @@
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-if (!function_exists('generate_qr_code_taiwan')) {
-    /**
-     * @param $string
-     *
-     * @return mixed
-     */
-    function generate_qr_code_taiwan($string)
-    {
-        $qr = $string;
-
-        $type = 'png';
-
-        $qrCodeBinary = QrCode::format($type)
-            ->size(500)
-            ->errorCorrection('H')
-            ->merge('/resources/assets/images/qr_icon.png')
-            ->generate($qr);
-
-        $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
-
-        return $qrCode;
-    }
-}
 
 if (!function_exists('generate_qr_code')) {
     /**
