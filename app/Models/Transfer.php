@@ -97,7 +97,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     {
         $url = '';
         switch ($this->paymentAgency) {
-            case 'wicstore':
+            case 'wic-store':
                 break;
             case '7-eleven':
                 $url = 'vip/' . $this->clientId . '.jpg';

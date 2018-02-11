@@ -281,7 +281,7 @@ class TransferController extends AbstractController
 
         $branch = $this->transferService->nearby($latitude, $longitude, $agency);
 
-        if (is_null($branch)) {
+        if (is_null($branch) || $branch === false) {
             return $this->respondWithError('no_branch_found', Response::HTTP_NOT_FOUND);
         }
 
