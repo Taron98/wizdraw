@@ -11,14 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $type
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $clients
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereType($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\IdentityType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\IdentityType whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\IdentityType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\IdentityType whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\IdentityType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\IdentityType withoutTrashed()
  * @mixin \Eloquent
  */
 class IdentityType extends AbstractModel

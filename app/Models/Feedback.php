@@ -9,26 +9,31 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Wizdraw\Models\Feedback
  *
  * @property int $id
- * @property int $transferId
+ * @property int|null $transferId
  * @property int $clientId
- * @property int $feedbackQuestionId
- * @property int $rating
- * @property string $note
+ * @property int|null $feedbackQuestionId
+ * @property int|null $rating
+ * @property string|null $note
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Wizdraw\Models\Client $client
- * @property-read \Wizdraw\Models\FeedbackQuestion $feedbackQuestion
- * @property-read \Wizdraw\Models\Transfer $transfer
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereFeedbackQuestionId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereNote($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereRating($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereTransferId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback whereUpdatedAt($value)
+ * @property-read \Wizdraw\Models\FeedbackQuestion|null $feedbackQuestion
+ * @property-read \Wizdraw\Models\Transfer|null $transfer
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereFeedbackQuestionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereTransferId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Feedback whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Feedback withoutTrashed()
  * @mixin \Eloquent
  */
 class Feedback extends AbstractModel

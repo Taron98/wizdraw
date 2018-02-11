@@ -13,16 +13,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $credits
  * @property int $clientId
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
- * @property \Carbon\Carbon $deletedAt
+ * @property \Carbon\Carbon|null $updatedAt
+ * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Wizdraw\Models\Client $client
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereClientId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereCredits($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip whereUpdatedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereCredits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Vip whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Vip withoutTrashed()
  * @mixin \Eloquent
  */
 class Vip extends AbstractModel
