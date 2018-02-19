@@ -24,3 +24,15 @@ if (!function_exists('use_qr_stores')) {
         return $stores->keyBy('store')->keys()->all();
     }
 }
+
+/**
+ * get the first result of customer service number by a given country
+ */
+if (!function_exists('get_cs_number')) {
+
+    function get_cs_number($countryId)
+    {
+        $stores = DB::table('countries_stores')->where([['country_id' , '=', $countryId] , ['active', '=', 1]])->get(['cs_number']);
+        return $stores->keyBy('cs_number')->keys()->all();
+    }
+}
