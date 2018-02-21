@@ -177,4 +177,5 @@ class CountryController extends AbstractController
     {
         return use_qr_stores($countryId);
     }
+
 }
