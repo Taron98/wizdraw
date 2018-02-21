@@ -40,7 +40,9 @@ class CountryStore extends AbstractModel
     protected $fillable = [
         'country_id',
         'store',
-        'active'
+        'active',
+        'use_qr_code',
+        'cs_number'
     ];
 
     /**
