@@ -210,11 +210,6 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@use_qr_stores',
             ]);
 
-            Route::get('/cs_number/{countryId}', [
-                'as'   => 'country.cs_number',
-                'uses' => 'CountryController@getCsNumber',
-            ]);
-
         });
 
         // Transfer

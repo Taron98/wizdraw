@@ -178,12 +178,4 @@ class CountryController extends AbstractController
         return use_qr_stores($countryId);
     }
 
-    /**
-     * @param int $countryId
-     * @return mixed
-     */
-    public function getCsNumber(int $countryId)
-    {
-        return get_cs_number($countryId);
-    }
 }
