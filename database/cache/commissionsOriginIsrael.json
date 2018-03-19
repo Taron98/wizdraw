@@ -7,7 +7,9 @@
     "const": null,
     "min_range": "1001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2014",
@@ -17,7 +19,9 @@
     "const": null,
     "min_range": "1001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2015",
@@ -27,7 +31,9 @@
     "const": "10",
     "min_range": "801",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2016",
@@ -37,7 +43,9 @@
     "const": "8",
     "min_range": "501",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2017",
@@ -47,7 +55,9 @@
     "const": "10",
     "min_range": "801",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2018",
@@ -57,7 +67,9 @@
     "const": "8",
     "min_range": "201",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2019",
@@ -67,7 +79,9 @@
     "const": "6",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2020",
@@ -77,7 +91,9 @@
     "const": "6",
     "min_range": "1",
     "max_range": "500",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2021",
@@ -87,7 +103,9 @@
     "const": "5",
     "min_range": "1",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2022",
@@ -97,7 +115,9 @@
     "const": "5",
     "min_range": "1",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2023",
@@ -107,7 +127,9 @@
     "const": "35",
     "min_range": "1",
     "max_range": "3600",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2024",
@@ -117,7 +139,9 @@
     "const": "53",
     "min_range": "3601",
     "max_range": "5000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2025",
@@ -127,7 +151,9 @@
     "const": "10",
     "min_range": "1",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2026",
@@ -137,7 +163,9 @@
     "const": null,
     "min_range": "1001",
     "max_range": "99999",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2027",
@@ -147,7 +175,9 @@
     "const": "14",
     "min_range": "1",
     "max_range": "700",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2028",
@@ -157,7 +187,9 @@
     "const": "25",
     "min_range": "701",
     "max_range": "2800",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2029",
@@ -167,7 +199,9 @@
     "const": "32",
     "min_range": "2801",
     "max_range": "4900",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2030",
@@ -177,7 +211,9 @@
     "const": "54",
     "min_range": "4901",
     "max_range": "8750",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2048",
@@ -187,7 +223,9 @@
     "const": "17",
     "min_range": "1",
     "max_range": "350",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2049",
@@ -197,7 +235,9 @@
     "const": "25",
     "min_range": "351",
     "max_range": "2800",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2050",
@@ -207,7 +247,9 @@
     "const": "32",
     "min_range": "2801",
     "max_range": "4900",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2051",
@@ -217,48 +259,50 @@
     "const": "52",
     "min_range": "4901",
     "max_range": "8750",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
-//  {
-//    "id": "2052",
-//    "country": "INDIA",
-//    "currency": "USD",
-//    "percentage": null,
-//    "const": "31",
-//    "min_range": "2001",
-//    "max_range": "4000",
-//    "origin": 13
-//  },
-//  {
-//    "id": "2053",
-//    "country": "INDIA",
-//    "currency": "USD",
-//    "percentage": null,
-//    "const": "59",
-//    "min_range": "4001",
-//    "max_range": "6000",
-//    "origin": 13
-//  },
-//  {
-//    "id": "2054",
-//    "country": "INDIA",
-//    "currency": "USD",
-//    "percentage": null,
-//    "const": "78",
-//    "min_range": "6001",
-//    "max_range": "8000",
-//    "origin": 13
-//  },
-//  {
-//    "id": "2056",
-//    "country": "INDIA",
-//    "currency": "USD",
-//    "percentage": null,
-//    "const": "99",
-//    "min_range": "8001",
-//    "max_range": "10000",
-//    "origin": 13
-//  },
+  //  {
+  //    "id": "2052",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "31",
+  //    "min_range": "2001",
+  //    "max_range": "4000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2053",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "59",
+  //    "min_range": "4001",
+  //    "max_range": "6000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2054",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "78",
+  //    "min_range": "6001",
+  //    "max_range": "8000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2056",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "99",
+  //    "min_range": "8001",
+  //    "max_range": "10000",
+  //    "origin": 13
+  //  },
   {
     "id": "2057",
     "country": "INDIA",
@@ -267,7 +311,9 @@
     "const": "7",
     "min_range": "1",
     "max_range": "400",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2058",
@@ -277,7 +323,9 @@
     "const": "10",
     "min_range": "401",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2059",
@@ -287,7 +335,9 @@
     "const": "12",
     "min_range": "801",
     "max_range": "1100",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2060",
@@ -297,7 +347,9 @@
     "const": "20",
     "min_range": "1101",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2061",
@@ -307,7 +359,9 @@
     "const": "31",
     "min_range": "2001",
     "max_range": "4000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2062",
@@ -317,7 +371,9 @@
     "const": "59",
     "min_range": "4001",
     "max_range": "6000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2063",
@@ -327,7 +383,9 @@
     "const": "78",
     "min_range": "6001",
     "max_range": "8000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2064",
@@ -337,7 +395,9 @@
     "const": "99",
     "min_range": "8001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2065",
@@ -347,7 +407,9 @@
     "const": "7",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2066",
@@ -357,7 +419,9 @@
     "const": "8",
     "min_range": "201",
     "max_range": "300",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2067",
@@ -367,7 +431,9 @@
     "const": "10",
     "min_range": "301",
     "max_range": "500",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2068",
@@ -377,7 +443,9 @@
     "const": "13",
     "min_range": "501",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2069",
@@ -387,7 +455,9 @@
     "const": "20",
     "min_range": "1001",
     "max_range": "1500",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2070",
@@ -397,7 +467,9 @@
     "const": "26",
     "min_range": "1501",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2071",
@@ -407,7 +479,9 @@
     "const": "40",
     "min_range": "2001",
     "max_range": "4000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2072",
@@ -417,7 +491,9 @@
     "const": "50",
     "min_range": "4001",
     "max_range": "6000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2073",
@@ -427,7 +503,9 @@
     "const": "85",
     "min_range": "6001",
     "max_range": "9000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2074",
@@ -437,7 +515,9 @@
     "const": "100",
     "min_range": "9001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2075",
@@ -447,7 +527,9 @@
     "const": "5",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2076",
@@ -457,7 +539,9 @@
     "const": null,
     "min_range": "201",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2077",
@@ -467,7 +551,9 @@
     "const": null,
     "min_range": "2001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "2078",
@@ -477,7 +563,9 @@
     "const": "5",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "525",
@@ -487,7 +575,9 @@
     "const": "7",
     "min_range": "201",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "526",
@@ -497,6 +587,601 @@
     "const": "10",
     "min_range": "2001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "is_pickup": 1,
+    "is_deposit": 0
+  },
+  //middle
+  {
+    "id": "2013",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0.01",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2014",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0.01",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2015",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "10",
+    "min_range": "801",
+    "max_range": "1000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2016",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "8",
+    "min_range": "501",
+    "max_range": "800",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2017",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "10",
+    "min_range": "801",
+    "max_range": "1000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2018",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "8",
+    "min_range": "201",
+    "max_range": "800",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2019",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "6",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2020",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "6",
+    "min_range": "1",
+    "max_range": "500",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2021",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "5",
+    "min_range": "1",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2022",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "5",
+    "min_range": "1",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2023",
+    "country": "THAILAND",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "35",
+    "min_range": "1",
+    "max_range": "3600",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2024",
+    "country": "THAILAND",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "53",
+    "min_range": "3601",
+    "max_range": "5000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2025",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "10",
+    "min_range": "1",
+    "max_range": "1000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2026",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": "0.012",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "99999",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2027",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "14",
+    "min_range": "1",
+    "max_range": "700",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2028",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2029",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2030",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2048",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "17",
+    "min_range": "1",
+    "max_range": "350",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2049",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "25",
+    "min_range": "351",
+    "max_range": "2800",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2050",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2051",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "52",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  //  {
+  //    "id": "2052",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "31",
+  //    "min_range": "2001",
+  //    "max_range": "4000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2053",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "59",
+  //    "min_range": "4001",
+  //    "max_range": "6000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2054",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "78",
+  //    "min_range": "6001",
+  //    "max_range": "8000",
+  //    "origin": 13
+  //  },
+  //  {
+  //    "id": "2056",
+  //    "country": "INDIA",
+  //    "currency": "USD",
+  //    "percentage": null,
+  //    "const": "99",
+  //    "min_range": "8001",
+  //    "max_range": "10000",
+  //    "origin": 13
+  //  },
+  {
+    "id": "2057",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "7",
+    "min_range": "1",
+    "max_range": "400",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2058",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "10",
+    "min_range": "401",
+    "max_range": "800",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2059",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "12",
+    "min_range": "801",
+    "max_range": "1100",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2060",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "20",
+    "min_range": "1101",
+    "max_range": "2000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2061",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "31",
+    "min_range": "2001",
+    "max_range": "4000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2062",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "59",
+    "min_range": "4001",
+    "max_range": "6000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2063",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "78",
+    "min_range": "6001",
+    "max_range": "8000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2064",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "99",
+    "min_range": "8001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2065",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "7",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2066",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "8",
+    "min_range": "201",
+    "max_range": "300",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2067",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "10",
+    "min_range": "301",
+    "max_range": "500",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2068",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "13",
+    "min_range": "501",
+    "max_range": "1000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2069",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "20",
+    "min_range": "1001",
+    "max_range": "1500",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2070",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "26",
+    "min_range": "1501",
+    "max_range": "2000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2071",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "40",
+    "min_range": "2001",
+    "max_range": "4000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2072",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "50",
+    "min_range": "4001",
+    "max_range": "6000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2073",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "85",
+    "min_range": "6001",
+    "max_range": "9000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2074",
+    "country": "SRI LANKA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "100",
+    "min_range": "9001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2075",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2076",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2077",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "2078",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "525",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "7",
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
+  },
+  {
+    "id": "526",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "10",
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "is_pickup": 0,
+    "is_deposit": 1
   }
 ]
