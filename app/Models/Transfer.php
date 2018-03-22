@@ -36,6 +36,7 @@ use Wizdraw\Services\TransferService;
  * @property-read \Wizdraw\Models\BankAccount|null $bankAccount
  * @property-read \Wizdraw\Models\Client $client
  * @property-read null|\stdClass $nearbyBranch
+ * @property-read mixed $qrCodeUrl
  * @property-read float $receiverAmount
  * @property-read float $totalAmount
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Nature[] $natures

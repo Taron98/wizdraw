@@ -16,8 +16,10 @@ namespace Wizdraw\Models;
  * @property string $store
  * @property int $active
  * @property int $useQrCode
+ * @property string $csNumber
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereCsNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereStore($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereUseQrCode($value)

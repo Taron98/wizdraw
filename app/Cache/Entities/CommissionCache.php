@@ -27,6 +27,12 @@ class CommissionCache extends AbstractCacheEntity
     /** @var  int */
     protected $origin;
 
+    /** @var int */
+    protected $isPickup;
+
+    /** @var int */
+    protected $isDeposit;
+
     /**
      * @return mixed
      */
@@ -83,6 +89,44 @@ class CommissionCache extends AbstractCacheEntity
     public function setConst($const): CommissionCache
     {
         $this->const = (int)$const;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIsDeposit()
+    {
+        return $this->isDeposit;
+    }
+
+    /**
+     * @param $isDeposit
+     * @return CommissionCache
+     */
+    public function setIsDeposit($isDeposit): CommissionCache
+    {
+        $this->isDeposit = (int)$isDeposit;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIsPickup()
+    {
+        return $this->isPickup;
+    }
+
+    /**
+     * @param $isPickup
+     * @return CommissionCache
+     */
+    public function setIsPickup($isPickup): CommissionCache
+    {
+        $this->isPickup = (int)$isPickup;
 
         return $this;
     }
