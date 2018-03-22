@@ -263,46 +263,6 @@
     "is_pickup": 1,
     "is_deposit": 0
   },
-  //  {
-  //    "id": "2052",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "31",
-  //    "min_range": "2001",
-  //    "max_range": "4000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2053",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "59",
-  //    "min_range": "4001",
-  //    "max_range": "6000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2054",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "78",
-  //    "min_range": "6001",
-  //    "max_range": "8000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2056",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "99",
-  //    "min_range": "8001",
-  //    "max_range": "10000",
-  //    "origin": 13
-  //  },
   {
     "id": "2057",
     "country": "INDIA",
@@ -591,7 +551,6 @@
     "is_pickup": 1,
     "is_deposit": 0
   },
-  //middle
   {
     "id": "2079",
     "country": "NEPAL",
@@ -856,46 +815,6 @@
     "is_pickup": 0,
     "is_deposit": 1
   },
-  //  {
-  //    "id": "2052",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "31",
-  //    "min_range": "2001",
-  //    "max_range": "4000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2053",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "59",
-  //    "min_range": "4001",
-  //    "max_range": "6000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2054",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "78",
-  //    "min_range": "6001",
-  //    "max_range": "8000",
-  //    "origin": 13
-  //  },
-  //  {
-  //    "id": "2056",
-  //    "country": "INDIA",
-  //    "currency": "USD",
-  //    "percentage": null,
-  //    "const": "99",
-  //    "min_range": "8001",
-  //    "max_range": "10000",
-  //    "origin": 13
-  //  },
   {
     "id": "2101",
     "country": "INDIA",
