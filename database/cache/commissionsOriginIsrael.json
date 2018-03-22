@@ -593,7 +593,7 @@
   },
   //middle
   {
-    "id": "2013",
+    "id": "2079",
     "country": "NEPAL",
     "currency": "USD",
     "percentage": "0.01",
@@ -605,7 +605,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2014",
+    "id": "2080",
     "country": "NEPAL",
     "currency": "EUR",
     "percentage": "0.01",
@@ -617,7 +617,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2015",
+    "id": "2081",
     "country": "NEPAL",
     "currency": "EUR",
     "percentage": "0",
@@ -629,7 +629,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2016",
+    "id": "2082",
     "country": "NEPAL",
     "currency": "EUR",
     "percentage": "0",
@@ -641,7 +641,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2017",
+    "id": "2083",
     "country": "NEPAL",
     "currency": "USD",
     "percentage": "0",
@@ -653,7 +653,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2018",
+    "id": "2084",
     "country": "NEPAL",
     "currency": "USD",
     "percentage": "0",
@@ -665,7 +665,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2019",
+    "id": "2085",
     "country": "NEPAL",
     "currency": "USD",
     "percentage": "0",
@@ -677,7 +677,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2020",
+    "id": "2086",
     "country": "NEPAL",
     "currency": "EUR",
     "percentage": "0",
@@ -689,7 +689,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2021",
+    "id": "2087",
     "country": "NEPAL",
     "currency": "USD",
     "percentage": "0",
@@ -701,7 +701,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2022",
+    "id": "2088",
     "country": "NEPAL",
     "currency": "EUR",
     "percentage": "0",
@@ -713,7 +713,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2023",
+    "id": "2089",
     "country": "THAILAND",
     "currency": "ILS",
     "percentage": null,
@@ -725,7 +725,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2024",
+    "id": "2090",
     "country": "THAILAND",
     "currency": "ILS",
     "percentage": null,
@@ -737,7 +737,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2025",
+    "id": "2091",
     "country": "THAILAND",
     "currency": "EUR",
     "percentage": null,
@@ -749,7 +749,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2026",
+    "id": "2092",
     "country": "THAILAND",
     "currency": "EUR",
     "percentage": "0.012",
@@ -761,7 +761,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2027",
+    "id": "2093",
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
@@ -773,7 +773,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2028",
+    "id": "2094",
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
@@ -785,7 +785,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2029",
+    "id": "2095",
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
@@ -797,7 +797,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2030",
+    "id": "2096",
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
@@ -809,7 +809,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2048",
+    "id": "2097",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -821,7 +821,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2049",
+    "id": "2098",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -833,7 +833,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2050",
+    "id": "2099",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -845,7 +845,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2051",
+    "id": "2100",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -897,7 +897,7 @@
   //    "origin": 13
   //  },
   {
-    "id": "2057",
+    "id": "2101",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -909,7 +909,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2058",
+    "id": "2102",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -921,7 +921,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2059",
+    "id": "2103",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -933,7 +933,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2060",
+    "id": "2104",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -945,7 +945,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2061",
+    "id": "2105",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -957,7 +957,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2062",
+    "id": "2106",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -969,7 +969,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2063",
+    "id": "2107",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -981,7 +981,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2064",
+    "id": "2108",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
@@ -993,7 +993,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2065",
+    "id": "2109",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1005,7 +1005,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2066",
+    "id": "2110",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1017,7 +1017,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2067",
+    "id": "2111",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1029,7 +1029,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2068",
+    "id": "2112",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1041,7 +1041,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2069",
+    "id": "2113",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1053,7 +1053,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2070",
+    "id": "2114",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1065,7 +1065,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2071",
+    "id": "2115",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1077,7 +1077,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2072",
+    "id": "2116",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1089,7 +1089,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2073",
+    "id": "2117",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1101,7 +1101,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2074",
+    "id": "2118",
     "country": "SRI LANKA",
     "currency": "USD",
     "percentage": null,
@@ -1113,7 +1113,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2075",
+    "id": "2119",
     "country": "GEORGIA",
     "currency": "USD",
     "percentage": null,
@@ -1125,7 +1125,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2076",
+    "id": "2120",
     "country": "GEORGIA",
     "currency": "USD",
     "percentage": "0.017",
@@ -1137,7 +1137,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2077",
+    "id": "2121",
     "country": "GEORGIA",
     "currency": "USD",
     "percentage": "0.017",
@@ -1149,7 +1149,7 @@
     "is_deposit": 1
   },
   {
-    "id": "2078",
+    "id": "2122",
     "country": "GEORGIA",
     "currency": "EUR",
     "percentage": null,
@@ -1161,7 +1161,7 @@
     "is_deposit": 1
   },
   {
-    "id": "525",
+    "id": "2123",
     "country": "GEORGIA",
     "currency": "EUR",
     "percentage": "0.017",
@@ -1173,7 +1173,7 @@
     "is_deposit": 1
   },
   {
-    "id": "526",
+    "id": "2124",
     "country": "GEORGIA",
     "currency": "EUR",
     "percentage": "0.017",
