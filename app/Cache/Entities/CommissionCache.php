@@ -27,11 +27,8 @@ class CommissionCache extends AbstractCacheEntity
     /** @var  int */
     protected $origin;
 
-    /** @var int */
-    protected $isPickup;
-
-    /** @var int */
-    protected $isDeposit;
+    /** @var string */
+    protected $transferType;
 
     /**
      * @return mixed
@@ -94,39 +91,20 @@ class CommissionCache extends AbstractCacheEntity
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIsDeposit()
+    public function getTransferType()
     {
-        return $this->isDeposit;
+        return $this->transferType;
     }
 
     /**
-     * @param $isDeposit
+     * @param $transferType
      * @return CommissionCache
      */
-    public function setIsDeposit($isDeposit): CommissionCache
+    public function setTransferType($transferType): CommissionCache
     {
-        $this->isDeposit = (int)$isDeposit;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getIsPickup()
-    {
-        return $this->isPickup;
-    }
-
-    /**
-     * @param $isPickup
-     * @return CommissionCache
-     */
-    public function setIsPickup($isPickup): CommissionCache
-    {
-        $this->isPickup = (int)$isPickup;
+        $this->transferType = $transferType;
 
         return $this;
     }

@@ -8,8 +8,7 @@
     "min_range": "1001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2014",
@@ -20,8 +19,7 @@
     "min_range": "1001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2015",
@@ -32,8 +30,7 @@
     "min_range": "801",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2016",
@@ -44,8 +41,7 @@
     "min_range": "501",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2017",
@@ -56,8 +52,7 @@
     "min_range": "801",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2018",
@@ -68,8 +63,7 @@
     "min_range": "201",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2019",
@@ -80,8 +74,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2020",
@@ -92,8 +85,7 @@
     "min_range": "1",
     "max_range": "500",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2021",
@@ -104,8 +96,7 @@
     "min_range": "1",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2022",
@@ -116,8 +107,7 @@
     "min_range": "1",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2023",
@@ -128,8 +118,7 @@
     "min_range": "1",
     "max_range": "3600",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2024",
@@ -140,8 +129,7 @@
     "min_range": "3601",
     "max_range": "5000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2025",
@@ -152,8 +140,7 @@
     "min_range": "1",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2026",
@@ -164,8 +151,7 @@
     "min_range": "1001",
     "max_range": "99999",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2027",
@@ -176,8 +162,7 @@
     "min_range": "1",
     "max_range": "700",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2028",
@@ -188,8 +173,7 @@
     "min_range": "701",
     "max_range": "2800",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2029",
@@ -200,8 +184,7 @@
     "min_range": "2801",
     "max_range": "4900",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2030",
@@ -212,8 +195,7 @@
     "min_range": "4901",
     "max_range": "8750",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2048",
@@ -224,8 +206,7 @@
     "min_range": "1",
     "max_range": "350",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2049",
@@ -236,8 +217,7 @@
     "min_range": "351",
     "max_range": "2800",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2050",
@@ -248,8 +228,7 @@
     "min_range": "2801",
     "max_range": "4900",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2051",
@@ -260,8 +239,7 @@
     "min_range": "4901",
     "max_range": "8750",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2057",
@@ -272,8 +250,7 @@
     "min_range": "1",
     "max_range": "400",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2058",
@@ -284,8 +261,7 @@
     "min_range": "401",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2059",
@@ -296,8 +272,7 @@
     "min_range": "801",
     "max_range": "1100",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2060",
@@ -308,8 +283,7 @@
     "min_range": "1101",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2061",
@@ -320,8 +294,7 @@
     "min_range": "2001",
     "max_range": "4000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2062",
@@ -332,8 +305,7 @@
     "min_range": "4001",
     "max_range": "6000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2063",
@@ -344,8 +316,7 @@
     "min_range": "6001",
     "max_range": "8000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2064",
@@ -356,8 +327,7 @@
     "min_range": "8001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2065",
@@ -368,8 +338,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2066",
@@ -380,8 +349,7 @@
     "min_range": "201",
     "max_range": "300",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2067",
@@ -392,8 +360,7 @@
     "min_range": "301",
     "max_range": "500",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2068",
@@ -404,8 +371,7 @@
     "min_range": "501",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2069",
@@ -416,8 +382,7 @@
     "min_range": "1001",
     "max_range": "1500",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2070",
@@ -428,8 +393,7 @@
     "min_range": "1501",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2071",
@@ -440,8 +404,7 @@
     "min_range": "2001",
     "max_range": "4000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2072",
@@ -452,8 +415,7 @@
     "min_range": "4001",
     "max_range": "6000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2073",
@@ -464,8 +426,7 @@
     "min_range": "6001",
     "max_range": "9000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2074",
@@ -476,8 +437,7 @@
     "min_range": "9001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2075",
@@ -488,8 +448,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2076",
@@ -500,8 +459,7 @@
     "min_range": "201",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2077",
@@ -512,8 +470,7 @@
     "min_range": "2001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2078",
@@ -524,8 +481,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "525",
@@ -536,8 +492,7 @@
     "min_range": "201",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "526",
@@ -548,8 +503,7 @@
     "min_range": "2001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2079",
@@ -560,8 +514,7 @@
     "min_range": "1001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2080",
@@ -572,8 +525,7 @@
     "min_range": "1001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2081",
@@ -584,8 +536,7 @@
     "min_range": "801",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2082",
@@ -596,8 +547,7 @@
     "min_range": "501",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2083",
@@ -608,8 +558,7 @@
     "min_range": "801",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2084",
@@ -620,8 +569,7 @@
     "min_range": "201",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2085",
@@ -632,8 +580,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2086",
@@ -644,8 +591,7 @@
     "min_range": "1",
     "max_range": "500",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2087",
@@ -656,8 +602,7 @@
     "min_range": "1",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2088",
@@ -668,8 +613,7 @@
     "min_range": "1",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2089",
@@ -680,8 +624,7 @@
     "min_range": "1",
     "max_range": "3600",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2090",
@@ -692,8 +635,7 @@
     "min_range": "3601",
     "max_range": "5000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2091",
@@ -704,8 +646,7 @@
     "min_range": "1",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2092",
@@ -716,8 +657,7 @@
     "min_range": "1001",
     "max_range": "99999",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2093",
@@ -728,8 +668,7 @@
     "min_range": "1",
     "max_range": "700",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2094",
@@ -740,8 +679,7 @@
     "min_range": "701",
     "max_range": "2800",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2095",
@@ -752,8 +690,7 @@
     "min_range": "2801",
     "max_range": "4900",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2096",
@@ -764,8 +701,7 @@
     "min_range": "4901",
     "max_range": "8750",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2097",
@@ -776,8 +712,7 @@
     "min_range": "1",
     "max_range": "350",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2098",
@@ -788,8 +723,7 @@
     "min_range": "351",
     "max_range": "2800",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2099",
@@ -800,8 +734,7 @@
     "min_range": "2801",
     "max_range": "4900",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2100",
@@ -812,8 +745,7 @@
     "min_range": "4901",
     "max_range": "8750",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2101",
@@ -824,8 +756,7 @@
     "min_range": "1",
     "max_range": "400",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2102",
@@ -836,8 +767,7 @@
     "min_range": "401",
     "max_range": "800",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2103",
@@ -848,8 +778,7 @@
     "min_range": "801",
     "max_range": "1100",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2104",
@@ -860,8 +789,7 @@
     "min_range": "1101",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2105",
@@ -872,8 +800,7 @@
     "min_range": "2001",
     "max_range": "4000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2106",
@@ -884,8 +811,7 @@
     "min_range": "4001",
     "max_range": "6000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2107",
@@ -896,8 +822,7 @@
     "min_range": "6001",
     "max_range": "8000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2108",
@@ -908,8 +833,7 @@
     "min_range": "8001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2109",
@@ -920,8 +844,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2110",
@@ -932,8 +855,7 @@
     "min_range": "201",
     "max_range": "300",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2111",
@@ -944,8 +866,7 @@
     "min_range": "301",
     "max_range": "500",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2112",
@@ -956,8 +877,7 @@
     "min_range": "501",
     "max_range": "1000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2113",
@@ -968,8 +888,7 @@
     "min_range": "1001",
     "max_range": "1500",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2114",
@@ -980,8 +899,7 @@
     "min_range": "1501",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2115",
@@ -992,8 +910,7 @@
     "min_range": "2001",
     "max_range": "4000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2116",
@@ -1004,8 +921,7 @@
     "min_range": "4001",
     "max_range": "6000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2117",
@@ -1016,8 +932,7 @@
     "min_range": "6001",
     "max_range": "9000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2118",
@@ -1028,8 +943,7 @@
     "min_range": "9001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2119",
@@ -1040,8 +954,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2120",
@@ -1052,8 +965,7 @@
     "min_range": "201",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2121",
@@ -1064,8 +976,7 @@
     "min_range": "2001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2122",
@@ -1076,8 +987,7 @@
     "min_range": "1",
     "max_range": "200",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2123",
@@ -1088,8 +998,7 @@
     "min_range": "201",
     "max_range": "2000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   },
   {
     "id": "2124",
@@ -1100,7 +1009,6 @@
     "min_range": "2001",
     "max_range": "10000",
     "origin": 13,
-    "is_pickup": 0,
-    "is_deposit": 1
+    "transfer_type": "deposit"
   }
 ]
