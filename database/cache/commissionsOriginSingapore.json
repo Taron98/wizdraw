@@ -1,13 +1,24 @@
 [
-{
-"id": "2011",
-"country": "PHILIPPINES",
-"currency": "USD",
-"percentage": "0",
-"const": "22",
-"min_range": "1",
-"max_range": "5000",
-"origin": 91
-}
-
+  {
+    "id": "2011",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "22",
+    "min_range": "1",
+    "max_range": "5000",
+    "origin": 91,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2130",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "22",
+    "min_range": "1",
+    "max_range": "5000",
+    "origin": 91,
+    "transfer_type": "pickup_cash"
+  }
 ]

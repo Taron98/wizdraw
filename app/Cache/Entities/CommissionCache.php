@@ -27,6 +27,9 @@ class CommissionCache extends AbstractCacheEntity
     /** @var  int */
     protected $origin;
 
+    /** @var string */
+    protected $transferType;
+
     /**
      * @return mixed
      */
@@ -83,6 +86,25 @@ class CommissionCache extends AbstractCacheEntity
     public function setConst($const): CommissionCache
     {
         $this->const = (int)$const;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransferType()
+    {
+        return $this->transferType;
+    }
+
+    /**
+     * @param $transferType
+     * @return CommissionCache
+     */
+    public function setTransferType($transferType): CommissionCache
+    {
+        $this->transferType = $transferType;
 
         return $this;
     }
