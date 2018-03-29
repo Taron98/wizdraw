@@ -10,6 +10,17 @@
     "timezone": -3
   },
   {
+    "id": "112",
+    "description": "ARMENIA",
+    "coin_id": "AMD",
+    "country_code_2": "AM",
+    "country_code_3": "ARM",
+    "phone_code": "374",
+    "is_active": 1,
+    "is_pickup": 1,
+    "timezone": 4
+  },
+  {
     "id": "93",
     "description": "AUSTRALIA",
     "coin_id": "AUD",
