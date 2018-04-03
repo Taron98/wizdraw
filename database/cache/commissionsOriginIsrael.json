@@ -7,7 +7,8 @@
     "const": null,
     "min_range": "1001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2014",
@@ -17,7 +18,8 @@
     "const": null,
     "min_range": "1001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2015",
@@ -27,7 +29,8 @@
     "const": "10",
     "min_range": "801",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2016",
@@ -37,7 +40,8 @@
     "const": "8",
     "min_range": "501",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2017",
@@ -47,7 +51,8 @@
     "const": "10",
     "min_range": "801",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2018",
@@ -57,7 +62,8 @@
     "const": "8",
     "min_range": "201",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2019",
@@ -67,7 +73,8 @@
     "const": "6",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2020",
@@ -77,7 +84,8 @@
     "const": "6",
     "min_range": "1",
     "max_range": "500",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2021",
@@ -87,7 +95,8 @@
     "const": "5",
     "min_range": "1",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2022",
@@ -97,7 +106,8 @@
     "const": "5",
     "min_range": "1",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2023",
@@ -107,7 +117,8 @@
     "const": "35",
     "min_range": "1",
     "max_range": "3600",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2024",
@@ -117,7 +128,8 @@
     "const": "53",
     "min_range": "3601",
     "max_range": "5000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2025",
@@ -127,7 +139,8 @@
     "const": "10",
     "min_range": "1",
     "max_range": "1000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2026",
@@ -137,7 +150,8 @@
     "const": null,
     "min_range": "1001",
     "max_range": "99999",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2027",
@@ -147,7 +161,8 @@
     "const": "14",
     "min_range": "1",
     "max_range": "700",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2028",
@@ -157,7 +172,8 @@
     "const": "25",
     "min_range": "701",
     "max_range": "2800",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2029",
@@ -167,7 +183,8 @@
     "const": "32",
     "min_range": "2801",
     "max_range": "4900",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2030",
@@ -177,87 +194,52 @@
     "const": "54",
     "min_range": "4901",
     "max_range": "8750",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2048",
     "country": "INDIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
-    "const": "7",
+    "const": "17",
     "min_range": "1",
-    "max_range": "400",
-    "origin": 13
+    "max_range": "350",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2049",
     "country": "INDIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
-    "const": "10",
-    "min_range": "401",
-    "max_range": "800",
-    "origin": 13
+    "const": "25",
+    "min_range": "351",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2050",
     "country": "INDIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
-    "const": "12",
-    "min_range": "801",
-    "max_range": "1100",
-    "origin": 13
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2051",
     "country": "INDIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
-    "const": "20",
-    "min_range": "1101",
-    "max_range": "2000",
-    "origin": 13
-  },
-  {
-    "id": "2052",
-    "country": "INDIA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "31",
-    "min_range": "2001",
-    "max_range": "4000",
-    "origin": 13
-  },
-  {
-    "id": "2053",
-    "country": "INDIA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "59",
-    "min_range": "4001",
-    "max_range": "6000",
-    "origin": 13
-  },
-  {
-    "id": "2054",
-    "country": "INDIA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "78",
-    "min_range": "6001",
-    "max_range": "8000",
-    "origin": 13
-  },
-  {
-    "id": "2056",
-    "country": "INDIA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "99",
-    "min_range": "8001",
-    "max_range": "10000",
-    "origin": 13
+    "const": "52",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2057",
@@ -267,7 +249,8 @@
     "const": "7",
     "min_range": "1",
     "max_range": "400",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2058",
@@ -277,7 +260,8 @@
     "const": "10",
     "min_range": "401",
     "max_range": "800",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2059",
@@ -287,7 +271,8 @@
     "const": "12",
     "min_range": "801",
     "max_range": "1100",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2060",
@@ -297,7 +282,8 @@
     "const": "20",
     "min_range": "1101",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2061",
@@ -307,7 +293,8 @@
     "const": "31",
     "min_range": "2001",
     "max_range": "4000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2062",
@@ -317,7 +304,8 @@
     "const": "59",
     "min_range": "4001",
     "max_range": "6000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2063",
@@ -327,7 +315,8 @@
     "const": "78",
     "min_range": "6001",
     "max_range": "8000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2064",
@@ -337,107 +326,8 @@
     "const": "99",
     "min_range": "8001",
     "max_range": "10000",
-    "origin": 13
-  },
-  {
-    "id": "2065",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "7",
-    "min_range": "1",
-    "max_range": "200",
-    "origin": 13
-  },
-  {
-    "id": "2066",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "8",
-    "min_range": "201",
-    "max_range": "300",
-    "origin": 13
-  },
-  {
-    "id": "2067",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "10",
-    "min_range": "301",
-    "max_range": "500",
-    "origin": 13
-  },
-  {
-    "id": "2068",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "13",
-    "min_range": "501",
-    "max_range": "1000",
-    "origin": 13
-  },
-  {
-    "id": "2069",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "20",
-    "min_range": "1001",
-    "max_range": "1500",
-    "origin": 13
-  },
-  {
-    "id": "2070",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "26",
-    "min_range": "1501",
-    "max_range": "2000",
-    "origin": 13
-  },
-  {
-    "id": "2071",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "40",
-    "min_range": "2001",
-    "max_range": "4000",
-    "origin": 13
-  },
-  {
-    "id": "2072",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "50",
-    "min_range": "4001",
-    "max_range": "6000",
-    "origin": 13
-  },
-  {
-    "id": "2073",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "85",
-    "min_range": "6001",
-    "max_range": "9000",
-    "origin": 13
-  },
-  {
-    "id": "2074",
-    "country": "SRI LANKA",
-    "currency": "USD",
-    "percentage": null,
-    "const": "100",
-    "min_range": "9001",
-    "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2075",
@@ -447,7 +337,8 @@
     "const": "5",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2076",
@@ -457,7 +348,8 @@
     "const": null,
     "min_range": "201",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2077",
@@ -467,7 +359,8 @@
     "const": null,
     "min_range": "2001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2078",
@@ -477,7 +370,8 @@
     "const": "5",
     "min_range": "1",
     "max_range": "200",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "525",
@@ -487,7 +381,8 @@
     "const": "7",
     "min_range": "201",
     "max_range": "2000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "526",
@@ -497,6 +392,491 @@
     "const": "10",
     "min_range": "2001",
     "max_range": "10000",
-    "origin": 13
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2079",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0.01",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2080",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0.01",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2081",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "10",
+    "min_range": "801",
+    "max_range": "1000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2082",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "8",
+    "min_range": "501",
+    "max_range": "800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2083",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "10",
+    "min_range": "801",
+    "max_range": "1000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2084",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "8",
+    "min_range": "201",
+    "max_range": "800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2085",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "6",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2086",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "6",
+    "min_range": "1",
+    "max_range": "500",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2087",
+    "country": "NEPAL",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "5",
+    "min_range": "1",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2088",
+    "country": "NEPAL",
+    "currency": "EUR",
+    "percentage": "0",
+    "const": "5",
+    "min_range": "1",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2089",
+    "country": "THAILAND",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "35",
+    "min_range": "1",
+    "max_range": "3600",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2090",
+    "country": "THAILAND",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "53",
+    "min_range": "3601",
+    "max_range": "5000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2091",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "10",
+    "min_range": "1",
+    "max_range": "1000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2092",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": "0.012",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "99999",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2093",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "14",
+    "min_range": "1",
+    "max_range": "700",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2094",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2095",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2096",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2097",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "17",
+    "min_range": "1",
+    "max_range": "350",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2098",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "25",
+    "min_range": "351",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2099",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2100",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "52",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2101",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "7",
+    "min_range": "1",
+    "max_range": "400",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2102",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "10",
+    "min_range": "401",
+    "max_range": "800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2103",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "12",
+    "min_range": "801",
+    "max_range": "1100",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2104",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "20",
+    "min_range": "1101",
+    "max_range": "2000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2105",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "31",
+    "min_range": "2001",
+    "max_range": "4000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2106",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "59",
+    "min_range": "4001",
+    "max_range": "6000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2107",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "78",
+    "min_range": "6001",
+    "max_range": "8000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2108",
+    "country": "INDIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "99",
+    "min_range": "8001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2109",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "17.5",
+    "min_range": "1",
+    "max_range": "350",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2110",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "24.5",
+    "min_range": "351",
+    "max_range": "2450",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2111",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "42",
+    "min_range": "2451",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2112",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "63",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2113",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "17.5",
+    "min_range": "1",
+    "max_range": "350",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2114",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "24.5",
+    "min_range": "351",
+    "max_range": "2450",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2115",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "42",
+    "min_range": "2451",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2116",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "63",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2119",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2120",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2121",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2122",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2123",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "7",
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2124",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "10",
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
   }
 ]

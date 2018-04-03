@@ -128,7 +128,7 @@ class BankCacheService extends AbstractCacheService
     private function getBankCountryName($stdJson)
     {
         if (!empty($stdJson->country_name)) {
-            return screaming_snake_case($stdJson->country_name);
+            return ($stdJson->country_name);
         }
 
         $constName = "self::TYPE_" . strtoupper($stdJson->type) . "_COUNTRY";
