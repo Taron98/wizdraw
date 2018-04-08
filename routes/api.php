@@ -14,6 +14,13 @@
 // Api v1.0
 Route::group(['prefix' => 'v1/'], function () {
 
+    Route::group(['prefix' => 'statuses/'], function (){
+        Route::post('/notifyAborted/', [
+            'as'   => 'statuses.notifyAborted',
+            'uses' => 'StatusesController@notifyAborted',
+        ]);
+    });
+
     // Authentication
     Route::group(['prefix' => 'auth/'], function () {
 

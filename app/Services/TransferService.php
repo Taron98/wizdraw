@@ -255,4 +255,15 @@ class TransferService extends AbstractService
 
     }
 
+    public function clientNotifyAbortedStatus($transfers)
+    {
+        $res = $this->repository->findWithClient($transfers);
+        foreach ($res as $transfer){
+            //@todo - set new notification for each client
+            $transfer->client->notify();
+        }
+        $e = 1;
+
+    }
+
 }

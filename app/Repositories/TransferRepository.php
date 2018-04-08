@@ -73,4 +73,8 @@ class TransferRepository extends AbstractRepository
         return $total;
     }
 
+    public function findWithClient($transfers){
+        return $this->model::whereIn('transaction_number', $transfers)->with('client')->get();
+    }
+
 }
