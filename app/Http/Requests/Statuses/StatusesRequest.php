@@ -5,11 +5,13 @@ namespace Wizdraw\Http\Requests\Statuses;
 use Wizdraw\Http\Requests\AbstractRequest;
 
 /**
- * Class TransferAddReceiptRequest
- * @package Wizdraw\Http\Requests\Transfer
+ * Class StatusesRequest
+ * @package Wizdraw\Http\Requests\Statuses
  */
 class StatusesRequest extends AbstractRequest
 {
+
+    const VALID_IPS = array('::1', "localhost", '52.21.225.207', '54.86.248.41');
 
     /**
      * Determine if the user is authorized to make this request.
@@ -18,9 +20,9 @@ class StatusesRequest extends AbstractRequest
      */
     public function authorize()
     {
-        //todo: validate ip's from wic's bridge
-        $r = $this->ip();
-        if($r){
+        $clientIp = $this->ip();
+        echo 'client ip: ' . $clientIp;
+        if(in_array($clientIp, self::VALID_IPS)){
             return true;
         }else{
             return false;
