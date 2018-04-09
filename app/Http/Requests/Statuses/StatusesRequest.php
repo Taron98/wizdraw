@@ -11,7 +11,7 @@ use Wizdraw\Http\Requests\AbstractRequest;
 class StatusesRequest extends AbstractRequest
 {
 
-    const VALID_IPS = array('::1', "localhost", '52.21.225.207', '54.86.248.41');
+    const VALID_IPS = array('::1', 'localhost', '52.21.225.207', '54.86.248.41', '82.81.220.149');
 
     /**
      * Determine if the user is authorized to make this request.
