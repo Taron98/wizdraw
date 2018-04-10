@@ -12,7 +12,9 @@ use Wizdraw\Models\Nature;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
+use Wizdraw\Models\User;
 use Wizdraw\Repositories\TransferRepository;
+use Wizdraw\Notifications\TransferAborted;
 
 /**
  * Class TransferService
@@ -47,7 +49,8 @@ class TransferService extends AbstractService
         TransferReceiptService $transferReceiptService,
         TransferStatusService $transferStatusService,
         NatureService $natureService
-    ) {
+    )
+    {
         $this->repository = $transferRepository;
         $this->transferReceiptService = $transferReceiptService;
         $this->transferStatusService = $transferStatusService;
@@ -84,14 +87,15 @@ class TransferService extends AbstractService
         RateCache $rate,
         BankAccount $bankAccount = null,
         array $attributes = []
-    ) {
-        if($attributes['payment_agency'] == 'circle-k'){
+    )
+    {
+        if ($attributes['payment_agency'] == 'circle-k') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
-        }elseif($attributes['payment_agency'] == '7-eleven'){
+        } elseif ($attributes['payment_agency'] == '7-eleven') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
-        }elseif($attributes['payment_agency'] == 'pay-to-agent'){
+        } elseif ($attributes['payment_agency'] == 'pay-to-agent') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT;
-        } else{
+        } else {
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
 
@@ -100,7 +104,7 @@ class TransferService extends AbstractService
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
 
-        $attributes[ 'rate' ] = $rate->getRate();
+        $attributes['rate'] = $rate->getRate();
 
         $transfer = $this->repository->createWithRelation($senderClient, $bankAccount, $initStatus, $defaultNatureIds,
             $attributes);
@@ -153,13 +157,15 @@ class TransferService extends AbstractService
         float $commission,
         float $totalAmount,
         float $receiverAmount
-    ): bool {
+    ): bool
+    {
         $calcTotalAmount = $amount + $commission;
 
         $calcReceiverAmount = $amount * $rate->getRate();
 
         //todo: need to figure out what to do if the client not send round amount, temporary fix
-        return (!bccomp($totalAmount, $calcTotalAmount, 3)) /*&& !bccomp($receiverAmount, $calcReceiverAmount, 3)*/;
+        return (!bccomp($totalAmount, $calcTotalAmount, 3)) /*&& !bccomp($receiverAmount, $calcReceiverAmount, 3)*/
+            ;
     }
 
     /**
@@ -193,14 +199,14 @@ class TransferService extends AbstractService
      */
     public function nearby(float $latitude, float $longitude, $agency)
     {
-        if($agency == self::AGENCY_7_ELEVEN){
-        // todo: this solution is hardcoded for the 1st version
-        $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
-        }elseif ($agency == self::AGENCY_CIRCLE_K){
+        if ($agency == self::AGENCY_7_ELEVEN) {
+            // todo: this solution is hardcoded for the 1st version
+            $branchesJson = json_decode(file_get_contents(database_path('cache/branches.json')), true);
+        } elseif ($agency == self::AGENCY_CIRCLE_K) {
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesCircleK.json')), true);
-        }elseif($agency == self::AGENCY_WIC_STORE){
+        } elseif ($agency == self::AGENCY_WIC_STORE) {
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesWicStore.json')), true);
-        }else{
+        } else {
             $branchesJson = json_decode(file_get_contents(database_path('cache/branchesPayToAgent.json')), true);
         }
         $branches = collect();
@@ -208,14 +214,14 @@ class TransferService extends AbstractService
             $distance = $this->distance(
                 (float)$latitude,
                 (float)$longitude,
-                (float)$branch[ 'latitude' ],
-                (float)$branch[ 'longitude' ]
+                (float)$branch['latitude'],
+                (float)$branch['longitude']
             );
 
             if ($distance <= 10) {
-                $branch[ 'distance' ] = (float)$distance;
+                $branch['distance'] = (float)$distance;
 
-                $branches->put($branch[ 'id' ], $branch);
+                $branches->put($branch['id'], $branch);
             }
         }
 
@@ -251,8 +257,21 @@ class TransferService extends AbstractService
     public function getLimit($defaultCountryId)
     {
         $redis = Redis::connection();
-        return $redis->lrange(redis_key('origin',$defaultCountryId,'amountLimits'), 0, -1);
+        return $redis->lrange(redis_key('origin', $defaultCountryId, 'amountLimits'), 0, -1);
 
+    }
+
+    public function clientNotifyAbortedStatus($transfers)
+    {
+        $abortedTransfers = $this->repository->findWithClient($transfers);
+        foreach ($abortedTransfers as $transfer) {
+            $client = $transfer->client;
+            /** @var  User */
+            $user = $client->user;
+            $user->notify((new TransferAborted($transfer)));
+        }
+
+        return true;
     }
 
 }
