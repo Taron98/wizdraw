@@ -21,7 +21,6 @@ class StatusesRequest extends AbstractRequest
     public function authorize()
     {
         $clientIp = $this->ip();
-        echo 'client ip: ' . $clientIp;
         if(in_array($clientIp, self::VALID_IPS)){
             return true;
         }else{
