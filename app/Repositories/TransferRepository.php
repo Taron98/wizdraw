@@ -64,7 +64,8 @@ class TransferRepository extends AbstractRepository
      */
     public function monthlyTransfer() : float
     {
-        $transfers = Auth::user()->client->transfers->where('status_id','<>',9)->where('status_id','<>',1);
+        $clientDefaultCountryId = Auth::user()->client->default_country_id;
+        $transfers = Auth::user()->client->transfers->where('status_id','<>',9)->where('status_id','<>',1)->where('sender_country_id', '=', $clientDefaultCountryId);
 
         $total = $transfers
             ->where('created_at', '>=', Carbon::now()->subMonth(1))
