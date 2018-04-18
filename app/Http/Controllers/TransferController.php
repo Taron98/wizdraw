@@ -138,7 +138,7 @@ class TransferController extends AbstractController
         if (!$this->transferService->validateMonthly($amount, $client)) {
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        //@TODO - make this work
+
         if (!$this->transferService->validateYearly($amount, $client)) {
             return $this->respondWithError('max_yearly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }

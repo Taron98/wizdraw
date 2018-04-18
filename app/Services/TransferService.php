@@ -137,7 +137,7 @@ class TransferService extends AbstractService
 
     /**
      * @param float $amount
-     *
+     * @param Client $senderClient
      * @return bool
      */
     public function validateMonthly(float $amount, Client $senderClient): bool
@@ -149,14 +149,18 @@ class TransferService extends AbstractService
         return ($monthlyTotal <= $monthlyLimit);
     }
 
+    /**
+     * @param float $amount
+     * @param Client $senderClient
+     * @return bool
+     */
     public function validateYearly(float $amount, Client $senderClient): bool
     {
-        //@TODO - create this in repository
-        $monthlyTotal = $amount + $this->repository->yearlyTransfer();
+        $yearlyTotal = $amount + $this->repository->yearlyTransfer();
         $senderClientCountry = $senderClient->default_country_id;
-        $monthlyLimit = array_key_exists($senderClientCountry, self::YEARLY_LIMITS_ARRAY) ? self::YEARLY_LIMITS_ARRAY[$senderClientCountry] : self::DEFAULT_MAX_YEARLY_TRANSFER;
+        $yearlyLimit = array_key_exists($senderClientCountry, self::YEARLY_LIMITS_ARRAY) ? self::YEARLY_LIMITS_ARRAY[$senderClientCountry] : self::DEFAULT_MAX_YEARLY_TRANSFER;
 
-        return array_key_exists($senderClientCountry, self::YEARLY_LIMITS_ARRAY) ? ($monthlyTotal <= $monthlyLimit) : true;
+        return array_key_exists($senderClientCountry, self::YEARLY_LIMITS_ARRAY) ? ($yearlyTotal <= $yearlyLimit) : true;
     }
 
     /**
