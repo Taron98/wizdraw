@@ -64,8 +64,7 @@ class TransferRepository extends AbstractRepository
      */
     public function monthlyTransfer() : float
     {
-        $transfers = Auth::user()->client->transfers->where('status_id','<>',9)->where('status_id','<>',1);
-
+        $transfers = $this->getClientValidTransfers();
         $total = $transfers
             ->where('created_at', '>=', Carbon::now()->subMonth(1))
             ->sum('amount');
@@ -73,6 +72,35 @@ class TransferRepository extends AbstractRepository
         return $total;
     }
 
+    /**
+     * @return float
+     */
+    public function yearlyTransfer() : float
+    {
+        $transfers = $this->getClientValidTransfers();
+        $total = $transfers
+            ->where('created_at', '>=', Carbon::now()->subYear(1))
+            ->sum('amount');
+
+        return $total;
+    }
+
+    /**
+     * @return static
+     */
+    private function getClientValidTransfers(){
+        $clientDefaultCountryId = Auth::user()->client->default_country_id;
+
+        return Auth::user()->client->transfers
+            ->where('status_id','<>',9)
+            ->where('status_id','<>',1)
+            ->where('sender_country_id', '=', $clientDefaultCountryId);
+    }
+
+    /**
+     * @param $transfers
+     * @return mixed
+     */
     public function findWithClient($transfers){
         $withClients = $this->model::whereIn('transaction_number', $transfers)->with('client')->get();
         return $withClients;

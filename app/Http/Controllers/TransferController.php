@@ -135,8 +135,12 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
         }
 
-        if (!$this->transferService->validateMonthly($amount)) {
+        if (!$this->transferService->validateMonthly($amount, $client)) {
             return $this->respondWithError('max_monthly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (!$this->transferService->validateYearly($amount, $client)) {
+            return $this->respondWithError('max_yearly_transfer_reached', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         if (!$this->transferService->validateTotals($rate, $amount, $commission, $totalAmount, $receiverAmount)) {
