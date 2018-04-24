@@ -12,6 +12,7 @@ use Wizdraw\Cache\Services\RateCacheService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
 use Wizdraw\Http\Requests\Country\CountryStoresRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Http\Requests\ClientService;
 
 /**
  * Class CountryController
@@ -34,6 +35,8 @@ class CountryController extends AbstractController
     /** @var  BranchCacheService */
     private $branchCacheService;
 
+    private $clientService;
+
     /**
      * GroupController constructor.
      *
@@ -48,13 +51,15 @@ class CountryController extends AbstractController
         RateCacheService $rateCacheService,
         CommissionCacheService $commissionCacheService,
         BankCacheService $bankCacheService,
-        BranchCacheService $branchCacheService
+        BranchCacheService $branchCacheService,
+        ClientService $clientService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
         $this->commissionCacheService = $commissionCacheService;
         $this->bankCacheService = $bankCacheService;
         $this->branchCacheService = $branchCacheService;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -70,6 +75,9 @@ class CountryController extends AbstractController
     {
         $client = $request->user()->client;
 
+        //check if the user is entitled for hk campaign
+        $clientLastFiveTransfers = $client->transfers->take(5);
+        $isEntitledForHkCampaign = $this->clientService->isEntitledForHkCampaign($clientLastFiveTransfers);
 
         /** @var CountryCache $country */
         $country = $this->countryCacheService->find($id);
