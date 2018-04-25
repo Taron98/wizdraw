@@ -123,12 +123,5 @@ class ClientService extends AbstractService
         return $this->repository->updateAffiliate($affiliate, $client);
     }
 
-    public function isEntitledForHkCampaign($transfers): Boolean{
-        $count = 0;
-        foreach ($transfers as $transfer){
-            $count++;
-        }
-        return $count < 5 ? true : false;
-    }
 
 }

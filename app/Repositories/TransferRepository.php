@@ -106,4 +106,18 @@ class TransferRepository extends AbstractRepository
         return $withClients;
     }
 
+    /**
+     * @param $transfers
+     * @param $originCountry
+     * @param $from
+     * @param $to
+     * @return mixed
+     */
+    public function getClientLastTransfersBetweenDates($transfers, $originCountry, $from, $to){
+        return $transfers
+            ->where('sender_country_id', $originCountry)
+            ->where('created_at','>=', $from)
+            ->where('created_at','<=', $to);
+    }
+
 }

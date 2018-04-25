@@ -295,4 +295,12 @@ class TransferService extends AbstractService
         return true;
     }
 
+    public function isEntitledForHkFirstFiveTransactionsCampaign(Client $client){
+        //@todo - get this from model and change dates to the real ones
+        $clientLastTransfersBetweenDates = $this->repository
+            ->getClientLastTransfersBetweenDates($client->transfers, 90, '2018-04-22 00:00:00', '2018-06-30 23:59:59');
+
+        return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
+    }
+
 }

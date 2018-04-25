@@ -9,10 +9,10 @@ use Wizdraw\Cache\Services\BranchCacheService;
 use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
+use Wizdraw\Services\TransferService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
 use Wizdraw\Http\Requests\Country\CountryStoresRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
-use Wizdraw\Http\Requests\ClientService;
 
 /**
  * Class CountryController
@@ -35,7 +35,8 @@ class CountryController extends AbstractController
     /** @var  BranchCacheService */
     private $branchCacheService;
 
-    private $clientService;
+    /*** @var TransferService */
+    private $transferService;
 
     /**
      * GroupController constructor.
@@ -52,14 +53,14 @@ class CountryController extends AbstractController
         CommissionCacheService $commissionCacheService,
         BankCacheService $bankCacheService,
         BranchCacheService $branchCacheService,
-        ClientService $clientService
+        TransferService $transferService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
         $this->commissionCacheService = $commissionCacheService;
         $this->bankCacheService = $bankCacheService;
         $this->branchCacheService = $branchCacheService;
-        $this->clientService = $clientService;
+        $this->transferService = $transferService;
     }
 
     /**
@@ -76,8 +77,7 @@ class CountryController extends AbstractController
         $client = $request->user()->client;
 
         //check if the user is entitled for hk campaign
-        $clientLastFiveTransfers = $client->transfers->take(5);
-        $isEntitledForHkCampaign = $this->clientService->isEntitledForHkCampaign($clientLastFiveTransfers);
+        $isEntitledForHkFirstFiveTransactionsCampaign = $this->transferService->isEntitledForHkFirstFiveTransactionsCampaign($client);
 
         /** @var CountryCache $country */
         $country = $this->countryCacheService->find($id);
