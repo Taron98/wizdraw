@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Entities\RateCache;
@@ -13,6 +14,7 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\User;
+use Wizdraw\Models\Campaign;
 use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
 
@@ -295,10 +297,18 @@ class TransferService extends AbstractService
         return true;
     }
 
-    public function isEntitledForHkFirstFiveTransactionsCampaign(Client $client){
-        //@todo - get this from model and change dates to the real ones
+    /**
+     * @param Client $client
+     * @param $campaign
+     * @return bool
+     */
+    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
+        //@todo - change dates to the real ones in db
+        if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
+            return false;
+        }
         $clientLastTransfersBetweenDates = $this->repository
-            ->getClientLastTransfersBetweenDates($client->transfers, 90, '2018-04-22 00:00:00', '2018-06-30 23:59:59');
+            ->getClientLastTransfersBetweenDates($client->transfers, 90, $campaign[0]->start_date, $campaign[0]->end_date);
 
         return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
     }
