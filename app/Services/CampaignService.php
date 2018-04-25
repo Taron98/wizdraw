@@ -23,12 +23,24 @@ class CampaignService extends AbstractService
         $this->campaign = $campaign;
     }
 
-
+    /**
+     * @param $id
+     * @return $this
+     */
     public function getCampaign($id)
     {
         $campaign = $this->campaign->getCampaignById($id);
 
         return $campaign;
+    }
+
+    public function setNewCommission($commissionsArray, $commissionToSet)
+    {
+        foreach($commissionsArray as $commissionObj){
+            $const = $commissionObj->getConst();
+        }
+
+        return $commissionsArray;
     }
 
 
