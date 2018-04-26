@@ -298,6 +298,7 @@ class TransferService extends AbstractService
     }
 
     /**
+     * @desc check if the user is entitled for hk_first_five_transfers campaign
      * @param Client $client
      * @param $campaign
      * @return bool

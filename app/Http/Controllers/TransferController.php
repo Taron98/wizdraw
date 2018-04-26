@@ -196,11 +196,9 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
-
-        //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
+        
         $campaign = $this->campaignService->getCampaign(1);
-        $isEntitledForHkFirstFiveTransfersCampaign = $this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign);
-        if($isEntitledForHkFirstFiveTransfersCampaign){
+        if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
             $this->campaignService->createInCampaignsWithTransfers($campaign, $transfer);
         }
 

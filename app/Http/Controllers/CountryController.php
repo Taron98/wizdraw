@@ -103,9 +103,9 @@ class CountryController extends AbstractController
             $client->defaultCountryId);
 
         //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
-        $campaign = $this->campaignService->getCampaign(1);
-        $isEntitledForHkFirstFiveTransfersCampaign = $this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign);
-        if($isEntitledForHkFirstFiveTransfersCampaign){
+        if($this->transferService
+            ->isEntitledForHkFirstFiveTransfersCampaign($client, $this->campaignService->getCampaign(1)))
+        {
             $commissions = $this->campaignService->setNewCommission($commissions, true, 18);
         }
 
