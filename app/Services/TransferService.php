@@ -303,7 +303,6 @@ class TransferService extends AbstractService
      * @return bool
      */
     public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
-        //@todo - change dates to the real ones in db
         if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
             return false;
         }
