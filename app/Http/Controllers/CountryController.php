@@ -9,9 +9,12 @@ use Wizdraw\Cache\Services\BranchCacheService;
 use Wizdraw\Cache\Services\CommissionCacheService;
 use Wizdraw\Cache\Services\CountryCacheService;
 use Wizdraw\Cache\Services\RateCacheService;
+use Wizdraw\Services\TransferService;
+use Wizdraw\Services\CampaignService;
 use Wizdraw\Http\Requests\Country\CountryShowByLocationRequest;
 use Wizdraw\Http\Requests\Country\CountryStoresRequest;
 use Wizdraw\Http\Requests\NoParamRequest;
+use Wizdraw\Models\Campaign;
 
 /**
  * Class CountryController
@@ -34,27 +37,38 @@ class CountryController extends AbstractController
     /** @var  BranchCacheService */
     private $branchCacheService;
 
+    /*** @var TransferService */
+    private $transferService;
+
+    /*** @var CampaignService */
+    private $campaignService;
+
     /**
-     * GroupController constructor.
-     *
+     * CountryController constructor.
      * @param CountryCacheService $countryCacheService
      * @param RateCacheService $rateCacheService
      * @param CommissionCacheService $commissionCacheService
      * @param BankCacheService $bankCacheService
      * @param BranchCacheService $branchCacheService
+     * @param TransferService $transferService
+     * @param CampaignService $campaignService
      */
     public function __construct(
         CountryCacheService $countryCacheService,
         RateCacheService $rateCacheService,
         CommissionCacheService $commissionCacheService,
         BankCacheService $bankCacheService,
-        BranchCacheService $branchCacheService
+        BranchCacheService $branchCacheService,
+        TransferService $transferService,
+        CampaignService $campaignService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
         $this->commissionCacheService = $commissionCacheService;
         $this->bankCacheService = $bankCacheService;
         $this->branchCacheService = $branchCacheService;
+        $this->transferService = $transferService;
+        $this->campaignService = $campaignService;
     }
 
     /**
@@ -69,7 +83,6 @@ class CountryController extends AbstractController
     public function show(int $id, NoParamRequest $request)
     {
         $client = $request->user()->client;
-
 
         /** @var CountryCache $country */
         $country = $this->countryCacheService->find($id);
@@ -88,6 +101,14 @@ class CountryController extends AbstractController
 
         $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',
             $client->defaultCountryId);
+
+        //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
+        if($this->transferService
+            ->isEntitledForHkFirstFiveTransfersCampaign($client, $this->campaignService->getCampaign(1)))
+        {
+            $commissions = $this->campaignService->setNewCommission($commissions, true, 18);
+        }
+
         $country->setCommissions($commissions);
 
         return $country;

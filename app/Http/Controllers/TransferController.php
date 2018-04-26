@@ -26,6 +26,7 @@ use Wizdraw\Services\FeedbackService;
 use Wizdraw\Services\FileService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
+use Wizdraw\Services\CampaignService;
 
 /**
  * Class TransferController
@@ -54,9 +55,14 @@ class TransferController extends AbstractController
 
     /** @var FileService */
     private $fileService;
+
+    /**
+     * @var CampaignService
+     */
+    private $campaignService;
+
     /**
      * TransferController constructor.
-     *
      * @param TransferService $transferService
      * @param ClientService $clientService
      * @param TransferReceiptService $transferReceiptService
@@ -64,6 +70,7 @@ class TransferController extends AbstractController
      * @param FeedbackService $feedbackService
      * @param RateCacheService $rateCacheService
      * @param FileService $fileService
+     * @param CampaignService $campaignService
      */
     public function __construct(
         TransferService $transferService,
@@ -72,7 +79,8 @@ class TransferController extends AbstractController
         BankAccountService $bankAccountService,
         FeedbackService $feedbackService,
         RateCacheService $rateCacheService,
-        FileService $fileService
+        FileService $fileService,
+        CampaignService $campaignService
     ) {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
@@ -81,6 +89,7 @@ class TransferController extends AbstractController
         $this->feedbackService = $feedbackService;
         $this->rateCacheService = $rateCacheService;
         $this->fileService = $fileService;
+        $this->campaignService = $campaignService;
     }
 
     /**
@@ -187,6 +196,11 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+        
+        $campaign = $this->campaignService->getCampaign(1);
+        if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
+            $this->campaignService->createInCampaignsWithTransfers($campaign, $transfer);
+        }
 
         $qr = ['result' => false, 'qr' => ''];
         if($paymentAgency == 'circle-k'){
