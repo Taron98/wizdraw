@@ -2,9 +2,27 @@
 
 namespace Wizdraw\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * Wizdraw\Models\Campaign
+ *
+ * @property int $id
+ * @property string $campaignName
+ * @property int $originCountryId
+ * @property bool $active
+ * @property \Carbon\Carbon|null $startDate
+ * @property \Carbon\Carbon|null $endDate
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\CampaignWithTransfer[] $campaignWithTransfer
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereCampaignName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereOriginCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereStartDate($value)
+ * @mixin \Eloquent
  */
+
 class Campaign extends AbstractModel
 {
 
@@ -48,6 +66,14 @@ class Campaign extends AbstractModel
         'start_date',
         'end_date',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function campaignWithTransfer(): HasMany
+    {
+        return $this->hasMany(CampaignWithTransfer::class);
+    }
 
     /**
      * @param $id

@@ -5,6 +5,7 @@ namespace Wizdraw\Models;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use stdClass;
@@ -34,6 +35,7 @@ use Wizdraw\Services\TransferService;
  * @property \Carbon\Carbon|null $updatedAt
  * @property \Carbon\Carbon|null $deletedAt
  * @property-read \Wizdraw\Models\BankAccount|null $bankAccount
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\CampaignWithTransfer[] $campaignWithTransfer
  * @property-read \Wizdraw\Models\Client $client
  * @property-read null|\stdClass $nearbyBranch
  * @property-read mixed $qrCodeUrl
@@ -208,6 +210,14 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function receiverClient(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'receiver_client_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function campaignWithTransfer(): HasMany
+    {
+        return $this->hasMany(CampaignWithTransfer::class);
     }
 
     /**

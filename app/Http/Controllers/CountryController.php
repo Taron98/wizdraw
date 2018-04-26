@@ -99,15 +99,14 @@ class CountryController extends AbstractController
         $rate = $this->rateCacheService->find($country->getId());
         $country->setRate($rate);
 
-        //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db)
-        $campaign = $this->campaignService->getCampaign(1);
-        $isEntitledForHkFirstFiveTransfersCampaign = $this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign);
-
         $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',
             $client->defaultCountryId);
 
+        //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
+        $campaign = $this->campaignService->getCampaign(1);
+        $isEntitledForHkFirstFiveTransfersCampaign = $this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign);
         if($isEntitledForHkFirstFiveTransfersCampaign){
-            $commissions = $this->campaignService->setNewCommission($commissions, 18);
+            $commissions = $this->campaignService->setNewCommission($commissions, true, 18);
         }
 
         $country->setCommissions($commissions);

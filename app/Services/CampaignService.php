@@ -3,6 +3,8 @@
 namespace Wizdraw\Services;
 
 use Wizdraw\Models\Campaign;
+use Wizdraw\Models\CampaignWithTransfer;
+use Wizdraw\Models\Transfer;
 
 /**
  * Class CampaignService
@@ -12,15 +14,17 @@ class CampaignService extends AbstractService
 {
 
     protected $campaign;
+    protected $campaignWithTransfer;
 
     /**
      * CampaignService constructor.
-     *
      * @param Campaign $campaign
+     * @param CampaignWithTransfer $campaignWithTransfer
      */
-    public function __construct(Campaign $campaign)
+    public function __construct(Campaign $campaign, CampaignWithTransfer $campaignWithTransfer)
     {
         $this->campaign = $campaign;
+        $this->campaignWithTransfer = $campaignWithTransfer;
     }
 
     /**
@@ -34,13 +38,24 @@ class CampaignService extends AbstractService
         return $campaign;
     }
 
-    public function setNewCommission($commissionsArray, $commissionToSet)
+    /**
+     * @param $commissionsArray
+     * @param $isConst
+     * @param $commissionToSet
+     * @return mixed
+     */
+    public function setNewCommission($commissionsArray, $isConst, $commissionToSet)
     {
         foreach($commissionsArray as $commissionObj){
-            $const = $commissionObj->getConst();
+            $isConst ? $commissionObj->setConst($commissionToSet) : $commissionObj->setPercentage($commissionToSet);
         }
 
         return $commissionsArray;
+    }
+
+    public function createInCampaignsWithTransfers($campaign, Transfer $transfer)
+    {
+        return $this->campaignWithTransfer->insertToCampaignsWithTransfers($campaign[0]->id, $transfer->transactionNumber);
     }
 
 

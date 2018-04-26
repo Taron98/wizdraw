@@ -117,7 +117,9 @@ class TransferRepository extends AbstractRepository
         return $transfers
             ->where('sender_country_id', $originCountry)
             ->where('created_at','>=', $from)
-            ->where('created_at','<=', $to);
+            ->where('created_at','<=', $to)
+            ->where('status_id','<>', 1)
+            ->where('status_id','<>', 9);
     }
 
 }
