@@ -53,6 +53,11 @@ class CampaignService extends AbstractService
         return $commissionsArray;
     }
 
+    /**
+     * @param $campaign
+     * @param Transfer $transfer
+     * @return bool
+     */
     public function createInCampaignsWithTransfers($campaign, Transfer $transfer)
     {
         return $this->campaignWithTransfer->insertToCampaignsWithTransfers($campaign[0]->id, $transfer->transactionNumber);
