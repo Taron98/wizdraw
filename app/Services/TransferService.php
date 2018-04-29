@@ -304,13 +304,27 @@ class TransferService extends AbstractService
      * @return bool
      */
     public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
+        if(!$this->isEntitledForCampaign($campaign)){
+            return false;
+        }
+        //At first, the condition for being entitled to the campaign was for the first 5 transfers only (as the function name..)
+//        $clientLastTransfersBetweenDates = $this->repository
+//            ->getClientLastTransfersBetweenDates($client->transfers, 90, $campaign[0]->start_date, $campaign[0]->end_date);
+
+//        return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
+        return $client->defaultCountryId === 90 ? true : false;
+    }
+
+    /**
+     * @desc check if the user is entitled for a campaign by the campaign start and end dates and if it's active
+     * @param $campaign
+     * @return bool
+     */
+    private function isEntitledForCampaign($campaign){
         if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
             return false;
         }
-        $clientLastTransfersBetweenDates = $this->repository
-            ->getClientLastTransfersBetweenDates($client->transfers, 90, $campaign[0]->start_date, $campaign[0]->end_date);
-
-        return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
+        return true;
     }
 
 }
