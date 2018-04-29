@@ -20,6 +20,7 @@ class CreateCampaignsTable extends Migration
             $table->boolean('active')->default(false);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
