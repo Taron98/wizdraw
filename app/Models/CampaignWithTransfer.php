@@ -76,13 +76,14 @@ class CampaignWithTransfer extends AbstractModel
 
     /**
      * @param $campaignId
-     * @param $transactionId
+     * @param $transferId
+     * @param $transactionNumber
      * @return bool
      */
-    public function insertToCampaignsWithTransfers($campaignId, $transactionId)
+    public function insertToCampaignsWithTransfers($campaignId, $transferId, $transactionNumber)
     {
         return $this->insert([
-            ['campaign_id' => $campaignId, 'transaction_number' => $transactionId]
+            ['campaign_id' => $campaignId, 'transfer_id' => $transferId, 'transaction_number' => $transactionNumber]
         ]);
     }
 
