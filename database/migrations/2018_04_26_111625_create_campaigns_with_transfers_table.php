@@ -27,10 +27,6 @@ class CreateCampaignsWithTransfersTable extends Migration
                 ->references('id')->on('transfers')
                 ->onDelete('cascade');
 
-            $table->foreign('transaction_number')
-                ->references('transaction_number')->on('transfers')
-                ->onDelete('cascade');
-
             $table->timestamp('created_at')->useCurrent();
         });
     }
