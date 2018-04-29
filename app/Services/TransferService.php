@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Services;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Entities\RateCache;
@@ -13,6 +14,7 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\User;
+use Wizdraw\Models\Campaign;
 use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
 
@@ -293,6 +295,22 @@ class TransferService extends AbstractService
         }
 
         return true;
+    }
+
+    /**
+     * @desc check if the user is entitled for hk_first_five_transfers campaign
+     * @param Client $client
+     * @param $campaign
+     * @return bool
+     */
+    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
+        if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
+            return false;
+        }
+        $clientLastTransfersBetweenDates = $this->repository
+            ->getClientLastTransfersBetweenDates($client->transfers, 90, $campaign[0]->start_date, $campaign[0]->end_date);
+
+        return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
     }
 
 }
