@@ -4,9 +4,9 @@
     "country": "PHILIPPINES",
     "currency": "NTD",
     "percentage": "0",
-    "const": "350",
+    "const": "250",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "30000",
     "origin": 119,
     "transfer_type": "deposit"
   },
@@ -17,7 +17,7 @@
     "percentage": "0",
     "const": "300",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "30000",
     "origin": 119,
     "transfer_type": "pickup_cash"
   }
