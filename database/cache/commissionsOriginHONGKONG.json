@@ -37,9 +37,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "22",
+    "const": "18",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "8000",
     "origin": 90,
     "transfer_type": "deposit"
   },
@@ -48,9 +48,9 @@
     "country": "THAILAND",
     "currency": "USD",
     "percentage": "0",
-    "const": "22",
+    "const": "18",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "8000",
     "origin": 90,
     "transfer_type": "deposit"
   },
@@ -92,9 +92,9 @@
     "country": "PHILIPPINES",
     "currency": "USD",
     "percentage": "0",
-    "const": "22",
+    "const": "18",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "8000",
     "origin": 90,
     "transfer_type": "pickup_cash"
   },
@@ -103,9 +103,9 @@
     "country": "THAILAND",
     "currency": "USD",
     "percentage": "0",
-    "const": "22",
+    "const": "18",
     "min_range": "1",
-    "max_range": "5000",
+    "max_range": "8000",
     "origin": 90,
     "transfer_type": "pickup_cash"
   }
