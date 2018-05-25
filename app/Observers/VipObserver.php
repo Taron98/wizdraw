@@ -1,7 +1,8 @@
 <?php
 
-namespace Wizdraw\Models;
+namespace Wizdraw\Observers;
 
+use Wizdraw\Models\Vip;
 use Wizdraw\Services\VipService;
 
 /**
