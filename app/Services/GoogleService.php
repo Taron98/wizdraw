@@ -43,10 +43,12 @@ class GoogleService extends AbstractService
                 continue;
             }
 
-            $last = array_pop($result[ 'address_components' ]);
-
-            if (isset($last[ 'short_name' ]) && strlen($last[ 'short_name' ]) == 2) {
-                return $last[ 'short_name' ];
+            $last = array_pop($result['address_components']);
+            $preLast = $result['address_components'][count($result['address_components']) - 1];
+            if (isset($last['short_name']) && strlen($last['short_name']) == 2) {
+                return $last['short_name'];
+            } elseif (isset($preLast['short_name']) && strlen($preLast['short_name']) == 2) {
+                return $preLast['short_name'];
             }
         }
     }

@@ -167,7 +167,7 @@ class AuthController extends AbstractController
 
         try {
             // todo: device_id?
-            $facebookUserConnect = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
+            $facebookUserConnect = $this->facebookService->connect($requestAttr[ 'token' ], (int)$requestAttr[ 'expire' ],
                 $requestAttr[ 'device_id' ]);
 
             $facebookUser = $facebookUserConnect['facebookUser'];
