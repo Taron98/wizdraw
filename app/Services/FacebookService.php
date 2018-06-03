@@ -154,7 +154,6 @@ class FacebookService extends AbstractService
         }
 
         return ['facebookUser' => $facebookUser , 'exist' => $existingFacebookUser];
-;
     }
 
     /**

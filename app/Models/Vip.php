@@ -4,6 +4,7 @@ namespace Wizdraw\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Wizdraw\Observers\VipObserver;
 
 /**
  * Wizdraw\Models\Vip
