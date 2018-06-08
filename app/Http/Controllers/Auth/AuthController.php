@@ -190,6 +190,7 @@ class AuthController extends AbstractController
             'token'     => $token,
             'didSetup'  => $client->isDidSetup(),
             'isPending' => $user->isPending(),
+            'phone'     => $client->getPhone(),
             'facebookUserAlreadyExist' => $facebookUserConnect['exist'],
         ], $facebookUser->toArray()));
     }
