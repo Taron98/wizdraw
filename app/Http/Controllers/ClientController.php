@@ -157,7 +157,7 @@ class ClientController extends AbstractController
         if (!is_null($client->vip)) {
             $client->vip->fresh();
         }
-        $user['didSetup'] = $user['didSetup'] = $user->client->isDidSetup();
+        $user['didSetup'] = $isSetup;
         return $this->respond(array_merge($user->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),
