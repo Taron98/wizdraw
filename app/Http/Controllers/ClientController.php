@@ -99,6 +99,7 @@ class ClientController extends AbstractController
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
+        $user->client->fill($inputs);
 
         if (is_null($client)) {
             return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST, $inputs);
@@ -158,6 +159,7 @@ class ClientController extends AbstractController
             $client->vip->fresh();
         }
         $user['didSetup'] = $isSetup;
+        $user['hasGroup'] = $user->client->adminGroups->count() > 0;
         return $this->respond(array_merge($user->toArray(), [
             'identityImage' => $this->fileService->getUrlIfExists(FileService::TYPE_IDENTITY, $clientId),
             'addressImage'  => $this->fileService->getUrlIfExists(FileService::TYPE_ADDRESS, $clientId),

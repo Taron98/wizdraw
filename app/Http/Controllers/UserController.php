@@ -205,6 +205,9 @@ class UserController extends AbstractController
         } else {
             $phone = substr($phone, 0, 1) == '+' ? $phone : '+' . $phone;
             $client = $this->clientService->findByPhone($phone);
+            if (is_null($client)) {
+                return $this->respondWithError('phone_not_found', Response::HTTP_NOT_FOUND);
+            }
             $user = $client->user;
         }
         if (is_null($user)) {
