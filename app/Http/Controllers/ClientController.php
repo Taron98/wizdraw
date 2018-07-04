@@ -99,7 +99,7 @@ class ClientController extends AbstractController
 
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
-        $user->client->fill($inputs);
+        //$user->client->fill($inputs);
 
         if (is_null($client)) {
             return $this->respondWithError('could_not_create_client', Response::HTTP_BAD_REQUEST, $inputs);
