@@ -23,11 +23,10 @@ class SMSVerificationSendAmountRequest extends TransferCreateRequest
      */
     public function rules()
     {
-        return [];
-//        $parentRules = parent::rules();
-//        return array_merge($parentRules, [
-//            'cId' => 'required|string',
-//            'smsCode' => 'required|string'
-//        ]);
+        $parentRules = parent::rules();
+        return array_merge($parentRules, [
+            'cId' => 'required|string',
+            'smsCode' => 'required|string'
+        ]);
     }
 }
