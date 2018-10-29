@@ -7,7 +7,7 @@ use Predis\Client;
 use stdClass;
 use Wizdraw\Cache\Entities\AbstractCacheEntity;
 use Wizdraw\Cache\Entities\CountryCache;
-use Wizdraw\Services\GoogleService;
+use Wizdraw\Services\GeoLocationService;
 
 /**
  * Class CountryCacheService
@@ -26,20 +26,20 @@ class CountryCacheService extends AbstractCacheService
     /** @var  string */
     protected $keyPrefix = 'country';
 
-    /** @var  GoogleService */
-    private $googleService;
+    /** @var  GeoLocationService */
+    private $geoLocationService;
 
     /**
      * CountryCacheService constructor.
      *
      * @param Client $redis
-     * @param GoogleService $googleService
+     * @param GeoLocationService $geoLocationService
      */
-    public function __construct(Client $redis, GoogleService $googleService)
+    public function __construct(Client $redis, GeoLocationService $geoLocationService)
     {
         parent::__construct($redis);
 
-        $this->googleService = $googleService;
+        $this->geoLocationService = $geoLocationService;
     }
 
     /**
@@ -78,7 +78,7 @@ class CountryCacheService extends AbstractCacheService
             $entity->setIsPickup($stdJson->is_pickup);
         }
         if(!empty($stdJson->is_deposit)) {
-        $entity->setIsDeposit($stdJson->is_deposit);
+            $entity->setIsDeposit($stdJson->is_deposit);
         }
 
 
@@ -170,7 +170,7 @@ class CountryCacheService extends AbstractCacheService
      */
     public function findByLocation(float $latitude, float $longitude)
     {
-        $countryCode = $this->googleService->get($latitude, $longitude);
+        $countryCode = $this->geoLocationService->get($latitude, $longitude);
         $countryId = $this->findIdByCode($countryCode);
 
         return $this->find($countryId);
