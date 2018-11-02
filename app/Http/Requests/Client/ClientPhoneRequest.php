@@ -29,7 +29,7 @@ class ClientPhoneRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'phone' => 'phone:AUTO',
+            'phone' => 'phone:AUTO,IL',
         ];
     }
 

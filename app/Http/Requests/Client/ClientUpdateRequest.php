@@ -40,7 +40,7 @@ class ClientUpdateRequest extends AbstractRequest
             'lastName'          => 'min:1|max:70',
             //'birthDate'         => 'before:18 years ago|after:100 years ago',
             'gender'            => 'in:male,female',
-            'phone'             => 'phone:AUTO',
+            'phone'             => 'phone:AUTO,IL',
             'defaultCountryId'  => 'integer|cacheExists:country',
             'residentCountryId' => 'integer|cacheExists:country',
             'state'             => 'min:2|max:120',
