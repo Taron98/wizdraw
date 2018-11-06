@@ -195,7 +195,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
-        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
