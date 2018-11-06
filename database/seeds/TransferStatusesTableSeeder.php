@@ -87,6 +87,11 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'original_status' => 'CONFIRMED',
                 'color'           => '#6fca56',
             ],
+            [
+                'status'          => TransferStatus::STATUS_WAIT,
+                'original_status' => TransferStatus::STATUS_WAIT,
+                'color'           => '',
+            ],
         ];
 
         TransferStatus::insert($transferStatuses);

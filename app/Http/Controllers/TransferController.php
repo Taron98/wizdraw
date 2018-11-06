@@ -14,6 +14,8 @@ use Wizdraw\Http\Requests\Transfer\TransferFeedbackRequest;
 use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Http\Requests\Transfer\TransferUsedAgencyRequest;
+use Wizdraw\Http\Requests\Transfer\WizdrawCard\SendSMSRequest;
+use Wizdraw\Http\Requests\Transfer\WizdrawCard\SMSVerificationSendAmountRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
@@ -24,6 +26,7 @@ use Wizdraw\Services\BankAccountService;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\FeedbackService;
 use Wizdraw\Services\FileService;
+use Wizdraw\Services\GuzzleHttpService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
@@ -62,6 +65,11 @@ class TransferController extends AbstractController
     private $campaignService;
 
     /**
+     * @var GuzzleHttpService $httpService
+     */
+    protected $httpService;
+
+    /**
      * TransferController constructor.
      * @param TransferService $transferService
      * @param ClientService $clientService
@@ -71,6 +79,7 @@ class TransferController extends AbstractController
      * @param RateCacheService $rateCacheService
      * @param FileService $fileService
      * @param CampaignService $campaignService
+     * @param GuzzleHttpService $guzzleHttpService
      */
     public function __construct(
         TransferService $transferService,
@@ -80,8 +89,10 @@ class TransferController extends AbstractController
         FeedbackService $feedbackService,
         RateCacheService $rateCacheService,
         FileService $fileService,
-        CampaignService $campaignService
-    ) {
+        CampaignService $campaignService,
+        GuzzleHttpService $guzzleHttpService
+    )
+    {
         $this->transferService = $transferService;
         $this->clientService = $clientService;
         $this->transferReceiptService = $transferReceiptService;
@@ -90,6 +101,7 @@ class TransferController extends AbstractController
         $this->rateCacheService = $rateCacheService;
         $this->fileService = $fileService;
         $this->campaignService = $campaignService;
+        $this->httpService = $guzzleHttpService;
     }
 
     /**
@@ -196,7 +208,7 @@ class TransferController extends AbstractController
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
-        
+
         $campaign = $this->campaignService->getCampaign(1);
         if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
             $this->campaignService->createInCampaignsWithTransfers($campaign, $transfer);
@@ -433,5 +445,31 @@ class TransferController extends AbstractController
             return $this->respondWithError('limit_not_found', Response::HTTP_NOT_FOUND);
         }
         return $this->respond(['limit' => $limit]);
+    }
+
+    /**
+     * @param SendSMSRequest $request
+     * @return JsonResponse
+     */
+    public function sendSMSWizdrawCard(SendSMSRequest $request)
+    {
+        $cId = $request->only(['cId']);
+        if ($this->httpService->sendVerificationSMS($cId)) {
+            return $this->respond(['message' => 'Fill the sms verification code']);
+        }
+        return $this->respondWithError('Failed To send SMS', 500);
+    }
+
+    /**
+     * @param SMSVerificationSendAmountRequest $request
+     * @return JsonResponse
+     */
+    public function wizdrawCardCreateTransfer(SMSVerificationSendAmountRequest $request)
+    {
+        $params = $request->only(['cId', 'amount', 'smsCode']);
+        if ($this->httpService->verifySendAmount($params)) {
+            return $this->create($request);
+        }
+        return $this->respondWithError('Failed To unload money', 500);
     }
 }
