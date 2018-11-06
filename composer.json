@@ -20,7 +20,9 @@
         "hoy/pushwoosh": "^2.2",
         "simplesoftwareio/simple-qrcode": "^1.5",
         "approached/laravel-image-optimizer": "^2.2",
-        "propaganistas/laravel-phone": "4.0.3"
+        "propaganistas/laravel-phone": "4.0.3",
+        "giggsey/locale": "1.6",
+        "giggsey/libphonenumber-for-php": "8.9.16"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
