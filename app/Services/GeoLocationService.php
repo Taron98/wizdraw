@@ -33,7 +33,7 @@ class GeoLocationService extends AbstractService
     {
         $url = self::API_URL . 'lat=' . $latitude . '&lng=' . $longitude;
         $response = json_decode($this->guzzleClient->get($url)->getBody(), true);
-        return !empty($response) ? $response['countryCode'] : 'IL';
+        return !empty($response['countryCode']) ? $response['countryCode'] : 'HK';
     }
 
 }
