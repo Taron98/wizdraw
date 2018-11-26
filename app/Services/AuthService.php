@@ -57,7 +57,7 @@ class AuthService extends AbstractService
      *
      * @return string
      */
-    public function createTokenFromFbId(int $facebookId): string
+    public function createTokenFromFbId($facebookId): string
     {
         $user = $this->userService->findByFacebookId($facebookId);
 

@@ -61,7 +61,8 @@ class AuthController extends AbstractController
         UserRepository $userRepository,
         UserService $userService,
         ClientService $clientService
-    ) {
+    )
+    {
         $this->facebookService = $facebookService;
         $this->authService = $authService;
         $this->userRepository = $userRepository;
@@ -79,7 +80,8 @@ class AuthController extends AbstractController
     public
     function login(
         AuthLoginRequest $request
-    ): JsonResponse {
+    ): JsonResponse
+    {
         $credentials = $request->only('email', 'password');
 
         $token = $this->authenticate($credentials);
@@ -96,11 +98,11 @@ class AuthController extends AbstractController
         $this->userService->updateModel($user);
 
         return $this->respond(array_merge([
-            'token'       => $token,
-            'didSetup'    => $user->client->isDidSetup(),
-            'hasGroup'    => $hasGroup,
+            'token' => $token,
+            'didSetup' => $user->client->isDidSetup(),
+            'hasGroup' => $hasGroup,
             'canTransfer' => $user->client->canTransfer(),
-            'noPassword'  => $user->hasNoPassword(),
+            'noPassword' => $user->hasNoPassword(),
         ], $user->toArray()));
     }
 
@@ -114,7 +116,8 @@ class AuthController extends AbstractController
     public
     function signup(
         AuthSignupRequest $request
-    ): JsonResponse {
+    ): JsonResponse
+    {
         $userAttrs = $request->only('email', 'deviceId');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
         $phone = $request->only('phone')['phone'];
@@ -124,14 +127,14 @@ class AuthController extends AbstractController
         }
         if ($this->clientService->findByPhone($phone)) {
             $client = $this->clientService->findByPhone($phone);
-            if($client->user){
+            if ($client->user) {
                 return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
             }
         }
 
-        if(isset($client) && !is_null($client)){
+        if (isset($client) && !is_null($client)) {
             $client = $this->clientService->update($clientAttrs, $client->id);
-        }else{
+        } else {
             $client = $this->clientService->createClient($clientAttrs);
         }
         /** @var Client $client */
@@ -145,7 +148,11 @@ class AuthController extends AbstractController
             return $this->respondWithError('could_not_create_user');
         }
 
-        $client->notify(new ClientVerify(true));
+        $client->notify(
+            (new ClientVerify(true))
+                ->onQueue('emails')
+                ->onConnection('redis')
+        );
 
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
@@ -162,13 +169,14 @@ class AuthController extends AbstractController
      */
     public function facebook(
         AuthFacebookRequest $request
-    ): JsonResponse {
+    ): JsonResponse
+    {
         $requestAttr = $request->inputs();
 
         try {
             // todo: device_id?
-            $facebookUserConnect = $this->facebookService->connect($requestAttr[ 'token' ], $requestAttr[ 'expire' ],
-                $requestAttr[ 'device_id' ]);
+            $facebookUserConnect = $this->facebookService->connect($requestAttr['token'], (int)$requestAttr['expire'],
+                $requestAttr['device_id']);
 
             $facebookUser = $facebookUserConnect['facebookUser'];
         } catch (FacebookInvalidTokenException $exception) {
@@ -187,9 +195,10 @@ class AuthController extends AbstractController
 
         // Returns our token, including his facebook information
         return $this->respond(array_merge([
-            'token'     => $token,
-            'didSetup'  => $client->isDidSetup(),
+            'token' => $token,
+            'didSetup' => $client->isDidSetup(),
             'isPending' => $user->isPending(),
+            'phone'     => $client->getPhone(),
             'facebookUserAlreadyExist' => $facebookUserConnect['exist'],
         ], $facebookUser->toArray()));
     }
@@ -229,7 +238,8 @@ class AuthController extends AbstractController
     function authenticate(
         array $credentials = [],
         string $facebookId = ''
-    ) {
+    )
+    {
 
         try {
             if (!empty($credentials)) {

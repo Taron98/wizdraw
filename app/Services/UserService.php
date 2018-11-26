@@ -39,7 +39,7 @@ class UserService extends AbstractService
      *
      * @return mixed
      */
-    public function findByFacebookId(int $facebookId)
+    public function findByFacebookId($facebookId)
     {
         return $this->repository->findByField('facebook_id', $facebookId)->first();
     }

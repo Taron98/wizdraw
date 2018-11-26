@@ -282,6 +282,18 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@alreadyUsedPaymentAgency',
             ]);
 
+            Route::group(['prefix' => 'wizdrawCard/'], function () {
+                Route::post('/sendSMS', [
+                    'as' => 'transfer.wizdrawCard.sendSMS',
+                    'uses' => 'TransferController@sendSMS'
+                ]);
+
+                Route::post('/wizdrawCardCreateTransfer', [
+                    'as' => 'transfer.wizdrawCard.sendSMS',
+                    'uses' => 'TransferController@wizdrawCardCreateTransfer'
+                ]);
+            });
+
         });
 
         // Feedback

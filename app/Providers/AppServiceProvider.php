@@ -2,6 +2,8 @@
 
 namespace Wizdraw\Providers;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Wizdraw\Services\ValidatorService;
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ClientInterface::class,Client::class);
     }
 
     private function bootValidator()

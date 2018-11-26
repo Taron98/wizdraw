@@ -61,7 +61,8 @@ class UserController extends AbstractController
     public function password(UserPasswordRequest $request): JsonResponse
     {
         $user = $this->userService->updatePassword($request->user(), $request->input('password'));
-
+        $user['client'] = $user->client;
+        $user['didSetup'] = $user->client->isDidSetup();
         return $this->respond($user);
     }
 
@@ -80,7 +81,7 @@ class UserController extends AbstractController
         $user->client->notify(new ClientVerify());
 
         return $this->respond([
-            'verifyCode'   => $user->getVerifyCode(),
+            'verifyCode' => $user->getVerifyCode(),
             'verifyExpire' => (string)$user->getVerifyExpire(),
         ]);
     }
@@ -135,16 +136,16 @@ class UserController extends AbstractController
         $client = $user->client;
 
         return $this->respond([
-            'user'   => [
-                'email'      => ($user->getEmail()) ?: '',
+            'user' => [
+                'email' => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
                 'noPassword' => $user->hasNoPassword(),
             ],
             'client' => [
-                'id'         => $client->getId(),
-                'firstName'  => ($client->getFirstName()) ?: '',
+                'id' => $client->getId(),
+                'firstName' => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
-                'lastName'   => ($client->getLastName()) ?: '',
+                'lastName' => ($client->getLastName()) ?: '',
             ],
         ]);
     }
@@ -163,7 +164,7 @@ class UserController extends AbstractController
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
 
-        if(!versionControl($versionId)) {
+        if (!versionControl($versionId)) {
             return $this->respondWithError('version_out_of_date', Response::HTTP_VERSION_NOT_SUPPORTED);
 
         }
@@ -175,16 +176,16 @@ class UserController extends AbstractController
         $client = $user->client;
 
         return $this->respond([
-            'user'   => [
-                'email'      => ($user->getEmail()) ?: '',
+            'user' => [
+                'email' => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
                 'noPassword' => $user->hasNoPassword(),
             ],
             'client' => [
-                'id'         => $client->getId(),
-                'firstName'  => ($client->getFirstName()) ?: '',
+                'id' => $client->getId(),
+                'firstName' => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
-                'lastName'   => ($client->getLastName()) ?: '',
+                'lastName' => ($client->getLastName()) ?: '',
             ],
         ]);
     }
@@ -199,11 +200,14 @@ class UserController extends AbstractController
     {
         $email = $request->input('email');
         $phone = $request->input('phone');
-        if($email){
+        if ($email) {
             $user = $this->userService->findByEmail($email);
-        }else{
-            $phone = substr($phone, 0, 1) == '+' ?  $phone : '+' . $phone;
+        } else {
+            $phone = substr($phone, 0, 1) == '+' ? $phone : '+' . $phone;
             $client = $this->clientService->findByPhone($phone);
+            if (is_null($client)) {
+                return $this->respondWithError('phone_not_found', Response::HTTP_NOT_FOUND);
+            }
             $user = $client->user;
         }
         if (is_null($user)) {
