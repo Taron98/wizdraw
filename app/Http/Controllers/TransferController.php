@@ -453,8 +453,7 @@ class TransferController extends AbstractController
      */
     public function sendSMSWizdrawCard(SendSMSRequest $request)
     {
-        $cId = $request->only(['cId']);
-        if ($this->httpService->sendVerificationSMS($cId)) {
+        if ($this->httpService->sendVerificationSMS(['cId' => $request->input('cId')])) {
             return $this->respond(['message' => 'Fill the sms verification code']);
         }
         return $this->respondWithError('Failed To send SMS', 500);
@@ -466,7 +465,11 @@ class TransferController extends AbstractController
      */
     public function wizdrawCardCreateTransfer(SMSVerificationSendAmountRequest $request)
     {
-        $params = $request->only(['cId', 'amount', 'smsCode']);
+        $params = [
+            'cId' => $request->input('cId'),
+            'amount' => $request->input('amount'),
+            'smsCode' => $request->input('smsCode')
+        ];
         if ($this->httpService->verifySendAmount($params)) {
             return $this->create($request);
         }
