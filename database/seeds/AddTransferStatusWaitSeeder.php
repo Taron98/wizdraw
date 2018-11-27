@@ -16,7 +16,7 @@ class AddTransferStatusWaitSeeder extends Seeder
             [
                 'status' => TransferStatus::STATUS_WAIT,
                 'original_status' => TransferStatus::STATUS_WAIT,
-                'color' => '',
+                'color' => '#50b9f1',
             ],
         ];
         TransferStatus::insert($transferStatuses);
