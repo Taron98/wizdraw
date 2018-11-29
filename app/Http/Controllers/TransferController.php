@@ -467,7 +467,7 @@ class TransferController extends AbstractController
     {
         $params = [
             'cId' => $request->input('cId'),
-            'amount' => $request->input('amount'),
+            'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
         if ($this->httpService->verifySendAmount($params)) {
