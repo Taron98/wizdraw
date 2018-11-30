@@ -88,8 +88,8 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'color'           => '#6fca56',
             ],
             [
-                'status'          => TransferStatus::STATUS_PREPAID_POSTED,
-                'original_status' => TransferStatus::STATUS_PREPAID_POSTED,
+                'status'          => TransferStatus::STATUS_WAIT,
+                'original_status' => TransferStatus::STATUS_WAIT,
                 'color'           => '',
             ],
         ];
