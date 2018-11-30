@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Controllers;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\RateCache;
@@ -470,9 +471,15 @@ class TransferController extends AbstractController
             'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
-        if ($this->httpService->verifySendAmount($params)) {
-            return $this->create($request);
+        try {
+            $result = $this->httpService->verifySendAmount($params);
+            if ($result['sent']) {
+                return $this->create($request);
+            } else {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
+        } catch (Exception $exception) {
+            return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return $this->respondWithError('Failed To unload money', 500);
     }
 }
