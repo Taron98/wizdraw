@@ -101,7 +101,7 @@ class TransferService extends AbstractService
         } elseif ($attributes['payment_agency'] == '7-eleven') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
         } elseif ($attributes['payment_agency'] == 'wic-store' && isset($attributes['c_id']) && isset($attributes['sms_code'])) {
-            $transferStatus = TransferStatus::STATUS_WAIT;
+            $transferStatus = TransferStatus::STATUS_PREPAID_POSTED;
             unset($attributes['c_id']);
             unset($attributes['sms_code']);
         } elseif ($attributes['payment_agency'] == 'pay-to-agent') {
