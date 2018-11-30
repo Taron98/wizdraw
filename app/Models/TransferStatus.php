@@ -49,7 +49,7 @@ class TransferStatus extends AbstractModel
     const STATUS_REQUEST_CANCEL = 'REQUEST CANCEL';
     const STATUS_FOR_VERIFICATION = 'FOR VERIFICATION';
     const STATUS_COMPLETED = 'Completed';
-    const STATUS_PREPAID_POSTED = 'POSTED';
+    const STATUS_PREPAID_POSTED = 'Posted wizdraw';
 
     /**
      * The table associated with the model.

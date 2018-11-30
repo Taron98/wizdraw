@@ -15,7 +15,7 @@ class AddTransferStatusWaitSeeder extends Seeder
         $transferStatuses = [
             [
                 'status' => TransferStatus::STATUS_PREPAID_POSTED,
-                'original_status' => TransferStatus::STATUS_PREPAID_POSTED,
+                'original_status' => strtoupper(TransferStatus::STATUS_POSTED),
                 'color' => '#50b9f1',
             ],
         ];
