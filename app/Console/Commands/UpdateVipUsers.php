@@ -4,6 +4,7 @@ namespace Wizdraw\Console\Commands;
 
 use Illuminate\Console\Command;
 use Wizdraw\Models\Vip;
+use Wizdraw\Services\FileService;
 
 class UpdateVipUsers extends Command
 {
@@ -22,11 +23,18 @@ class UpdateVipUsers extends Command
     protected $description = 'This command updating the vip users for 7-eleven QR code generating';
 
     /**
-     * UpdateVipUsers constructor.
+     * @var FileService $fileService
      */
-    public function __construct()
+    private $fileService;
+    /**
+     * UpdateVipUsers constructor.
+     * @param FileService $fileService
+     */
+    public function __construct(FileService $fileService)
     {
         parent::__construct();
+
+        $this->fileService = $fileService;
     }
 
     /**
