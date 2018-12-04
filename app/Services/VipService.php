@@ -59,4 +59,13 @@ class VipService extends AbstractService
         return $this->generateNumber();
     }
 
+    /**
+     * @param $clientId
+     * @return mixed
+     */
+    public function findByClientId($clientId)
+    {
+        return $this->repository->findByField('client_id', $clientId);
+    }
+
 }
