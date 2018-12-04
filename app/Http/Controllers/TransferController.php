@@ -233,6 +233,7 @@ class TransferController extends AbstractController
         $user->notify(
             (new TransferMissingReceipt($transfer))
                 ->delay(Carbon::now()->addHour())
+                ->onConnection('redis')
         );
 
         return $this->respond(array_merge($transfer->toArray(), [
