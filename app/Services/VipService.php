@@ -65,7 +65,7 @@ class VipService extends AbstractService
      */
     public function findByClientId($clientId)
     {
-        return $this->repository->findByField('client_id', $clientId);
+        return $this->repository->findByField('client_id', $clientId)->first();
     }
 
 }
