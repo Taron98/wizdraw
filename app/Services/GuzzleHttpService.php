@@ -29,11 +29,11 @@ class GuzzleHttpService extends AbstractService
 
     /**
      * @param array $params
-     * @return bool
+     * @return array
      */
-    public function sendVerificationSMS(array $params): bool
+    public function sendVerificationSMS(array $params): array
     {
-        $requestSent = false;
+        $requestSent = ['sent' => false];
         try {
             $response = $this->sendRequest(
                 'POST',
@@ -42,7 +42,9 @@ class GuzzleHttpService extends AbstractService
             );
             $decodedResponse = json_decode((string)$response->getBody(), true);
             if (isset($decodedResponse['errorCode']) && $decodedResponse['errorCode'] === 0) {
-                $requestSent = true;
+                $requestSent['sent'] = true;
+            } else {
+                $requestSent['message'] = $decodedResponse['errorDesc'];
             }
         } catch (GuzzleException $exception) {
             $this->writeLog('Error from Pre paid server', [

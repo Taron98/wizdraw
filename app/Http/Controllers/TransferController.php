@@ -471,10 +471,16 @@ class TransferController extends AbstractController
      */
     public function sendSMSWizdrawCard(SendSMSRequest $request)
     {
-        if ($this->httpService->sendVerificationSMS(['cId' => $request->input('cId')])) {
-            return $this->respond(['message' => 'Fill the sms verification code']);
+        try {
+            $result = $this->httpService->sendVerificationSMS(['cId' => $request->input('cId')]);
+            if ($result['sent']) {
+                return $this->respond(['message' => 'Fill the sms verification code']);
+            } else {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
+        } catch (Exception $exception) {
+            return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return $this->respondWithError('Failed To send SMS', 500);
     }
 
     /**
