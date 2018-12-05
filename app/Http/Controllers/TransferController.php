@@ -31,6 +31,7 @@ use Wizdraw\Services\GuzzleHttpService;
 use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
+use Wizdraw\Services\VipService;
 
 /**
  * Class TransferController
@@ -71,6 +72,11 @@ class TransferController extends AbstractController
     protected $httpService;
 
     /**
+     * @var VipService $vipService
+     */
+    protected $vipService;
+
+    /**
      * TransferController constructor.
      * @param TransferService $transferService
      * @param ClientService $clientService
@@ -81,6 +87,7 @@ class TransferController extends AbstractController
      * @param FileService $fileService
      * @param CampaignService $campaignService
      * @param GuzzleHttpService $guzzleHttpService
+     * @param VipService $vipService
      */
     public function __construct(
         TransferService $transferService,
@@ -91,7 +98,8 @@ class TransferController extends AbstractController
         RateCacheService $rateCacheService,
         FileService $fileService,
         CampaignService $campaignService,
-        GuzzleHttpService $guzzleHttpService
+        GuzzleHttpService $guzzleHttpService,
+        VipService $vipService
     )
     {
         $this->transferService = $transferService;
@@ -103,6 +111,7 @@ class TransferController extends AbstractController
         $this->fileService = $fileService;
         $this->campaignService = $campaignService;
         $this->httpService = $guzzleHttpService;
+        $this->vipService = $vipService;
     }
 
     /**
@@ -221,6 +230,13 @@ class TransferController extends AbstractController
         }
         elseif ($paymentAgency == '7-eleven') {
             $qr['result'] = true ;
+            $clientId = $client->getId();
+            $vipClient = $this->vipService->findByClientId($clientId);
+            if ($vipClient) {
+                $this->fileService->uploadQrVip($clientId, $vipClient->getNumber());
+            } else {
+                $this->vipService->createVip($client);
+            }
         }
         elseif($paymentAgency == 'pay-to-agent'){
             $affiliateCode = $client->getAffiliateId() ? $client->affiliate->code : NULL;
@@ -234,6 +250,7 @@ class TransferController extends AbstractController
         $user->notify(
             (new TransferMissingReceipt($transfer))
                 ->delay(Carbon::now()->addHour())
+                ->onConnection('redis')
         );
 
         return $this->respond(array_merge($transfer->toArray(), [

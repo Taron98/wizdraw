@@ -105,6 +105,7 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         $notifiable->notify(
             (new ClientMissingInfo())
                 ->delay($twentyFourHoursForward)
+                ->onConnection('redis')
         );
     }
 

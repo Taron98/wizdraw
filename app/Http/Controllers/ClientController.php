@@ -149,6 +149,7 @@ class ClientController extends AbstractController
             $user->notify(
                 (new ClientMissingInfo())
                     ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
+                    ->onConnection('redis')
             );
 
             $this->vipService->createVip($client);

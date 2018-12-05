@@ -92,6 +92,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         $notifiable->notify(
             (new TransferMissingReceipt($this->transfer))
                 ->delay($target)
+                ->onConnection('redis')
         );
     }
 }
