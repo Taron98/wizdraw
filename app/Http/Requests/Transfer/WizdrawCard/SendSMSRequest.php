@@ -24,7 +24,8 @@ class SendSMSRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'cId' => 'required|string'
+            'cId' => 'required|numeric',
+            'fullName' => 'string'
         ];
     }
 }

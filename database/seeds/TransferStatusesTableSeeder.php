@@ -89,7 +89,7 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
             ],
             [
                 'status'          => TransferStatus::STATUS_WAIT,
-                'original_status' => TransferStatus::STATUS_WAIT,
+                'original_status' => "PENDING",
                 'color'           => '',
             ],
         ];

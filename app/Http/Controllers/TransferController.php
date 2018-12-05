@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Controllers;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\RateCache;
@@ -470,11 +471,16 @@ class TransferController extends AbstractController
      */
     public function sendSMSWizdrawCard(SendSMSRequest $request)
     {
-        $cId = $request->only(['cId']);
-        if ($this->httpService->sendVerificationSMS($cId)) {
-            return $this->respond(['message' => 'Fill the sms verification code']);
+        try {
+            $result = $this->httpService->sendVerificationSMS(['cId' => $request->input('cId')]);
+            if ($result['sent']) {
+                return $this->respond(['message' => 'Fill the sms verification code']);
+            } else {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
+        } catch (Exception $exception) {
+            return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return $this->respondWithError('Failed To send SMS', 500);
     }
 
     /**
@@ -483,10 +489,20 @@ class TransferController extends AbstractController
      */
     public function wizdrawCardCreateTransfer(SMSVerificationSendAmountRequest $request)
     {
-        $params = $request->only(['cId', 'amount', 'smsCode']);
-        if ($this->httpService->verifySendAmount($params)) {
-            return $this->create($request);
+        $params = [
+            'cId' => $request->input('cId'),
+            'amount' => $request->input('totalAmount'),
+            'smsCode' => $request->input('smsCode')
+        ];
+        try {
+            $result = $this->httpService->verifySendAmount($params);
+            if ($result['sent']) {
+                return $this->create($request);
+            } else {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
+        } catch (Exception $exception) {
+            return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return $this->respondWithError('Failed To unload money', 500);
     }
 }
