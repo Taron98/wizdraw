@@ -285,7 +285,7 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::group(['prefix' => 'wizdrawCard/'], function () {
                 Route::post('/sendSMS', [
                     'as' => 'transfer.wizdrawCard.sendSMS',
-                    'uses' => 'TransferController@sendSMS'
+                    'uses' => 'TransferController@sendSMSWizdrawCard'
                 ]);
 
                 Route::post('/wizdrawCardCreateTransfer', [
