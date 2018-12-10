@@ -82,6 +82,7 @@ class AuthController extends AbstractController
         AuthLoginRequest $request
     ): JsonResponse
     {
+        Log::info(json_encode(['credentials' => $request->all()]));
         $credentials = $request->only('email', 'password');
 
         $token = $this->authenticate($credentials);
