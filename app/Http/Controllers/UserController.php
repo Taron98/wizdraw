@@ -204,7 +204,7 @@ class UserController extends AbstractController
             $user = $this->userService->findByEmail($email);
         } else {
             $phone = substr($phone, 0, 1) == '+' ? $phone : '+' . $phone;
-            $client = $this->clientService->findByPhone($phone);
+            $client = $this->clientService->findByPhoneAndClientType($phone, 'sender');
             if (is_null($client)) {
                 return $this->respondWithError('phone_not_found', Response::HTTP_NOT_FOUND);
             }
