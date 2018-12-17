@@ -82,6 +82,7 @@ class AuthController extends AbstractController
         AuthLoginRequest $request
     ): JsonResponse
     {
+        Log::info(json_encode(['credentials' => $request->all()]));
         $credentials = $request->only('email', 'password');
 
         $token = $this->authenticate($credentials);
@@ -148,11 +149,7 @@ class AuthController extends AbstractController
             return $this->respondWithError('could_not_create_user');
         }
 
-        $client->notify(
-            (new ClientVerify(true))
-                ->onQueue('emails')
-                ->onConnection('redis')
-        );
+        $client->notify(new ClientVerify(true));
 
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),

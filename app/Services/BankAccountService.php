@@ -38,6 +38,7 @@ class BankAccountService extends AbstractService
     public function createBankAccount(int $clientId, array $attributes, $bankBranchName = null, $bankBranchId = null)
     {
         $bankBranch = null;
+        $attributes['account_number'] = trim($attributes['account_number']);
         if (!is_null($bankBranchName)) {
             $bankBranch = $this->bankBranchService->findByName($bankBranchName);
             if (is_null($bankBranch)) {

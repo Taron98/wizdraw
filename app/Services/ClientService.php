@@ -52,15 +52,15 @@ class ClientService extends AbstractService
         foreach ($clients as $client) {
             $clientModel = null;
 
-            if (isset($client[ 'phone' ])) {
-                $clientModel = $this->findByPhone($client[ 'phone' ]);
+            if (isset($client['phone'])) {
+                $clientModel = $this->findByPhone($client['phone']);
             }
 
             if (is_null($clientModel)) {
                 $clientModel = $this->repository->create($client);
             } else {
                 /* This situation is not longer available, receivers names now updating through change name endpoint */
-               // $clientModel = $this->repository->update($client, $clientModel->getId());
+                // $clientModel = $this->repository->update($client, $clientModel->getId());
             }
 
             $clientModels->push($clientModel);
@@ -109,6 +109,21 @@ class ClientService extends AbstractService
         $phone = phone($phone);
 
         return $this->repository->findByPhone($phone)->first();
+    }
+
+    /**
+     * @param string $phone
+     * @param string $clientType
+     * @return Client|null
+     */
+    public function findByPhoneAndClientType(string $phone, string $clientType)
+    {
+        if (empty($phone) || empty($clientType)) {
+            return null;
+        }
+
+        $phone = phone($phone);
+        return $this->repository->findWhere(['phone' => $phone, 'client_type' => $clientType])->first();
     }
 
     /**

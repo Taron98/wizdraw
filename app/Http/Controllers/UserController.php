@@ -13,6 +13,7 @@ use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Notifications\UserResetPassword;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\UserService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserController
@@ -198,13 +199,14 @@ class UserController extends AbstractController
      */
     public function reset(UserResetPasswordRequest $request)
     {
+        Log::info(json_encode(['credentials' => $request->all()]));
         $email = $request->input('email');
         $phone = $request->input('phone');
         if ($email) {
             $user = $this->userService->findByEmail($email);
         } else {
             $phone = substr($phone, 0, 1) == '+' ? $phone : '+' . $phone;
-            $client = $this->clientService->findByPhone($phone);
+            $client = $this->clientService->findByPhoneAndClientType($phone, 'sender');
             if (is_null($client)) {
                 return $this->respondWithError('phone_not_found', Response::HTTP_NOT_FOUND);
             }

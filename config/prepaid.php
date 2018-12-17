@@ -6,5 +6,5 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'apiEndpoint' => env('PREPAID_SERVER_API', 'http://54.89.82.197/index.php/api')
+    'apiEndpoint' => env('PREPAID_SERVER_API', 'https://www.ppcwf.com/index.php/api')
 ];
