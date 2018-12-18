@@ -65,7 +65,7 @@ class CommissionCache extends AbstractCacheEntity
      */
     public function setPercentage($percentage): CommissionCache
     {
-        $this->percentage = (int)$percentage;
+        $this->percentage = $percentage;
 
         return $this;
     }
