@@ -506,28 +506,6 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2091",
-    "country": "THAILAND",
-    "currency": "EUR",
-    "percentage": null,
-    "const": "10",
-    "min_range": "1",
-    "max_range": "1000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2092",
-    "country": "THAILAND",
-    "currency": "EUR",
-    "percentage": "0.012",
-    "const": null,
-    "min_range": "1001",
-    "max_range": "99999",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
     "id": "2093",
     "country": "PHILIPPINES",
     "currency": "USD",
