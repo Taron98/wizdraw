@@ -217,16 +217,19 @@ if (!function_exists('zeroGenerator')) {
         $len = strlen($str);
 
         if ($len < $totalTabsLength) {
+            $rtl
+                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
+                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
 
-            $len = $totalTabsLength - $len;
-            $zeros = '';
-//            $rtl
-//                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
-//                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
-            for ($i = 0; $i < $len; $i++) {
-                $zeros .= '0';
-            }
-            $str = $rtl ? $zeros . $str : $str . $zeros;
+//            $len = $totalTabsLength - $len;
+//            $zeros = '';
+////            $rtl
+////                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
+////                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
+//            for ($i = 0; $i < $len; $i++) {
+//                $zeros .= '0';
+//            }
+//            $str = $rtl ? $zeros . $str : $str . $zeros;
         }
 
         return $str;
