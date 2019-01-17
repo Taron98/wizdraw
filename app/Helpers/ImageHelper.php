@@ -214,11 +214,19 @@ if (!function_exists('zeroGenerator')) {
     function zeroGenerator(string $str, int $totalTabsLength = 0, bool $rtl = true, bool $float = false)
     {
         $str = $float ? number_format((float)$str, 2, '', '') : $str;
+        $len = strlen($str);
 
-        if (strlen($str) < $totalTabsLength) {
-            $rtl
-                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
-                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
+        if ($len < $totalTabsLength) {
+
+            $len = $len - $totalTabsLength;
+            $zeros = '';
+//            $rtl
+//                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
+//                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
+            for ($i = 0; $i < $len; $i++) {
+                $zeros .= '0';
+            }
+            $str = $rtl ? $zeros . $str : $str . $zeros;
         }
 
         return $str;
