@@ -149,7 +149,7 @@ if (!function_exists('getCheckSum')) {
     {
         $digits = strlen($data);
 
-        // Sets the data (string*) lenght to be exact 9 characters
+        // Sets the data (string) length to be exact 9 characters
         if ($digits < 9) {
             getCheckSum('0' . $data);
         }
