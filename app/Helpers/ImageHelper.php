@@ -171,7 +171,7 @@ if (!function_exists('getCheckSum')) {
             $sum = 0;
 
             for ($i = 0; $i < $digits; $i++) {
-                $sum += (int)$data[$i] + $weights[$i];
+                $sum += (int)$data[$i] * $weights[$i];
             }
 
             $remainder = $sum % $mod;
