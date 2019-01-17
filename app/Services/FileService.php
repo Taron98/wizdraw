@@ -24,6 +24,8 @@ class FileService extends AbstractService
     const DEFAULT_QR_EXT = 'png';
     const DEFAULT_FILE_EXT = 'jpg';
 
+    const HK_ACCOUNT_NUMBER = '085730-60000537';
+
     /** @var  Filesystem */
     private $fileSystem;
 
@@ -131,7 +133,8 @@ class FileService extends AbstractService
      */
     public function uploadQr7Eleven(string $name, string $amount)
     {
-        $qrCode = generate_qr_code_7_eleven($amount, $account = '496351');
+        $account = str_replace('-', '', self::HK_ACCOUNT_NUMBER);
+        $qrCode = generate_qr_code_7_eleven($amount, $account);
 
         $res = $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
 
