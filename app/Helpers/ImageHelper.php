@@ -218,7 +218,7 @@ if (!function_exists('zeroGenerator')) {
 
         if ($len < $totalTabsLength) {
 
-            $len = $len - $totalTabsLength;
+            $len = $totalTabsLength - $len;
             $zeros = '';
 //            $rtl
 //                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
