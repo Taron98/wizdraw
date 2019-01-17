@@ -2,7 +2,6 @@
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-
 if (!function_exists('generate_qr_code')) {
     /**
      * @param $string
@@ -13,6 +12,40 @@ if (!function_exists('generate_qr_code')) {
     {
         $checksum = getCheckSum("00" . $string);
         $qr = "098030" . "000" . $string . $checksum;
+
+        $type = 'png';
+
+        $qrCodeBinary = QrCode::format($type)
+            ->size(500)
+            ->errorCorrection('H')
+            ->merge('/resources/assets/images/qr_icon.png')
+            ->generate($qr);
+
+        $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
+
+        return $qrCode;
+    }
+}
+
+if (!function_exists('generate_qr_code_7_eleven')) {
+
+    /**
+     * @param string $amount
+     * @param string $account
+     *
+     * @return string
+     */
+    function generate_qr_code_7_eleven(string $amount, string $account)
+    {
+        $merchantCode = '624';
+        $billType = '00';
+        $dealExpiry = date('Ymd', strtotime('+2 days'));
+
+        $account = $account . getCheckSum($account);
+        $account = zeroGenerator($account, 20);
+        $amount = zeroGenerator($amount, 10, true, true);
+
+        $qr = $merchantCode . $billType . $account . $amount;
 
         $type = 'png';
 
@@ -112,28 +145,42 @@ if (!function_exists('getCheckSum')) {
      *
      * @return string
      */
-    function getCheckSum($data)
+    function getCheckSum($data, $mod = 37)
     {
+        $digits = strlen($data);
 
-        $sum = 0;
-        $mod = 9;
-        $weight = 12;
-        $checksum = -1;
-
-        for ($i = strlen($data) - 1; $i >= 0; $i--) {
-            $value = (int)$data[ $i ];
-            $sum = $sum + $value * $weight;
-            $weight--;
+        // Sets the data (string*) lenght to be exact 9 characters
+        if ($digits < 9) {
+            getCheckSum('0' . $data);
         }
 
-        $remainder = $sum % $mod;
-        if ($remainder == 0) {
-            $checksum = 0;
-        } else {
-            $checksum = $mod - $remainder;
+        $weights = [];
+
+        // Sums current digit plus the previous digit to a valid weight
+        for ($idx = 0; $idx < $digits; $idx++) {
+
+            $prev = $idx - 1;
+
+            $weights[] = $idx !== 0
+                ? (int)$data[$prev] + (int)$data[$idx]
+                : (int)$data[$idx];
         }
 
-        return (string)$checksum;
+        if ($digits === count($weights)) {
+
+            $sum = 0;
+
+            for ($i = 0; $i < $digits; $i++) {
+                $sum += (int)$data[$i] + $weights[$i];
+            }
+
+            $remainder = $sum % $mod;
+
+            $checksum = $remainder
+                ? $mod - $remainder
+                : $remainder;
+            return (string)$checksum;
+        }
     }
 
 }
@@ -151,8 +198,29 @@ if (!function_exists('handleFloatAmount')) {
         }
 
         return $amountPrefix . $amountFormatted;
+    }
+}
 
+if (!function_exists('zeroGenerator')) {
 
+    /**
+     * @param string $str
+     * @param int $totalTabsLength
+     * @param bool $rtl
+     * @param bool $float
+     *
+     * @return mixed|string
+     */
+    function zeroGenerator(string $str, int $totalTabsLength = 0, bool $rtl = true, bool $float = false)
+    {
+        $str = $float ? number_format((float)$str, 2, '', '') : $str;
 
+        if (strlen($str) < $totalTabsLength) {
+            $rtl
+                ? zeroGenerator('0' . $str, $totalTabsLength, $rtl)
+                : zeroGenerator($str . '0', $totalTabsLength, $rtl);
+        }
+
+        return $str;
     }
 }
