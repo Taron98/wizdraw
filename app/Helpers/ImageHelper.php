@@ -211,7 +211,7 @@ if (!function_exists('zeroGenerator')) {
      *
      * @return mixed|string
      */
-    function zeroGenerator(string $str, int $totalTabsLength = 0, bool $rtl = true, bool $float = false)
+    function zeroGenerator(string $str, int $totalTabsLength, bool $rtl = true, bool $float = false)
     {
         $str = $float ? number_format((float)$str, 2, '', '') : $str;
         $len = strlen($str);
