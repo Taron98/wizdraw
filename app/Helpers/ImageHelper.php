@@ -179,6 +179,10 @@ if (!function_exists('getCheckSum')) {
             $checksum = $remainder
                 ? $mod - $remainder
                 : $remainder;
+
+            if (strlen($checksum) < 2) {
+                $checksum = '0' . $checksum;
+            }
             return (string)$checksum;
         }
     }
