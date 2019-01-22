@@ -911,5 +911,104 @@
     "max_range": "20000",
     "origin": 13,
     "transfer_type": "deposit"
+  },
+  {
+    "id": "2139",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "14",
+    "min_range": "1",
+    "max_range": "700",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2140",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2141",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "90",
+    "min_range": "8751",
+    "max_range": "20000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "14",
+    "min_range": "1",
+    "max_range": "700",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2142",
+    "country": "PHILIPPINES",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "7000",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   }
 ]
