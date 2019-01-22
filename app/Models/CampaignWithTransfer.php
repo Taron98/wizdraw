@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * Wizdraw\Models\CampaignWithTransfer
  *
- * @property int $id
- * @property int $campaignId
+ * @property integer $id
+ * @property integer $campaignId
+ * @property integer $transferId
  * @property string $transactionNumber
  * @property \Carbon\Carbon $createdAt
  * @property-read \Wizdraw\Models\Campaign $campaign
  * @property-read \Wizdraw\Models\Transfer $transfer
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CampaignWithTransfer whereCampaignId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CampaignWithTransfer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CampaignWithTransfer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CampaignWithTransfer whereTransactionNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CampaignWithTransfer whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CampaignWithTransfer whereCampaignId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CampaignWithTransfer whereTransferId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CampaignWithTransfer whereTransactionNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CampaignWithTransfer whereCreatedAt($value)
  * @mixin \Eloquent
  */
 class CampaignWithTransfer extends AbstractModel

@@ -30,6 +30,9 @@ class CommissionCache extends AbstractCacheEntity
     /** @var string */
     protected $transferType;
 
+    /** @var string */
+    protected $currency;
+
     /**
      * @return mixed
      */
@@ -175,6 +178,24 @@ class CommissionCache extends AbstractCacheEntity
     public function getKey() : string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency(string $currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
     }
 
 }
