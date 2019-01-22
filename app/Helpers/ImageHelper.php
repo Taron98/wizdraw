@@ -180,10 +180,11 @@ if (!function_exists('getCheckSum')) {
                 ? $mod - $remainder
                 : $remainder;
 
-            if (strlen($checksum) < 2) {
-                $checksum = '0' . $checksum;
-            }
-            return (string)$checksum;
+//            if (strlen($checksum) < 2) {
+//                $checksum = '0' . $checksum;
+//            }
+//            return (string)$checksum;
+            return zeroGenerator($checksum, 2);
         }
     }
 
