@@ -42,7 +42,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
         $dealExpiry = date('Ymd', strtotime('+2 days'));
 
         $account = $account . getCheckSum($account);
-        $account = zeroGenerator($account, 20);
+//        $account = zeroGenerator($account, 20);
         $amount = zeroGenerator($amount, 10, true, true);
 
         $qr = $merchantCode . $billType . $account . $amount;
@@ -180,10 +180,6 @@ if (!function_exists('getCheckSum')) {
                 ? $mod - $remainder
                 : $remainder;
 
-//            if (strlen($checksum) < 2) {
-//                $checksum = '0' . $checksum;
-//            }
-//            return (string)$checksum;
             return zeroGenerator($checksum, 2);
         }
     }
