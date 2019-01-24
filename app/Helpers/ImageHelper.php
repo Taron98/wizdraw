@@ -52,7 +52,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
         $qrCodeBinary = QrCode::format($type)
             ->size(500)
             ->errorCorrection('H')
-            ->merge('/resources/assets/images/qr_icon.png')
+            ->merge('/resources/assets/images/qr_icon_7_eleven.png')
             ->generate($qr);
 
         $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
