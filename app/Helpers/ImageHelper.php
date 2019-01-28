@@ -42,7 +42,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
         $dealExpiry = date('Ymd', strtotime('+2 days'));
 
         $account = $account . getCheckSum($account);
-//        $account = zeroGenerator($account, 20);
+        $account = zeroGenerator($account, 20);
         $amount = zeroGenerator($amount, 10, true, true);
 
         $qr = $merchantCode . $billType . $account . $amount;
@@ -52,7 +52,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
         $qrCodeBinary = QrCode::format($type)
             ->size(500)
             ->errorCorrection('H')
-            ->merge('/resources/assets/images/qr_icon_7_eleven.png')
+            ->merge('/resources/assets/images/qr_icon.png')
             ->generate($qr);
 
         $qrCode = 'data:image/' . $type . ';base64,' . base64_encode($qrCodeBinary);
