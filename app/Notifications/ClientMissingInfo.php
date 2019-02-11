@@ -4,11 +4,12 @@ namespace Wizdraw\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use NotificationChannels\ExpoPushNotifications\ExpoChannel;
+use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
-use Wizdraw\Notifications\Channels\PushwooshChannel;
-use Wizdraw\Notifications\Messages\PushwooshMessage;
+
 use Wizdraw\Services\FileService;
 
 /**
@@ -37,25 +38,26 @@ class ClientMissingInfo extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushwooshChannel::class];
+        return [ExpoChannel::class];
     }
+
 
     /**
      * @param $notifiable
      *
-     * @return PushwooshMessage
+     * @return ExpoMessage|null
      */
-    public function toPushwoosh(User $notifiable)
+    public function toExpoPush(User $notifiable)
     {
         $missing = $this->checkMissing($notifiable->client);
 
-        if (!count($missing[ 0 ])) {
+        if (!count($missing[0])) {
             return null;
         }
 
         $content = trans('notification.missing_multiple');
-        if (count($missing[ 0 ]) === 1) {
-            $content = trans('notification.missing_' . $missing[ 0 ][ 0 ]);
+        if (count($missing[0]) === 1) {
+            $content = trans('notification.missing_' . $missing[0][0]);
         }
 
         $this->addReminder($notifiable);
@@ -64,13 +66,10 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         if (is_null($this->delay) || $this->delay->diffInMinutes(null, false) > 5) {
             return null;
         }
-
-        return (new PushwooshMessage)
-            ->setContent($content)
-            ->setData([
-                'state' => self::APPLICATION_STATE,
-                'data'  => $missing[ 1 ],
-            ]);
+        return ExpoMessage::create()
+            ->badge(1)
+            ->enableSound()
+            ->body($content);
     }
 
     /**

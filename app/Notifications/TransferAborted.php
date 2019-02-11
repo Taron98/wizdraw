@@ -5,11 +5,12 @@ namespace Wizdraw\Notifications;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use NotificationChannels\ExpoPushNotifications\ExpoChannel;
+use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
-use Wizdraw\Notifications\Channels\PushwooshChannel;
-use Wizdraw\Notifications\Messages\PushwooshMessage;
+
 
 /**
  * Class TransferAborted
@@ -43,15 +44,16 @@ class TransferAborted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushwooshChannel::class];
+        return [ExpoChannel::class];
     }
+
 
     /**
      * @param $notifiable
      *
-     * @return PushwooshMessage|null
+     * @return ExpoMessage|null
      */
-    public function toPushwoosh(User $notifiable)
+    public function toExpoPush(User $notifiable)
     {
         $countryStores = $this->stores($this->transfer->senderCountryId);
 
@@ -59,15 +61,10 @@ class TransferAborted extends Notification implements ShouldQueue
             'transactionNumber' => $this->transfer->getTransactionNumber(),
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
-
-        return (new PushwooshMessage)
-            ->setContent($content)
-            ->setData([
-                'state' => self::APPLICATION_STATE,
-                'data'  => [
-                    'transferId' => $this->transfer->getId(),
-                ],
-            ]);
+        return ExpoMessage::create()
+            ->badge(1)
+            ->enableSound()
+            ->body($content);
     }
 
     /**

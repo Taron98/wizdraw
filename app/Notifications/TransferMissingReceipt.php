@@ -5,11 +5,13 @@ namespace Wizdraw\Notifications;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use NotificationChannels\ExpoPushNotifications\ExpoChannel;
+use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
-use Wizdraw\Notifications\Channels\PushwooshChannel;
-use Wizdraw\Notifications\Messages\PushwooshMessage;
+
+
 
 /**
  * Class TransferMissingReceipt
@@ -44,36 +46,30 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushwooshChannel::class];
+        return [ExpoChannel::class];
     }
 
     /**
      * @param $notifiable
      *
-     * @return PushwooshMessage|null
+     * @return ExpoMessage|null
      */
-    public function toPushwoosh(User $notifiable)
+    public function toExpoPush(User $notifiable)
     {
         $content = trans('notification.transfer_missing_receipt', [
             'transactionNumber' => $this->transfer->getTransactionNumber(),
             'receiverFirstName' => $this->transfer->receiverClient->getFirstName(),
         ]);
 
-        // A receipt was added
-        if (!is_null($this->transfer->receipt) || $this->transfer->statusId!=3) {
+        if (!is_null($this->transfer->receipt) || $this->transfer->statusId != 3) {
             return;
         }
 
         $this->addReminder($notifiable);
-
-        return (new PushwooshMessage)
-            ->setContent($content)
-            ->setData([
-                'state' => self::APPLICATION_STATE,
-                'data'  => [
-                    'transferId' => $this->transfer->getId(),
-                ],
-            ]);
+        return ExpoMessage::create()
+            ->badge(1)
+            ->enableSound()
+            ->body($content);
     }
 
     /**
