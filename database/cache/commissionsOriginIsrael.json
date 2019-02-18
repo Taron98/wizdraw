@@ -115,7 +115,7 @@
     "currency": "ILS",
     "percentage": null,
     "const": "35",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "3600",
     "origin": 13,
     "transfer_type": "pickup_cash"
@@ -159,7 +159,7 @@
     "currency": "USD",
     "percentage": "0",
     "const": "14",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "700",
     "origin": 13,
     "transfer_type": "pickup_cash"
@@ -193,7 +193,7 @@
     "percentage": "0",
     "const": "54",
     "min_range": "4901",
-    "max_range": "7000",
+    "max_range": "8750",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
@@ -203,7 +203,7 @@
     "currency": "ILS",
     "percentage": null,
     "const": "15",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "350",
     "origin": 13,
     "transfer_type": "pickup_cash"
@@ -220,11 +220,33 @@
     "transfer_type": "pickup_cash"
   },
   {
+    "id": "2050",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2051",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "52",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
     "id": "2057",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
-    "const": "22",
+    "const": "7",
     "min_range": "1",
     "max_range": "400",
     "origin": 13,
@@ -488,8 +510,8 @@
     "country": "THAILAND",
     "currency": "ILS",
     "percentage": null,
-    "const": "35",
-    "min_range": "1",
+    "const": "37",
+    "min_range": "10",
     "max_range": "4000",
     "origin": 13,
     "transfer_type": "deposit"
@@ -498,10 +520,32 @@
     "id": "2090",
     "country": "THAILAND",
     "currency": "ILS",
-    "percentage": "1.1",
+    "percentage": "0.011",
     "const": null,
     "min_range": "4001",
     "max_range": "20000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2091",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "10",
+    "min_range": "1",
+    "max_range": "1000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2092",
+    "country": "THAILAND",
+    "currency": "EUR",
+    "percentage": "0.012",
+    "const": null,
+    "min_range": "1001",
+    "max_range": "99999",
     "origin": 13,
     "transfer_type": "deposit"
   },
@@ -550,12 +594,23 @@
     "transfer_type": "deposit"
   },
   {
+    "id": "2200",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "93",
+    "min_range": "8751",
+    "max_range": "18500",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
     "id": "2097",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
     "const": "15",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "350",
     "origin": 13,
     "transfer_type": "deposit"
@@ -594,11 +649,33 @@
     "transfer_type": "deposit"
   },
   {
+    "id": "2201",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "100",
+    "min_range": "7461",
+    "max_range": "14920",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2202",
+    "country": "INDIA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "150",
+    "min_range": "14920",
+    "max_range": "20000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
     "id": "2101",
     "country": "INDIA",
     "currency": "EUR",
     "percentage": null,
-    "const": "22",
+    "const": "7",
     "min_range": "1",
     "max_range": "400",
     "origin": 13,
@@ -687,7 +764,7 @@
     "currency": "ILS",
     "percentage": null,
     "const": "17",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "749",
     "origin": 13,
     "transfer_type": "deposit"
@@ -730,25 +807,47 @@
     "country": "SRI LANKA",
     "currency": "ILS",
     "percentage": null,
-    "const": "17",
-    "min_range": "1",
-    "max_range": "749",
+    "const": "89",
+    "min_range": "7467",
+    "max_range": "12000",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2114",
     "country": "SRI LANKA",
     "currency": "ILS",
     "percentage": null,
+    "const": "135",
+    "min_range": "12001",
+    "max_range": "20000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2115",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "17",
+    "min_range": "10",
+    "max_range": "700",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2116",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
     "const": "24",
-    "min_range": "750",
+    "min_range": "701",
     "max_range": "3735",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
   {
-    "id": "2115",
+    "id": "2117",
     "country": "SRI LANKA",
     "currency": "ILS",
     "percentage": null,
@@ -759,7 +858,7 @@
     "transfer_type": "pickup_cash"
   },
   {
-    "id": "2116",
+    "id": "2118",
     "country": "SRI LANKA",
     "currency": "ILS",
     "percentage": null,
@@ -834,181 +933,5 @@
     "max_range": "10000",
     "origin": 13,
     "transfer_type": "deposit"
-  },
-  {
-    "id": "2132",
-    "country": "PHILIPPINES",
-    "currency": "USD",
-    "percentage": null,
-    "const": "90",
-    "min_range": "8751",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2133",
-    "country": "INDIA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "100",
-    "min_range": "7461",
-    "max_range": "14920",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2134",
-    "country": "INDIA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "150",
-    "min_range": "14921",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2135",
-    "country": "SRI LANKA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "89",
-    "min_range": "7467",
-    "max_range": "12000",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2136",
-    "country": "SRI LANKA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "135",
-    "min_range": "12001",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2137",
-    "country": "SRI LANKA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "89",
-    "min_range": "7467",
-    "max_range": "12000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2138",
-    "country": "SRI LANKA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "135",
-    "min_range": "12001",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2139",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "14",
-    "min_range": "1",
-    "max_range": "700",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2140",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "25",
-    "min_range": "701",
-    "max_range": "2800",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2141",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "32",
-    "min_range": "2801",
-    "max_range": "4900",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2142",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "54",
-    "min_range": "4901",
-    "max_range": "8750",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2143",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "90",
-    "min_range": "8751",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2144",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "14",
-    "min_range": "1",
-    "max_range": "700",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2145",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "25",
-    "min_range": "701",
-    "max_range": "2800",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2146",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "32",
-    "min_range": "2801",
-    "max_range": "4900",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2147",
-    "country": "PHILIPPINES",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "54",
-    "min_range": "4901",
-    "max_range": "7000",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
   }
 ]
