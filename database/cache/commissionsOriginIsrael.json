@@ -230,28 +230,7 @@
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
-  {
-    "id": "2050",
-    "country": "INDIA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "32",
-    "min_range": "2801",
-    "max_range": "4900",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2051",
-    "country": "INDIA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "52",
-    "min_range": "4901",
-    "max_range": "8750",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
+
   {
     "id": "2057",
     "country": "INDIA",
@@ -531,7 +510,7 @@
     "id": "2090",
     "country": "THAILAND",
     "currency": "ILS",
-    "percentage": "0.011",
+    "percentage": "1.10",
     "const": null,
     "min_range": "4001",
     "max_range": "20000",
@@ -566,7 +545,7 @@
     "currency": "USD",
     "percentage": "0",
     "const": "14",
-    "min_range": "1",
+    "min_range": "10",
     "max_range": "700",
     "origin": 13,
     "transfer_type": "deposit"
@@ -614,6 +593,61 @@
     "max_range": "18500",
     "origin": 13,
     "transfer_type": "deposit"
+  },
+  {
+    "id": "2134",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "14",
+    "min_range": "10",
+    "max_range": "700",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2135",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "25",
+    "min_range": "701",
+    "max_range": "2800",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2136",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "32",
+    "min_range": "2801",
+    "max_range": "4900",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2137",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "54",
+    "min_range": "4901",
+    "max_range": "8750",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2138",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "93",
+    "min_range": "8751",
+    "max_range": "18500",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   },
   {
     "id": "2097",
