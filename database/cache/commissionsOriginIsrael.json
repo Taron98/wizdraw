@@ -198,6 +198,17 @@
     "transfer_type": "pickup_cash"
   },
   {
+    "id": "2131",
+    "country": "PHILIPPINES",
+    "currency": "USD",
+    "percentage": "0",
+    "const": "93",
+    "min_range": "8751",
+    "max_range": "18500",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
     "id": "2048",
     "country": "INDIA",
     "currency": "ILS",
