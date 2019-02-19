@@ -37,8 +37,6 @@ if (!function_exists('generate_qr_code_7_eleven')) {
      */
     function generate_qr_code_7_eleven(string $amount, string $account)
     {
-        $qr = $amount;
-
         $merchantCode = '624';
         $billType = '00';
         $dealExpiry = date('Ymd', strtotime('+2 days'));
@@ -47,6 +45,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
 //        $account = zeroGenerator($account, 20);
         $amount = zeroGenerator($amount, 10, true, true);
 
+        $qr = $amount;
 //        $qr = $merchantCode . $billType . $account . $amount;
 
         $type = 'png';
