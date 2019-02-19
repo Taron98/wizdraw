@@ -880,6 +880,28 @@
     "transfer_type": "pickup_cash"
   },
   {
+    "id": "2132",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "89",
+    "min_range": "7467",
+    "max_range": "12000",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2133",
+    "country": "SRI LANKA",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "135",
+    "min_range": "12001",
+    "max_range": "20000",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
     "id": "2119",
     "country": "GEORGIA",
     "currency": "USD",
