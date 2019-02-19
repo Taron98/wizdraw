@@ -45,8 +45,7 @@ if (!function_exists('generate_qr_code_7_eleven')) {
 //        $account = zeroGenerator($account, 20);
         $amount = zeroGenerator($amount, 10, true, true);
 
-        $qr = $amount;
-//        $qr = $merchantCode . $billType . $account . $amount;
+        $qr = $merchantCode . $billType . $account . $amount;
 
         $type = 'png';
 
