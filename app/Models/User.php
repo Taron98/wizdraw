@@ -55,6 +55,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\User whereVerifyExpire($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User withoutTrashed()
+ * @mixin \Eloquent
  */
 class User extends AbstractModel implements
     AuthenticatableContract,

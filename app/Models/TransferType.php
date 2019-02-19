@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType withoutTrashed()
+ * @mixin \Eloquent
  */
 class TransferType extends AbstractModel
 {
