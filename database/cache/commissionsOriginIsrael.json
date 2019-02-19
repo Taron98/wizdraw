@@ -542,7 +542,7 @@
   {
     "id": "2093",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "14",
     "min_range": "10",
@@ -553,7 +553,7 @@
   {
     "id": "2094",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "25",
     "min_range": "701",
@@ -564,7 +564,7 @@
   {
     "id": "2095",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "32",
     "min_range": "2801",
@@ -575,7 +575,7 @@
   {
     "id": "2096",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "54",
     "min_range": "4901",
@@ -586,7 +586,7 @@
   {
     "id": "2125",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "93",
     "min_range": "8751",
@@ -597,7 +597,7 @@
   {
     "id": "2134",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "14",
     "min_range": "10",
@@ -608,7 +608,7 @@
   {
     "id": "2135",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "25",
     "min_range": "701",
@@ -619,7 +619,7 @@
   {
     "id": "2136",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "32",
     "min_range": "2801",
@@ -630,7 +630,7 @@
   {
     "id": "2137",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "54",
     "min_range": "4901",
@@ -641,7 +641,7 @@
   {
     "id": "2138",
     "country": "PHILIPPINES",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "0",
     "const": "93",
     "min_range": "8751",
