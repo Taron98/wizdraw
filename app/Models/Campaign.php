@@ -7,21 +7,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Wizdraw\Models\Campaign
  *
- * @property integer $id
+ * @property int $id
  * @property string $campaignName
- * @property integer $originCountryId
- * @property boolean $active
- * @property \Carbon\Carbon $startDate
- * @property \Carbon\Carbon $endDate
- * @property \Carbon\Carbon $createdAt
+ * @property int $originCountryId
+ * @property bool $active
+ * @property \Carbon\Carbon|null $startDate
+ * @property \Carbon\Carbon|null $endDate
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\CampaignWithTransfer[] $campaignWithTransfer
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereCampaignName($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereOriginCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereActive($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereStartDate($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereEndDate($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Campaign whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereCampaignName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereOriginCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Campaign whereStartDate($value)
  * @mixin \Eloquent
  */
 
