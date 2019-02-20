@@ -694,7 +694,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2126",
+    "id": "2140",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -705,7 +705,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2127",
+    "id": "2141",
     "country": "INDIA",
     "currency": "ILS",
     "percentage": null,
@@ -876,7 +876,7 @@
     "percentage": null,
     "const": "17",
     "min_range": "10",
-    "max_range": "700",
+    "max_range": "749",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
@@ -886,7 +886,7 @@
     "currency": "ILS",
     "percentage": null,
     "const": "24",
-    "min_range": "701",
+    "min_range": "750",
     "max_range": "3735",
     "origin": 13,
     "transfer_type": "pickup_cash"
