@@ -8,22 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\TransferType
  *
- * @property int $id
+ * @property integer $id
  * @property string $type
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon|null $updatedAt
- * @property \Carbon\Carbon|null $deletedAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Transfer[] $transfers
- * @method static bool|null forceDelete()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType onlyTrashed()
- * @method static bool|null restore()
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\TransferType whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType withTrashed()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType withoutTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereType($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\TransferType whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class TransferType extends AbstractModel
