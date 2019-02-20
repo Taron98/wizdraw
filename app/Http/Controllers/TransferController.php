@@ -234,7 +234,8 @@ class TransferController extends AbstractController
             if (!$this->vipService->findByClientId($clientId)) {
                 $this->vipService->createVip($client);
             }
-            $qr = $this->fileService->uploadQr7Eleven($clientId, $amount);
+//            $qr = $this->fileService->uploadQr7Eleven($clientId, $amount);
+            $qr = $this->fileService->uploadQr7Eleven($transfer->getTransactionNumber(), $amount);
         }
 //        elseif ($paymentAgency == '7-eleven') {
 //            $qr['result'] = true ;
