@@ -574,7 +574,7 @@
   {
     "id": "2095",
     "country": "PHILIPPINES",
-    "currency": "ILS",
+    "currency": "USD",
     "percentage": "0",
     "const": "32",
     "min_range": "2801",
@@ -812,5 +812,71 @@
     "max_range": "8750",
     "origin": 13,
     "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2119",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2120",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2121",
+    "country": "GEORGIA",
+    "currency": "USD",
+    "percentage": "0.017",
+    "const": null,
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2122",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": null,
+    "const": "5",
+    "min_range": "1",
+    "max_range": "200",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2123",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "7",
+    "min_range": "201",
+    "max_range": "2000",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2124",
+    "country": "GEORGIA",
+    "currency": "EUR",
+    "percentage": "0.017",
+    "const": "10",
+    "min_range": "2001",
+    "max_range": "10000",
+    "origin": 13,
+    "transfer_type": "deposit"
   }
 ]
