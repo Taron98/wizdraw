@@ -12,25 +12,20 @@ use Wizdraw\Models\Pivots\GroupClient;
 /**
  * Wizdraw\Models\Group
  *
- * @property int $id
+ * @property integer $id
  * @property string $name
- * @property int|null $adminClientId
+ * @property integer $adminClientId
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon|null $updatedAt
- * @property \Carbon\Carbon|null $deletedAt
- * @property-read \Wizdraw\Models\Client|null $adminClient
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
+ * @property-read \Wizdraw\Models\Client $adminClient
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Client[] $memberClients
- * @method static bool|null forceDelete()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group onlyTrashed()
- * @method static bool|null restore()
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereAdminClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\Group whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group withTrashed()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group withoutTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereAdminClientId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Group whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Group extends AbstractModel
