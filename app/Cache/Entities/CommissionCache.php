@@ -175,7 +175,7 @@ class CommissionCache extends AbstractCacheEntity
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->id;
     }

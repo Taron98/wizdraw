@@ -233,8 +233,7 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse|string
      */
-    private
-    function authenticate(
+    private function authenticate(
         array $credentials = [],
         string $facebookId = ''
     )

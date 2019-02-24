@@ -227,18 +227,9 @@ class TransferController extends AbstractController
         $qr = ['result' => false, 'qr' => ''];
         if($paymentAgency == 'circle-k'){
             $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
-        }
-        elseif ($paymentAgency == '7-eleven') {
-            $qr['result'] = true ;
-            $clientId = $client->getId();
-            $vipClient = $this->vipService->findByClientId($clientId);
-            if ($vipClient) {
-                $this->fileService->uploadQrVip($clientId, $vipClient->getNumber());
-            } else {
-                $this->vipService->createVip($client);
-            }
-        }
-        elseif($paymentAgency == 'pay-to-agent'){
+        } elseif ($paymentAgency == '7-eleven') {
+            $qr = $this->fileService->uploadQr7Eleven($transfer->getTransactionNumber(), $amount);
+        } elseif($paymentAgency == 'pay-to-agent'){
             $affiliateCode = $client->getAffiliateId() ? $client->affiliate->code : NULL;
             $qr = $this->fileService->uploadQrPayToAgent($transfer->getTransactionNumber(),
                 $transfer->getTotalAmountAttribute(),
