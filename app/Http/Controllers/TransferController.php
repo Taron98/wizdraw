@@ -228,7 +228,7 @@ class TransferController extends AbstractController
         if($paymentAgency == 'circle-k'){
             $qr = $this->fileService->uploadQrCircleK($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
         } elseif ($paymentAgency == '7-eleven') {
-            $qr = $this->fileService->uploadQr7Eleven($transfer->getTransactionNumber(), $amount);
+            $qr = $this->fileService->uploadQr7Eleven($transfer->getTransactionNumber(), $transfer->getTotalAmountAttribute());
         } elseif($paymentAgency == 'pay-to-agent'){
             $affiliateCode = $client->getAffiliateId() ? $client->affiliate->code : NULL;
             $qr = $this->fileService->uploadQrPayToAgent($transfer->getTransactionNumber(),
