@@ -135,11 +135,11 @@ class UserController extends AbstractController
 
         $client = $user->client;
         return $this->respond([
-            'user' => [
-                'email' => ($user->getEmail()) ?: '',
-                'facebookId' => ($user->getFacebookId()) ?: '',
-                'noPassword' => $user->hasNoPassword(),
-            ],
+
+            'email' => ($user->getEmail()) ?: '',
+            'facebookId' => ($user->getFacebookId()) ?: '',
+            'noPassword' => $user->hasNoPassword(),
+
             'client' => [
                 'id' => $client->getId(),
                 'identity_type_id' => ($client->identityType()) ?: '0',
@@ -156,11 +156,11 @@ class UserController extends AbstractController
                 'client_type' => ($client->getClientType()) ?: '',
                 'is_approved' => ($client->isApproved()) ?: '',
                 'affiliate_id' => ($client->getAffiliateId()) ?: '',
-                'is_changed' => ($client->isChanged()) ? : '',
+                'is_changed' => ($client->isChanged()) ?: '',
                 'firstName' => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName' => ($client->getLastName()) ?: '',
-                'didSetup' => ($client->isDidSetup()) ? : false,
+                'didSetup' => ($client->isDidSetup()) ?: false,
 
             ],
         ]);
