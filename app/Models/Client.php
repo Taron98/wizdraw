@@ -679,7 +679,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function isChanged()
     {
-        return $this->isChanged;
+        return $this->is_changed;
     }
 
     /**
