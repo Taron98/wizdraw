@@ -145,7 +145,7 @@ class UserController extends AbstractController
                 'identity_type_id' => ($client->identityType()) ?: '0',
                 'identity_number' => ($client->getIdentityNumber()) ?: '',
                 'identity_expire' => ($client->getIdentityExpire()) ?: '',
-                'birth_date' => ($client->getBirthDate()) ?: '',
+                'birth_date' => ($client->getBirthDateAttribute($client->getBirthDate())) ?: '',
                 'gender' => ($client->getGender()) ?: '',
                 'phone' => ($client->getPhone()) ?: '',
                 'default_country_id' => ($client->getDefaultCountry()) ?: '',
