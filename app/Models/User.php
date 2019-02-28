@@ -396,6 +396,16 @@ class User extends AbstractModel implements
     {
         return Hash::check($this->verifyCode, $this->password);
     }
+
+    /**
+     * @return int
+     */
+    public function getIdType()
+    {
+        return $this->identity_type_id;
+    }
+
+
     //</editor-fold>
 
 }
