@@ -3,6 +3,8 @@
 namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Wizdraw\Http\Requests\NotificationsRequest;
+
 
 /**
  * Class NotificationsController
@@ -14,17 +16,18 @@ class NotificationsController extends AbstractController
     /**
      * Saving a token for push notifications
      *
-     * @param string $token
+     * @param NotificationsRequest $request
      *
-     * @param string $phone
-     *
-     * @return string
+     * @return JsonResponse
      */
-    public function token($token, $phone)
+    public function token( NotificationsRequest $request
+    ): JsonResponse
     {
-        dd('test',$token, $phone);
+        dd('test',$request);
         //save the token here
-        return 'success';
+        return $this->respond([
+            'success' => true,
+        ]);
     }
 
 
