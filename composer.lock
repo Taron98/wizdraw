@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc3762554c3e31da7806c4c01e973cb4",
+    "content-hash": "27ae5c8b532f15d1c23c489e548517b1",
     "packages": [
         {
             "name": "alymosul/exponent-server-sdk-php",
@@ -50,16 +50,16 @@
         },
         {
             "name": "alymosul/laravel-exponent-push-notifications",
-            "version": "v1.5",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Alymosul/laravel-exponent-push-notifications.git",
-                "reference": "ba9dd51f90d3ef43318ef5ff3ab3e5682a2333c3"
+                "reference": "72c6e17882d909f83dbe55b9e739cd41534ca3f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Alymosul/laravel-exponent-push-notifications/zipball/ba9dd51f90d3ef43318ef5ff3ab3e5682a2333c3",
-                "reference": "ba9dd51f90d3ef43318ef5ff3ab3e5682a2333c3",
+                "url": "https://api.github.com/repos/Alymosul/laravel-exponent-push-notifications/zipball/72c6e17882d909f83dbe55b9e739cd41534ca3f1",
+                "reference": "72c6e17882d909f83dbe55b9e739cd41534ca3f1",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
             ],
             "description": "Exponent push notifications driver for laravel",
             "homepage": "https://github.com/alymosul/laravel-exponent-push-notifications",
-            "time": "2018-09-27T12:57:18+00:00"
+            "time": "2019-01-31T10:01:57+00:00"
         },
         {
             "name": "approached/laravel-image-optimizer",
@@ -3198,6 +3198,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2016-11-27T07:52:03+00:00"
         },
         {

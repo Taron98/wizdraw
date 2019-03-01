@@ -18,12 +18,13 @@ class NotificationsController extends AbstractController
      *
      * @param string $phone
      *
-     * @return mixed
+     * @return string
      */
     public function token($token, $phone)
     {
-        var_dump('test',$token, $phone);
+        dd('test',$token, $phone);
         //save the token here
+        return 'success';
     }
 
 
