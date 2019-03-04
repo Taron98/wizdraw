@@ -8,22 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Wizdraw\Models\FeedbackQuestion
  *
- * @property int $id
+ * @property integer $id
  * @property string $question
  * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon|null $updatedAt
- * @property \Carbon\Carbon|null $deletedAt
+ * @property \Carbon\Carbon $updatedAt
+ * @property \Carbon\Carbon $deletedAt
  * @property-read \Illuminate\Database\Eloquent\Collection|\Wizdraw\Models\Feedback[] $feedbacks
- * @method static bool|null forceDelete()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion onlyTrashed()
- * @method static bool|null restore()
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\FeedbackQuestion whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion withTrashed()
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion withoutTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereQuestion($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\FeedbackQuestion whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class FeedbackQuestion extends AbstractModel

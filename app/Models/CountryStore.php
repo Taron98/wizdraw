@@ -11,18 +11,18 @@ namespace Wizdraw\Models;
 /**
  * Wizdraw\Models\CountryStore
  *
- * @property int $id
- * @property int $countryId
+ * @property integer $id
+ * @property integer $countryId
  * @property string $store
- * @property int $active
- * @property int $useQrCode
+ * @property boolean $active
+ * @property boolean $useQrCode
  * @property string $csNumber
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereCountryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereCsNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereStore($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Wizdraw\Models\CountryStore whereUseQrCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereStore($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereActive($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereUseQrCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\CountryStore whereCsNumber($value)
  * @mixin \Eloquent
  */
 class CountryStore extends AbstractModel

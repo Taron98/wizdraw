@@ -24,10 +24,9 @@ class NotificationsController extends AbstractController
     ): JsonResponse
     {
 
-        //save the token here
-        $token = $credentials = $request->only('token');
-        $phone = $credentials = $request->only('phone');
-        dd('test',$token, $phone);
+        $credentials = $request->only('token', 'phone');
+        $token = $credentials['token'];
+        $phone = $credentials['phone'];
         return $this->respond([
             'success' => true,
         ]);
