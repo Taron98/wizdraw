@@ -29,8 +29,8 @@ class NotificationsRequest extends  AbstractRequest
     public function rules()
     {
         return [
-            'token'         => 'required',
-            'phone'        => 'required',
+            'expo_token' => 'required',
+	    'deviceId' => 'required'
         ];
     }
 }
