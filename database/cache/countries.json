@@ -127,8 +127,10 @@
     "country_code_2": "CN",
     "country_code_3": "CHN",
     "phone_code": "86",
-    "is_active": 0,
-    "timezone": 8
+    "is_active": 1,
+    "timezone": 8,
+    "is_pickup": 0,
+    "is_deposit": 1
   },
   {
     "id": "89",
@@ -206,7 +208,7 @@
     "country_code_2": "GE",
     "country_code_3": "GEO",
     "phone_code": "995",
-    "is_active": 0,
+    "is_active": 1,
     "timezone": 4,
     "is_pickup": 1,
     "is_deposit": 0
@@ -389,7 +391,9 @@
     "country_code_3": "MDA",
     "phone_code": "373",
     "is_active": 0,
-    "timezone": 2
+    "timezone": 2,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "94",
@@ -501,8 +505,10 @@
     "country_code_2": "RU",
     "country_code_3": "RUS",
     "phone_code": "7",
-    "is_active": 0,
-    "timezone": 4
+    "is_active": 1,
+    "timezone": 4,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "91",
@@ -624,8 +630,10 @@
     "country_code_2": "UA",
     "country_code_3": "UKR",
     "phone_code": "380",
-    "is_active": 0,
-    "timezone": 2
+    "is_active": 1,
+    "timezone": 2,
+    "is_pickup": 1,
+    "is_deposit": 0
   },
   {
     "id": "4",
@@ -654,8 +662,10 @@
     "country_code_2": "VN",
     "country_code_3": "VNM",
     "phone_code": "84",
-    "is_active": 0,
-    "timezone": 7
+    "is_active": 1,
+    "timezone": 7,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "119",
