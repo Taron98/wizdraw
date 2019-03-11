@@ -30,6 +30,7 @@ class NotificationsRequest extends  AbstractRequest
     {
         return [
             'expo_token' => 'required',
+	        'deviceId' => 'required'
         ];
     }
 }

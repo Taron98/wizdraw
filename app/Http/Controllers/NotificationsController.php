@@ -4,6 +4,9 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Wizdraw\Http\Requests\NotificationsRequest;
+use Illuminate\Support\Facades\DB;
+
+
 
 
 /**
@@ -23,11 +26,15 @@ class NotificationsController extends AbstractController
     public function token( NotificationsRequest $request
     ): JsonResponse
     {
-
-        $credentials = $request->only('expo_token');
-        dd($request->all());
+        $credentials = $request->all();
         $token = $credentials['expo_token'];
-        //store it somewhere
+        $deviceId = $credentials['deviceId'];
+        $res = DB::table('expo_token')->insert([
+            ['expo_token' => $token],
+            ['device_id' => $deviceId],
+        ]);
+        dd($res);
+
         return $this->respond([
             'success' => true,
         ]);
