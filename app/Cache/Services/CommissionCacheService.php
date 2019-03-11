@@ -78,7 +78,8 @@ class CommissionCacheService extends AbstractCacheService
             ->setMinRange($stdJson->min_range)
             ->setMaxRange($stdJson->max_range)
             ->setOrigin($stdJson->origin)
-            ->setTransferType($stdJson->transfer_type);
+            ->setTransferType($stdJson->transfer_type)
+            ->setCurrency($stdJson->currency);
 
         return $entity;
     }

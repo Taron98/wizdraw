@@ -19,10 +19,13 @@ class FileService extends AbstractService
     const TYPE_ADDRESS = 'address';
     const TYPE_QR_VIP = 'vip';
     const TYPE_QR_CIRCLE_K = 'circle-k';
+    const TYPE_QR_7_ELEVEN = '7-eleven';
     const TYPE_QR_PAY_TO_AGENT = 'pay-to-agent';
 
     const DEFAULT_QR_EXT = 'png';
     const DEFAULT_FILE_EXT = 'jpg';
+
+    const HK_ACCOUNT_NUMBER = '085730-60000537';
 
     /** @var  Filesystem */
     private $fileSystem;
@@ -118,11 +121,27 @@ class FileService extends AbstractService
      */
     public function uploadQrVip(string $name, string $vipNumber)
     {
-
         $qrCode = generate_qr_code(substr($vipNumber,1));
 
         return $this->upload(self::TYPE_QR_VIP, $name, $qrCode);
     }
+
+    /**
+     * @param string $name
+     * @param string $amount
+     *
+     * @return array
+     */
+    public function uploadQr7Eleven(string $name, string $amount)
+    {
+        $account = str_replace('-', '', self::HK_ACCOUNT_NUMBER);
+        $qrCode = generate_qr_code_7_eleven($amount, $account);
+
+        $res = $this->upload(self::TYPE_QR_7_ELEVEN, $name, $qrCode);
+
+        return ['result' => $res, 'qr' => $qrCode];
+    }
+
 
     /**
      * @param $wf
