@@ -16,6 +16,9 @@ class CreateExpoTokenTable extends Migration
         Schema::create('expo_token', function (Blueprint $table) {
             $table->string('expo_token');
             $table->string('device_id');
+            $table->primary(['device_id']);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

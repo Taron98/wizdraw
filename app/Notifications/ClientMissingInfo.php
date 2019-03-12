@@ -66,10 +66,16 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         if (is_null($this->delay) || $this->delay->diffInMinutes(null, false) > 5) {
             return null;
         }
-        return ExpoMessage::create()
-            ->badge(1)
-            ->enableSound()
-            ->body($content);
+        $client = new \GuzzleHttp\Client();
+        $expoToken = 'aaa';
+        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
+            'form_params' => [
+                'to' => $expoToken,
+                'title' => 'Missing Information',
+                'body' => $content
+            ]
+        ]);
+        return $response;
     }
 
     /**

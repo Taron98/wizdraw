@@ -14,5 +14,5 @@ class ExpoToken extends Model
     /**
      * @var array
      */
-    protected $fillable = [ 'device_id',  'expo_token'];
+    protected $fillable = [ 'device_id',  'expo_token', 'created_at', 'updated_at'];
 }

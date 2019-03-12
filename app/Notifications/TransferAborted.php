@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\ExpoPushNotifications\ExpoChannel;
 use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 
@@ -61,10 +62,18 @@ class TransferAborted extends Notification implements ShouldQueue
             'transactionNumber' => $this->transfer->getTransactionNumber(),
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
-        return ExpoMessage::create()
-            ->badge(1)
-            ->enableSound()
-            ->body($content);
+        $device_id = $this->transfer->client->user()->first()->device_id;
+        $client = new \GuzzleHttp\Client();
+        $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
+
+        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
+            'form_params' => [
+                'to' => $expoToken,
+                'title' => 'Transfer Aborted',
+                'body' => $content
+            ]
+        ]);
+        return $response;
     }
 
     /**

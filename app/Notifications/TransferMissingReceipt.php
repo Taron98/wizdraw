@@ -66,10 +66,16 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         }
 
         $this->addReminder($notifiable);
-        return ExpoMessage::create()
-            ->badge(1)
-            ->enableSound()
-            ->body($content);
+        $client = new \GuzzleHttp\Client();
+        $expoToken = 'aaa';
+        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
+            'form_params' => [
+                'to' => $expoToken,
+                'title' => 'Transfer Missing Receipt',
+                'body' => $content
+            ]
+        ]);
+        return $response;
     }
 
     /**
