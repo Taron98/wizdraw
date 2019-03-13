@@ -42,7 +42,7 @@ class TransferCreateRequest extends AbstractRequest
             'senderCountryId'   => 'required|integer|cacheExists:country',
 
             'amount'     => 'required|numeric',
-            'commission' => 'required|numeric',
+            'commission' => 'required|regex:/^\d*\.?\d*$/',
 
             'totalAmount'    => 'required|numeric',
             'receiverAmount' => 'required|numeric',
