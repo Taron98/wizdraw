@@ -485,6 +485,8 @@ class TransferController extends AbstractController
             'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
+        dump($params);
+        die;
         try {
             $result = $this->httpService->verifySendAmount($params);
             if ($result['sent']) {
