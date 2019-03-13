@@ -276,6 +276,10 @@ Route::group(['prefix' => 'v1/'], function () {
                 'as'   => 'transfer.limit',
                 'uses' => 'TransferController@limit',
             ]);
+            Route::get('/maxamount/{client}/', [
+                'as'   => 'transfer.maxamount',
+                'uses' => 'TransferController@maxamount',
+            ]);
 
             Route::post('/usedPaymentAgency/', [
                 'as'   => 'transfer.usedPaymentAgency',

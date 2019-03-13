@@ -364,6 +364,15 @@ class Transfer extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * @param $client_id
+     *
+     */
+    public function getClientTransfers($client_id)
+    {
+        return $this->where('client_id', $client_id)->get();
+    }
+
+    /**
      * @param int $clientId
      *
      * @return Transfer
