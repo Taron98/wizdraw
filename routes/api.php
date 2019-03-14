@@ -281,6 +281,10 @@ Route::group(['prefix' => 'v1/'], function () {
                 'as'   => 'transfer.usedPaymentAgency',
                 'uses' => 'TransferController@alreadyUsedPaymentAgency',
             ]);
+            Route::get('/suppliers/{countryId}/', [
+                'as'   => 'transfer.suppliers',
+                'uses' => 'TransferController@suppliers',
+            ]);
 
             Route::group(['prefix' => 'wizdrawCard/'], function () {
                 Route::post('/sendSMS', [

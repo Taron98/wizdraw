@@ -505,4 +505,8 @@ class TransferController extends AbstractController
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
+
+    public function suppliers($country){
+
+    }
 }
