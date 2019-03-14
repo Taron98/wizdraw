@@ -467,19 +467,7 @@ class TransferController extends AbstractController
 
     public function maxamount($client_id)
     {
-        $limit = 4500;
-        $transfer = new Transfer();
-        $transactions = $transfer->getClientTransfers($client_id);
-        if (is_null($transactions) || sizeof($limit) === 0) {
-            return $this->respond(['available' => $limit]);
-        }
-
-        $fullamount = 0;
-        foreach ($transactions as $k => $v){
-            $fullamount+=$v->amount;
-        }
-        $available = $limit - $fullamount;
-
+        $available = $this->transferService->getAvailableAmount($client_id);
         return $this->respond(['available' => $available]);
     }
 

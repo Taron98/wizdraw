@@ -331,4 +331,24 @@ class TransferService extends AbstractService
         return true;
     }
 
+    public function getAvailableAmount($client_id){
+        $limit = 4500;
+        $transfer = new Transfer();
+        $transactions = $transfer->getClientTransfers($client_id);
+        if (is_null($transactions) || sizeof($limit) === 0) {
+            return $this->respond(['available' => $limit]);
+        }
+
+        $full_amount = 0;
+        foreach ($transactions as $k => $v){
+            $full_amount+=$v->amount;
+        }
+
+        $available = $limit - $full_amount;
+        $available = $available < 0 ? 0 : $available;
+        return $available;
+    }
+
+
+
 }
