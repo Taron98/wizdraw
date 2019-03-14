@@ -336,7 +336,7 @@ class TransferService extends AbstractService
         $transfer = new Transfer();
         $transactions = $transfer->getClientTransfers($client_id);
         if (is_null($transactions) || sizeof($limit) === 0) {
-            return $this->respond(['available' => $limit]);
+            return $limit;
         }
 
         $full_amount = 0;
