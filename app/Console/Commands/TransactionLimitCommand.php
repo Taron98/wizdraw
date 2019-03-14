@@ -44,7 +44,7 @@ class TransactionLimitCommand extends Command
      */
     public function setTransactionLimit()
     {
-        $limits = [13 => 5000, 90 => 8000, 119 => 30000];
+        $limits = [13 => 5000, 90 => [ 'circkle-k' => 2300, 'seven-eleven' => 4500 ], 119 => 30000];
         $redis = Redis::connection();
         foreach ($limits as $k => $v){
             $redis->lpush(redis_key('origin', $k, 'amountLimits'), $v);
