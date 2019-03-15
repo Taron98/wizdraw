@@ -19,7 +19,6 @@ class CreateSuppliersTable extends Migration
             $table->string('supplier_name_wfs');
             $table->string('country_id');
             $table->string('active');
-            $table->timestamps();
         });
     }
 
