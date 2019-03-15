@@ -283,7 +283,7 @@ Route::group(['prefix' => 'v1/'], function () {
             ]);
             Route::get('/suppliers/{countryId}/', [
                 'as'   => 'transfer.suppliers',
-                'uses' => 'TransferController@suppliers',
+                'uses' => 'SupplierController@suppliers',
             ]);
 
             Route::group(['prefix' => 'wizdrawCard/'], function () {

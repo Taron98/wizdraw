@@ -506,7 +506,4 @@ class TransferController extends AbstractController
         }
     }
 
-    public function suppliers($country){
-
-    }
 }
