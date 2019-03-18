@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use stdClass;
 use Wizdraw\Services\TransferService;
-use Carbon\Carbon;
 
 /**
  * Wizdraw\Models\Transfer
@@ -362,16 +361,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function getClientId()
     {
         return $this->clientId;
-    }
-
-    /**
-     * @param $client_id
-     *
-     */
-    public function getClientTransfers($client_id)
-    {
-
-        return $this->where('client_id', $client_id)->where('created_at', '>', Carbon::now()->subDays(30))->get();
     }
 
     /**
