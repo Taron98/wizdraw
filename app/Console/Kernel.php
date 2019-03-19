@@ -18,7 +18,8 @@ class Kernel extends ConsoleKernel
         Commands\TransactionLimitCommand::class,
         Commands\UpdateAppNotificationCommand::class,
         Commands\CommissionAndActiveCommand::class,
-        Commands\UpdateVipUsers::class
+        Commands\UpdateVipUsers::class,
+        Commands\RefreshCommand::class
     ];
 
     /**
