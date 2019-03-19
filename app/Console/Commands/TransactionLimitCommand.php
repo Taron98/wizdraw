@@ -39,7 +39,7 @@ class TransactionLimitCommand extends Command
     /**
      * set sending amount limit on cache
      * for ex.
-     * sender from israel can send 500 ILS per transaction
+     * sender from israel can send 20000 ILS per transaction
      * sender from hong kong can send 8000 HKD per transaction
      */
     public function setTransactionLimit()
