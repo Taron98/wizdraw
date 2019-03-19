@@ -39,6 +39,9 @@ class RefreshCommand extends Command
     public function handle()
     {
         shell_exec('sudo service supervisor restart');
+        shell_exec('sudo chmod -R 777 ../../../bootstrap/cache/');
+        shell_exec('sudo chmod -R 777 ../../../storage/');
+        shell_exec('sudo chmod -R 777 ../../../public/');
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         Artisan::call('wiz:cache:test');
