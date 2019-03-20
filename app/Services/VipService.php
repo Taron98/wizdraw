@@ -33,15 +33,11 @@ class VipService extends AbstractService
      * @param Client $client
      *
      * @return Vip
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function createVip(Client $client)
     {
-        /** @var Vip $vip */
-        $vip = $this->repository->createWithRelation($client);
-
-        $this->fileService->uploadQrVip($client->getId(), $vip->getNumber());
-
-        return $vip;
+        return $this->repository->createWithRelation($client);
     }
 
     /**
@@ -61,7 +57,9 @@ class VipService extends AbstractService
 
     /**
      * @param $clientId
+     *
      * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function findByClientId($clientId)
     {

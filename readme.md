@@ -23,3 +23,7 @@
 * **php artisan wiz:cache:commission**
 * **php artisan wiz:cache:transaction:limit**
 * **composer dump-autoload**
+
+## Just update redis
+* Clear redis
+* Run **php artisan refresh**

@@ -56,7 +56,7 @@
   {
     "type": "GLOBAL",
     "id": "10",
-    "name": "BANCO DE ORO UNIVERSAL BANK",
+    "name": "BDO BANCO DE ORO UNIVERSAL BANK",
     "country_name": "PHILIPPINES"
   },
   {
@@ -1449,12 +1449,6 @@
     "type": "GLOBAL",
     "id": "242",
     "name": "002-BANGKOK BANK PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "243",
-    "name": "001-BANK OF THAILAND",
     "country_name": "THAILAND"
   },
   {
@@ -14614,12 +14608,6 @@
     "id": "2436",
     "name": "Bank of Valletta plc\ufffd[4]",
     "country_name": "MALTA"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2437",
-    "name": "001BANK OF THAILAND",
-    "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",

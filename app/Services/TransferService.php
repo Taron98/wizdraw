@@ -27,8 +27,10 @@ class TransferService extends AbstractService
     const DEFAULT_MAX_MONTHLY_TRANSFER = 8000;
     const DEFAULT_MAX_YEARLY_TRANSFER = 210000;
     //@TODO - for the future, if we add more sending countries, we need to make this limits come from the db
-    const MONTHLY_LIMITS_ARRAY = array(90 => 8000, 13 => 35000, 119 => 60000);
+    const MONTHLY_LIMITS_ARRAY = array(90 => 4500, 13 => 35000, 119 => 60000);
     const YEARLY_LIMITS_ARRAY = array(13 => 210000);
+
+    const HONG_KONG_SENDER = 90;
 
     const AGENCY_7_ELEVEN = '7-eleven';
     const AGENCY_CIRCLE_K = 'circle-k';
@@ -148,7 +150,8 @@ class TransferService extends AbstractService
      */
     public function validateMonthly(float $amount, Client $senderClient): bool
     {
-        $monthlyTotal = $amount + $this->repository->monthlyTransfer();
+        $hongKongSender = $senderClient->default_country_id === self::HONG_KONG_SENDER;
+        $monthlyTotal = $amount + $this->repository->monthlyTransfer($hongKongSender);
         $senderClientCountry = $senderClient->default_country_id;
         $monthlyLimit = array_key_exists($senderClientCountry, self::MONTHLY_LIMITS_ARRAY) ? self::MONTHLY_LIMITS_ARRAY[$senderClientCountry] : self::DEFAULT_MAX_MONTHLY_TRANSFER;
 
@@ -330,5 +333,4 @@ class TransferService extends AbstractService
         }
         return true;
     }
-
 }

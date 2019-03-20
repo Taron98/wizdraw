@@ -39,12 +39,13 @@ class TransactionLimitCommand extends Command
     /**
      * set sending amount limit on cache
      * for ex.
-     * sender from israel can send 500 ILS per transaction
+     * sender from israel can send 20000 ILS per transaction
      * sender from hong kong can send 8000 HKD per transaction
      */
     public function setTransactionLimit()
     {
-        $limits = [13 => 5000, 90 => [ 'circkle-k' => 2300, 'seven-eleven' => 7999 ], 119 => 30000];
+
+        $limits = [13 => 20000, 90 => [ 'circkle-k' => 2300, 'seven-eleven' => 4500 ] , 119 => 30000];
         $redis = Redis::connection();
         foreach ($limits as $k => $v){
             $redis->lpush(redis_key('origin', $k, 'amountLimits'), $v);

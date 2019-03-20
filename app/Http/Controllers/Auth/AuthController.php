@@ -17,6 +17,7 @@ use Wizdraw\Http\Requests\Auth\AuthSignupRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\User;
 use Wizdraw\Notifications\ClientVerify;
+use Wizdraw\Notifications\ClientWelcome;
 use Wizdraw\Repositories\UserRepository;
 use Wizdraw\Services\AuthService;
 use Wizdraw\Services\ClientService;
@@ -150,7 +151,8 @@ class AuthController extends AbstractController
         }
 
         $client->notify(new ClientVerify(true));
-
+        $client->notify(new ClientWelcome());
+        //welcome
         return $this->respond([
             'token' => $this->authService->createTokenFromUser($user),
         ]);
@@ -231,8 +233,7 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse|string
      */
-    private
-    function authenticate(
+    private function authenticate(
         array $credentials = [],
         string $facebookId = ''
     )
