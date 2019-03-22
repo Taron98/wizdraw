@@ -14,10 +14,8 @@ class AddSuppliersToTransfersTable extends Migration
     public function up()
     {
         Schema::table('transfers', function (Blueprint $table) {
-            $table->foreign('supplier')
-                ->references('supplier_name')->on('suppliers')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->text('supplier')->nullable();
+
         });
     }
 
