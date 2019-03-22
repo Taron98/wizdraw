@@ -147,7 +147,6 @@ class TransferController extends AbstractController
         $user = $request->user();
         $client = $user->client;
         $inputs = $request->inputs();
-
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');

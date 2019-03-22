@@ -68,6 +68,11 @@ class CreateTransfersTable extends Migration
                 ->references('id')->on('transfer_receipts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->foreign('supplier')
+                ->references('supplier_name')->on('suppliers')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
