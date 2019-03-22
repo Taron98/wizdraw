@@ -69,10 +69,6 @@ class CreateTransfersTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('supplier')
-                ->references('supplier_name')->on('suppliers')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 
