@@ -93,7 +93,6 @@ class TransferService extends AbstractService
         Client $senderClient,
         RateCache $rate,
         BankAccount $bankAccount = null,
-        $supplier,
         array $attributes = []
     )
     {
@@ -111,7 +110,6 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
         $attributes['supplier'] = $supplier;
-        
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);

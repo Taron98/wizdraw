@@ -147,7 +147,6 @@ class TransferController extends AbstractController
         $user = $request->user();
         $client = $user->client;
         $inputs = $request->inputs();
-        $supplier = $request->inputs('supplier');
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');
@@ -217,7 +216,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
-        $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $supplier, $inputs);
+        $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
         $campaign = $this->campaignService->getCampaign(1);
         if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
