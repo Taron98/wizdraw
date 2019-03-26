@@ -42,6 +42,8 @@ class ExpoChannel
     {
         $params = $notification->toExpoPush()->toArray();
 
+        \Log::debug(json_encode($params));
+
         $headers = [
             'Content-type' => 'application/json; charset=utf-8',
             'Accept' => 'application/json',
