@@ -11,6 +11,11 @@
 |
 */
 
+use Wizdraw\Notifications\TransferAborted;
+
 Route::get('/', function () {
+    $user = new \Wizdraw\Models\User();
+    $transfer = new \Wizdraw\Models\Transfer();
+    $user->notify((new TransferAborted($transfer)));
     return view('welcome');
 });

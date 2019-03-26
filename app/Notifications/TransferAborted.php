@@ -56,13 +56,15 @@ class TransferAborted extends Notification implements ShouldQueue
      */
     public function toExpoPush(User $notifiable)
     {
-        $countryStores = $this->stores($this->transfer->senderCountryId);
+//        $countryStores = $this->stores($this->transfer->senderCountryId);
+        $countryStores = $this->stores(90);
 
         $content = trans('notification.transfer_aborted', [
-            'transactionNumber' => $this->transfer->getTransactionNumber(),
+//            'transactionNumber' => $this->transfer->getTransactionNumber(),
+            'transactionNumber' => 'WF9204720869',
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
-        $device_id = $this->transfer->client->user()->first()->device_id;
+        $device_id = 'ab6fc0a2-009a-417a-a30a-9e4d7377f910';
 
         $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
 
