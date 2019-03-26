@@ -42,9 +42,12 @@ class ExpoChannel
     {
         $params = $notification->toExpoPush()->toArray();
 
-        $this->http->request('POST', self::EXPO_NOTIFICATION_URL, [
-            $params
-        ]);
+        $headers = [
+            'Content-type' => 'application/json; charset=utf-8',
+            'Accept' => 'application/json',
+        ];
+
+        $this->http->post(self::EXPO_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
     }
 
 }
