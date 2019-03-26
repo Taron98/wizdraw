@@ -3,6 +3,7 @@
 namespace Wizdraw\Http\Controllers;
 
 use Wizdraw\Http\Requests\Statuses\StatusesRequest;
+use Wizdraw\Notifications\TransferAborted;
 use Wizdraw\Services\TransferService;
 
 class StatusesController extends AbstractController
@@ -25,6 +26,9 @@ class StatusesController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function notifyAborted(StatusesRequest $statusesRequest){
+        $user = new \Wizdraw\Models\User();
+        $transfer = new \Wizdraw\Models\Transfer();
+        $user->notify((new TransferAborted($transfer)));
         $requestDone = $this->transferService->clientNotifyAbortedStatus($statusesRequest['transfers']);
         $success = $requestDone ? true : false;
         return $this->respond(

@@ -11,6 +11,7 @@ namespace Wizdraw\Notifications\Channels;
 
 use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class ExpoChannel
 {
@@ -42,7 +43,7 @@ class ExpoChannel
     {
         $params = $notification->toExpoPush()->toArray();
 
-        \Log::debug(json_encode($params));
+        Log::debug(json_encode($params));
 
         $headers = [
             'Content-type' => 'application/json; charset=utf-8',
