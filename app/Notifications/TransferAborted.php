@@ -6,11 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
-use NotificationChannels\ExpoPushNotifications\ExpoChannel;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
+use Wizdraw\Notifications\Channels\ExpoChannel;
 use Wizdraw\Notifications\Messages\ExpoMessage;
 
 
