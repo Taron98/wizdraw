@@ -5,6 +5,7 @@ namespace Wizdraw\Notifications;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Log;
 use NotificationChannels\ExpoPushNotifications\ExpoChannel;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\ExpoToken;
@@ -59,14 +60,18 @@ class TransferAborted extends Notification implements ShouldQueue
 //        $countryStores = $this->stores($this->transfer->senderCountryId);
         $countryStores = $this->stores(90);
 
+        \Log::debug(json_encode($countryStores));
+
         $content = trans('notification.transfer_aborted', [
 //            'transactionNumber' => $this->transfer->getTransactionNumber(),
             'transactionNumber' => 'WF9204720869',
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
+        \Log::debug(json_encode($content));
         $device_id = 'ab6fc0a2-009a-417a-a30a-9e4d7377f910';
 
         $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
+        \Log::debug(json_encode($expoToken));
 
         return (new ExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
