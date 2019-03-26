@@ -60,18 +60,18 @@ class TransferAborted extends Notification implements ShouldQueue
 //        $countryStores = $this->stores($this->transfer->senderCountryId);
         $countryStores = $this->stores(90);
 
-        \Log::error(json_encode($countryStores));
+        Log::info(json_encode($countryStores));
 
         $content = trans('notification.transfer_aborted', [
 //            'transactionNumber' => $this->transfer->getTransactionNumber(),
             'transactionNumber' => 'WF9204720869',
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
-        \Log::error(json_encode($content));
+        Log::info(json_encode($content));
         $device_id = 'ab6fc0a2-009a-417a-a30a-9e4d7377f910';
 
         $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
-        \Log::error(json_encode($expoToken));
+        Log::info(json_encode($expoToken));
 
         return (new ExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
