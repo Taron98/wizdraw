@@ -4,6 +4,11 @@ namespace Wizdraw\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Wizdraw\Models\ExpoToken
+ *
+ * @mixin \Eloquent
+ */
 class ExpoToken extends Model
 {
     /**

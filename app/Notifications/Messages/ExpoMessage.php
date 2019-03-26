@@ -8,66 +8,39 @@
 
 namespace Wizdraw\Notifications\Messages;
 
-
-use Carbon\Carbon;
-
-
 class ExpoMessage
 {
-    /** @var  string */
+    /**
+     * The notification title
+     *
+     * @var string
+     */
     private $to;
 
-    /** @var  string */
-    private $data;
-
-    /** @var  string */
+    /**
+     * The notification title
+     *
+     * @var string
+     */
     private $title;
 
-    /** @var  string */
+    /**
+     * The notification body
+     *
+     * @var string
+     */
     private $body;
 
-    /** @var  Carbon */
-    private $ttl;
-
-    /** @var  int */
-    private $expiration;
-
-    /** @var  'default' | 'normal' | 'high' */
-    private $priority;
-
-    /** @var  string */
-    private $subtitle;
-
-    /** @var  'default' | null */
-    private $sound;
-
-    /** @var  int */
-    private $badge;
-
-    /** @var  string */
-    private $_category;
-
-    /** @var  string */
-    private $channelId;
-
     /**
-     * ExpoMessage constructor.
+     * The notification sound for recipient
      *
-     * @param string $to
-     * @param string $data
-     * @param string $title
-     * @param string $body
-     *
+     * @var string
      */
-    public function __construct(string $to= '', string $data = '', string $title = '', string $body = '')
-    {
-        $this->to = $to;
-        $this->data = $data;
-        $this->title= $title;
-        $this->body = $body;
-    }
+    private $sound = 'default';
 
     /**
+     * Get token for the device
+     *
      * @return string
      */
     public function getTo(): string
@@ -76,11 +49,12 @@ class ExpoMessage
     }
 
     /**
-     * @param string $to
+     * Set token for the push notification
      *
+     * @param string $to
      * @return ExpoMessage
      */
-    public function setTo(string $to): ExpoMessage
+    public function setTo(string $to)
     {
         $this->to = $to;
 
@@ -88,26 +62,8 @@ class ExpoMessage
     }
 
     /**
-     * @return string
-     */
-    public function getData(): string
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param string $data
+     * Get title of the notification
      *
-     * @return ExpoMessage
-     */
-    public function setData(string $data): ExpoMessage
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getTitle(): string
@@ -116,8 +72,9 @@ class ExpoMessage
     }
 
     /**
-     * @param string $title
+     * Set title of the notification
      *
+     * @param string $title
      * @return ExpoMessage
      */
     public function setTitle(string $title): ExpoMessage
@@ -128,6 +85,8 @@ class ExpoMessage
     }
 
     /**
+     * Get body of the notification
+     *
      * @return string
      */
     public function getBody(): string
@@ -136,8 +95,9 @@ class ExpoMessage
     }
 
     /**
-     * @param string $body
+     * Set body of the notification
      *
+     * @param string $body
      * @return ExpoMessage
      */
     public function setBody(string $body): ExpoMessage
@@ -147,21 +107,42 @@ class ExpoMessage
         return $this;
     }
 
-
-    public function toNotification()
+    /**
+     * Enable the message sound.
+     *
+     * @return $this
+     */
+    public function enableSound(): ExpoMessage
     {
-        $client = new \GuzzleHttp\Client();
+        $this->sound = 'default';
 
-        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
-            'form_params' => [
-                'to' => $this->to,
-                'title' => $this->title,
-                'body' => $this->body
-            ]
-        ]);
-        return $response;
+        return $this;
     }
 
+    /**
+     * Disable the message sound.
+     *
+     * @return $this
+     */
+    public function disableSound()
+    {
+        $this->sound = null;
 
+        return $this;
+    }
 
+    /**
+     * Get an array representation of the message.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'to'    => $this->getTo(),
+            'title' => $this->getTitle(),
+            'body'  => $this->getBody(),
+            'sound' => $this->sound,
+        ];
+    }
 }
