@@ -2,12 +2,13 @@
 
 namespace Wizdraw\Notifications;
 
+use App\Notifications\Channel\PushExpoChannel;
+use App\Notifications\Messages\PushExpoMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use NotificationChannels\ExpoPushNotifications\ExpoChannel;
-use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Client;
+use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\User;
 
 use Wizdraw\Services\FileService;
@@ -38,14 +39,14 @@ class ClientMissingInfo extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [ExpoChannel::class];
+        return [PushExpoChannel::class];
     }
 
 
     /**
      * @param $notifiable
      *
-     * @return ExpoMessage|null
+     * @return PushExpoMessage|null
      */
     public function toExpoPush(User $notifiable)
     {
@@ -66,16 +67,11 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         if (is_null($this->delay) || $this->delay->diffInMinutes(null, false) > 5) {
             return null;
         }
-        $client = new \GuzzleHttp\Client();
-        $expoToken = 'aaa';
-        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
-            'form_params' => [
-                'to' => $expoToken,
-                'title' => 'Missing Information',
-                'body' => $content
-            ]
-        ]);
-        return $response;
+        $device_id = $notifiable->device_id;
+
+        $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
+
+        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Missing Information')->setBody($content)->enableSound();
     }
 
     /**

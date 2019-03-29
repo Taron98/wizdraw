@@ -2,7 +2,8 @@
 
 namespace Wizdraw\Notifications;
 
-use Carbon\Carbon;
+use App\Notifications\Channel\PushExpoChannel;
+use App\Notifications\Messages\PushExpoMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
@@ -10,8 +11,6 @@ use Illuminate\Notifications\Notification;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
-use Wizdraw\Notifications\Channels\ExpoChannel;
-use Wizdraw\Notifications\Messages\ExpoMessage;
 
 
 /**
@@ -46,34 +45,28 @@ class TransferAborted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [ExpoChannel::class];
+        return [PushExpoChannel::class];
     }
 
 
     /**
      * @param $notifiable
      *
-     * @return ExpoMessage|null
+     * @return PushExpoMessage|null
      */
-    public function toExpoPush(User $notifiable)
+    public function toExpoPush($notifiable)
     {
-//        $countryStores = $this->stores($this->transfer->senderCountryId);
-        $countryStores = $this->stores(90);
-
-        Log::info(json_encode($countryStores));
+        $countryStores = $this->stores($this->transfer->senderCountryId);
 
         $content = trans('notification.transfer_aborted', [
-//            'transactionNumber' => $this->transfer->getTransactionNumber(),
-            'transactionNumber' => 'WF9204720869',
+            'transactionNumber' => $this->transfer->getTransactionNumber(),
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
-        Log::info(json_encode($content));
-        $device_id = 'ab6fc0a2-009a-417a-a30a-9e4d7377f910';
+        $device_id = $this->transfer->client->user->device_id;
 
         $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
-        Log::info(json_encode($expoToken));
 
-        return (new ExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
+        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
 
     /**

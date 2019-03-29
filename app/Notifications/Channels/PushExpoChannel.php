@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rubina.shakhkyan
- * Date: 11.03.2019
- * Time: 15:00
- */
 
-namespace Wizdraw\Notifications\Channels;
+namespace App\Notifications\Channel;
 
 
 use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 
-class ExpoChannel
+class PushExpoChannel
 {
 
     const EXPO_NOTIFICATION_URL = 'https://exp.host/--/api/v2/push/send';
@@ -41,9 +34,7 @@ class ExpoChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $params = $notification->toExpoPush()->toArray();
-
-        Log::debug(json_encode($params));
+        $params = $notification->toExpoPush($notifiable)->toArray();
 
         $headers = [
             'Content-type' => 'application/json; charset=utf-8',
@@ -52,5 +43,4 @@ class ExpoChannel
 
         $this->http->post(self::EXPO_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
     }
-
 }

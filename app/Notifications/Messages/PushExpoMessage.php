@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rubina.shakhkyan
- * Date: 11.03.2019
- * Time: 15:08
- */
 
-namespace Wizdraw\Notifications\Messages;
+namespace App\Notifications\Messages;
 
-class ExpoMessage
+class PushExpoMessage
 {
     /**
      * The notification title
@@ -52,9 +46,9 @@ class ExpoMessage
      * Set token for the push notification
      *
      * @param string $to
-     * @return ExpoMessage
+     * @return PushExpoMessage
      */
-    public function setTo(string $to)
+    public function setTo(string $to): PushExpoMessage
     {
         $this->to = $to;
 
@@ -75,9 +69,9 @@ class ExpoMessage
      * Set title of the notification
      *
      * @param string $title
-     * @return ExpoMessage
+     * @return PushExpoMessage
      */
-    public function setTitle(string $title): ExpoMessage
+    public function setTitle(string $title): PushExpoMessage
     {
         $this->title = $title;
 
@@ -98,9 +92,9 @@ class ExpoMessage
      * Set body of the notification
      *
      * @param string $body
-     * @return ExpoMessage
+     * @return PushExpoMessage
      */
-    public function setBody(string $body): ExpoMessage
+    public function setBody(string $body): PushExpoMessage
     {
         $this->body = $body;
 
@@ -112,7 +106,7 @@ class ExpoMessage
      *
      * @return $this
      */
-    public function enableSound(): ExpoMessage
+    public function enableSound(): PushExpoMessage
     {
         $this->sound = 'default';
 

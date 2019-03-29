@@ -16,8 +16,5 @@ use Wizdraw\Models\User;
 use Wizdraw\Notifications\TransferAborted;
 
 Route::get('/', function () {
-    $user = new User();
-    $transfer = new Transfer();
-    $user->notify((new TransferAborted($transfer)));
     return view('welcome');
 });

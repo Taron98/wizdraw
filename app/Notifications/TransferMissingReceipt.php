@@ -2,12 +2,15 @@
 
 namespace Wizdraw\Notifications;
 
+use App\Notifications\Channel\PushExpoChannel;
+use App\Notifications\Messages\PushExpoMessage;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\ExpoPushNotifications\ExpoChannel;
 use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 
@@ -46,15 +49,15 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [ExpoChannel::class];
+        return [PushExpoChannel::class];
     }
 
     /**
      * @param $notifiable
      *
-     * @return ExpoMessage|null
+     * @return PushExpoMessage|null
      */
-    public function toExpoPush(User $notifiable)
+    public function toExpoPush($notifiable)
     {
         $content = trans('notification.transfer_missing_receipt', [
             'transactionNumber' => $this->transfer->getTransactionNumber(),
@@ -66,16 +69,11 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         }
 
         $this->addReminder($notifiable);
-        $client = new \GuzzleHttp\Client();
-        $expoToken = 'aaa';
-        $response = $client->request('POST', 'https://exp.host/--/api/v2/push/send', [
-            'form_params' => [
-                'to' => $expoToken,
-                'title' => 'Transfer Missing Receipt',
-                'body' => $content
-            ]
-        ]);
-        return $response;
+        $device_id = $this->transfer->client->user->device_id;
+
+        $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
+
+        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Missing Receipt')->setBody($content)->enableSound();
     }
 
     /**

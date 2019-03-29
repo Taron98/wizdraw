@@ -187,7 +187,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        NotificationChannels\ExpoPushNotifications\ExpoPushNotificationsServiceProvider::class,
 
         /*
          * Package Service Providers...
