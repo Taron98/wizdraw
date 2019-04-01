@@ -110,6 +110,25 @@ class SuppliersTableSeeder  extends AbstractTableSeeder
                 'country_id' => '55',
                 'active' => '1',
             ],
+            [
+                'supplier_name' => 'Pickup Philippines',
+                'supplier_name_wfs' => 'Pickup Philippines',
+                'country_id' => '3',
+                'active' => '1',
+            ],
+            [
+                'supplier_name' => 'METROBANK pick up',
+                'supplier_name_wfs' => 'METROBANK pick up',
+                'country_id' => '3',
+                'active' => '1',
+            ],
+            [
+                'supplier_name' => 'Bdo Pickup',
+                'supplier_name_wfs' => 'Bdo Pickup',
+                'country_id' => '3',
+                'active' => '1',
+            ],
+
 
 
 
