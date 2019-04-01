@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TransferTypesTableSeeder::class);
         $this->call(NaturesTableSeeder::class);
         $this->call(FeedbackQuestionsTableSeeder::class);
+        $this->call(SuppliersTableSeeder::class);
 
         if (!TransferStatus::whereStatus(TransferStatus::STATUS_WAIT)->get()->count() > 0) {
             $this->call(AddTransferStatusWaitSeeder::class);
