@@ -2,7 +2,7 @@
 
 namespace Wizdraw\Notifications;
 
-use Wizdraw\Notifications\Channel\PushExpoChannel;
+use Wizdraw\Notifications\Channels\PushExpoChannel;
 use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;

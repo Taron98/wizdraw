@@ -9,7 +9,7 @@ use Wizdraw\Models\Client;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\User;
 
-use Wizdraw\Notifications\Channel\PushExpoChannel;
+use Wizdraw\Notifications\Channels\PushExpoChannel;
 use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Wizdraw\Services\FileService;
 
