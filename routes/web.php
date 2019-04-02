@@ -11,10 +11,6 @@
 |
 */
 
-use Wizdraw\Models\Transfer;
-use Wizdraw\Models\User;
-use Wizdraw\Notifications\TransferAborted;
-
 Route::get('/', function () {
     return view('welcome');
 });

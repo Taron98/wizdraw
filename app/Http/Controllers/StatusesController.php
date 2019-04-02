@@ -3,7 +3,6 @@
 namespace Wizdraw\Http\Controllers;
 
 use Wizdraw\Http\Requests\Statuses\StatusesRequest;
-use Wizdraw\Notifications\TransferAborted;
 use Wizdraw\Services\TransferService;
 
 class StatusesController extends AbstractController

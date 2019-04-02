@@ -17,9 +17,8 @@ use Wizdraw\Models\User;
  * Class TransferAborted
  * @package Wizdraw\Notifications
  */
-class TransferAborted extends Notification implements ShouldQueue
+class TransferAborted extends Notification
 {
-    use Queueable;
 
     const APPLICATION_STATE = 'money-transfer.home.intro';
 
