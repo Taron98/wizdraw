@@ -2,8 +2,6 @@
 
 namespace Wizdraw\Notifications;
 
-use App\Notifications\Channel\PushExpoChannel;
-use App\Notifications\Messages\PushExpoMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -11,6 +9,8 @@ use Wizdraw\Models\Client;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\User;
 
+use Wizdraw\Notifications\Channel\PushExpoChannel;
+use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Wizdraw\Services\FileService;
 
 /**

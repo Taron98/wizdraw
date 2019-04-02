@@ -2,13 +2,11 @@
 
 namespace Wizdraw\Notifications;
 
-use App\Notifications\Channel\PushExpoChannel;
-use App\Notifications\Messages\PushExpoMessage;
+use Wizdraw\Notifications\Channel\PushExpoChannel;
+use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use NotificationChannels\ExpoPushNotifications\ExpoChannel;
-use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
@@ -20,10 +18,8 @@ use Wizdraw\Models\User;
  * Class TransferMissingReceipt
  * @package Wizdraw\Notifications
  */
-class TransferMissingReceipt extends Notification implements ShouldQueue
+class TransferMissingReceipt extends Notification
 {
-    use Queueable;
-
     const REMIND_EVERY_HOURS = 5;
     const APPLICATION_STATE = 'money-transfer.finish-transaction';
 

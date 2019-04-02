@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Channel;
+namespace Wizdraw\Notifications\Channel;
 
 
 use GuzzleHttp\Client;

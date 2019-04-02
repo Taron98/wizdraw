@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Messages;
+namespace Wizdraw\Notifications\Messages;
 
 class PushExpoMessage
 {
