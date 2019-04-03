@@ -14,7 +14,7 @@ class AddSuppliersToTransfersTable extends Migration
     public function up()
     {
         Schema::table('transfers', function (Blueprint $table) {
-            $table->text('supplier')->nullable();
+            $table->string('supplier', 45)->nullable();
 
         });
     }

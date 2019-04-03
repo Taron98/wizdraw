@@ -8,12 +8,23 @@
 
 namespace Wizdraw\Http\Controllers;
 use Wizdraw\Models\Supplier;
+use Wizdraw\Services\SupplierService;
+use Wizdraw\Services\UserService;
 
 class SupplierController
 
 {
-    public function __construct()
+    /** @var  SupplierService */
+    private $supplierService;
+
+    /**
+     * SupplierController constructor.
+     *
+     * @param SupplierService $supplierService
+     */
+    public function __construct(SupplierService $supplierService)
     {
+        $this->supplierService = $supplierService;
     }
 
     /**
@@ -22,8 +33,6 @@ class SupplierController
      */
     public function suppliers($country_id)
     {
-        $supplier = new Supplier();
-        $suppliers = $supplier->getSuppliers($country_id);
-        return $suppliers;
+        return $this->supplierService->findByCountry($country_id);
     }
 }

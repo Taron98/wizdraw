@@ -53,6 +53,6 @@ class Supplier extends Model
     ];
 
     public function getSuppliers($country_id){
-        return $this->where('country_id', $country_id)->get();
+        return $this->where('country_id', $country_id)->where('active', '1')->get();
     }
 }
