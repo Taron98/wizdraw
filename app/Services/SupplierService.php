@@ -32,6 +32,7 @@ class SupplierService extends AbstractService
      */
     public function findByCountry($country)
     {
-        return $this->repository->findByCountry($country);
+        return $this->repository->findWhere(['country'=> $country, 'active'=> '1'])->all();
+
     }
 }

@@ -9,6 +9,7 @@
 namespace Wizdraw\Repositories;
 use Wizdraw\Models\Supplier;
 
+
 /**
  * Class SupplierRepository
  * @package Wizdraw\Repositories
@@ -25,13 +26,4 @@ class SupplierRepository extends AbstractRepository
         return Supplier::class;
     }
 
-    /**
-     * @param $country
-     *
-     * @return mixed
-     */
-    public function findByCountry($country)
-    {
-        return $this->findWhere(['country'=> $country, 'active'=> '1'])->all();
-    }
 }
