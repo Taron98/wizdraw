@@ -344,9 +344,9 @@ class TransferService extends AbstractService
      * @return bool
      */
     public function isNotBlackListed(Client $sender, $receiver){
-        if($sender->defaultCountryId !== 13){
-            return true;
-        }
+//        if($sender->defaultCountryId !== 13){
+//            return true;
+//        }
 
         $client = new GuzzleClient();
         $url = "http://34.235.30.82/api/v1/black-list";
@@ -362,7 +362,7 @@ class TransferService extends AbstractService
             'middleName' => $receiver['middle_name'],
         ];
 
-        $request = $client->post($url,  ['multipart'=>$fullName, 'headers' => ['Accept' => 'multipart/form-data']]);
+        $request = $client->post($url,  ['multipart'=>$fullName ]);
         $response = $request->send();
 dd($response);
         $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
