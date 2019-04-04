@@ -20,7 +20,6 @@ use Wizdraw\Notifications\TransferAborted;
 use GuzzleHttp\Client as GuzzleClient;
 
 
-
 /**
  * Class TransferService
  * @package Wizdraw\Services
@@ -313,8 +312,9 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
-        if(!$this->isEntitledForCampaign($campaign)){
+    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign)
+    {
+        if (!$this->isEntitledForCampaign($campaign)) {
             return false;
         }
         //At first, the condition for being entitled to the campaign was for the first 5 transfers only (as the function name..)
@@ -330,8 +330,9 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    private function isEntitledForCampaign($campaign){
-        if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
+    private function isEntitledForCampaign($campaign)
+    {
+        if ((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)) {
             return false;
         }
         return true;
@@ -343,7 +344,8 @@ class TransferService extends AbstractService
      * @param $receiver
      * @return bool
      */
-    public function isNotBlackListed(Client $sender, $receiver){
+    public function isNotBlackListed(Client $sender, $receiver)
+    {
 //        if($sender->defaultCountryId !== 13){
 //            return true;
 //        }
@@ -352,35 +354,45 @@ class TransferService extends AbstractService
         $url = "http://34.235.30.82/api/v1/black-list";
 
         $fullName = [
-            'firstName' => $sender->first_name,
-            'lastName' => $sender->last_name,
-            'middleName' => $sender->middle_name,
+            [
+                'name' => 'firstName',
+                'contents' => $sender->first_name,
+            ],
+            [
+                'name' => 'lastName',
+                'contents' => $sender->last_name,
+            ],
+            [
+                'name' => 'middleName',
+                'contents' => $sender->middle_name,
+            ],
+
         ];
         $receiverName = [
             [
-                'name' =>  'firstName',
+                'name' => 'firstName',
                 'contents' => $receiver['first_name'],
             ],
             [
-                'name' =>  'lastName',
+                'name' => 'lastName',
                 'contents' => $receiver['last_name'],
             ],
             [
-                'name' =>  'middleName',
+                'name' => 'middleName',
                 'contents' => $receiver['middle_name'],
             ],
 
         ];
 
-        $request = $client->post($url,  ['multipart'=> $fullName  ]);
+        $request = $client->post($url, ['multipart' => $fullName]);
         $response = $request->send();
-dd($response);
-        $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
+        dd($response);
+        $receiverRequest = $client->post($url, ['body' => $receiverName]);
         $receiverResponse = $receiverRequest->send();
 
         dump($response, $receiverResponse);
 
-        if($response['error'] || $receiverResponse['error']){
+        if ($response['error'] || $receiverResponse['error']) {
             return false;
         }
         return true;
