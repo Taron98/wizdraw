@@ -333,4 +333,29 @@ class TransferService extends AbstractService
         }
         return true;
     }
+
+    /**
+     * @desc check if the user is in terrorists list
+     * @param Client $user
+     * @return bool
+     */
+    public function isNotBlackListed(Client $user){
+        $client = new \GuzzleHttp\Client();
+        $url = "http://34.235.30.82/api/v1/black-list";
+
+        $fullName = [
+            'firstName' => $user->first_name,
+            'lastName' => $user->last_name,
+            'middleName' => $user->middle_name,
+        ];
+        dd($fullName);
+        $request = $client->post($url,  ['body'=>$fullName]);
+        $response = $request->send();
+
+        dd($response);
+//        if()){
+//            return false;
+//        }
+//        return true;
+    }
 }
