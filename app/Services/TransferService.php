@@ -17,6 +17,9 @@ use Wizdraw\Models\User;
 use Wizdraw\Models\Campaign;
 use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
+use GuzzleHttp\Client as GuzzleClient;
+
+
 
 /**
  * Class TransferService
@@ -341,7 +344,7 @@ class TransferService extends AbstractService
      * @return bool
      */
     public function isNotBlackListed(Client $sender, $receiver){
-        $client = new \GuzzleHttp\Client();
+        $client = new GuzzleClient();
         $url = "http://34.235.30.82/api/v1/black-list";
 
         $fullName = [
@@ -349,13 +352,23 @@ class TransferService extends AbstractService
             'lastName' => $sender->last_name,
             'middleName' => $sender->middle_name,
         ];
+        $receiverName = [
+            'firstName' => $receiver['first_name'],
+            'lastName' => $receiver['last_name'],
+            'middleName' => $receiver['middle_name'],
+        ];
+
         $request = $client->post($url,  ['body'=>$fullName]);
-        dump($receiver);
         $response = $request->send();
-        dd($response);
-//        if()){
-//            return false;
-//        }
-//        return true;
+
+        $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
+        $receiverResponse = $receiverRequest->send();
+
+        dd($response, $receiverResponse);
+        if($response->error || $receiverResponse->error){
+            return false;
+        }
+        return true;
+
     }
 }
