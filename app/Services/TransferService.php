@@ -344,6 +344,10 @@ class TransferService extends AbstractService
      * @return bool
      */
     public function isNotBlackListed(Client $sender, $receiver){
+        if($sender->defaultCountryId !== 13){
+            return true;
+        }
+
         $client = new GuzzleClient();
         $url = "http://34.235.30.82/api/v1/black-list";
 

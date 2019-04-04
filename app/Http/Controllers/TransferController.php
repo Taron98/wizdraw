@@ -165,7 +165,7 @@ class TransferController extends AbstractController
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
         }
-        if ($receiverCountryId == 13 && !$this->transferService->isNotBlackListed($client, $receiver)) {
+        if (!$this->transferService->isNotBlackListed($client, $receiver)) {
             return $this->respondWithError('user_is_in_terrorists_list', Response::HTTP_FORBIDDEN, $client);
         }
 
