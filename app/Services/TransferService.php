@@ -358,14 +358,22 @@ class TransferService extends AbstractService
             'middleName' => $receiver['middle_name'],
         ];
 
-        $request = $client->post($url,  ['body'=>$fullName]);
-        $response = $request->send();
-
-        $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
-        $receiverResponse = $receiverRequest->send();
-
-        dd($response, $receiverResponse);
-        if($response->error || $receiverResponse->error){
+//        $request = $client->post($url,  ['form_params'=>$fullName]);
+//        $response = $request->send();
+        $response = [
+            'error' => 226,
+            'description' => 'Terrorist Alert',
+            'message' => 'Details failed terrorist limitation'
+        ];
+//        $receiverRequest = $client->post($url,  ['form_params'=>$receiverName]);
+//        $receiverResponse = $receiverRequest->send();
+        $receiverResponse = [
+            'statusCode' => 200,
+            'description' => 'Success',
+            'message' => 'User passed the terrorist limitation check successfully'
+        ];
+        dump($response, $receiverResponse);
+        if($response['error'] || $receiverResponse['error']){
             return false;
         }
         return true;
