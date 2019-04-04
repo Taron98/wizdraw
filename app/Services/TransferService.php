@@ -362,7 +362,7 @@ class TransferService extends AbstractService
             'middleName' => $receiver['middle_name'],
         ];
 
-        $request = $client->post($url,  ['multipart'=>$fullName ]);
+        $request = $client->post($url,  ['multipart'=> [ $fullName ] ]);
         $response = $request->send();
 dd($response);
         $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
