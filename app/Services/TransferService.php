@@ -350,28 +350,62 @@ class TransferService extends AbstractService
 //            return true;
 //        }
 
-        $client = new GuzzleClient();
         $url = "http://34.235.30.82/api/v1/black-list";
+        $client = new \GuzzleHttp\Client();
+        $boundary = 'boundary';
 
-        $fullName = [
-            'firstName' => $sender->first_name,
-            'lastName' => $sender->last_name,
-            'middleName' => $sender->middle_name,
+        $fullName= [
+            [
+                'name' => 'first_name',
+                'contents' => $sender->first_name,
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $sender->last_name,
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $sender->middle_name,
+            ],
         ];
+
         $receiverName = [
-            'firstName' => $receiver['first_name'],
-            'lastName' => $receiver['last_name'],
-            'middleName' => $receiver['middle_name'],
+            [
+                'name' => 'first_name',
+                'contents' => $receiver['first_name'],
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $receiver['last_name'],
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $receiver['middle_name'],
+            ]
         ];
 
-        $request = $client->post($url,  ['form_params'=>$fullName, 'headers' => ['Content-Type' => 'multipart/form-data']]);
-        dd($request);
-        $response = $request->send();
-dd($response);
-        $receiverRequest = $client->post($url,  ['form_params'=>$receiverName, 'headers' => ['Content-Type' => 'multipart/form-data']]);
-        $receiverResponse = $receiverRequest->send();
+        $senderParams = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($fullName, $boundary),
+        ];
 
-        dump($response, $receiverResponse);
+        $receiverParams = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
+        ];
+        $res = $client->request("POST", $url, $senderParams);
+        dump(json_decode($res->getBody()));
+        die;
+
+
+
+
 
         if($response['error'] || $receiverResponse['error']){
             return false;
