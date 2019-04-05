@@ -363,12 +363,11 @@ class TransferService extends AbstractService
             'lastName' => $receiver['last_name'],
             'middleName' => $receiver['middle_name'],
         ];
-dump($fullName);
+
         $request = $client->post($url,  ['form_params'=>$fullName, 'headers' => ['Accept' => 'mutipart/form-data']]);
-        dd($request);
         $response = $request->send();
 dd($response);
-        $receiverRequest = $client->post($url,  ['form_params'=>$receiverName, 'headers' => ['Accept' => 'mutipart/form-data']);
+        $receiverRequest = $client->post($url,  ['form_params'=>$receiverName, 'headers' => ['Accept' => 'mutipart/form-data']]);
         $receiverResponse = $receiverRequest->send();
 
         dump($response, $receiverResponse);
