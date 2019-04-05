@@ -354,45 +354,25 @@ class TransferService extends AbstractService
         $url = "http://34.235.30.82/api/v1/black-list";
 
         $fullName = [
-            [
-                'name' => 'firstName',
-                'contents' => $sender->first_name,
-            ],
-            [
-                'name' => 'lastName',
-                'contents' => $sender->last_name,
-            ],
-            [
-                'name' => 'middleName',
-                'contents' => $sender->middle_name,
-            ],
-
+            'firstName' => $sender->first_name,
+            'lastName' => $sender->last_name,
+            'middleName' => $sender->middle_name,
         ];
         $receiverName = [
-            [
-                'name' => 'firstName',
-                'contents' => $receiver['first_name'],
-            ],
-            [
-                'name' => 'lastName',
-                'contents' => $receiver['last_name'],
-            ],
-            [
-                'name' => 'middleName',
-                'contents' => $receiver['middle_name'],
-            ],
-
+            'firstName' => $receiver['first_name'],
+            'lastName' => $receiver['last_name'],
+            'middleName' => $receiver['middle_name'],
         ];
 
-        $request = $client->post($url, ['multipart' => $fullName]);
+        $request = $client->post($url,  ['form_params'=>$fullName, 'headers' => ['Accept' => 'application/form-data']]);
         $response = $request->send();
-        dd($response);
-        $receiverRequest = $client->post($url, ['body' => $receiverName]);
+dd($response);
+        $receiverRequest = $client->post($url,  ['body'=>$receiverName]);
         $receiverResponse = $receiverRequest->send();
 
         dump($response, $receiverResponse);
 
-        if ($response['error'] || $receiverResponse['error']) {
+        if($response['error'] || $receiverResponse['error']){
             return false;
         }
         return true;
