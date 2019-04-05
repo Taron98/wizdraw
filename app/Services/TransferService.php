@@ -346,39 +346,9 @@ class TransferService extends AbstractService
      */
     public function isNotBlackListed(Client $sender, $receiver)
     {
-//        if($sender->defaultCountryId !== 13){
-//            return true;
-//        }
-
-        $url = "http://34.235.30.82/api/v1/black-list";
-        $client = new \GuzzleHttp\Client();
-        $boundary = 'my_custom_boundary';
-        $multipart_form = [
-            [
-                'name' => 'first_name',
-                'contents' => 'Varsham',
-            ],
-            [
-                'name' => 'last_name',
-                'contents' => 'Asdgasdg',
-            ],
-            [
-                'name' => 'middle_name',
-                'contents' => '',
-            ],
-        ];
-        $params = [
-            'headers' => [
-                'Connection' => 'close',
-                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
-            ],
-            'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
-        ];
-        $res = $client->request("POST", $url, $params);
-        dump(json_decode($res->getBody()));
-        echo $res->getBody();
-        die;
-
+        if($sender->defaultCountryId !== 13){
+            return true;
+        }
 
 
         $url = "http://34.235.30.82/api/v1/black-list";
@@ -422,9 +392,8 @@ class TransferService extends AbstractService
             ],
             'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
         ];
-        $res = $client->request("POST", $url, $params);
-        dump(json_decode($res->getBody()));
-        die;
+        $response = $client->request("POST", $url, $params);
+        $response = json_decode($response->getBody());
 
         $receiverParams = [
             'headers' => [
@@ -433,8 +402,10 @@ class TransferService extends AbstractService
             ],
             'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
         ];
+        $receiverResponse = $client->request("POST", $url, $receiverParams);
+        $receiverResponse = json_decode($receiverResponse->getBody());
 
-        if($response['error'] || $receiverResponse['error']){
+        if(isset($response->error)|| isset($receiverResponse->error)){
             return false;
         }
         return true;
