@@ -352,7 +352,7 @@ class TransferService extends AbstractService
         }
 
 
-        $url = "http://34.235.30.82/api/v1/black-list";
+
         $client = new \GuzzleHttp\Client();
 
         $boundary = 'my_custom_boundary';
@@ -393,7 +393,7 @@ class TransferService extends AbstractService
             ],
             'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
         ];
-        $response = $client->request("POST", $url, $params);
+        $response = $client->request("POST", env('API_URI'), $params);
         $response = json_decode($response->getBody());
 
         $receiverParams = [
@@ -403,7 +403,7 @@ class TransferService extends AbstractService
             ],
             'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
         ];
-        $receiverResponse = $client->request("POST", $url, $receiverParams);
+        $receiverResponse = $client->request("POST", env('API_URI'), $receiverParams);
         $receiverResponse = json_decode($receiverResponse->getBody());
 
         if(isset($response->error)|| isset($receiverResponse->error)){
