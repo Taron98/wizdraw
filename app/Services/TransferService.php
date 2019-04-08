@@ -342,11 +342,12 @@ class TransferService extends AbstractService
      * @desc check if the user is in terrorists list
      * @param Client $sender
      * @param $receiver
+     * @param $receiverCountryId
      * @return bool
      */
-    public function isNotBlackListed(Client $sender, $receiver)
+    public function isNotBlackListed(Client $sender, $receiver, $receiverCountryId)
     {
-        if($sender->defaultCountryId !== 13){
+        if($sender->defaultCountryId !== 13 && $receiverCountryId !== 13){
             return true;
         }
 
