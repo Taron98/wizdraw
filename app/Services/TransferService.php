@@ -341,17 +341,13 @@ class TransferService extends AbstractService
     /**
      * @desc check if the user is in terrorists list
      * @param Client $sender
-     * @param $receiver
-     * @param $receiverCountryId
      * @return bool
      */
-    public function isNotBlackListed(Client $sender, $receiver, $receiverCountryId)
+    public function isNotBlackListed(Client $sender)
     {
-        if($sender->defaultCountryId !== 13 && $receiverCountryId !== 13){
+        if($sender->defaultCountryId !== 13 ){
             return true;
         }
-
-
 
         $client = new \GuzzleHttp\Client();
 
@@ -370,22 +366,6 @@ class TransferService extends AbstractService
                 'contents' => $sender->middle_name,
             ],
         ];
-
-        $receiverName = [
-            [
-                'name' => 'first_name',
-                'contents' => $receiver['first_name'],
-            ],
-            [
-                'name' => 'last_name',
-                'contents' => $receiver['last_name'],
-            ],
-            [
-                'name' => 'middle_name',
-                'contents' => $receiver['middle_name'],
-            ]
-        ];
-
         $params = [
             'headers' => [
                 'Connection' => 'close',
@@ -393,20 +373,11 @@ class TransferService extends AbstractService
             ],
             'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
         ];
+
         $response = $client->request("POST", env('API_URI'), $params);
         $response = json_decode($response->getBody());
 
-        $receiverParams = [
-            'headers' => [
-                'Connection' => 'close',
-                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
-            ],
-            'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
-        ];
-        $receiverResponse = $client->request("POST", env('API_URI'), $receiverParams);
-        $receiverResponse = json_decode($receiverResponse->getBody());
-
-        if(isset($response->error)|| isset($receiverResponse->error)){
+        if(isset($response->error)){
             return false;
         }
         return true;
