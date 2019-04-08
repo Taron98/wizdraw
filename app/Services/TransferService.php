@@ -406,7 +406,7 @@ class TransferService extends AbstractService
         $receiverResponse = $client->request("POST", env('API_URI'), $receiverParams);
         $receiverResponse = json_decode($receiverResponse->getBody());
 
-        if(isset($response->error)|| isset($receiverResponse->error)){
+        if(isset($response->statusCode) && $response->statusCode == 226 || isset($receiverResponse->statusCode) && $receiverResponse->statusCode == 226){
             return false;
         }
         return true;
