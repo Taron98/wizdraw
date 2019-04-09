@@ -14,7 +14,7 @@ class AddCidToTransfersTable extends Migration
     public function up()
     {
         Schema::table('transfers', function (Blueprint $table) {
-            $table->string('cId', 11)->nullable()->after('sender_country_id');
+            $table->string('c_id', 11)->nullable()->after('sender_country_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddCidToTransfersTable extends Migration
     public function down()
     {
         Schema::table('transfers', function (Blueprint $table) {
-            $table->dropColumn('cId');
+            $table->dropColumn('c_id');
         });
     }
 }
