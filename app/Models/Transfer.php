@@ -119,6 +119,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'bank_account_id',
         'receiver_country_id',
         'sender_country_id',
+        'cId',
         'amount',
         'commission',
         'rate',
