@@ -18,8 +18,10 @@ use Wizdraw\Models\User;
  * Class TransferMissingReceipt
  * @package Wizdraw\Notifications
  */
-class TransferMissingReceipt extends Notification
+class TransferMissingReceipt extends Notification implements ShouldQueue
 {
+    use Queueable;
+
     const REMIND_EVERY_HOURS = 5;
     const APPLICATION_STATE = 'money-transfer.finish-transaction';
 
