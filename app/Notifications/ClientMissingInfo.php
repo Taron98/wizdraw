@@ -69,6 +69,7 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         }
         $device_id = $notifiable->device_id;
 
+
         $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
 
         return (new PushExpoMessage())->setTo($expoToken)->setTitle('Missing Information')->setBody($content)->enableSound();

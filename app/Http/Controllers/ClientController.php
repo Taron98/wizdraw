@@ -145,11 +145,12 @@ class ClientController extends AbstractController
         }
 
         // todo: move to other place
-        if ($isSetup) {
+//        if ($isSetup) {
+        if (true) {
             $user->notify(
                 (new ClientMissingInfo())
-                    ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
-                    ->onConnection('redis')
+//                    ->delay($client->getTargetTime(ClientMissingInfo::REMIND_TIME), $user)
+//                    ->onConnection('redis')
             );
 
             $this->vipService->createVip($client);
