@@ -63,7 +63,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         ]);
 
         if (!is_null($this->transfer->receipt) || $this->transfer->statusId != 3) {
-            //return null;
+           //return null;
         }
 
         $this->addReminder($notifiable);
