@@ -55,7 +55,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      *
      * @return PushExpoMessage|null
      */
-    public function toExpoPush($notifiable)
+    public function toExpoPush(User $notifiable)
     {
         $content = trans('notification.transfer_missing_receipt', [
             'transactionNumber' => $this->transfer->getTransactionNumber(),
