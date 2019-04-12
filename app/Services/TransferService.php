@@ -104,8 +104,8 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
         } elseif ($attributes['payment_agency'] == 'wizdraw-prepaid' && isset($attributes['c_id']) && isset($attributes['sms_code'])) {
             $transferStatus = TransferStatus::STATUS_WAIT;
-            unset($attributes['c_id']);
-//            unset($attributes['sms_code']);
+//            unset($attributes['c_id']);
+            unset($attributes['sms_code']);
         } elseif ($attributes['payment_agency'] == 'pay-to-agent') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT;
         } else {
