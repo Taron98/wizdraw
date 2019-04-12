@@ -65,7 +65,7 @@ class ClientMissingInfo extends Notification implements ShouldQueue
 
         // Most of the time it means that the user registered after 9pm
         if (is_null($this->delay) || $this->delay->diffInMinutes(null, false) > 5) {
-//            return null;
+            return null;
         }
         $device_id = $notifiable->device_id;
 
@@ -106,8 +106,8 @@ class ClientMissingInfo extends Notification implements ShouldQueue
 
         $notifiable->notify(
             (new ClientMissingInfo())
-//                ->delay($twentyFourHoursForward)
-//                ->onConnection('redis')
+                ->delay($twentyFourHoursForward)
+                ->onConnection('redis')
         );
     }
 
