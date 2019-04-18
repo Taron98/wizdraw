@@ -166,7 +166,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
         }
         if (!$this->transferService->isNotBlackListed($client, $receiver)) {
-            return $this->respondWithError('user_is_blacklisted', Response::HTTP_FORBIDDEN, $client);
+            return $this->respondWithError('an_error_has_occurred,_please_contact_customer_service.', Response::HTTP_FORBIDDEN, $client);
         }
 
         if (!$this->transferService->validateMonthly($amount, $client)) {
