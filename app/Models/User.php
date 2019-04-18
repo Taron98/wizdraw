@@ -32,6 +32,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
+ * @property string $encrypted
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
@@ -52,6 +53,7 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\User whereEncrypted($value)
  * @mixin \Eloquent
  */
 class User extends AbstractModel implements

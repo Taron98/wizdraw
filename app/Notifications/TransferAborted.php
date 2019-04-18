@@ -58,8 +58,9 @@ class TransferAborted extends Notification
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
         $device_id = $this->transfer->client->user->device_id;
+        $client_id = $notifiable->client_id;
 
-        $expoToken = ExpoToken::where('device_id', $device_id)->first()->expo_token;
+        $expoToken = ExpoToken::where('device_id', $device_id)->where('client_id', $client_id)->first()->expo_token;
 
         return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
