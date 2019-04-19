@@ -46,6 +46,12 @@ class CountryCache extends AbstractCacheEntity
     /** @var  int */
     protected $isDeposit;
 
+    /** @var float */
+    protected $wisdrawIlsBaseRate;
+
+    /** @var float */
+    protected $wizdrawIlsExchangeRate;
+
     /**
      * @return string
      */
@@ -267,6 +273,46 @@ class CountryCache extends AbstractCacheEntity
     }
 
     /**
+     * @return float
+     */
+    public function getWisdrawIlsBaseRate(): float
+    {
+        return $this->wisdrawIlsBaseRate;
+    }
+
+    /**
+     * @param float $wisdrawIlsBaseRate
+     *
+     * @return $this
+     */
+    public function setWisdrawIlsBaseRate(float $wisdrawIlsBaseRate)
+    {
+        $this->wisdrawIlsBaseRate = $wisdrawIlsBaseRate;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getWizdrawIlsExchangeRate(): float
+    {
+        return $this->wizdrawIlsExchangeRate;
+    }
+
+    /**
+     * @param float $wizdrawIlsExchangeRate
+     *
+     * @return $this
+     */
+    public function setWizdrawIlsExchangeRate(float $wizdrawIlsExchangeRate)
+    {
+        $this->wizdrawIlsExchangeRate = $wizdrawIlsExchangeRate;
+
+        return $this;
+    }
+
+    /**
      * @param Carbon $targetTime
      *
      * @return Carbon
@@ -282,5 +328,4 @@ class CountryCache extends AbstractCacheEntity
 
         return $targetTime;
     }
-
 }
