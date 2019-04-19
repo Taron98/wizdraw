@@ -32,6 +32,8 @@ use Wizdraw\Services\TransferService;
  * @property float $latitude
  * @property float $longitude
  * @property string $note
+ * @property float $ilsBaseRate
+ * @property float $ilsExchangeRate
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
@@ -650,6 +652,46 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setNote($note): Transfer
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getIlsBaseRate()
+    {
+        return $this->ilsBaseRate;
+    }
+
+    /**
+     * @param float $ilsBaseRate
+     *
+     * @return Transfer
+     */
+    public function setIlsBaseRate($ilsBaseRate): Transfer
+    {
+        $this->ilsBaseRate = $ilsBaseRate;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getIlsExchangeRate()
+    {
+        return $this->ilsExchangeRate;
+    }
+
+    /**
+     * @param float $ilsExchangeRate
+     *
+     * @return Transfer
+     */
+    public function setIlsExchangeRate($ilsExchangeRate): Transfer
+    {
+        $this->ilsExchangeRate = $ilsExchangeRate;
 
         return $this;
     }
