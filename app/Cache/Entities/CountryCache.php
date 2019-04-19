@@ -47,7 +47,7 @@ class CountryCache extends AbstractCacheEntity
     protected $isDeposit;
 
     /** @var float */
-    protected $wisdrawIlsBaseRate;
+    protected $wizdrawIlsBaseRate;
 
     /** @var float */
     protected $wizdrawIlsExchangeRate;
@@ -275,9 +275,9 @@ class CountryCache extends AbstractCacheEntity
     /**
      * @return float
      */
-    public function getWisdrawIlsBaseRate(): float
+    public function getWizdrawIlsBaseRate(): float
     {
-        return $this->wisdrawIlsBaseRate;
+        return $this->wizdrawIlsBaseRate;
     }
 
     /**
@@ -285,9 +285,9 @@ class CountryCache extends AbstractCacheEntity
      *
      * @return $this
      */
-    public function setWisdrawIlsBaseRate(float $wisdrawIlsBaseRate)
+    public function setWizdrawIlsBaseRate(float $wizdrawIlsBaseRate)
     {
-        $this->wisdrawIlsBaseRate = $wisdrawIlsBaseRate;
+        $this->wizdrawIlsBaseRate = $wizdrawIlsBaseRate;
 
         return $this;
     }
