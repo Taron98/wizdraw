@@ -67,7 +67,7 @@ class ClientMissingInfo extends Notification implements ShouldQueue
             return null;
         }
         $device_id = $notifiable->device_id;
-        $client_id = $notifiable->client->getId();
+        $client_id = $notifiable->client_id;
 
 
         $expoToken = ExpoToken::where('device_id', $device_id)->where('client_id', $client_id)->first()->expo_token;

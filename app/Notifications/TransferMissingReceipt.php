@@ -68,7 +68,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
 
         $this->addReminder($notifiable);
         $device_id = $this->transfer->client->user->device_id;
-        $client_id = $notifiable->client->getId();
+        $client_id = $notifiable->client->user->client_id;
 
         $expoToken = ExpoToken::where('device_id', $device_id)->where('client_id', $client_id)->first()->expo_token;
 
