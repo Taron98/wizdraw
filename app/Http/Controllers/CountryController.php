@@ -110,7 +110,7 @@ class CountryController extends AbstractController
             $client->defaultCountryId);
         if ($client->defaultCountryId === 13) {
             $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'), true);
-            $country->setWisdrawIlsBaseRate($wizdrawRate['wf_rate']);
+            $country->setWizdrawIlsBaseRate($wizdrawRate['wf_rate']);
             $country->setWizdrawIlsExchangeRate($wizdrawRate['wf_exchange_rate']);
         }
 
