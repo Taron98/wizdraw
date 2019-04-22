@@ -17,6 +17,8 @@ use Wizdraw\Models\User;
 use Wizdraw\Models\Campaign;
 use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
+use GuzzleHttp\Client as GuzzleClient;
+
 
 /**
  * Class TransferService
@@ -27,8 +29,10 @@ class TransferService extends AbstractService
     const DEFAULT_MAX_MONTHLY_TRANSFER = 8000;
     const DEFAULT_MAX_YEARLY_TRANSFER = 210000;
     //@TODO - for the future, if we add more sending countries, we need to make this limits come from the db
-    const MONTHLY_LIMITS_ARRAY = array(90 => 8000, 13 => 35000, 119 => 60000);
+    const MONTHLY_LIMITS_ARRAY = array(90 => 4500, 13 => 35000, 119 => 60000);
     const YEARLY_LIMITS_ARRAY = array(13 => 210000);
+
+    const HONG_KONG_SENDER = 90;
 
     const AGENCY_7_ELEVEN = '7-eleven';
     const AGENCY_CIRCLE_K = 'circle-k';
@@ -147,7 +151,8 @@ class TransferService extends AbstractService
      */
     public function validateMonthly(float $amount, Client $senderClient): bool
     {
-        $monthlyTotal = $amount + $this->repository->monthlyTransfer();
+        $hongKongSender = $senderClient->default_country_id === self::HONG_KONG_SENDER;
+        $monthlyTotal = $amount + $this->repository->monthlyTransfer($hongKongSender);
         $senderClientCountry = $senderClient->default_country_id;
         $monthlyLimit = array_key_exists($senderClientCountry, self::MONTHLY_LIMITS_ARRAY) ? self::MONTHLY_LIMITS_ARRAY[$senderClientCountry] : self::DEFAULT_MAX_MONTHLY_TRANSFER;
 
@@ -306,8 +311,9 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
-        if(!$this->isEntitledForCampaign($campaign)){
+    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign)
+    {
+        if (!$this->isEntitledForCampaign($campaign)) {
             return false;
         }
         //At first, the condition for being entitled to the campaign was for the first 5 transfers only (as the function name..)
@@ -323,11 +329,86 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    private function isEntitledForCampaign($campaign){
-        if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
+    private function isEntitledForCampaign($campaign)
+    {
+        if ((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)) {
             return false;
         }
         return true;
     }
 
+    /**
+     * @desc check if the user is in terrorists list
+     * @param Client $sender
+     * @param $receiver
+     * @return bool
+     */
+    public function isNotBlackListed(Client $sender, $receiver)
+    {
+        if($sender->defaultCountryId !== 13 ){
+            return true;
+        }
+
+
+
+        $client = new \GuzzleHttp\Client();
+
+        $boundary = 'my_custom_boundary';
+        $multipart_form = [
+            [
+                'name' => 'first_name',
+                'contents' => $sender->first_name,
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $sender->last_name,
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $sender->middle_name,
+            ],
+        ];
+
+        $receiverName = [
+            [
+                'name' => 'first_name',
+                'contents' => $receiver['first_name'],
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $receiver['last_name'],
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $receiver['middle_name'],
+            ]
+        ];
+
+        $params = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
+        ];
+
+        $response = $client->request("POST", env('API_URI'), $params);
+        $response = json_decode($response->getBody());
+
+        $receiverParams = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
+        ];
+        $receiverResponse = $client->request("POST", env('API_URI'), $receiverParams);
+        $receiverResponse = json_decode($receiverResponse->getBody());
+
+        if(isset($response->statusCode) && $response->statusCode == 226 || isset($receiverResponse->statusCode) && $receiverResponse->statusCode == 226){
+            return false;
+        }
+        return true;
+
+    }
 }

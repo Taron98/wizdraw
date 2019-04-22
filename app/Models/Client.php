@@ -331,6 +331,14 @@ class Client extends AbstractModel implements AuthorizableContract
     }
 
     /**
+     * @return int
+     */
+    public function getResidentCountry()
+    {
+        return $this->residentCountryId;
+    }
+
+    /**
      * TODO: Currently, we haven't decided yet
      * TODO:  how to implement the caching of the old tables
      */
@@ -668,7 +676,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function isChanged()
     {
-        return $this->isChanged;
+        return $this->is_changed;
     }
 
     /**

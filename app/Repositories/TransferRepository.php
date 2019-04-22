@@ -60,13 +60,18 @@ class TransferRepository extends AbstractRepository
     }
 
     /**
+     * @param bool $isHK
      * @return float
      */
-    public function monthlyTransfer() : float
+    public function monthlyTransfer($isHK = false) : float
     {
+        $filterDate = Carbon::now()->subMonth(1);
+        if ($isHK) {
+            $filterDate = Carbon::now()->startOfMonth();
+        }
         $transfers = $this->getClientValidTransfers();
         $total = $transfers
-            ->where('created_at', '>=', Carbon::now()->subMonth(1))
+            ->where('created_at', '>=', $filterDate)
             ->sum('amount');
 
         return $total;
