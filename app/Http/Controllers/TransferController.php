@@ -32,6 +32,7 @@ use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
 use Wizdraw\Services\VipService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TransferController
@@ -220,6 +221,7 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
+        Log::info(json_encode(['client' => $client->toArray(), 'rate' => $rate->toArray(), 'bankAccount' => $bankAccount->toArray(), 'inputs' => $inputs]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
         $campaign = $this->campaignService->getCampaign(1);
@@ -488,8 +490,11 @@ class TransferController extends AbstractController
             'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
+        Log::info('Leumi card log');
+        Log::info(json_encode($params));
         try {
             $result = $this->httpService->verifySendAmount($params);
+            Log::info(json_encode($result));
             if ($result['sent']) {
                 return $this->create($request);
             } else {
