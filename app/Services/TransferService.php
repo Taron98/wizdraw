@@ -17,6 +17,8 @@ use Wizdraw\Models\User;
 use Wizdraw\Models\Campaign;
 use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
+use GuzzleHttp\Client as GuzzleClient;
+
 
 /**
  * Class TransferService
@@ -310,8 +312,9 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign){
-        if(!$this->isEntitledForCampaign($campaign)){
+    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign)
+    {
+        if (!$this->isEntitledForCampaign($campaign)) {
             return false;
         }
         //At first, the condition for being entitled to the campaign was for the first 5 transfers only (as the function name..)
@@ -327,10 +330,86 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    private function isEntitledForCampaign($campaign){
-        if((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)){
+    private function isEntitledForCampaign($campaign)
+    {
+        if ((!$campaign[0]->active) || (Carbon::now() < $campaign[0]->start_date) || (Carbon::now() > $campaign[0]->end_date)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @desc check if the user is in terrorists list
+     * @param Client $sender
+     * @param $receiver
+     * @return bool
+     */
+    public function isNotBlackListed(Client $sender, $receiver)
+    {
+        if($sender->defaultCountryId !== 13 ){
+            return true;
+        }
+
+
+
+        $client = new \GuzzleHttp\Client();
+
+        $boundary = 'my_custom_boundary';
+        $multipart_form = [
+            [
+                'name' => 'first_name',
+                'contents' => $sender->first_name,
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $sender->last_name,
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $sender->middle_name,
+            ],
+        ];
+
+        $receiverName = [
+            [
+                'name' => 'first_name',
+                'contents' => $receiver['first_name'],
+            ],
+            [
+                'name' => 'last_name',
+                'contents' => $receiver['last_name'],
+            ],
+            [
+                'name' => 'middle_name',
+                'contents' => $receiver['middle_name'],
+            ]
+        ];
+
+        $params = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($multipart_form, $boundary), // here is all the magic
+        ];
+
+        $response = $client->request("POST", env('API_URI'), $params);
+        $response = json_decode($response->getBody());
+
+        $receiverParams = [
+            'headers' => [
+                'Connection' => 'close',
+                'Content-Type' => 'multipart/form-data; boundary='.$boundary,
+            ],
+            'body' => new \GuzzleHttp\Psr7\MultipartStream($receiverName, $boundary),
+        ];
+        $receiverResponse = $client->request("POST", env('API_URI'), $receiverParams);
+        $receiverResponse = json_decode($receiverResponse->getBody());
+
+        if(isset($response->statusCode) && $response->statusCode == 226 || isset($receiverResponse->statusCode) && $receiverResponse->statusCode == 226){
+            return false;
+        }
+        return true;
+
     }
 }
