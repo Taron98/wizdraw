@@ -32,7 +32,6 @@ use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
 use Wizdraw\Services\VipService;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class TransferController
@@ -490,11 +489,8 @@ class TransferController extends AbstractController
             'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
-        Log::info('Leumi card log');
-        Log::info(json_encode($params));
         try {
             $result = $this->httpService->verifySendAmount($params);
-            Log::info(json_encode($result));
             if ($result['sent']) {
                 return $this->create($request);
             } else {
