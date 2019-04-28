@@ -129,13 +129,11 @@ class UserController extends AbstractController
     {
         /** @var User $user */
         $user = $this->userService->findByDeviceId($deviceId);
-
         if (is_null($user)) {
             return $this->respondWithError('device_not_found', Response::HTTP_NOT_FOUND);
         }
 
         $client = $user->client;
-
         return $this->respond([
             'user' => [
                 'email' => ($user->getEmail()) ?: '',
@@ -144,9 +142,26 @@ class UserController extends AbstractController
             ],
             'client' => [
                 'id' => $client->getId(),
+                'identity_type_id' => ($client->identityType()) ?: '0',
+                'identity_number' => ($client->getIdentityNumber()) ?: '',
+                'identity_expire' => ($client->getBirthDateAttribute($client->getIdentityExpire())) ?: '',
+                'birth_date' => ($client->getBirthDateAttribute($client->getBirthDate())) ?: '',
+                'gender' => ($client->getGender()) ?: '',
+                'phone' => ($client->getPhone()) ?: '',
+                'default_country_id' => ($client->getDefaultCountry()) ?: '',
+                'resident_country_id' => ($client->getResidentCountry()) ?: '',
+                'state' => ($client->getState()) ?: '',
+                'city' => ($client->getCity()) ?: '',
+                'address' => ($client->getAddress()) ?: '',
+                'client_type' => ($client->getClientType()) ?: '',
+                'is_approved' => ($client->isApproved()) ?: '',
+                'affiliate_id' => ($client->getAffiliateId()) ?: '',
+                'is_changed' => ($client->isChanged()) ? : '',
                 'firstName' => ($client->getFirstName()) ?: '',
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName' => ($client->getLastName()) ?: '',
+                'didSetup' => ($client->isDidSetup()) ? : false,
+
             ],
         ]);
     }
