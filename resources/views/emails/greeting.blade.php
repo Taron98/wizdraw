@@ -7,7 +7,7 @@
 <body>
 <div style="width:100%; max-width:600px; margin: 0 auto;font-family: Poppins; line-height:normal; font-style:normal; text-align: center;">
     <div style="background-color: #2C37A4; height: 291px; box-sizing:border-box; position: relative">
-        <div><img style="margin:39px 0;" src="logo.png"/></div>
+        <div><img style="margin:39px 0;" src="{{ resource_path(['assets/images/logo.png'])}}"/></div>
         <div style="margin: 0 54px; box-sizing: border-box; border-top:5px solid #FFFFFF; border-left:5px solid #FFFFFF; border-right:5px solid #FFFFFF;  color:white; margin-top: -9px; padding-bottom:1px;">
             <p style="font-size:34px;font-weight:600;">Greetings {{$firstName}}!
             </p>
@@ -34,7 +34,7 @@
                 </h3>
                 <div style="margin-bottom: 30px;">
                     <div style="height: 89px; width: 89px; line-height: 89px;  border-radius:100%;background-color: #2C37A4; text-align:center; display:inline-block;">
-                        <img src="../../assets/images/icon_1.png" style="vertical-align:middle;">
+                        <img src="{{ resource_path(['assets/images/icon_1.png'])}}" style="vertical-align:middle;">
                     </div>
                     <div style="width:300px;display:inline-block; vertical-align: middle;margin-left:20px;">
                         Access beneficiaries quickly – Create a group of your permanent beneficiaries
@@ -42,7 +42,7 @@
                 </div>
                 <div style="margin-bottom: 30px;">
                     <div style="height: 89px; width: 89px; line-height: 89px;  border-radius:100%;background-color: #2C37A4; text-align:center; display:inline-block;">
-                        <img src="../../assets/images/icon_2.png" style="vertical-align:middle;">
+                        <img src="{{ resource_path(['assets/images/icon_2.png'])}}" style="vertical-align:middle;">
                     </div>
                     <div style="width:300px; display:inline-block; vertical-align: middle; margin-left:20px;">
                         Select how to send money – Top-up cash/Debit card, 7-Eleven/Circle-K, Pick-up/Bank account
@@ -50,7 +50,7 @@
                 </div>
                 <div style="margin-bottom: 30px;">
                     <div style="height: 89px; width: 89px; line-height: 89px;  border-radius:100%;background-color: #2C37A4; text-align:center;display:inline-block;">
-                        <img src="../../assets/images/icon_3.png" style="vertical-align:middle;">
+                        <img src="{{ resource_path(['assets/images/icon_3.png'])}}" style="vertical-align:middle;">
                     </div>
                     <div style="width:300px;display:inline-block; vertical-align: middle;margin-left:20px;">
                         Receive immediate confirmation – Know the exact amount transferred in your currency
@@ -67,8 +67,8 @@
     <div style="background-color: #2C37A4; height: 163px;">
         <div style="padding-top: 40px; margin-bottom:20px;">
             <a style="margin-right:16px;" href="https://www.facebook.com/wizdrawremit"><img
-                        src="../../assets/images/Facebook.png"/></a>
-            <a href="https://www.linkedin.com/company-beta/13263947/"><img src="../../assets/images/Linkedin.png"/></a>
+                        src="{{ resource_path(['assets/images/Facebook.png']) }}"/></a>
+            <a href="https://www.linkedin.com/company-beta/13263947/"><img src="{{ resource_path(['assets/images/Linkedin.png'])}}"/></a>
         </div>
         <div style="color: #FFFFFF; font-weight: 600;">
             Wizdraw Team
