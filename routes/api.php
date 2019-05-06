@@ -314,9 +314,15 @@ Route::group(['prefix' => 'v1/'], function () {
             ]);
 
         });
-
-
+        Route::group(['prefix' => 'notifications/'], function (){
+            Route::post('/token/', [
+                'as'   => 'notifications.token',
+                'uses' => 'NotificationsController@token',
+            ]);
+        });
     });
+
+
 
 
 });

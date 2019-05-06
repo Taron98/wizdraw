@@ -22,7 +22,8 @@
         "approached/laravel-image-optimizer": "^2.2",
         "propaganistas/laravel-phone": "4.0.3",
         "giggsey/locale": "1.6",
-        "giggsey/libphonenumber-for-php": "8.9.16"
+        "giggsey/libphonenumber-for-php": "8.9.16",
+        "alymosul/laravel-exponent-push-notifications": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

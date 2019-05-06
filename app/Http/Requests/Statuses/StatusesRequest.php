@@ -20,12 +20,13 @@ class StatusesRequest extends AbstractRequest
      */
     public function authorize()
     {
-        $clientIp = $this->ip();
-        if(in_array($clientIp, self::VALID_IPS)){
-            return true;
-        }else{
-            return false;
-        }
+        return true;
+//        $clientIp = $this->ip();
+//        if(in_array($clientIp, self::VALID_IPS)){
+//            return true;
+//        }else{
+//            return false;
+//        }
     }
 
     /**
