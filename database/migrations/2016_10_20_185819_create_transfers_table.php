@@ -68,6 +68,7 @@ class CreateTransfersTable extends Migration
                 ->references('id')->on('transfer_receipts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
         });
     }
 

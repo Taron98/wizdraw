@@ -147,7 +147,6 @@ class TransferController extends AbstractController
         $user = $request->user();
         $client = $user->client;
         $inputs = $request->inputs();
-
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');
@@ -499,4 +498,5 @@ class TransferController extends AbstractController
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
+
 }
