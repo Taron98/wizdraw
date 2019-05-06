@@ -13,7 +13,6 @@ use Wizdraw\Notifications\ClientVerify;
 use Wizdraw\Notifications\UserResetPassword;
 use Wizdraw\Services\ClientService;
 use Wizdraw\Services\UserService;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserController
@@ -214,7 +213,6 @@ class UserController extends AbstractController
      */
     public function reset(UserResetPasswordRequest $request)
     {
-        Log::info(json_encode(['credentials' => $request->all()]));
         $email = $request->input('email');
         $phone = $request->input('phone');
         if ($email) {
