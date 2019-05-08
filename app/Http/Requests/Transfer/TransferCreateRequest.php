@@ -64,6 +64,7 @@ class TransferCreateRequest extends AbstractRequest
             'longitude' => 'required|longitude',
 
             'note' => 'string',
+            'supplier' => 'string'
 
             // 'natures', current is const
         ];

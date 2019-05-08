@@ -2,22 +2,19 @@
 
 namespace Wizdraw\Notifications;
 
-use Carbon\Carbon;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Wizdraw\Notifications\Channels\PushExpoChannel;
+use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
-use Wizdraw\Models\User;
-use Wizdraw\Notifications\Channels\PushwooshChannel;
-use Wizdraw\Notifications\Messages\PushwooshMessage;
+
 
 /**
  * Class TransferAborted
  * @package Wizdraw\Notifications
  */
-class TransferAborted extends Notification implements ShouldQueue
+class TransferAborted extends Notification
 {
-    use Queueable;
 
     const APPLICATION_STATE = 'money-transfer.home.intro';
 
@@ -43,15 +40,16 @@ class TransferAborted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushwooshChannel::class];
+        return [PushExpoChannel::class];
     }
+
 
     /**
      * @param $notifiable
      *
-     * @return PushwooshMessage|null
+     * @return PushExpoMessage|null
      */
-    public function toPushwoosh(User $notifiable)
+    public function toExpoPush($notifiable)
     {
         $countryStores = $this->stores($this->transfer->senderCountryId);
 
@@ -59,15 +57,12 @@ class TransferAborted extends Notification implements ShouldQueue
             'transactionNumber' => $this->transfer->getTransactionNumber(),
             'csPhoneNumber' => $countryStores[0]->cs_number,
         ]);
+        $device_id = $this->transfer->client->user->device_id;
+        $client_id =  $this->transfer->client->user->client_id;
 
-        return (new PushwooshMessage)
-            ->setContent($content)
-            ->setData([
-                'state' => self::APPLICATION_STATE,
-                'data'  => [
-                    'transferId' => $this->transfer->getId(),
-                ],
-            ]);
+        $expoToken = ExpoToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->expo_token;
+
+        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
 
     /**

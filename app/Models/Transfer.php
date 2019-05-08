@@ -38,6 +38,7 @@ use Wizdraw\Services\TransferService;
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
  * @property string $supplier
+ * @property integer $ibmTransferId
  * @property-read mixed $qrCodeUrl
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Wizdraw\Models\Client $receiverClient
@@ -72,6 +73,7 @@ use Wizdraw\Services\TransferService;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSupplier($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereIbmTransferId($value)
  * @mixin \Eloquent
  */
 class Transfer extends AbstractModel implements AuthorizableContract
@@ -136,6 +138,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'longitude',
         'note',
         'status_id',
+        'supplier'
     ];
 
     /**
