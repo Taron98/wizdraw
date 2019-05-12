@@ -4,8 +4,110 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c7021be1d90623d048d6e213cb62379",
+    "content-hash": "39c3cf3a58cb37663cca7b4dc2691cb7",
     "packages": [
+        {
+            "name": "alymosul/exponent-server-sdk-php",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alymosul/exponent-server-sdk-php.git",
+                "reference": "c3fec550e2c0c0e6dea94866a122c93d97915f03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alymosul/exponent-server-sdk-php/zipball/c3fec550e2c0c0e6dea94866a122c93d97915f03",
+                "reference": "c3fec550e2c0c0e6dea94866a122c93d97915f03",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ExponentPhpSDK\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aly Suleiman",
+                    "email": "alymosul@gmail.com"
+                }
+            ],
+            "description": "Server-side library for working with Expo push notifications using PHP",
+            "keywords": [
+                "expo",
+                "exponent",
+                "notifications",
+                "push"
+            ],
+            "time": "2019-01-18T13:18:59+00:00"
+        },
+        {
+            "name": "alymosul/laravel-exponent-push-notifications",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alymosul/laravel-exponent-push-notifications.git",
+                "reference": "72c6e17882d909f83dbe55b9e739cd41534ca3f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alymosul/laravel-exponent-push-notifications/zipball/72c6e17882d909f83dbe55b9e739cd41534ca3f1",
+                "reference": "72c6e17882d909f83dbe55b9e739cd41534ca3f1",
+                "shasum": ""
+            },
+            "require": {
+                "alymosul/exponent-server-sdk-php": "1.1.*",
+                "illuminate/auth": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/config": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/events": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/http": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/notifications": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/queue": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/routing": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/validation": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "orchestra/testbench": "~3.3||~3.4||~3.5||~3.6||~3.7",
+                "phpunit/phpunit": "~5.4||~5.7||~6.0||^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\ExpoPushNotifications\\ExpoPushNotificationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\ExpoPushNotifications\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aly Suleiman",
+                    "email": "alymosul@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Exponent push notifications driver for laravel",
+            "homepage": "https://github.com/alymosul/laravel-exponent-push-notifications",
+            "time": "2019-01-31T10:01:57+00:00"
+        },
         {
             "name": "approached/laravel-image-optimizer",
             "version": "2.2.3",
@@ -3096,6 +3198,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2016-11-27T07:52:03+00:00"
         },
         {

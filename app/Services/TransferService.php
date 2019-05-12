@@ -113,7 +113,6 @@ class TransferService extends AbstractService
         } else {
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
-
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
