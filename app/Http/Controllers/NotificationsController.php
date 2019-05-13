@@ -28,13 +28,11 @@ class NotificationsController extends AbstractController
     {
         $credentials = $request->all();
         $expo = ExpoToken::where(['device_id' => $credentials['device_id'], 'client_id'=>$credentials['client_id']])->first();
-
-        if ($expo->expo_token  == null){
+        if ($expo == null){
             ExpoToken::create($credentials);
         }else{
             $expo->update(['expo_token' => $credentials['expo_token']]);
         }
-
         return $this->respond([
             'success' => true,
         ]);
