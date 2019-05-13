@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use ExponentPhpSDK\Expo;
 use Illuminate\Http\JsonResponse;
 use Wizdraw\Http\Requests\NotificationsRequest;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,9 @@ class NotificationsController extends AbstractController
     ): JsonResponse
     {
         $credentials = $request->all();
-        ExpoToken::create($credentials);
+        $expo = ExpoToken::firstOrNew(array('device_id' => $credentials['device_id'], 'client_id'=>$credentials['client_id']));
+        $expo->expo_token = $credentials['expo_token'];
+        $expo->save();
 
         return $this->respond([
             'success' => true,
