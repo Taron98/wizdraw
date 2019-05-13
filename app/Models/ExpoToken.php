@@ -4,6 +4,7 @@ namespace Wizdraw\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * Wizdraw\Models\ExpoToken
  *
@@ -15,7 +16,7 @@ class ExpoToken extends Model
      * @var string
      */
     protected $table = "expo_token";
-    protected $primaryKey = array('device_id', 'client_id');
+    protected $primaryKey = 'device_id';
 
     /**
      * @var array
