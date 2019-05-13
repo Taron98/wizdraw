@@ -15,7 +15,7 @@ class ExpoToken extends Model
      * @var string
      */
     protected $table = "expo_token";
-    protected $primaryKey = ['device_id', 'client_id'];
+    protected $primaryKey = array('device_id', 'client_id');
 
     /**
      * @var array
