@@ -128,7 +128,7 @@ class AuthController extends AbstractController
         $phone = $request->only('phone')['phone'];
         $user = $this->userRepository->findByField('email', $request->only('email'))->first();
 	$client = $this->clientService->findByPhone($phone);
-        if ($client!=null && $client->user && $user != null && $this->clientRepository->findByField('id', $user->client_id)->client_type == 'sender' ) {
+ if (($client!=null && $client->user!=null && $client->clientType=='sender' ||  $user != null) ) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
