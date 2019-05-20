@@ -127,8 +127,8 @@ class AuthController extends AbstractController
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
         $phone = $request->only('phone')['phone'];
         $user = $this->userRepository->findByField('email', $request->only('email'))->first();
-	$client = $this->clientService->findByPhone($phone);
- if (($client!=null && $client->user!=null && $client->clientType=='sender' ||  $user != null) ) {
+        $client = $this->clientService->findByPhone($phone);
+        if (($client != null && $client->user != null && $client->clientType == 'sender' || $user != null)) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
@@ -195,7 +195,7 @@ class AuthController extends AbstractController
             'token' => $token,
             'didSetup' => $client->isDidSetup(),
             'isPending' => $user->isPending(),
-            'phone'     => $client->getPhone(),
+            'phone' => $client->getPhone(),
             'facebookUserAlreadyExist' => $facebookUserConnect['exist'],
         ], $facebookUser->toArray()));
     }
