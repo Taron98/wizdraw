@@ -144,6 +144,7 @@ class AuthController extends AbstractController
 
         /** @var User $user */
         $user = $this->userRepository->createWithRelation($userAttrs, $client);
+        $client = $this->clientRepository->updateType('sender', $client);
         if (!$user) {
             return $this->respondWithError('could_not_create_user');
         }
