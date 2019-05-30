@@ -3,7 +3,6 @@
 namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Predis\Client;
 use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Services\BankCacheService;
 use Wizdraw\Cache\Services\BranchCacheService;
@@ -44,9 +43,6 @@ class CountryController extends AbstractController
     /*** @var CampaignService */
     private $campaignService;
 
-    /** @var Client */
-    private $redis;
-
     /**
      * CountryController constructor.
      * @param CountryCacheService $countryCacheService
@@ -56,7 +52,6 @@ class CountryController extends AbstractController
      * @param BranchCacheService $branchCacheService
      * @param TransferService $transferService
      * @param CampaignService $campaignService
-     * @param Client $redis
      */
     public function __construct(
         CountryCacheService $countryCacheService,
@@ -65,8 +60,7 @@ class CountryController extends AbstractController
         BankCacheService $bankCacheService,
         BranchCacheService $branchCacheService,
         TransferService $transferService,
-        CampaignService $campaignService,
-        Client $redis
+        CampaignService $campaignService
     ) {
         $this->countryCacheService = $countryCacheService;
         $this->rateCacheService = $rateCacheService;
@@ -75,7 +69,6 @@ class CountryController extends AbstractController
         $this->branchCacheService = $branchCacheService;
         $this->transferService = $transferService;
         $this->campaignService = $campaignService;
-        $this->redis = $redis;
     }
 
     /**
@@ -108,11 +101,6 @@ class CountryController extends AbstractController
 
         $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',
             $client->defaultCountryId);
-        if ($client->defaultCountryId === 13) {
-            $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'), true);
-            $country->setWizdrawIlsBaseRate($wizdrawRate['wf_rate']);
-            $country->setWizdrawIlsExchangeRate($wizdrawRate['wf_exchange_rate']);
-        }
 
         //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
         if($this->transferService

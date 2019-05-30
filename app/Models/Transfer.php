@@ -23,7 +23,6 @@ use Wizdraw\Services\TransferService;
  * @property integer $bankAccountId
  * @property integer $receiverCountryId
  * @property integer $senderCountryId
- * @property string $cId
  * @property float $amount
  * @property float $commission
  * @property float $rate
@@ -32,12 +31,9 @@ use Wizdraw\Services\TransferService;
  * @property float $latitude
  * @property float $longitude
  * @property string $note
- * @property float $ilsBaseRate
- * @property float $ilsExchangeRate
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property string $supplier
  * @property integer $ibmTransferId
  * @property-read mixed $qrCodeUrl
  * @property-read \Wizdraw\Models\Client $client
@@ -60,7 +56,6 @@ use Wizdraw\Services\TransferService;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
@@ -72,7 +67,6 @@ use Wizdraw\Services\TransferService;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSupplier($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereIbmTransferId($value)
  * @mixin \Eloquent
  */
@@ -129,8 +123,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'sender_country_id',
         'amount',
         'commission',
-        'ils_base_rate',
-        'ils_exchange_rate',
         'rate',
         'status_id',
         'receipt_id',
@@ -655,46 +647,6 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function setNote($note): Transfer
     {
         $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getIlsBaseRate()
-    {
-        return $this->ilsBaseRate;
-    }
-
-    /**
-     * @param float $ilsBaseRate
-     *
-     * @return Transfer
-     */
-    public function setIlsBaseRate($ilsBaseRate): Transfer
-    {
-        $this->ilsBaseRate = $ilsBaseRate;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getIlsExchangeRate()
-    {
-        return $this->ilsExchangeRate;
-    }
-
-    /**
-     * @param float $ilsExchangeRate
-     *
-     * @return Transfer
-     */
-    public function setIlsExchangeRate($ilsExchangeRate): Transfer
-    {
-        $this->ilsExchangeRate = $ilsExchangeRate;
 
         return $this;
     }
