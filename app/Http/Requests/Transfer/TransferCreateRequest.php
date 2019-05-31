@@ -70,8 +70,8 @@ class TransferCreateRequest extends AbstractRequest
         ];
 
         $rules = array_merge($rules, [
-            'ilsBaseRate' => 'required|numeric',
-            'ilsExchangeRate' => 'required|numeric'
+            'ilsBaseRate' => 'numeric',
+            'ilsExchangeRate' => 'numeric'
         ]);
 
         return $rules;
