@@ -69,6 +69,11 @@ class TransferCreateRequest extends AbstractRequest
             // 'natures', current is const
         ];
 
+        $rules = array_merge($rules, [
+            'ilsBaseRate' => 'numeric',
+            'ilsExchangeRate' => 'numeric'
+        ]);
+
         return $rules;
 
 //        return [
