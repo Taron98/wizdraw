@@ -64,7 +64,9 @@ class TransferCreateRequest extends AbstractRequest
             'longitude' => 'required|longitude',
 
             'note' => 'string',
-            'supplier' => 'string'
+            'supplier' => 'string',
+            'ilsBaseRate' => 'nullable|numeric',
+            'ilsExchangeRate' => 'nullable|numeric'
 
             // 'natures', current is const
         ];
