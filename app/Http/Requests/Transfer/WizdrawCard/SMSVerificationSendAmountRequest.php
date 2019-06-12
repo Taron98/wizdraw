@@ -25,7 +25,7 @@ class SMSVerificationSendAmountRequest extends TransferCreateRequest
     {
         $parentRules = parent::rules();
         return array_merge($parentRules, [
-            'cId' => 'required|string',
+            'cid' => 'required|string',
             'smsCode' => 'required|string'
         ]);
     }
