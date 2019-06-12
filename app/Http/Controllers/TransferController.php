@@ -147,7 +147,6 @@ class TransferController extends AbstractController
         $user = $request->user();
         $client = $user->client;
         $inputs = $request->inputs();
-
         $receiverClientId = $request->input('receiverClientId');
         $receiver = $request->input('receiver');
         $amount = $request->input('amount');
@@ -164,6 +163,9 @@ class TransferController extends AbstractController
 
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
+        }
+        if (!$this->transferService->isNotBlackListed($client, $receiver)) {
+            return $this->respondWithError('an_error_has_occurred,_please_contact_customer_service.', Response::HTTP_FORBIDDEN, $client);
         }
 
         if (!$this->transferService->validateMonthly($amount, $client)) {
@@ -496,4 +498,5 @@ class TransferController extends AbstractController
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
+
 }
