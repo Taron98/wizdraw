@@ -1093,74 +1093,44 @@
   },
   {
     "type": "GLOBAL",
-    "id": "183",
-    "name": "098-SMALL AND MEDIUM ENTERPRISE DEVELOPMENT BANK O",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "184",
-    "name": "073-LAND AND HOUSES RETAIL BANK PUBLIC COMPANY LIM",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "185",
-    "name": "072-GE MONEY RETAIL BANK PUBLIC COMPANY LIMITED",
+    "name": "073LAND AND HOUSES BANK PUBLIC COMPANY LIMITED (LHBANK)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "186",
-    "name": "071-THE THAI CREDIT RETAIL BANK PUBLIC COMPANY LIM",
+    "name": "071THE THAI CREDIT RETAIL BANK PUBLIC COMPANY LIMITED  (TCRB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "187",
-    "name": "070-ACL BANK PUBLIC COMPANY LIMITED",
+    "name": "070INDUSTRIAL AND COMMERCIAL BANK OF CHINA (THAI) PUBLIC COMPANY LIMITED (ICBC THAI)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "188",
-    "name": "069-KIATNAKIN BANK PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "189",
-    "name": "068-AIG RETAIL BANK PUBLIC COMPANY LIMITED",
+    "name": "069KIATNAKIN BANK PUBLIC COMPANY LIMITED (KK)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "190",
-    "name": "067-TISCO BANK PUBLIC COMPANY LIMITED",
+    "name": "067TISCO BANK PUBLIC COMPANY LIMITED (TISCO)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "191",
-    "name": "066-ISLAMIC BANK OF THAILAND",
+    "name": "066ISLAMIC BANK OF THAILAND (ISBT)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "192",
-    "name": "065-THANACHART BANK PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "193",
-    "name": "053-THE BANK OF NOVA SCOTIA, BANGKOK BRANCH",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "194",
-    "name": "052-BANK OF CHINA LIMITED, BANGKOK BRANCH",
+    "name": "065THANACHART BANK PUBLIC COMPANY LIMITED (TBANK)",
     "country_name": "THAILAND"
   },
   {
@@ -1273,182 +1243,110 @@
   },
   {
     "type": "GLOBAL",
-    "id": "213",
-    "name": "045-BNP PARIBAS, BANGKOK",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "214",
-    "name": "039-MIZUHO CORPORATE BANK,LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "215",
-    "name": "035-EXPORT-IMPORT BANK OF THAILAND",
+    "name": "039MIZUHO CORPORATE BANK LIMITED (MHCB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "216",
-    "name": "034-BANK FOR AGRICULTURAL AND AGRICULTURAL CO-OPER",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "217",
-    "name": "033-GOVERNMENT HOUSING BANK",
+    "name": "034BANK FOR AGRICULTURE AND AGRICULTURAL COOPERATIVES (BAAC)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "218",
-    "name": "032-DEUTSCHE BANK AKTIENGESELLSCHAFT",
+    "name": "032DEUTSCHE BANK AKTIENGESELLSCHAFT (DB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "219",
-    "name": "031-HONGKONG & SHANGHAI CORPORATION LTD.",
+    "name": "031HONG KONG & SHANGHAI CORPORATION LIMITED (HSBC)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "220",
-    "name": "030-GOVERNMENT SAVING BANK",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "221",
-    "name": "029-INDIAN OVERSEAS BANK, BANGKOK BRANCH",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "222",
-    "name": "028-CALYON",
+    "name": "030GOVERNMENT SAVING BANK (GSB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "223",
-    "name": "027-BANK OF AMERICA NATIONAL ASSOCIATION",
+    "name": "027BANK OF AMERICA NATIONAL ASSOCIATION (AMERICA)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "224",
-    "name": "026-MEGA INTERNATIONAL COMMERCIAL BANK PUBLIC COMP",
+    "name": "026MEGA INTERNATIONAL COMMERCIAL BANK PCL (MEGA ICBC)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "225",
-    "name": "025-BANK OF AYUDHAYA PUBLIC COMPANY LTD.",
+    "name": "025BANK OF AYUDHYA PUBLIC COMPANY LIMITED (BAY)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "226",
-    "name": "024-UNITED OVERSEAS BANK (THAI) PUBLIC COMPANY LIM",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "227",
-    "name": "023-RHB BANK BERHAD",
+    "name": "024UNITED OVERSEAS BANK (THAI) PCL (UOBT)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "228",
-    "name": "022-BANKTHAI PUBLIC COMPANY LIMITED",
+    "name": "022CIMB THAI BANK PUBLIC COMPANY LIMITED (CIMBT)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "229",
-    "name": "020-STANDARD CHARTERED BANK (THAI) PUBLIC COMPANY ",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "230",
-    "name": "019-UOB RADANASIN BANK PUBLIC COMPANY LIMITED",
+    "name": "020STANDART CHARTERED BANK (THAI) PUBLIC COMPANY LIMITED (SCBT)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "231",
-    "name": "018-SUMITOMO MITSUI BANKING CORPORATION",
+    "name": "018SUMITOMO MITSUI BANKING CORPORATION (SMBC)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "232",
-    "name": "017-CITIBANK N.A.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "233",
-    "name": "015-SIAM CITY BANK LTD.",
+    "name": "017CITIBANK N.A. (CITI)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "234",
-    "name": "014-SIAM COMMERCIAL BANK PUBLIC COMPANY LTD.",
+    "name": "014SIAM COMMERCIAL BANK PUBLIC COMPANY LIMITED (SCB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "235",
-    "name": "011-TMB BANK PUBLIC COMPANY LIMITED.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "236",
-    "name": "010-THE BANK OF TOKYO-MITSUBISHI UFJ, LTD. BANGKOK",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "237",
-    "name": "009-OVERSEA-CHINESE BANKING CORPORATION LTD.BANGKO",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "238",
-    "name": "008-JPMORGAN CHASE BANK, BANGKOK BRANCH",
+    "name": "011TMB BANK PUBLIC COMPANY LIMITED (TMB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "239",
-    "name": "006-KRUNG THAI BANK PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "240",
-    "name": "005-ABN-AMRO N.V.",
+    "name": "006KRUNG THAI BANK PUBLIC COMPANY LIMITED (KTB)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "241",
-    "name": "004-KASIKORNBANK PUBLIC COMPANY LIMITED",
+    "name": "004KASIKORN BANK PUBLIC COMPANY LIMITED (KBANK)",
     "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
     "id": "242",
-    "name": "002-BANGKOK BANK PUBLIC COMPANY LTD.",
+    "name": "002BANGKOK BANK PUBLIC COMPANY LIMITED (BBL)",
     "country_name": "THAILAND"
   },
   {
@@ -14491,39 +14389,15 @@
   },
   {
     "type": "GLOBAL",
-    "id": "2417",
-    "name": "014SIAM COMMERCIAL BANK PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2418",
-    "name": "002BANGKOK BANK PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "2419",
     "name": "Princeton federal CREDIT UNION",
     "country_name": "USA"
   },
   {
     "type": "GLOBAL",
-    "id": "2420",
-    "name": "004KASIKORNBANK PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "2421",
     "name": "Slovensk\ufffd sporite??a, member of\ufffdErste Bank\ufffd[36]",
     "country_name": "SLOVAKIA"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2422",
-    "name": "011TMB BANK PUBLIC COMPANY LIMITED.",
-    "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
@@ -14539,45 +14413,15 @@
   },
   {
     "type": "GLOBAL",
-    "id": "2425",
-    "name": "006KRUNG THAI BANK PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2426",
-    "name": "065THANACHART BANK PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2427",
-    "name": "025BANK OF AYUDHAYA PUBLIC COMPANY LTD.",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "2428",
     "name": "BANK FIRST NIAGARA",
     "country_name": "USA"
   },
   {
     "type": "GLOBAL",
-    "id": "2429",
-    "name": "022BANKTHAI PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
-  },
-  {
-    "type": "GLOBAL",
     "id": "2430",
     "name": "Volkswagen Bank,\ufffdBraunschweig",
     "country_name": "GERMANY"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2431",
-    "name": "024UNITED OVERSEAS BANK (THAI) PUBLIC COMPANY LIM",
-    "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
@@ -14608,12 +14452,6 @@
     "id": "2436",
     "name": "Bank of Valletta plc\ufffd[4]",
     "country_name": "MALTA"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "2438",
-    "name": "070ACL BANK PUBLIC COMPANY LIMITED",
-    "country_name": "THAILAND"
   },
   {
     "type": "GLOBAL",
