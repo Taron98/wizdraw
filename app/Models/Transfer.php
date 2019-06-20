@@ -131,7 +131,9 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'longitude',
         'note',
         'status_id',
-        'supplier'
+        'supplier',
+        'ils_base_rate',
+        'ils_exchange_rate'
     ];
 
     /**

@@ -29,7 +29,7 @@ class TransferCreateRequest extends AbstractRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'receiver'            => 'required|array',
             'receiver.firstName'  => 'required|min:1|max:70',
             'receiver.middleName' => 'min:1|max:70',
@@ -64,10 +64,14 @@ class TransferCreateRequest extends AbstractRequest
             'longitude' => 'required|longitude',
 
             'note' => 'string',
-            'supplier' => 'string'
+            'supplier' => 'string',
+            'ilsBaseRate' => 'nullable|numeric',
+            'ilsExchangeRate' => 'nullable|numeric'
 
             // 'natures', current is const
         ];
+
+        return $rules;
 
 //        return [
 //            'receiver'            => 'required|array',
