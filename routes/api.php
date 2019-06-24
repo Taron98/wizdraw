@@ -36,7 +36,7 @@ Route::group(['prefix' => 'v1/'], function () {
 
         Route::post('/facebook/', [
             'as'   => 'auth.facebook',
-            'uses' => 'Auth\AuthController@facebook',
+            'uses' => 'Auth\AuthController@facebook'client
         ]);
 
         Route::post('/token/', [
