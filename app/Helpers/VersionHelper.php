@@ -14,11 +14,10 @@ if (!function_exists('versionControl')) {
         $currentVersion = config('app.version');
         $serverCurrentVersion = explode('.', $currentVersion);
         $userCurrentVersion = explode('.', $version);
-
         return [
             'version' => $currentVersion,
-            'needsUpdate' => $serverCurrentVersion[1]> $userCurrentVersion[1],
-            'existsUpdate' => $currentVersion > $version
+            'existsUpdate' => $currentVersion > $version,
+            'needsUpdate' => intval($serverCurrentVersion[1])> intval($userCurrentVersion[1])
         ];
     }
 }
