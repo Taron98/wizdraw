@@ -73,7 +73,6 @@ class ClientController extends AbstractController
      */
     public function update(ClientUpdateRequest $request): JsonResponse
     {
-
         $user = $request->user();
         $clientId = $request->user()->client->getId();
         $inputs = $request->inputs();
@@ -87,7 +86,6 @@ class ClientController extends AbstractController
 
         $isSetup = !$user->client->isDidSetup();
         if (is_null($identityNumber)) {
-dump('aaa');
             if (!is_null($phone) || $phone != '') {
                 if ($this->clientService->findByPhone($phone)) {
 
