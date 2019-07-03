@@ -85,7 +85,6 @@ class ClientController extends AbstractController
         }
 
         $isSetup = !$user->client->isDidSetup();
-
         if (is_null($identityNumber)) {
             if (!is_null($phone) || $phone != '') {
                 if ($this->clientService->findByPhone($phone)) {
@@ -96,7 +95,7 @@ class ClientController extends AbstractController
                 }
             }
         }
-
+       // Log::info("Client update data" . json_encode($inputs));
         /** @var Client $client */
         $client = $this->clientService->update($inputs, $clientId);
         //$user->client->fill($inputs);
