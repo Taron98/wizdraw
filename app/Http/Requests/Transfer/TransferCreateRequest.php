@@ -71,6 +71,13 @@ class TransferCreateRequest extends AbstractRequest
             // 'natures', current is const
         ];
 
+        if ($this->has('cid') && $this->has('cid')) {
+            array_merge($rules, [
+                'cid' => 'required|string',
+                'smsCode' => 'required|string'
+            ]);
+        }
+
         return $rules;
 
 //        return [
