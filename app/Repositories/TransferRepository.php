@@ -4,7 +4,6 @@ namespace Wizdraw\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Wizdraw\Models\BankAccount;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
@@ -50,8 +49,6 @@ class TransferRepository extends AbstractRepository
         $newTransfer->client()->associate($senderClient);
         $newTransfer->bankAccount()->associate($bankAccount);
         $newTransfer->status()->associate($status);
-
-        Log::info("New transfer data: " . json_encode($newTransfer));
 
         if (!$newTransfer->save()) {
             return null;

@@ -5,7 +5,6 @@ namespace Wizdraw\Http\Controllers;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Cache\Services\RateCacheService;
@@ -222,8 +221,6 @@ class TransferController extends AbstractController
         if ($request->has('cid')) {
             $this->wizdrawCardCreateTransfer($request);
         }
-
-        Log::info("Inputs: " . json_encode($inputs));
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
 
