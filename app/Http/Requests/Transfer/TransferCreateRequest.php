@@ -72,7 +72,7 @@ class TransferCreateRequest extends AbstractRequest
         ];
 
         if ($this->has('cid') && $this->has('smsCode')) {
-            array_merge($rules, [
+            $rules = array_merge($rules, [
                 'cid' => 'required|string',
                 'smsCode' => 'required|string'
             ]);
