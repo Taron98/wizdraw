@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Requests\Transfer;
 
+use Illuminate\Support\Facades\Log;
 use Wizdraw\Http\Requests\AbstractRequest;
 use Wizdraw\Models\TransferType;
 
@@ -29,6 +30,7 @@ class TransferCreateRequest extends AbstractRequest
      */
     public function rules()
     {
+        Log::info("Incoming data: " . json_encode($this->all()));
         $rules = [
             'receiver'            => 'required|array',
             'receiver.firstName'  => 'required|min:1|max:70',
