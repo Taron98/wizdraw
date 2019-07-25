@@ -4,7 +4,6 @@ namespace Wizdraw\Services;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Models\AbstractModel;
@@ -15,10 +14,8 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\User;
-use Wizdraw\Models\Campaign;
-use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
-use GuzzleHttp\Client as GuzzleClient;
+use Wizdraw\Repositories\TransferRepository;
 
 
 /**
@@ -105,7 +102,7 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
         } elseif ($attributes['payment_agency'] == '7-eleven') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
-        } elseif ($attributes['payment_agency'] == 'wizdraw-prepaid' && isset($attributes['c_id']) && isset($attributes['sms_code'])) {
+        } elseif ($attributes['payment_agency'] == 'wizdraw-prepaid' && isset($attributes['cid']) && isset($attributes['sms_code'])) {
             $transferStatus = TransferStatus::STATUS_WAIT;
 //            unset($attributes['c_id']);
             unset($attributes['sms_code']);
@@ -116,7 +113,6 @@ class TransferService extends AbstractService
         }
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
 
-        Log::info("Status data: " . json_encode($initStatus));
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
