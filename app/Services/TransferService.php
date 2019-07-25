@@ -116,7 +116,7 @@ class TransferService extends AbstractService
         }
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
 
-        Log::info("Status data: " . \GuzzleHttp\json_encode($initStatus));
+        Log::info("Status data: " . json_encode($initStatus));
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
