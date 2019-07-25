@@ -4,6 +4,7 @@ namespace Wizdraw\Services;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Wizdraw\Cache\Entities\RateCache;
 use Wizdraw\Models\AbstractModel;
@@ -114,6 +115,8 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
+
+        Log::info("Status data: " . \GuzzleHttp\json_encode($initStatus));
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
