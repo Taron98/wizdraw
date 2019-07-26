@@ -495,7 +495,7 @@ class TransferController extends AbstractController
         ];
         try {
             $result = $this->httpService->verifySendAmount($params);
-            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : true;
+            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : $result['sent'];
         } catch (Exception $exception) {
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
