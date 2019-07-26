@@ -220,7 +220,7 @@ class TransferController extends AbstractController
 
         if ($request->has('cid')) {
             $result = $this->wizdrawCardCreateTransfer($request);
-            if ($result !== true) {
+            if (!isset($result['sent'])) {
                 return $result;
             }
         }
@@ -495,7 +495,7 @@ class TransferController extends AbstractController
         ];
         try {
             $result = $this->httpService->verifySendAmount($params);
-            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : $this->respond($result['sent']);
+            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : $this->respond($result);
         } catch (Exception $exception) {
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
