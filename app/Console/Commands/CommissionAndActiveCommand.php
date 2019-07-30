@@ -38,20 +38,20 @@ class CommissionAndActiveCommand extends Command
         $data = file_get_contents(database_path('cache/commissionsOriginIsrael.json'));
         dispatch(new CommissionQueueJob($data));
 
-        $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
-        dispatch(new CommissionQueueJob($data));
-
-        $data = file_get_contents(database_path('cache/commissionsOriginSingapore.json'));
-        dispatch(new CommissionQueueJob($data));
-
-        $data = file_get_contents(database_path('cache/commissionsOriginTaiwan.json'));
-        dispatch(new CommissionQueueJob($data));
+//        $data = file_get_contents(database_path('cache/commissionsOriginHONGKONG.json'));
+//        dispatch(new CommissionQueueJob($data));
+//
+//        $data = file_get_contents(database_path('cache/commissionsOriginSingapore.json'));
+//        dispatch(new CommissionQueueJob($data));
+//
+//        $data = file_get_contents(database_path('cache/commissionsOriginTaiwan.json'));
+//        dispatch(new CommissionQueueJob($data));
     }
 
 
     private function manageActiveCountries()
     {
-        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA']];
+        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA', 'NEPAL', 'GEORGIA', 'MOLDOVA', 'UKRAINE', 'RUSSIA', 'VIETNAM', 'CHINA']];
 
         $redis = Redis::connection();
         $origins = [13, 90, 119, 91];
