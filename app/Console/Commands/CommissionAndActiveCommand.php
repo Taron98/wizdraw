@@ -51,7 +51,7 @@ class CommissionAndActiveCommand extends Command
 
     private function manageActiveCountries()
     {
-        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA', 'NEPAL', 'GEORGIA', 'MOLDOVA', 'UKRAINE', 'RUSSIAN FEDERATION', 'VIETNAM', 'CHINA']];
+        $json[] = ['119' => ['PHILIPPINES'], '90' => ['NEPAL', 'THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA'], '91' => ['PHILIPPINES'], '13' => ['THAILAND', 'PHILIPPINES', 'INDIA', 'SRI LANKA', 'NEPAL',  'GEORGIA', 'MOLDOVA', 'UKRAINE', 'RUSSIAN FEDERATION', 'VIETNAM', 'CHINA']];
 
         $redis = Redis::connection();
         $origins = [13, 90, 119, 91];
