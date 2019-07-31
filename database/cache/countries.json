@@ -205,7 +205,7 @@
   {
     "id": "67",
     "description": "GEORGIA",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "GE",
     "country_code_3": "GEO",
     "phone_code": "995",
@@ -386,7 +386,7 @@
   {
     "id": "72",
     "description": "MOLDOVA",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "MD",
     "country_code_3": "MDA",
     "phone_code": "373",
@@ -500,7 +500,7 @@
   {
     "id": "73",
     "description": "RUSSIAN FEDERATION",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "RU",
     "country_code_3": "RUS",
     "phone_code": "7",
@@ -624,7 +624,7 @@
   {
     "id": "75",
     "description": "UKRAINE",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "UA",
     "country_code_3": "UKR",
     "phone_code": "380",
