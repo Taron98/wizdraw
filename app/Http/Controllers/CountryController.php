@@ -2,7 +2,6 @@
 
 namespace Wizdraw\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Predis\Client;
 use Wizdraw\Cache\Entities\CountryCache;
@@ -88,7 +87,7 @@ class CountryController extends AbstractController
      *
      * @return mixed
      */
-    public function show(int $id, Request $request)
+    public function show(int $id, NoParamRequest $request)
     {
         $client = $request->user()->client;
 
