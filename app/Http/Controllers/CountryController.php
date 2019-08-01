@@ -4,7 +4,6 @@ namespace Wizdraw\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Predis\Client;
 use Wizdraw\Cache\Entities\CountryCache;
 use Wizdraw\Cache\Services\BankCacheService;
@@ -91,7 +90,6 @@ class CountryController extends AbstractController
      */
     public function show(int $id, Request $request)
     {
-        Log::info("COUNTRY: " . json_encode($request->all()));
         $client = $request->user()->client;
 
         /** @var CountryCache $country */
