@@ -12,7 +12,7 @@ class CommissionCache extends AbstractCacheEntity
     /** @var  int */
     protected $countryId;
 
-    /** @var  int */
+    /** @var  float */
     protected $percentage;
 
     /** @var  int */

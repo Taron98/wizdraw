@@ -83,7 +83,7 @@ class RateCacheService extends AbstractCacheService
 
     public function rateForUsdRate()
     {
-        $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'), true);
+        $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'));
 
         $stdClass = new stdClass();
 
