@@ -922,7 +922,7 @@
     "min_range": "10",
     "max_range": "2220",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2128",
@@ -933,7 +933,7 @@
     "min_range": "2221",
     "max_range": "3700",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2129",
@@ -944,7 +944,7 @@
     "min_range": "3701",
     "max_range": "5550",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2130",
@@ -955,7 +955,7 @@
     "min_range": "5551",
     "max_range": "18500",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2131",
@@ -966,71 +966,71 @@
     "min_range": "18501",
     "max_range": "20000",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2132",
-    "country": "CHINA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "19",
-    "min_range": "10",
-    "max_range": "2220",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2133",
-    "country": "CHINA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "30",
-    "min_range": "2221",
-    "max_range": "3700",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2134",
-    "country": "CHINA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "44",
-    "min_range": "3701",
-    "max_range": "5550",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2135",
-    "country": "CHINA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "56",
-    "min_range": "5551",
-    "max_range": "18500",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2136",
-    "country": "CHINA",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "93",
-    "min_range": "18501",
-    "max_range": "20000",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2137",
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
     "const": "33",
     "min_range": "10",
     "max_range": "1480",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2133",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "48",
+    "min_range": "1481",
+    "max_range": "2960",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2134",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "56",
+    "min_range": "2961",
+    "max_range": "3700",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2135",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "59",
+    "min_range": "3701",
+    "max_range": "4625",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2136",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "70",
+    "min_range": "4626",
+    "max_range": "9250",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2137",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
+    "const": "93",
+    "min_range": "9251",
+    "max_range": "18500",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
@@ -1039,14 +1039,25 @@
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
+    "const": "33",
+    "min_range": "10",
+    "max_range": "1480",
+    "origin": 13,
+    "transfer_type": "deposit"
+  },
+  {
+    "id": "2139",
+    "country": "VIETNAM",
+    "currency": "ILS",
+    "percentage": null,
     "const": "48",
     "min_range": "1481",
     "max_range": "2960",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
-    "id": "2139",
+    "id": "2140",
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
@@ -1054,10 +1065,10 @@
     "min_range": "2961",
     "max_range": "3700",
     "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
-    "id": "2140",
+    "id": "2141",
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
@@ -1065,38 +1076,16 @@
     "min_range": "3701",
     "max_range": "4625",
     "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2140",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "70",
-    "min_range": "4626",
-    "max_range": "9250",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2141",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "93",
-    "min_range": "9251",
-    "max_range": "18500",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
+    "transfer_type": "deposit"
   },
   {
     "id": "2142",
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
-    "const": "33",
-    "min_range": "10",
-    "max_range": "1480",
+    "const": "70",
+    "min_range": "4626",
+    "max_range": "9250",
     "origin": 13,
     "transfer_type": "deposit"
   },
@@ -1105,50 +1094,6 @@
     "country": "VIETNAM",
     "currency": "ILS",
     "percentage": null,
-    "const": "48",
-    "min_range": "1481",
-    "max_range": "2960",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2144",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "56",
-    "min_range": "2961",
-    "max_range": "3700",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2145",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "59",
-    "min_range": "3701",
-    "max_range": "4625",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2146",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
-    "const": "70",
-    "min_range": "4626",
-    "max_range": "9250",
-    "origin": 13,
-    "transfer_type": "deposit"
-  },
-  {
-    "id": "2147",
-    "country": "VIETNAM",
-    "currency": "ILS",
-    "percentage": null,
     "const": "93",
     "min_range": "9251",
     "max_range": "18500",
@@ -1156,7 +1101,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2148",
+    "id": "2144",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1167,13 +1112,57 @@
     "transfer_type": "pickup_cash"
   },
   {
-    "id": "21349",
+    "id": "21345",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
     "const": "48",
     "min_range": "1481",
     "max_range": "2960",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2146",
+    "country": "VIETNAM",
+    "currency": "USD",
+    "percentage": null,
+    "const": "56",
+    "min_range": "2961",
+    "max_range": "3700",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2147",
+    "country": "VIETNAM",
+    "currency": "USD",
+    "percentage": null,
+    "const": "59",
+    "min_range": "3701",
+    "max_range": "4625",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2148",
+    "country": "VIETNAM",
+    "currency": "USD",
+    "percentage": null,
+    "const": "70",
+    "min_range": "4626",
+    "max_range": "9250",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
+  },
+  {
+    "id": "2149",
+    "country": "VIETNAM",
+    "currency": "USD",
+    "percentage": null,
+    "const": "93",
+    "min_range": "9251",
+    "max_range": "18500",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
@@ -1182,50 +1171,6 @@
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
-    "const": "56",
-    "min_range": "2961",
-    "max_range": "3700",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2151",
-    "country": "VIETNAM",
-    "currency": "USD",
-    "percentage": null,
-    "const": "59",
-    "min_range": "3701",
-    "max_range": "4625",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2152",
-    "country": "VIETNAM",
-    "currency": "USD",
-    "percentage": null,
-    "const": "70",
-    "min_range": "4626",
-    "max_range": "9250",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2153",
-    "country": "VIETNAM",
-    "currency": "USD",
-    "percentage": null,
-    "const": "93",
-    "min_range": "9251",
-    "max_range": "18500",
-    "origin": 13,
-    "transfer_type": "pickup_cash"
-  },
-  {
-    "id": "2154",
-    "country": "VIETNAM",
-    "currency": "USD",
-    "percentage": null,
     "const": "33",
     "min_range": "10",
     "max_range": "1480",
@@ -1233,7 +1178,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2155",
+    "id": "2151",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1244,7 +1189,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2156",
+    "id": "2152",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1255,7 +1200,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2157",
+    "id": "2153",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1266,7 +1211,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2158",
+    "id": "2154",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1277,7 +1222,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2159",
+    "id": "2155",
     "country": "VIETNAM",
     "currency": "USD",
     "percentage": null,
@@ -1288,7 +1233,7 @@
     "transfer_type": "deposit"
   },
   {
-    "id": "2160",
+    "id": "2156",
     "country": "UKRAINE",
     "currency": "EUR",
     "percentage": "1.40",
