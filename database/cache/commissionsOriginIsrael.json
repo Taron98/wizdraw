@@ -322,7 +322,7 @@
   {
     "id": "2075",
     "country": "GEORGIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
     "const": "18",
     "min_range": "10",
@@ -333,7 +333,7 @@
   {
     "id": "2076",
     "country": "GEORGIA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "1.20",
     "const": null,
     "min_range": "1555",
@@ -366,7 +366,7 @@
   {
     "id": "525",
     "country": "MOLDOVA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
     "const": "18",
     "min_range": "10",
@@ -377,7 +377,7 @@
   {
     "id": "526",
     "country": "MOLDOVA",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "1.40",
     "const": null,
     "min_range": "1333",
@@ -839,7 +839,7 @@
   {
     "id": "2120",
     "country": "UKRAINE",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
     "const": "18",
     "min_range": "10",
@@ -850,7 +850,7 @@
   {
     "id": "2121",
     "country": "UKRAINE",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": "1.40",
     "const": null,
     "min_range": "1333",
@@ -872,7 +872,7 @@
   {
     "id": "2123",
     "country": "RUSSIAN FEDERATION",
-    "currency": "USD",
+    "currency": "ILS",
     "percentage": null,
     "const": "18",
     "min_range": "10",
@@ -1286,5 +1286,16 @@
     "max_range": "18500",
     "origin": 13,
     "transfer_type": "deposit"
+  },,
+  {
+    "id": "2160",
+    "country": "UKRAINE",
+    "currency": "EUR",
+    "percentage": "1.40",
+    "const": null,
+    "min_range": "1333",
+    "max_range": "18500",
+    "origin": 13,
+    "transfer_type": "pickup_cash"
   }
 ]
