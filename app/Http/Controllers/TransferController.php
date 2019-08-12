@@ -160,6 +160,9 @@ class TransferController extends AbstractController
         $this->rateCacheService->setKeyPrefix($request);
         /** @var RateCache $rate */
         $rate = $this->rateCacheService->find($receiverCountryId);
+        if (is_null($rate)) {
+            $rate = $this->rateCacheService->rateForUsdRate();
+        }
 
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
