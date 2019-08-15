@@ -86,7 +86,6 @@ class ClientVerify extends Notification implements ShouldQueue
 
         return (new MailMessage)
             ->subject($subject)
-            ->to($notifiable->user->getEmail())
             ->view('emails.verification', $attributes);
     }
 
