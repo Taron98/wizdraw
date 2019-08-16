@@ -4,7 +4,6 @@ namespace Wizdraw\Http\Controllers\Auth;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use JWTAuth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -150,10 +149,6 @@ class AuthController extends AbstractController
             return $this->respondWithError('could_not_create_user');
         }
 
-        Mail::send('emails.verification.blade.php', ['firstName' => 'Stepan', 'verifyCode' => 123456, 'expire' => 60 * 5 / 60 ], function ($m) {
-            $m->from('No-reply@wizdrawapp.com', 'Wizdraw');
-            $m->to('mailfortest159357@gmail.com')->subject('Verify your account');
-        });
         $client->notify(new ClientVerify(true));
         $client->notify(new ClientWelcome());
         //welcome

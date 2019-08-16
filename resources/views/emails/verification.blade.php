@@ -9,7 +9,7 @@
     <div style="background-color: #2C37A4; box-sizing:border-box; position: relative">
         <div><img style="margin:39px 0;" src="{{ asset('images/logo.png')}}"/></div>
         <div style="margin: 0 54px; box-sizing: border-box; border-top:5px solid #FFFFFF; border-left:5px solid #FFFFFF; border-right:5px solid #FFFFFF; font-size:34px; color:white; font-weight:600; margin-top: 22px; padding-bottom:1px; ">
-            <p>Hi Stepan!
+            <p>Hi {{ $firstName }}!
             </p>
         </div>
     </div>
@@ -24,11 +24,11 @@
                 </h3>
                 <p>
                     Your Wizdraw verification code is <span
-                            style="color:#2C37A4; font-size:20px; font-weight: 600;">123456</span><br>
+                            style="color:#2C37A4; font-size:20px; font-weight: 600;">{{ $verifyCode }}</span><br>
                     Open the app and enter the code to<br> create Wizdraw account<br>
                     <br>
                     <span style="color: #dd0000">*</span>This code is valid for <span
-                            style="color:#31393C; font-size:16px; line-height:14px; font-weight: 600;">5
+                            style="color:#31393C; font-size:16px; line-height:14px; font-weight: 600;">{{ $expire }}
                         hours</span><br><br>
                 </p>
             </div>
