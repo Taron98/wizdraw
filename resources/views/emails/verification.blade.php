@@ -16,7 +16,7 @@
     <div style="background-color: white; padding:0 54px 91px 54px;">
         <div style="border-bottom: 5px solid #2C37A4;border-left: 5px solid #2C37A4;border-right: 5px solid #2C37A4;margin-top: -41px; padding-top: 70px;">
             <div style="height: 220px; width: 220px; line-height: 220px; margin: 0 auto; border-radius:100%;background-color: #2C37A4; ">
-                <img style="vertical-align:middle;" src="{{ asset('images/message.png')}}"/>
+                <img style="vertical-align:middle;" src="{{ asset('assets/images/message.png')}}"/>
             </div>
             <div>
                 <h3 style="color:#31393C; line-height: 31px; font-size: 24px; font-weight: 600;">
@@ -36,7 +36,7 @@
     <div style="background-color: #2C37A4; height: 163px;">
         <div style="padding-top: 40px; margin-bottom:20px;">
             <a style="margin-right:16px;" href="https://www.facebook.com/wizdrawremit"><img
-                        src="{{ asset('images/Facebook.png')}}"/></a>
+                        src="{{ asset('assets/images/Facebook.png')}}"/></a>
             <a href="https://www.linkedin.com/company-beta/13263947/"><img src="{{ asset('assets/images/Linkedin.png')}}"/></a>
         </div>
         <div style="color: #FFFFFF; font-weight: 600;">
