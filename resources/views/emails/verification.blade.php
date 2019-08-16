@@ -24,8 +24,9 @@
                 </h3>
                 <p>
                     Your Wizdraw verification code is <span
-                            style="color:#2C37A4; font-size:20px; font-weight: 600;">123456</span><br><br>
+                            style="color:#2C37A4; font-size:20px; font-weight: 600;">123456</span><br>
                     Open the app and enter the code to<br> create Wizdraw account<br>
+                    <br>
                     <span style="color: #dd0000">*</span>This code is valid for <span
                             style="color:#31393C; font-size:16px; line-height:14px; font-weight: 600;">5
                         hours</span><br><br>
