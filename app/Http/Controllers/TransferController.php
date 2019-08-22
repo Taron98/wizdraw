@@ -16,7 +16,6 @@ use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Http\Requests\Transfer\TransferUsedAgencyRequest;
 use Wizdraw\Http\Requests\Transfer\WizdrawCard\SendSMSRequest;
-use Wizdraw\Http\Requests\Transfer\WizdrawCard\SMSVerificationSendAmountRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
@@ -217,6 +216,13 @@ class TransferController extends AbstractController
             $resInputs = ['receiver' => $receiver];
 
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST, $resInputs);
+        }
+
+        if ($request->has('cid')) {
+            $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
+            if (!$result['sent']) {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
         }
 
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
@@ -477,10 +483,10 @@ class TransferController extends AbstractController
     }
 
     /**
-     * @param SMSVerificationSendAmountRequest $request
-     * @return JsonResponse
+     * @param TransferCreateRequest $request
+     * @return bool|JsonResponse
      */
-    public function wizdrawCardCreateTransfer(SMSVerificationSendAmountRequest $request)
+    public function wizdrawCardCreateTransfer(TransferCreateRequest $request)
     {
         $params = [
             'cId' => $request->input('cid'),
@@ -489,11 +495,8 @@ class TransferController extends AbstractController
         ];
         try {
             $result = $this->httpService->verifySendAmount($params);
-            if ($result['sent']) {
-                return $this->create($request);
-            } else {
-                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
-            }
+            return $this->respond($result);
+//            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : $this->respond($result);
         } catch (Exception $exception) {
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
