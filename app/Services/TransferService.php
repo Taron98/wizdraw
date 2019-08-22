@@ -14,10 +14,8 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\User;
-use Wizdraw\Models\Campaign;
-use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
-use GuzzleHttp\Client as GuzzleClient;
+use Wizdraw\Repositories\TransferRepository;
 
 
 /**
@@ -114,6 +112,7 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
+
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();
