@@ -123,12 +123,15 @@
   {
     "id": "53",
     "description": "CHINA",
-    "coin_id": "RMB",
+    "coin_id": "CNY",
     "country_code_2": "CN",
     "country_code_3": "CHN",
     "phone_code": "86",
-    "is_active": 0,
-    "timezone": 8
+    "is_active": 1,
+    "timezone": 8,
+    "is_pickup": 1,
+    "is_deposit": 1
+
   },
   {
     "id": "89",
@@ -202,14 +205,13 @@
   {
     "id": "67",
     "description": "GEORGIA",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "GE",
     "country_code_3": "GEO",
     "phone_code": "995",
-    "is_active": 0,
+    "is_active": 1,
     "timezone": 4,
-    "is_pickup": 1,
-    "is_deposit": 0
+    "is_pickup": 1
   },
   {
     "id": "103",
@@ -384,12 +386,13 @@
   {
     "id": "72",
     "description": "MOLDOVA",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "MD",
     "country_code_3": "MDA",
     "phone_code": "373",
-    "is_active": 0,
-    "timezone": 2
+    "is_active": 1,
+    "timezone": 2,
+    "is_pickup": 1
   },
   {
     "id": "94",
@@ -497,12 +500,13 @@
   {
     "id": "73",
     "description": "RUSSIAN FEDERATION",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "RU",
     "country_code_3": "RUS",
     "phone_code": "7",
-    "is_active": 0,
-    "timezone": 4
+    "is_active": 1,
+    "timezone": 4,
+    "is_pickup": 1
   },
   {
     "id": "91",
@@ -620,12 +624,13 @@
   {
     "id": "75",
     "description": "UKRAINE",
-    "coin_id": "EUR",
+    "coin_id": "USD",
     "country_code_2": "UA",
     "country_code_3": "UKR",
     "phone_code": "380",
-    "is_active": 0,
-    "timezone": 2
+    "is_active": 1,
+    "timezone": 2,
+    "is_pickup": 1
   },
   {
     "id": "4",
@@ -654,8 +659,10 @@
     "country_code_2": "VN",
     "country_code_3": "VNM",
     "phone_code": "84",
-    "is_active": 0,
-    "timezone": 7
+    "is_active": 1,
+    "timezone": 7,
+    "is_pickup": 1,
+    "is_deposit": 1
   },
   {
     "id": "119",
