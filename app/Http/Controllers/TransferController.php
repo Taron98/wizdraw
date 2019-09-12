@@ -232,7 +232,7 @@ class TransferController extends AbstractController
         }
 
         Log::info(json_encode(['Client info' => $client]));
-        Log::info(json_encode(['Rate' => $rate]));
+        Log::info(json_encode(['Rate info' => $rate]));
         Log::info(json_encode(['Bank account' => $bankAccount]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
         Log::info(json_encode(['Transfer data' => $transfer]));
