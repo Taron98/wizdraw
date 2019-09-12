@@ -44,4 +44,17 @@ class ClientRepository extends AbstractRepository
 
         return $this->updateModel($client);
     }
+    /**
+     * @param $type
+     *
+     * @param Client $client
+     *
+     * @return AbstractModel
+     */
+    public function updateType($type, Client $client): AbstractModel
+    {
+        $client->setClientType($type);
+
+        return $this->updateModel($client);
+    }
 }

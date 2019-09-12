@@ -121,6 +121,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'bank_account_id',
         'receiver_country_id',
         'sender_country_id',
+        'cid',
         'amount',
         'commission',
         'rate',
@@ -130,7 +131,9 @@ class Transfer extends AbstractModel implements AuthorizableContract
         'longitude',
         'note',
         'status_id',
-        'supplier'
+        'supplier',
+        'ils_base_rate',
+        'ils_exchange_rate'
     ];
 
     /**
