@@ -223,15 +223,19 @@ class TransferController extends AbstractController
         }
 
         if ($request->has('cid')) {
-            Log::info(json_encode(['transfer request' => $request->all()]));
+            Log::info(json_encode(['Prepaid card request data' => $request->all()]));
             $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
-            Log::info(json_encode(['transfer response' => $result]));
+            Log::info(json_encode(['Prepaid card response data' => $result]));
             if (!$result['sent']) {
                 return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
             }
         }
 
+        Log::info(json_encode(['Client info' => $client]));
+        Log::info(json_encode(['Rate' => $rate]));
+        Log::info(json_encode(['Bank account' => $bankAccount]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+        Log::info(json_encode(['Transfer data' => $transfer]));
 
         $campaign = $this->campaignService->getCampaign(1);
         if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
