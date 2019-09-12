@@ -31,6 +31,7 @@ use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
 use Wizdraw\Services\VipService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TransferController
@@ -222,13 +223,19 @@ class TransferController extends AbstractController
         }
 
         if ($request->has('cid')) {
+            Log::info(json_encode(['Prepaid card request data' => $request->all()]));
             $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
+            Log::info(json_encode(['Prepaid card response data' => $result]));
             if (!$result['sent']) {
                 return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
             }
         }
 
+        Log::info(json_encode(['Client info' => $client]));
+        Log::info(json_encode(['Rate info' => $rate]));
+        Log::info(json_encode(['Bank account' => $bankAccount]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+        Log::info(json_encode(['Transfer data' => $transfer]));
 
         $campaign = $this->campaignService->getCampaign(1);
         if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
