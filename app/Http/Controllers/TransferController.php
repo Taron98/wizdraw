@@ -31,6 +31,7 @@ use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
 use Wizdraw\Services\VipService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TransferController
@@ -222,7 +223,9 @@ class TransferController extends AbstractController
         }
 
         if ($request->has('cid')) {
+            Log::info(json_encode(['transfer reqest' => $request]));
             $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
+            Log::info(json_encode(['transfer response' => $result]));
             if (!$result['sent']) {
                 return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
             }
