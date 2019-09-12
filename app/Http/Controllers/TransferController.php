@@ -223,7 +223,7 @@ class TransferController extends AbstractController
         }
 
         if ($request->has('cid')) {
-            Log::info(json_encode("Transaction id: " . $request->input('transactionNumber'));
+            Log::info(json_encode(['Transaction id' => $request->input('transactionNumber')]));
             Log::info(json_encode(['transfer request' => $request->all()]));
             $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
             Log::info(json_encode(['transfer response' => $result]));
