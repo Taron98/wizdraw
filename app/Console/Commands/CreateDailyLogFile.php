@@ -8,7 +8,7 @@
 
 namespace Wizdraw\Console\Commands;
 
-use App\Services\logs\LogsService;
+use Wizdraw\Services\LogsService;
 use Illuminate\Console\Command;
 
 class CreateDailyLogFile extends Command
