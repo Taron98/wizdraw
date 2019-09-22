@@ -19,7 +19,8 @@ class Kernel extends ConsoleKernel
         Commands\UpdateAppNotificationCommand::class,
         Commands\CommissionAndActiveCommand::class,
         Commands\UpdateVipUsers::class,
-        Commands\RefreshCommand::class
+        Commands\RefreshCommand::class,
+        Commands\CreateDailyLogFile::class
     ];
 
     /**
@@ -34,6 +35,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         // withoutOverlapping
+
+        /**Creates every day at 23:55 logs files with 777 permissions**/
+        $schedule->command('create:logs')->dailyAt('21:55');
     }
 
     /**
