@@ -80,4 +80,18 @@ class RateCacheService extends AbstractCacheService
             $this->keyPrefix = 'rateTwd';
         }
     }
+
+    public function rateForUsdRate()
+    {
+        $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'));
+
+        $stdClass = new stdClass();
+
+        /** @var RateCache $entity */
+        $entity = parent::mapFromQueue($stdClass);
+
+        $entity->setRate($wizdrawRate->wf_exchange_rate);
+
+        return $entity;
+    }
 }

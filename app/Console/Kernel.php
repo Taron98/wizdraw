@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         Commands\CommissionAndActiveCommand::class,
         Commands\UpdateVipUsers::class,
         Commands\RefreshCommand::class,
+        Commands\CreateDailyLogFile::class,
         Commands\StorageSize::class
     ];
 
@@ -36,6 +37,9 @@ class Kernel extends ConsoleKernel
             ->twiceDaily(4, 16)
             ->timezone('Asia/Jerusalem');
         // withoutOverlapping
+
+        /**Creates every day at 23:55 logs files with 777 permissions**/
+        $schedule->command('create:logs')->dailyAt('21:55');
     }
 
     /**

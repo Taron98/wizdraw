@@ -49,6 +49,7 @@ class ClientUpdateRequest extends AbstractRequest
             'addressImage'      => 'base64image',
             'clientType'        => 'in:sender,receiver',
             'profileImage'      => 'base64image',
+            'isApproved'        => 'integer'
         ];
 
 //        return [

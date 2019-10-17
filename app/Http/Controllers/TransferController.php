@@ -16,7 +16,6 @@ use Wizdraw\Http\Requests\Transfer\TransferNearbyRequest;
 use Wizdraw\Http\Requests\Transfer\TransferStatusRequest;
 use Wizdraw\Http\Requests\Transfer\TransferUsedAgencyRequest;
 use Wizdraw\Http\Requests\Transfer\WizdrawCard\SendSMSRequest;
-use Wizdraw\Http\Requests\Transfer\WizdrawCard\SMSVerificationSendAmountRequest;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferType;
@@ -32,6 +31,7 @@ use Wizdraw\Services\TransferReceiptService;
 use Wizdraw\Services\TransferService;
 use Wizdraw\Services\CampaignService;
 use Wizdraw\Services\VipService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TransferController
@@ -160,6 +160,9 @@ class TransferController extends AbstractController
         $this->rateCacheService->setKeyPrefix($request);
         /** @var RateCache $rate */
         $rate = $this->rateCacheService->find($receiverCountryId);
+        if (is_null($rate)) {
+            $rate = $this->rateCacheService->rateForUsdRate();
+        }
 
         if (!$client->canTransfer()) {
             return $this->respondWithError('could_not_transfer_unapproved_client', Response::HTTP_FORBIDDEN, $client);
@@ -219,7 +222,20 @@ class TransferController extends AbstractController
             return $this->respondWithError('could_not_update_receiver', Response::HTTP_BAD_REQUEST, $resInputs);
         }
 
+        if ($request->has('cid')) {
+            Log::info(json_encode(['Prepaid card request data' => $request->all()]));
+            $result = json_decode($this->wizdrawCardCreateTransfer($request)->getContent(), true);
+            Log::info(json_encode(['Prepaid card response data' => $result]));
+            if (!$result['sent']) {
+                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
+            }
+        }
+
+        Log::info(json_encode(['Client info' => $client]));
+        Log::info(json_encode(['Rate info' => $rate]));
+        Log::info(json_encode(['Bank account' => $bankAccount]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
+        Log::info(json_encode(['Transfer data' => $transfer]));
 
         $campaign = $this->campaignService->getCampaign(1);
         if($this->transferService->isEntitledForHkFirstFiveTransfersCampaign($client, $campaign)){
@@ -465,7 +481,7 @@ class TransferController extends AbstractController
     public function sendSMSWizdrawCard(SendSMSRequest $request)
     {
         try {
-            $result = $this->httpService->sendVerificationSMS(['cId' => $request->input('cId')]);
+            $result = $this->httpService->sendVerificationSMS(['cId' => $request->input('cid')]);
             if ($result['sent']) {
                 return $this->respond(['message' => 'Fill the sms verification code']);
             } else {
@@ -477,23 +493,20 @@ class TransferController extends AbstractController
     }
 
     /**
-     * @param SMSVerificationSendAmountRequest $request
-     * @return JsonResponse
+     * @param TransferCreateRequest $request
+     * @return bool|JsonResponse
      */
-    public function wizdrawCardCreateTransfer(SMSVerificationSendAmountRequest $request)
+    public function wizdrawCardCreateTransfer(TransferCreateRequest $request)
     {
         $params = [
-            'cId' => $request->input('cId'),
+            'cId' => $request->input('cid'),
             'amount' => $request->input('totalAmount'),
             'smsCode' => $request->input('smsCode')
         ];
         try {
             $result = $this->httpService->verifySendAmount($params);
-            if ($result['sent']) {
-                return $this->create($request);
-            } else {
-                return $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST);
-            }
+            return $this->respond($result);
+//            return !$result['sent'] ? $this->respondWithError($result['message'], Response::HTTP_BAD_REQUEST) : $this->respond($result);
         } catch (Exception $exception) {
             return $this->respondWithError($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
