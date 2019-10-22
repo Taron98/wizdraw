@@ -96,7 +96,7 @@ class StorageSize extends Command
 
         foreach ($this->space as $space) {
 
-            if ($space['size'] >= 15 && in_array($space['unit'], $units)) {
+            if ($space['size'] >= 5 && in_array($space['unit'], $units)) {
                 $cc = env('APP_ENV') !== 'production' ? StorageAlert::TEST : StorageAlert::PROD;
                 Mail::to($cc)->queue(new StorageAlert($this->space));
                 die(200);
