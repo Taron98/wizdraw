@@ -11,7 +11,7 @@ class StorageAlert extends Mailable
 {
     const TEST = ['juliettaa@worldcomfinance.com', 'daniell@worldcomfinance.com'];
 
-    const PROD = ['shanib@worldcomfinance.com', 'shahar@worldcomfinance.com', 'daniell@worldcomfinance.com', 'lihayk@worldcomfinance.com'];
+    const PROD = ['shanib@worldcomfinance.com', 'shahar@worldcomfinance.com', 'daniell@worldcomfinance.com', 'lihayk@worldcomfinance.com', 'ndror@restartit.co.il'];
 
     protected $data;
 
