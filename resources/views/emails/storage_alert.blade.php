@@ -15,7 +15,7 @@
 
     <ul>
         <li>Current project storage folder size is {{ $project['size'] }} {{ $project['unit'] }}</li>
-        <li>Current server <b>{{ request()->ip() }}</b> storage size is {{ $server['size'] }} {{ $server['unit'] }}</li>
+        <li>Current server <b>{{ $ip_address }}</b> storage size is {{ $server['size'] }} {{ $server['unit'] }}</li>
     </ul>
 
     <p>Please clear storage space.</p>
