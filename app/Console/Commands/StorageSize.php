@@ -98,6 +98,7 @@ class StorageSize extends Command
 
             if ($space['size'] >= 5 && in_array($space['unit'], $units)) {
                 $cc = env('APP_ENV') !== 'production' ? StorageAlert::TEST : StorageAlert::PROD;
+                $this->space['ip_address'] = exec('dig +short myip.opendns.com @resolver1.opendns.com');
                 Mail::to($cc)->queue(new StorageAlert($this->space));
                 die(200);
             }
