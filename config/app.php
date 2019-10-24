@@ -24,7 +24,7 @@ return [
     | we check against this value if he must update his application or not.
     |
     */
-    'version' => '8.1.53',
+    'version' => '8.1.54',
 
     /*
     |--------------------------------------------------------------------------
