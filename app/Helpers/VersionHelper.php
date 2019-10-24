@@ -7,17 +7,17 @@ if (!function_exists('versionControl')) {
      *
      * @param string $version
      *
-     * @return bool
+     * @return array
      */
     function versionControl($version)
     {
         $currentVersion = config('app.version');
         $serverCurrentVersion = explode('.', $currentVersion);
         $userCurrentVersion = explode('.', $version);
-        if(intval($serverCurrentVersion[0]) <= intval($userCurrentVersion[0])){
-            return true;
-        }
-
-        return false;
+        return [
+            'version' => $currentVersion,
+            'existsUpdate' => $currentVersion > $version,
+            'needsUpdate' => intval($serverCurrentVersion[1])> intval($userCurrentVersion[1])
+        ];
     }
 }
