@@ -119,6 +119,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Logs Storage Limit
+    |--------------------------------------------------------------------------
+    |
+    | The log storage limit determines the default days which need store in
+    | logs folder. The value must be a number and it is determined as days.
+    |
+    */
+
+    'log_max_files' => 60,
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |

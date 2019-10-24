@@ -14,10 +14,8 @@ use Wizdraw\Models\Transfer;
 use Wizdraw\Models\TransferReceipt;
 use Wizdraw\Models\TransferStatus;
 use Wizdraw\Models\User;
-use Wizdraw\Models\Campaign;
-use Wizdraw\Repositories\TransferRepository;
 use Wizdraw\Notifications\TransferAborted;
-use GuzzleHttp\Client as GuzzleClient;
+use Wizdraw\Repositories\TransferRepository;
 
 
 /**
@@ -104,9 +102,9 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K;
         } elseif ($attributes['payment_agency'] == '7-eleven') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_7_ELEVEN;
-        } elseif ($attributes['payment_agency'] == 'wic-store' && isset($attributes['c_id']) && isset($attributes['sms_code'])) {
+        } elseif ($attributes['payment_agency'] == 'wizdraw-prepaid' && isset($attributes['cid']) && isset($attributes['sms_code'])) {
             $transferStatus = TransferStatus::STATUS_WAIT;
-            unset($attributes['c_id']);
+//            unset($attributes['c_id']);
             unset($attributes['sms_code']);
         } elseif ($attributes['payment_agency'] == 'pay-to-agent') {
             $transferStatus = TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT;
@@ -114,6 +112,7 @@ class TransferService extends AbstractService
             $transferStatus = TransferStatus::STATUS_PENDING;
         }
         $initStatus = $this->transferStatusService->findByStatus($transferStatus);
+
         // todo: change when we'll add new natures
         $defaultNature = $this->natureService->findByNature(Nature::NATURE_SUPPORT_OR_GIFT);
         $defaultNatureIds = collect([$defaultNature])->pluck('id')->toArray();

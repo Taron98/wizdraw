@@ -102,8 +102,13 @@ class CountryController extends AbstractController
         }
 
         /* get NIS rates if necessary for request made from israel application */
-        $this->rateCacheService->setKeyPrefix($request);
-        $rate = $this->rateCacheService->find($country->getId());
+        $receivingCurrency = $request->input('currency');
+        if ($receivingCurrency === 'USD') {
+            $rate = $this->rateCacheService->rateForUsdRate();
+        }else{
+            $this->rateCacheService->setKeyPrefix($request);
+            $rate = $this->rateCacheService->find($country->getId());
+        }
         $country->setRate($rate);
 
         $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',

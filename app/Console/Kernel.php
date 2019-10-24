@@ -19,21 +19,27 @@ class Kernel extends ConsoleKernel
         Commands\UpdateAppNotificationCommand::class,
         Commands\CommissionAndActiveCommand::class,
         Commands\UpdateVipUsers::class,
-        Commands\RefreshCommand::class
+        Commands\RefreshCommand::class,
+        Commands\CreateDailyLogFile::class,
+        Commands\StorageSize::class
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      *
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('storage:size')
+            ->twiceDaily(4, 16)
+            ->timezone('Asia/Jerusalem');
         // withoutOverlapping
+
+        /**Creates every day at 23:55 logs files with 777 permissions**/
+        $schedule->command('create:logs')->dailyAt('21:55');
     }
 
     /**
