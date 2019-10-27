@@ -14,8 +14,7 @@
     <h3>"Wizdraw (server)" is running out of free storage space.</h3>
 
     <ul>
-        <li>Current project storage folder size is {{ $project['size'] }} {{ $project['unit'] }}</li>
-        <li>Current server <b>{{ $ip_address }}</b> storage size is {{ $server['size'] }} {{ $server['unit'] }}</li>
+        <li>Current server <b>{{ $ip_address }}</b> storage size is {{ $size }} {{ $unit }}</li>
     </ul>
 
     <p>Please clear storage space.</p>

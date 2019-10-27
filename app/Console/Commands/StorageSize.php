@@ -12,7 +12,7 @@ class StorageSize extends Command
 
     const PROD = '/var/www';
 
-    private $size = 0;
+    const SIZE_LIMIT = 1;
 
     private $space = [];
 
@@ -47,37 +47,11 @@ class StorageSize extends Command
      */
     public function handle()
     {
-        $files = scandir(storage_path());
-
-        foreach ($files as $file) {
-
-            $file = storage_path($file);
-
-            if ($file != storage_path(DIRECTORY_SEPARATOR) && $file != storage_path('..') && $file != storage_path('.')) {
-                is_dir($file) ? $this->scan($file) : $this->size += filesize($file);
-            }
-        }
-
         $disk = env('APP_ENV') !== 'production' ? static::LOCAL : static::PROD;
 
-        $this->space['project'] = $this->size($this->size, storage_path());
-        $this->space['server'] = $this->size(disk_free_space($disk), $disk);
+        $this->space = $this->size(disk_free_space($disk), $disk);
 
         $this->dispatch();
-    }
-
-    protected function scan($dir)
-    {
-        $files = scandir($dir);
-
-        foreach ($files as $file) {
-
-            $file = $dir . DIRECTORY_SEPARATOR . $file;
-
-            if ($file != $dir && $file != $dir . DIRECTORY_SEPARATOR . '..' && $file != $dir . DIRECTORY_SEPARATOR . '.') {
-                is_dir($file) ? $this->scan($file) : $this->size += filesize($file);
-            }
-        }
     }
 
     protected function size($bytes, $folder_name)
@@ -94,14 +68,11 @@ class StorageSize extends Command
     {
         $units = ['GB', 'TB', 'EB', 'ZB', 'YB'];
 
-        foreach ($this->space as $space) {
-
-            if ($space['size'] >= 5 && in_array($space['unit'], $units)) {
-                $cc = env('APP_ENV') !== 'production' ? StorageAlert::TEST : StorageAlert::PROD;
-                $this->space['ip_address'] = exec('dig +short myip.opendns.com @resolver1.opendns.com');
-                Mail::to($cc)->queue(new StorageAlert($this->space));
-                die(200);
-            }
+        if ($this->space['size'] <= static::SIZE_LIMIT && in_array($this->space['unit'], $units)) {
+            $cc = env('APP_ENV') !== 'production' ? StorageAlert::TEST : StorageAlert::PROD;
+            $this->space['ip_address'] = exec('dig +short myip.opendns.com @resolver1.opendns.com');
+            Mail::to($cc)->queue(new StorageAlert($this->space));
+            die(200);
         }
     }
 }
