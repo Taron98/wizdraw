@@ -169,40 +169,13 @@ class UserController extends AbstractController
      * Check on device wizdraw application version
      * User details by device id route
      *
-     * @param string $deviceId
      * @param string $versionId - version of the user current installed app
      *
      * @return JsonResponse
      */
-    public function version(string $deviceId, string $versionId): JsonResponse
+    public function version(string $versionId): JsonResponse
     {
-        /** @var User $user */
-        $user = $this->userService->findByDeviceId($deviceId);
-
-        if (!versionControl($versionId)) {
-            return $this->respondWithError('version_out_of_date', Response::HTTP_VERSION_NOT_SUPPORTED);
-
-        }
-
-        if (is_null($user)) {
-            return $this->respondWithError('device_not_found', Response::HTTP_NOT_FOUND);
-        }
-
-        $client = $user->client;
-
-        return $this->respond([
-            'user' => [
-                'email' => ($user->getEmail()) ?: '',
-                'facebookId' => ($user->getFacebookId()) ?: '',
-                'noPassword' => $user->hasNoPassword(),
-            ],
-            'client' => [
-                'id' => $client->getId(),
-                'firstName' => ($client->getFirstName()) ?: '',
-                'middleName' => ($client->getMiddleName()) ?: '',
-                'lastName' => ($client->getLastName()) ?: '',
-            ],
-        ]);
+        return $this->respond(versionControl($versionId));
     }
 
 
