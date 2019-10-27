@@ -68,8 +68,9 @@ class StorageSize extends Command
     {
         $units = ['GB', 'TB', 'EB', 'ZB', 'YB'];
 
-        if ($this->space['size'] >= static::SIZE_LIMIT && in_array($this->space['unit'], $units)) {
+        if ($this->space['size'] <= static::SIZE_LIMIT && in_array($this->space['unit'], $units)) {
             $cc = env('APP_ENV') !== 'production' ? StorageAlert::TEST : StorageAlert::PROD;
+            $this->space['ip_address'] = exec('dig +short myip.opendns.com @resolver1.opendns.com');
             Mail::to($cc)->queue(new StorageAlert($this->space));
             die(200);
         }
