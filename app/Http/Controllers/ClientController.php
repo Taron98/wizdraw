@@ -91,7 +91,7 @@ class ClientController extends AbstractController
 
                     $resInputs = ['phone' => $phone];
 
-                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST, $resInputs);
+                    return $this->respondWithError('Phone number already exists', Response::HTTP_BAD_REQUEST, $resInputs);
                 }
             }
         }
