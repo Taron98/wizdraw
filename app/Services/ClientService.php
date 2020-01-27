@@ -8,6 +8,8 @@ use Wizdraw\Models\Affiliate;
 use Wizdraw\Models\Client;
 use Wizdraw\Repositories\ClientRepository;
 use Wizdraw\Services\Entities\FacebookUser;
+use Propaganistas\LaravelPhone\PhoneNumber;
+
 
 /**
  * Class ClientService
@@ -106,7 +108,7 @@ class ClientService extends AbstractService
             return null;
         }
 
-        $phone = phone($phone);
+        $phone = phone($phone, 'IS');
 
         return $this->repository->findByPhone($phone)->first();
     }

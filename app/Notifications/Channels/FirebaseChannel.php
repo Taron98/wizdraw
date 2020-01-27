@@ -2,20 +2,22 @@
 
 namespace Wizdraw\Notifications\Channels;
 
-
 use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
 
-class PushExpoChannel
+/**
+ * Class PushwooshChannel
+ * @package Wizdraw\Notifications\Channels
+ */
+class FirebaseChannel
 {
-
-    const EXPO_NOTIFICATION_URL = 'https://fcm.googleapis.com/fcm/send';
+    const FIREBASE_NOTIFICATION_URL = 'https://fcm.googleapis.com/fcm/send';
 
     /** @var Client */
     private $http;
 
     /**
-     * SmsChannel constructor.
+     * FirebaseChannel constructor.
      *
      * @param Client $http
      */
@@ -34,13 +36,15 @@ class PushExpoChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $params = $notification->toExpoPush($notifiable)->toArray();
+        $params = $notification->toFirebasePush($notifiable)->toArray();
 
         $headers = [
             'Content-type' => 'application/json; charset=utf-8',
+            'Authorization' => 'key=' . env('FCM_LEGACY_KEY'),
             'Accept' => 'application/json',
         ];
 
-        $this->http->post(self::EXPO_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
+        $this->http->post(self::FIREBASE_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
     }
+
 }

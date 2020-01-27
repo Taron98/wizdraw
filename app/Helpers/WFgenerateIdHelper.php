@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Log;
 
 
 const PASSWORD = 'WiZ32#WIC';
