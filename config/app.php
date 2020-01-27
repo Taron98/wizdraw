@@ -172,6 +172,8 @@ return [
     |
     */
 
+    'WIC_WF_GENERATOR_URL' => env('WIC_WF_GENERATOR_URL'),
+
     'providers' => [
 
         /*
