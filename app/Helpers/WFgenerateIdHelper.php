@@ -19,7 +19,7 @@ if (!function_exists('getWfId')) {
         $ch = curl_init();
 
         /* local host */
-        curl_setopt($ch, CURLOPT_URL, env('WIC_WF_GENERATOR_URL'));
+        curl_setopt($ch, CURLOPT_URL, config('app.WIC_WF_GENERATOR_URL'));
 
         /* wic test env */
        // curl_setopt($ch, CURLOPT_URL,"52.21.225.207/transfers/new_wic_files/Server/initTransactionID.php");
