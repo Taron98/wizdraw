@@ -53,9 +53,9 @@ class PushFirebaseMessage
      * Set token for the push notification
      *
      * @param string $to
-     * @return PushExpoMessage
+     * @return PushFirebaseMessage
      */
-    public function setTo(string $to): PushExpoMessage
+    public function setTo(string $to): PushFirebaseMessage
     {
         $this->to = $to;
 
@@ -76,9 +76,9 @@ class PushFirebaseMessage
      * Set title of the notification
      *
      * @param string $title
-     * @return PushExpoMessage
+     * @return PushFirebaseMessage
      */
-    public function setTitle(string $title): PushExpoMessage
+    public function setTitle(string $title): PushFirebaseMessage
     {
         $this->title = $title;
 
@@ -99,9 +99,9 @@ class PushFirebaseMessage
      * Set body of the notification
      *
      * @param string $body
-     * @return PushExpoMessage
+     * @return PushFirebaseMessage
      */
-    public function setBody(string $body): PushExpoMessage
+    public function setBody(string $body): PushFirebaseMessage
     {
         $this->body = $body;
 
@@ -113,7 +113,7 @@ class PushFirebaseMessage
      *
      * @return $this
      */
-    public function enableSound(): PushExpoMessage
+    public function enableSound(): PushFirebaseMessage
     {
         $this->sound = 'default';
 
