@@ -44,7 +44,7 @@ class FirebaseChannel
             'Accept' => 'application/json',
         ];
 
-        $this->http->post(self::FIREBASE_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
+        $this->http->post(self::FIREBASE_NOTIFICATION_URL, ['headers' => $headers, 'json' => json_encode($params)]);
     }
 
 }

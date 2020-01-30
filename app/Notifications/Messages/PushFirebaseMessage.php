@@ -141,9 +141,11 @@ class PushFirebaseMessage
     {
         return [
             'to'    => $this->getTo(),
-            'title' => $this->getTitle(),
-            'body'  => $this->getBody(),
-            'sound' => $this->sound,
+            'notification' => array(
+                'title' => $this->getTitle(),
+                'body'  => $this->getBody(),
+                'sound' => $this->sound
+            )
         ];
     }
 }
