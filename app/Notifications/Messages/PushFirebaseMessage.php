@@ -144,7 +144,9 @@ class PushFirebaseMessage
             'notification' => array(
                 'title' => $this->getTitle(),
                 'body'  => $this->getBody(),
-                'sound' => $this->sound
+                'sound' => $this->sound,
+                'show_in_foreground' => true,
+                'channel' => 'test-channel'
             )
         ];
     }

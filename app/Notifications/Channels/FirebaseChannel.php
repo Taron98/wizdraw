@@ -36,15 +36,26 @@ class FirebaseChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $params = $notification->toFirebasePush($notifiable)->toArray();
+        $request_body = $notification->toFirebasePush($notifiable)->toArray();
 
-        $headers = [
-            'Content-type' => 'application/json; charset=utf-8',
-            'Authorization' => 'key=' . env('FCM_LEGACY_KEY'),
-            'Accept' => 'application/json',
-        ];
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $YOUR_API_KEY = 'AIzaSyAnvNj_ZHvZq5q9w4sQkUsI4mJTm3ZLBsk'; // Server key
+        $fields = json_encode($request_body);
+        $request_headers = array(
+                'Content-Type: application/json',
+                'Authorization: key=' . $YOUR_API_KEY,
+            );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        echo $response;
 
-        $this->http->post(self::FIREBASE_NOTIFICATION_URL, ['headers' => $headers, 'json' => $params]);
     }
 
 }
