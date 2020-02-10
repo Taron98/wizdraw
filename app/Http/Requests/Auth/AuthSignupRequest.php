@@ -34,12 +34,11 @@ class AuthSignupRequest extends AbstractRequest
             'lastName'  => 'required',
             'email'     => 'required|email',
             'deviceId'  => 'required', //|unique:users',
-            'phone' => 'regex:(^\+?(972|0|\+972|00972)(\-)?(([23489]{1}\d{7})|[5]{1}\d{8}))'
+            'phone' => 'required|phone:AUTO,IL'
         ];
-        if($this->has('phone')) {
+        if(strpos($this->phone, '5527') || strpos($this->phone, '5526')) {
             $rules['phone'] = array(
                 'required',
-                'phone:AUTO,IL',
                 'regex:(^\+?(972|0|\+972|00972)(\-)?(([23489]{1}\d{7})|[5]{1}\d{8}))'
             );
         }

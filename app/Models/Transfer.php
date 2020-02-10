@@ -185,6 +185,11 @@ class Transfer extends AbstractModel implements AuthorizableContract
 //            $randomNumber = (pow(10, 8) + time() % pow(10, 8));
 //            $model->transactionNumber = 'WF9' . (string)$randomNumber;
             $model->transactionNumber = getWfId();
+            if(strpos($model->supplier, 'Contact') !== false) {
+                $model->transactionNumber = str_replace('WF9', '97761', $model->transactionNumber);
+            } else if(strpos($model->supplier, 'Privat Money') !== false) {
+                $model->transactionNumber = str_replace('WF9', '7', $model->transactionNumber);
+            }
         });
     }
 
