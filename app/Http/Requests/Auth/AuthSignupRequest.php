@@ -29,13 +29,20 @@ class AuthSignupRequest extends AbstractRequest
     public function rules()
     {
         // TODO: update rules
-        return [
+        $rules = [
             'firstName' => 'required',
             'lastName'  => 'required',
             'email'     => 'required|email',
-            'phone'     => 'required|phone:AUTO,IL',
             'deviceId'  => 'required', //|unique:users',
+            'phone' => 'required|phone:AUTO,IL'
         ];
+        if(strpos($this->phone, '5527') || strpos($this->phone, '5526')) {
+            $rules['phone'] = array(
+                'required',
+                'regex:(^\+?(972|0|\+972|00972)(\-)?(([23489]{1}\d{7})|[5]{1}\d{8}))'
+            );
+        }
+        return $rules;
     }
 
 }
