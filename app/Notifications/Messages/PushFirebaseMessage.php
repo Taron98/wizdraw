@@ -143,10 +143,15 @@ class PushFirebaseMessage
             'to'    => $this->getTo(),
             'notification' => array(
                 'title' => $this->getTitle(),
+                'android_channel_id' => 'test-channel',
                 'body'  => $this->getBody(),
                 'sound' => $this->sound,
                 'show_in_foreground' => true,
                 'channel' => 'test-channel'
+            ),
+            'data' => array(
+                'title' => $this->getTitle(),
+                'body'  => $this->getBody(),
             )
         ];
     }

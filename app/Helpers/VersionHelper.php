@@ -9,15 +9,19 @@ if (!function_exists('versionControl')) {
      *
      * @return array
      */
-    function versionControl($version)
+    function versionControl($deviceType, $version)
     {
-        $currentVersion = config('app.version');
+        if($deviceType == 'ios') {
+            $currentVersion = config('app.versionIos');
+        } else {
+            $currentVersion = config('app.versionAndroid');
+        }
         $serverCurrentVersion = explode('.', $currentVersion);
         $userCurrentVersion = explode('.', $version);
         return [
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
-            'needsUpdate' => intval($serverCurrentVersion[1])> intval($userCurrentVersion[1])
+            'skipUpdate' => intval($serverCurrentVersion[1])> intval($userCurrentVersion[1])
         ];
     }
 }

@@ -19,12 +19,13 @@ return [
     | Application Version
     |--------------------------------------------------------------------------
     |
-    | This value determines the current version of the application's server,
+    | This values determines the current version of the application's server,
     | usage is when the user open the application, he sends his current version and
     | we check against this value if he must update his application or not.
     |
     */
-    'version' => '8.1.54',
+    'versionAndroid' => '8.1.54',
+    'versionIos' => '2.3',
 
     /*
     |--------------------------------------------------------------------------
