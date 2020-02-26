@@ -24,8 +24,10 @@ return [
     | we check against this value if he must update his application or not.
     |
     */
-    'versionAndroid' => '8.1.54',
-    'versionIos' => '2.3',
+    'version' => array(
+        'ios' => '2.3',
+        'android' => '8.1.54'
+    ),
 
     /*
     |--------------------------------------------------------------------------
