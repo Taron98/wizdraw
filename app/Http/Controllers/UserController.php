@@ -169,13 +169,14 @@ class UserController extends AbstractController
      * Check on device wizdraw application version
      * User details by device id route
      *
+     * @param string $deviceType - type of the user phone
      * @param string $versionId - version of the user current installed app
      *
      * @return JsonResponse
      */
-    public function version(string $versionId): JsonResponse
+    public function version(string $deviceType, string $versionId): JsonResponse
     {
-        return $this->respond(versionControl($versionId));
+        return $this->respond(versionControl($deviceType, $versionId));
     }
 
 
