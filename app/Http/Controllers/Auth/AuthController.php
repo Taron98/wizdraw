@@ -135,7 +135,7 @@ class AuthController extends AbstractController
             $isPending = $client->user->isPending;
         }
 
-        if ($isPending) {
+        if ((!is_null($user) || !is_null($client)) && !$isPending) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
