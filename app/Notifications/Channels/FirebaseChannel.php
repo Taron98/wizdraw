@@ -39,7 +39,7 @@ class FirebaseChannel
         $request_body = $notification->toFirebasePush($notifiable)->toArray();
 
         $url = 'https://fcm.googleapis.com/fcm/send';
-        $YOUR_API_KEY = 'AIzaSyAnvNj_ZHvZq5q9w4sQkUsI4mJTm3ZLBsk'; // Server key
+        $YOUR_API_KEY = env('FCM_LEGACY_KEY');
         $fields = json_encode($request_body);
         $request_headers = array(
                 'Content-Type: application/json',
