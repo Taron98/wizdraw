@@ -54,12 +54,7 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'UserController@device',
         ]);
 
-        Route::get('/version/{versionId}', [
-            'as'   => 'user.versionOld',
-            'uses' => 'UserController@versionOld',
-        ]);
-
-        Route::get('/version/{deviceType}/{versionId}', [
+        Route::get('/version/{deviceType}/{versionId?}', [
             'as'   => 'user.version',
             'uses' => 'UserController@version',
         ]);
