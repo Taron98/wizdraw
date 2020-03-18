@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 class PushExpoChannel
 {
 
-    const EXPO_NOTIFICATION_URL = 'https://exp.host/--/api/v2/push/send';
+    const EXPO_NOTIFICATION_URL = 'https://fcm.googleapis.com/fcm/send';
 
     /** @var Client */
     private $http;

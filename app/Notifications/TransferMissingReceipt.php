@@ -3,11 +3,14 @@
 namespace Wizdraw\Notifications;
 
 use Wizdraw\Notifications\Channels\PushExpoChannel;
+use Wizdraw\Notifications\Channels\FirebaseChannel;
 use Wizdraw\Notifications\Messages\PushExpoMessage;
+use Wizdraw\Notifications\Messages\PushFirebaseMessage;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Wizdraw\Models\FirebaseToken;
 use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
@@ -47,7 +50,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushExpoChannel::class];
+        return [FirebaseChannel::class];
     }
 
     /**
@@ -55,7 +58,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
      *
      * @return PushExpoMessage|null
      */
-    public function toExpoPush(User $notifiable)
+    public function toFirebasePush(User $notifiable)
     {
         $content = trans('notification.transfer_missing_receipt', [
             'transactionNumber' => $this->transfer->getTransactionNumber(),
@@ -70,9 +73,9 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
         $device_id = $this->transfer->client->user->device_id;
         $client_id = $notifiable->client->user->client_id;
 
-        $expoToken = ExpoToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->expo_token;
+        $fcmToken = FirebaseToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->fcm_token;
 
-        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Missing Receipt')->setBody($content)->enableSound();
+        return (new PushFirebaseMessage())->setTo($fcmToken)->setTitle('Transfer Missing Receipt')->setBody($content)->enableSound();
     }
 
     /**

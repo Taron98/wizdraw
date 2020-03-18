@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\Client;
 use Wizdraw\Models\ExpoToken;
+use Wizdraw\Models\FirebaseToken;
 use Wizdraw\Models\User;
 
-use Wizdraw\Notifications\Channels\PushExpoChannel;
-use Wizdraw\Notifications\Messages\PushExpoMessage;
+use Wizdraw\Notifications\Channels\FirebaseChannel;
+use Wizdraw\Notifications\Messages\PushFirebaseMessage;
 use Wizdraw\Services\FileService;
 
 /**
@@ -39,16 +40,16 @@ class ClientMissingInfo extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [PushExpoChannel::class];
+        return [FirebaseChannel::class];
     }
 
 
     /**
      * @param $notifiable
      *
-     * @return PushExpoMessage|null
+     * @return PushFirebaseMessage|null
      */
-    public function toExpoPush(User $notifiable)
+    public function toFirebasePush(User $notifiable)
     {
         $missing = $this->checkMissing($notifiable->client);
         if (!count($missing[0])) {
@@ -70,9 +71,9 @@ class ClientMissingInfo extends Notification implements ShouldQueue
         $client_id = $notifiable->client_id;
 
 
-        $expoToken = ExpoToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->expo_token;
+        $fcmToken = FirebaseToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->fcm_token;
 
-        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Missing Information')->setBody($content)->enableSound();
+        return (new PushFirebaseMessage())->setTo($fcmToken)->setTitle('Missing Information')->setBody($content)->enableSound();
     }
 
     /**
