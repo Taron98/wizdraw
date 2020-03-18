@@ -11,6 +11,20 @@ if (!function_exists('versionControl')) {
      */
     function versionControl($deviceType, $version)
     {
+        if(is_null($version)) {
+            $version = $deviceType;
+            $currentVersion = config('app.versionOld');
+            if(strpos($version, '2.3') !== false) {
+                $currentVersion = '2.4';
+            }
+            $serverCurrentVersion = explode('.', $currentVersion);
+            $userCurrentVersion = explode('.', $version);
+            return [
+                'versionOld' => $currentVersion,
+                'existsUpdate' => $currentVersion > $version,
+                'needsUpdate' => true
+            ];
+        }
         $currentVersion = config('app.version')[$deviceType];
         $serverCurrentVersion = explode('.', $currentVersion);
         $userCurrentVersion = explode('.', $version);
@@ -19,21 +33,6 @@ if (!function_exists('versionControl')) {
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
             'skipUpdate' => false
-        ];
-    }
-
-    function versionControlOld($version)
-    {
-        $currentVersion = config('app.version');
-        if(strpos($version, '2.3') !== false) {
-            $currentVersion = '2.4';
-        }
-        $serverCurrentVersion = explode('.', $currentVersion);
-        $userCurrentVersion = explode('.', $version);
-        return [
-            'versionOld' => $currentVersion,
-            'existsUpdate' => $currentVersion > $version,
-            'needsUpdate' => true
         ];
     }
 }
