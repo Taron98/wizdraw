@@ -38,7 +38,6 @@ class FirebaseChannel
     {
         $request_body = $notification->toFirebasePush($notifiable)->toArray();
 
-        $url = 'https://fcm.googleapis.com/fcm/send';
         $YOUR_API_KEY = env('FCM_LEGACY_KEY');
         $fields = json_encode($request_body);
         $request_headers = array(
@@ -46,7 +45,7 @@ class FirebaseChannel
                 'Authorization: key=' . $YOUR_API_KEY,
             );
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, self::FIREBASE_NOTIFICATION_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
