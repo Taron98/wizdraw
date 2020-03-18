@@ -21,4 +21,19 @@ if (!function_exists('versionControl')) {
             'skipUpdate' => false
         ];
     }
+
+    function versionControlOld($version)
+    {
+        $currentVersion = config('app.version');
+        if(strpos($version, '2.3') !== false) {
+            $currentVersion = '2.4';
+        }
+        $serverCurrentVersion = explode('.', $currentVersion);
+        $userCurrentVersion = explode('.', $version);
+        return [
+            'versionOld' => $currentVersion,
+            'existsUpdate' => $currentVersion > $version,
+            'needsUpdate' => true
+        ];
+    }
 }
