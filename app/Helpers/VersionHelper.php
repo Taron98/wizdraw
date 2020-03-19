@@ -20,7 +20,7 @@ if (!function_exists('versionControl')) {
             $serverCurrentVersion = explode('.', $currentVersion);
             $userCurrentVersion = explode('.', $version);
             return [
-                'versionOld' => $currentVersion,
+                'version' => $currentVersion,
                 'existsUpdate' => $currentVersion > $version,
                 'needsUpdate' => true
             ];
