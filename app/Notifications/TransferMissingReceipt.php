@@ -2,16 +2,13 @@
 
 namespace Wizdraw\Notifications;
 
-use Wizdraw\Notifications\Channels\PushExpoChannel;
 use Wizdraw\Notifications\Channels\FirebaseChannel;
-use Wizdraw\Notifications\Messages\PushExpoMessage;
 use Wizdraw\Notifications\Messages\PushFirebaseMessage;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\FirebaseToken;
-use Wizdraw\Models\ExpoToken;
 use Wizdraw\Models\Transfer;
 use Wizdraw\Models\User;
 
@@ -56,7 +53,7 @@ class TransferMissingReceipt extends Notification implements ShouldQueue
     /**
      * @param $notifiable
      *
-     * @return PushExpoMessage|null
+     * @return PushFirebaseMessage|null
      */
     public function toFirebasePush(User $notifiable)
     {
