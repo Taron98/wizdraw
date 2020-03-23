@@ -6,7 +6,7 @@ const PASSWORD = 'WiZ32#WIC';
 const USER = 'WFMobileWiz';
 
 if (!function_exists('getWfId')) {
-    function getWfId()
+    function getWfId($supplier)
     {
 
         // set post fields
@@ -14,6 +14,7 @@ if (!function_exists('getWfId')) {
             'username' => USER,
             'password' => PASSWORD,
             'method'   => 'getIdForWizdraw',
+            'supplier' => $supplier
         ];
 
         $ch = curl_init();
