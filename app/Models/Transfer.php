@@ -194,7 +194,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
             return $newTransactionId;
         }
         if ($this->attributes['supplier'] === 'Muthoot Pickup') {
-            $prefix = strlen($this->attributes['transaction_number']) >= 12 ? '84' : '840';
+            $prefix = strlen($this->attributes['transaction_number']) === 12 ? '84' : '840';
             $newTransactionId = str_replace('WF', $prefix, $this->attributes['transaction_number']);
             return $newTransactionId;
         }
