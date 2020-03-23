@@ -90,7 +90,7 @@ class RateCacheService extends AbstractCacheService
         /** @var RateCache $entity */
         $entity = parent::mapFromQueue($stdClass);
 
-        $entity->setRate($wizdrawRate->wf_exchange_rate);
+        $entity->setRate(1/$wizdrawRate->wf_exchange_rate);
 
         return $entity;
     }
