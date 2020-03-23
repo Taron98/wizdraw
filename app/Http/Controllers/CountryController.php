@@ -83,13 +83,13 @@ class CountryController extends AbstractController
      * Showing a country route
      *
      * @param int $id
-     * @param int $receivingCurrency
+     * @param string $receivingCurrency
      *
      * @param NoParamRequest $request
      *
      * @return mixed
      */
-    public function show(int $id, int $receivingCurrency, NoParamRequest $request)
+    public function show(int $id, string $receivingCurrency, NoParamRequest $request)
     {
         $client = $request->user()->client;
 
