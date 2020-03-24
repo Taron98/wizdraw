@@ -1,0 +1,514 @@
+[
+  {
+    "id": 1,
+    "name": "ANGIANG"
+  },
+  {
+    "id": 2,
+    "name": "BA RIA - VUNG TAU"
+  },
+  {
+    "id": 3,
+    "name": "BACGIANG"
+  },
+  {
+    "id": 4,
+    "name": "BACKAN"
+  },
+  {
+    "id": 5,
+    "name": "BACLIEU"
+  },
+  {
+    "id": 6,
+    "name": "BACNINH"
+  },
+  {
+    "id": 7,
+    "name": "BENTRE"
+  },
+  {
+    "id": 8,
+    "name": "BINHDINH"
+  },
+  {
+    "id": 9,
+    "name": "BINHDUONG"
+  },
+  {
+    "id": 10,
+    "name": "BINHPHUOC"
+  },
+  {
+    "id": 11,
+    "name": "BINHTHUAN"
+  },
+  {
+    "id": 12,
+    "name": "CAMAU"
+  },
+  {
+    "id": 13,
+    "name": "CANTHO"
+  },
+  {
+    "id": 14,
+    "name": "CAOBANG"
+  },
+  {
+    "id": 15,
+    "name": "DANANG"
+  },
+  {
+    "id": 16,
+    "name": "DAKLAK"
+  },
+  {
+    "id": 17,
+    "name": "DAKNONG"
+  },
+  {
+    "id": 18,
+    "name": "DIENBIEN"
+  },
+  {
+    "id": 19,
+    "name": "DONGNAI"
+  },
+  {
+    "id": 20,
+    "name": "DONGTHAP"
+  },
+  {
+    "id": 21,
+    "name": "GIALAI"
+  },
+  {
+    "id": 22,
+    "name": "HAGIANG"
+  },
+  {
+    "id": 23,
+    "name": "HANAM"
+  },
+  {
+    "id": 24,
+    "name": "HANOI"
+  },
+  {
+    "id": 25,
+    "name": "HATAY"
+  },
+  {
+    "id": 26,
+    "name": "HATINH"
+  },
+  {
+    "id": 27,
+    "name": "HAIDUONG"
+  },
+  {
+    "id": 28,
+    "name": "HAIPHONG"
+  },
+  {
+    "id": 29,
+    "name": "HAUGIANG"
+  },
+  {
+    "id": 30,
+    "name": "HOABINH"
+  },
+  {
+    "id": 31,
+    "name": "HUNGYEN"
+  },
+  {
+    "id": 32,
+    "name": "KHANHHOA"
+  },
+  {
+    "id": 33,
+    "name": "KIEN GIANG"
+  },
+  {
+    "id": 34,
+    "name": "KONTUM"
+  },
+  {
+    "id": 35,
+    "name": "LAICHAU"
+  },
+  {
+    "id": 36,
+    "name": "LAMDONG"
+  },
+  {
+    "id": 37,
+    "name": "LANGSON"
+  },
+  {
+    "id": 38,
+    "name": "LAOCAI"
+  },
+  {
+    "id": 39,
+    "name": "LONGAN"
+  },
+  {
+    "id": 40,
+    "name": "NAMDINH"
+  },
+  {
+    "id": 41,
+    "name": "NGHEAN"
+  },
+  {
+    "id": 42,
+    "name": "NINHBINH"
+  },
+  {
+    "id": 43,
+    "name": "NINHTHUAN"
+  },
+  {
+    "id": 44,
+    "name": "PHUTHO"
+  },
+  {
+    "id": 45,
+    "name": "PHUYEN"
+  },
+  {
+    "id": 46,
+    "name": "QUANGBINH"
+  },
+  {
+    "id": 47,
+    "name": "QUANGNAM"
+  },
+  {
+    "id": 48,
+    "name": "QUANGNGAI"
+  },
+  {
+    "id": 49,
+    "name": "QUANGNINH"
+  },
+  {
+    "id": 50,
+    "name": "QUANGTRI"
+  },
+  {
+    "id": 51,
+    "name": "SOCTRANG"
+  },
+  {
+    "id": 52,
+    "name": "SONLA"
+  },
+  {
+    "id": 53,
+    "name": "TAYNINH"
+  },
+  {
+    "id": 54,
+    "name": "THAIBINH"
+  },
+  {
+    "id": 55,
+    "name": "THAINGUYEN"
+  },
+  {
+    "id": 56,
+    "name": "THANHHOA"
+  },
+  {
+    "id": 57,
+    "name": "HUE"
+  },
+  {
+    "id": 58,
+    "name": "TIENGIANG"
+  },
+  {
+    "id": 59,
+    "name": "HCM"
+  },
+  {
+    "id": 60,
+    "name": "TRAVINH"
+  },
+  {
+    "id": 61,
+    "name": "TUYENQUANG"
+  },
+  {
+    "id": 62,
+    "name": "VINHLONG"
+  },
+  {
+    "id": 63,
+    "name": "VINHPHUC"
+  },
+  {
+    "id": 64,
+    "name": "YENBAI"
+  },
+  {
+    "id": 65,
+    "name": "ANGIANG"
+  },
+  {
+    "id": 66,
+    "name": "BA RIA - VUNG TAU"
+  },
+  {
+    "id": 67,
+    "name": "BACGIANG"
+  },
+  {
+    "id": 68,
+    "name": "BACKAN"
+  },
+  {
+    "id": 69,
+    "name": "BACLIEU"
+  },
+  {
+    "id": 70,
+    "name": "BACNINH"
+  },
+  {
+    "id": 71,
+    "name": "BENTRE"
+  },
+  {
+    "id": 72,
+    "name": "BINHDINH"
+  },
+  {
+    "id": 73,
+    "name": "BINHDUONG"
+  },
+  {
+    "id": 74,
+    "name": "BINHPHUOC"
+  },
+  {
+    "id": 75,
+    "name": "BINHTHUAN"
+  },
+  {
+    "id": 76,
+    "name": "CAMAU"
+  },
+  {
+    "id": 77,
+    "name": "CANTHO"
+  },
+  {
+    "id": 78,
+    "name": "CAOBANG"
+  },
+  {
+    "id": 79,
+    "name": "DANANG"
+  },
+  {
+    "id": 80,
+    "name": "DAKLAK"
+  },
+  {
+    "id": 81,
+    "name": "DAKNONG"
+  },
+  {
+    "id": 82,
+    "name": "DIENBIEN"
+  },
+  {
+    "id": 83,
+    "name": "DONGNAI"
+  },
+  {
+    "id": 84,
+    "name": "DONGTHAP"
+  },
+  {
+    "id": 85,
+    "name": "GIALAI"
+  },
+  {
+    "id": 86,
+    "name": "HAGIANG"
+  },
+  {
+    "id": 87,
+    "name": "HANAM"
+  },
+  {
+    "id": 88,
+    "name": "HANOI"
+  },
+  {
+    "id": 89,
+    "name": "HATAY"
+  },
+  {
+    "id": 90,
+    "name": "HATINH"
+  },
+  {
+    "id": 91,
+    "name": "HAIDUONG"
+  },
+  {
+    "id": 92,
+    "name": "HAIPHONG"
+  },
+  {
+    "id": 93,
+    "name": "HAUGIANG"
+  },
+  {
+    "id": 94,
+    "name": "HOABINH"
+  },
+  {
+    "id": 95,
+    "name": "HUNGYEN"
+  },
+  {
+    "id": 96,
+    "name": "KHANHHOA"
+  },
+  {
+    "id": 97,
+    "name": "KIEN GIANG"
+  },
+  {
+    "id": 98,
+    "name": "KONTUM"
+  },
+  {
+    "id": 99,
+    "name": "LAICHAU"
+  },
+  {
+    "id": 100,
+    "name": "LAMDONG"
+  },
+  {
+    "id": 101,
+    "name": "LANGSON"
+  },
+  {
+    "id": 102,
+    "name": "LAOCAI"
+  },
+  {
+    "id": 103,
+    "name": "LONGAN"
+  },
+  {
+    "id": 104,
+    "name": "NAMDINH"
+  },
+  {
+    "id": 105,
+    "name": "NGHEAN"
+  },
+  {
+    "id": 106,
+    "name": "NINHBINH"
+  },
+  {
+    "id": 107,
+    "name": "NINHTHUAN"
+  },
+  {
+    "id": 108,
+    "name": "PHUTHO"
+  },
+  {
+    "id": 109,
+    "name": "PHUYEN"
+  },
+  {
+    "id": 110,
+    "name": "QUANGBINH"
+  },
+  {
+    "id": 111,
+    "name": "QUANGNAM"
+  },
+  {
+    "id": 112,
+    "name": "QUANGNGAI"
+  },
+  {
+    "id": 113,
+    "name": "QUANGNINH"
+  },
+  {
+    "id": 114,
+    "name": "QUANGTRI"
+  },
+  {
+    "id": 115,
+    "name": "SOCTRANG"
+  },
+  {
+    "id": 116,
+    "name": "SONLA"
+  },
+  {
+    "id": 117,
+    "name": "TAYNINH"
+  },
+  {
+    "id": 118,
+    "name": "THAIBINH"
+  },
+  {
+    "id": 119,
+    "name": "THAINGUYEN"
+  },
+  {
+    "id": 120,
+    "name": "THANHHOA"
+  },
+  {
+    "id": 121,
+    "name": "HUE"
+  },
+  {
+    "id": 122,
+    "name": "TIENGIANG"
+  },
+  {
+    "id": 123,
+    "name": "HCM"
+  },
+  {
+    "id": 124,
+    "name": "TRAVINH"
+  },
+  {
+    "id": 125,
+    "name": "TUYENQUANG"
+  },
+  {
+    "id": 126,
+    "name": "VINHLONG"
+  },
+  {
+    "id": 127,
+    "name": "VINHPHUC"
+  },
+  {
+    "id": 128,
+    "name": "YENBAI"
+  }
+]

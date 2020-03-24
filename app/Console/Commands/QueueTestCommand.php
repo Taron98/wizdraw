@@ -9,6 +9,7 @@ use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
+use Wizdraw\Cache\Jobs\ProvinceQueueJob;
 
 /**
  * Class QueueTestCommand
@@ -62,6 +63,7 @@ class QueueTestCommand extends Command
         $this->writeCountries();
         $this->writeBanks();
         $this->writeRates();
+        $this->writeProvinces();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
 
@@ -93,6 +95,12 @@ class QueueTestCommand extends Command
     {
         $data = file_get_contents(database_path('cache/rates.json'));
         dispatch(new RateQueueJob($data));
+    }
+
+    private function writeProvinces()
+    {
+        $data = file_get_contents(database_path('cache/provinces.json'));
+        dispatch(new ProvinceQueueJob($data));
     }
 
     private function writeCommissions()
