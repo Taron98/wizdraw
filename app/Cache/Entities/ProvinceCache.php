@@ -11,16 +11,11 @@ class ProvinceCache extends AbstractCacheEntity
     /** @var  int */
     protected $id;
 
+    /** @var  int */
+    protected $countryId;
+
     /** @var  string */
     protected $name;
-
-    /**
-     * @return string
-     */
-    public function getKey() : string
-    {
-        return $this->id;
-    }
 
     /**
      * @return int
@@ -42,6 +37,25 @@ class ProvinceCache extends AbstractCacheEntity
     }
 
     /**
+     * @return int
+     */
+    public function getCountryId(): int
+    {
+        return $this->countryId;
+    }
+
+    /**
+     * @param int $countryId
+     * @return ProvinceCache
+     */
+    public function setCountryId(int $countryId): ProvinceCache
+    {
+        $this->countryId = $countryId;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -58,6 +72,14 @@ class ProvinceCache extends AbstractCacheEntity
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey() : string
+    {
+        return $this->id;
     }
 
 }
