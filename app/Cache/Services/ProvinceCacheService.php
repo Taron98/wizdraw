@@ -44,7 +44,7 @@ class ProvinceCacheService extends AbstractCacheService
     public function validate(AbstractCacheEntity $entity)
     {
         /** @var ProvinceCache $entity */
-        return !(empty($entity->getProvince()));
+        return !(empty($entity->getName()));
     }
 
     /**
@@ -57,8 +57,9 @@ class ProvinceCacheService extends AbstractCacheService
         /** @var ProvinceCache $entity */
         $entity = parent::mapFromQueue($stdJson);
 
-        $entity->setProvince($stdJson->name);
-    var_dump($entity);
+        $entity->setId($stdJson->id)
+               ->setName($stdJson->name);
+
         return $entity;
     }
 
@@ -70,7 +71,7 @@ class ProvinceCacheService extends AbstractCacheService
         parent::postSave($provinces);
 
         $provincesArr = $provinces->map(function (ProvinceCache $province) {
-            return $province->getProvince();
+            return $province->getName();
         });
 
         $this->redis->lpush(self::INDEX, $provincesArr->toArray());

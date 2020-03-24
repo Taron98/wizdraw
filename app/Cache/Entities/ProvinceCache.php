@@ -8,26 +8,35 @@ namespace Wizdraw\Cache\Entities;
  */
 class ProvinceCache extends AbstractCacheEntity
 {
+    /** @var  int */
+    protected $id;
 
     /** @var  string */
-    protected $province;
+    protected $name;
+
+    /**
+     * @return string
+     */
+    public function getKey() : string
+    {
+        return $this->id;
+    }
 
     /**
      * @return int
      */
-    public function getProvince()
+    public function getId()
     {
-        return $this->province;
+        return $this->id;
     }
 
     /**
-     * @param string $province
-     *
+     * @param int $id
      * @return ProvinceCache
      */
-    public function setProvince($province): ProvinceCache
+    public function setId($id): ProvinceCache
     {
-        $this->province = (string)$province;
+        $this->id = $id;
 
         return $this;
     }
@@ -35,9 +44,20 @@ class ProvinceCache extends AbstractCacheEntity
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getName(): string
     {
-        return $this->countryId;
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return ProvinceCache
+     */
+    public function setName(string $name): ProvinceCache
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
 }
