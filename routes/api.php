@@ -286,6 +286,11 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'SupplierController@suppliers',
             ]);
 
+            Route::get('/provinces/{countryId}/', [
+                'as'   => 'transfer.provinces',
+                'uses' => 'TransferController@getProvinces',
+            ]);
+
             Route::group(['prefix' => 'wizdrawCard/'], function () {
                 Route::post('/sendSMS', [
                     'as' => 'transfer.wizdrawCard.sendSMS',

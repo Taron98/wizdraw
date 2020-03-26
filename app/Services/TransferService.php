@@ -291,6 +291,17 @@ class TransferService extends AbstractService
 
     }
 
+    /**
+     * @param $defaultCountryId
+     *
+     * @return string
+     */
+    public function getProvinces($defaultCountryId)
+    {
+        $redis = Redis::connection();
+        return $redis->lrange(redis_key('provinces', $defaultCountryId), 0, -1);
+    }
+
     public function clientNotifyAbortedStatus($transfers)
     {
         $abortedTransfers = $this->repository->findWithClient($transfers);
