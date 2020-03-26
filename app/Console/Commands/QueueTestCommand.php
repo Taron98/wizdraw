@@ -9,8 +9,6 @@ use Wizdraw\Cache\Jobs\BrancheQueueJob;
 use Wizdraw\Cache\Jobs\CommissionQueueJob;
 use Wizdraw\Cache\Jobs\CountryQueueJob;
 use Wizdraw\Cache\Jobs\RateQueueJob;
-use Wizdraw\Cache\Jobs\ProvinceQueueJob;
-
 /**
  * Class QueueTestCommand
  * @package Wizdraw\Console\Commands
@@ -100,7 +98,16 @@ class QueueTestCommand extends Command
     private function writeProvinces()
     {
         $data = file_get_contents(database_path('cache/provinces.json'));
-        dispatch(new ProvinceQueueJob($data));
+        $provinces        = json_decode($data);
+        $redis            = Redis::connection();
+        $groupedProvinces = [];
+        foreach ($provinces as $province) {
+            $groupedProvinces[$province->country_id][] = $province->name;
+        }
+
+        foreach ($groupedProvinces as $key => $groupedProvince) {
+            $redis->lpush(redis_key('provinces', $key), $groupedProvince);
+        }
     }
 
     private function writeCommissions()
