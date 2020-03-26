@@ -14,8 +14,8 @@ if (!function_exists('versionControl')) {
         if(is_null($version)) {
             $version = $deviceType;
             $currentVersion = config('app.versionOld');
-            if(strpos($version, '2.3') !== false) {
-                $currentVersion = '2.5';
+            if($version === '2.3') {
+                $currentVersion = config('app.version')['ios'];
             }
             $serverCurrentVersion = explode('.', $currentVersion);
             $userCurrentVersion = explode('.', $version);
