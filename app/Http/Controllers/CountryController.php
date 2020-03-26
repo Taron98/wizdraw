@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Predis\Client;
 use Wizdraw\Cache\Entities\CountryCache;
@@ -82,12 +83,13 @@ class CountryController extends AbstractController
      * Showing a country route
      *
      * @param int $id
+     * @param string $receivingCurrency
      *
      * @param NoParamRequest $request
      *
      * @return mixed
      */
-    public function show(int $id, NoParamRequest $request)
+    public function show(int $id, string $receivingCurrency, NoParamRequest $request)
     {
         $client = $request->user()->client;
 
@@ -102,7 +104,7 @@ class CountryController extends AbstractController
         }
 
         /* get NIS rates if necessary for request made from israel application */
-        $receivingCurrency = $request->input('currency');
+//        $receivingCurrency = $request->input('currency');
         if ($receivingCurrency === 'USD') {
             $rate = $this->rateCacheService->rateForUsdRate();
         }else{
