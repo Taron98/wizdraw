@@ -450,7 +450,23 @@ class Client extends AbstractModel implements AuthorizableContract
     /**
      * @return string
      */
-    public function getIdentityExpire()
+    public function getIdentityTypeId()
+    {
+        return $this->identityTypeId;
+    }
+
+    /**
+     * @param string $identityTypeId
+     */
+    public function setIdentityTypeId($identityTypeId)
+    {
+        $this->identityTypeId = $identityTypeId;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getIdentityExpire(): Carbon
     {
         return Carbon::parse($this->identityExpire);
     }

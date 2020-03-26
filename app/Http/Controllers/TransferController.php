@@ -386,7 +386,13 @@ class TransferController extends AbstractController
     {
         $canTransfer = $request->user()->client->canTransfer();
         $isApproved = $request->user()->client->isApproved();
-        return $this->respond(['canTransfer' => $canTransfer, 'isApproved' => $isApproved]);
+        $isDocumentExpired = false;
+        if ($request->user()->client->getIdentityTypeId() == 2) {
+            $expiredDocumentDate = $request->user()->client->getIdentityExpire();
+            $currentDate = Carbon::now();
+            $isDocumentExpired = $expiredDocumentDate->lt($currentDate);
+        }
+        return $this->respond(['canTransfer' => $canTransfer, 'isApproved' => $isApproved, 'isDocumentExpired' => $isDocumentExpired]);
     }
 
     /**
