@@ -416,7 +416,7 @@ class Client extends AbstractModel implements AuthorizableContract
      */
     public function getIdentityExpireAttribute($value)
     {
-        return is_null($value) ? '' : Carbon::parse($value)->toDateString();
+        return Carbon::parse($value)->toDateString();
     }
 
     /**
