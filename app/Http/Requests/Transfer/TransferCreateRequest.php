@@ -35,7 +35,6 @@ class TransferCreateRequest extends AbstractRequest
             'receiver.middleName' => 'min:1|max:70',
             'receiver.lastName'   => 'required|min:1|max:70',
             'receiver.city'       => 'required_without:deposit|min:2|max:120',
-            'receiver.state'      => 'required_without:deposit|min:2|max:120',
 
             'receiverClientId'  => 'required|integer|exists:clients,id',
             'receiverCountryId' => 'required|integer|cacheExists:country',
@@ -75,6 +74,12 @@ class TransferCreateRequest extends AbstractRequest
             $rules = array_merge($rules, [
                 'cid' => 'required|string',
                 'smsCode' => 'required|string'
+            ]);
+        }
+
+        if ($this->input('receiverClientId') == 55) {
+            $rules = array_merge($rules, [
+                'receiver.state'      => 'required_without:deposit|min:2|max:120',
             ]);
         }
 

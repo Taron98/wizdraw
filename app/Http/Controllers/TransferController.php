@@ -476,6 +476,20 @@ class TransferController extends AbstractController
     }
 
     /**
+     * @param $defaultCountryId
+     *
+     * @return JsonResponse
+     */
+    public function getProvinces($defaultCountryId)
+    {
+        $provinces = $this->transferService->getProvinces($defaultCountryId);
+        if (is_null($provinces) || sizeof($provinces) === 0) {
+            return $this->respondWithError('provinces_not_found', Response::HTTP_NOT_FOUND);
+        }
+        return $this->respond(['provinces' => $provinces]);
+    }
+
+    /**
      * @param SendSMSRequest $request
      * @return JsonResponse
      */
