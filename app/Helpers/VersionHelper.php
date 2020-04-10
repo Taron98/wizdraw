@@ -13,7 +13,7 @@ if (!function_exists('versionControl')) {
     {
         if(is_null($version)) {
             $version = $deviceType;
-            $currentVersion = config('app.versionOld');
+            $currentVersion = config('app.version')['android'];
             if($version === '2.3') {
                 $currentVersion = config('app.version')['ios'];
             }
@@ -32,7 +32,7 @@ if (!function_exists('versionControl')) {
         return [
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
-            'skipUpdate' => false
+            'skipUpdate' => ($version === '8.2.4' || $version === '2.7')
         ];
     }
 }
