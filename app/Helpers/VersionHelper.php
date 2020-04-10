@@ -32,7 +32,7 @@ if (!function_exists('versionControl')) {
         return [
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
-            'skipUpdate' => ($version === '8.2.4' || $version === '2.7')
+            'skipUpdate' => ($version === '8.2.4' || $version === '2.8')
         ];
     }
 }
