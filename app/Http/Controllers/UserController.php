@@ -114,6 +114,7 @@ class UserController extends AbstractController
 
         //$this->userService->resetVerification($user);
         $user = $this->userService->updateStatus($request->user());
+        $user['noPassword'] = $user->hasNoPassword();
 
         return $this->respond($user);
     }
