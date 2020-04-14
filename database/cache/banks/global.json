@@ -1076,19 +1076,13 @@
   {
     "type": "GLOBAL",
     "id": "180",
-    "name": "ALLIED SAVINGS BANK",
+    "name": "PNB SAVINGS BANK",
     "country_name": "PHILIPPINES"
   },
   {
     "type": "GLOBAL",
     "id": "181",
     "name": "AL AMANAH ISLAMIC BANK",
-    "country_name": "PHILIPPINES"
-  },
-  {
-    "type": "GLOBAL",
-    "id": "182",
-    "name": "ALLIED BANKING CORPORATION",
     "country_name": "PHILIPPINES"
   },
   {
