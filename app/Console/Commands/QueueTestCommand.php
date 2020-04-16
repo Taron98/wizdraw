@@ -60,7 +60,7 @@ class QueueTestCommand extends Command
 
         $this->writeCountries();
         $this->writeBanks();
-        $this->writeRates();
+//        $this->writeRates();
         $this->writeProvinces();
 //        $this->writeCommissions();
 //        $this->writeIfsc();
