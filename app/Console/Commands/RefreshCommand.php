@@ -2,6 +2,7 @@
 
 namespace Wizdraw\Console\Commands;
 
+use Redis;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
@@ -38,6 +39,7 @@ class RefreshCommand extends Command
      */
     public function handle()
     {
+        Redis::flushDB();
         shell_exec('sudo service supervisor restart');
         shell_exec('sudo chmod -R 777 bootstrap/cache/');
         shell_exec('sudo chmod -R 777 storage/');
