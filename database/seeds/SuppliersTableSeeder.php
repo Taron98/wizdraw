@@ -128,8 +128,12 @@ class SuppliersTableSeeder  extends AbstractTableSeeder
                 'country_id' => '3',
                 'active' => '1',
             ],
-
-
+            [
+                'supplier_name' => 'Intel',
+                'supplier_name_wfs' => 'Intel Express',
+                'country_id' => '112',
+                'active' => '1',
+            ],
 
 
         ];
