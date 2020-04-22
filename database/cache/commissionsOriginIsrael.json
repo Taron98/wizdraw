@@ -1139,7 +1139,7 @@
     "percentage": null,
     "const": "5",
     "min_range": "1",
-    "max_range": "200",
+    "max_range": "330",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
