@@ -1137,9 +1137,9 @@
     "country": "ARMENIA",
     "currency": "ILS",
     "percentage": null,
-    "const": "5",
+    "const": "18",
     "min_range": "1",
-    "max_range": "330",
+    "max_range": "1200",
     "origin": 13,
     "transfer_type": "pickup_cash"
   },
@@ -1147,9 +1147,9 @@
     "id": 2104,
     "country": "ARMENIA",
     "currency": "ILS",
-    "percentage": "1.40",
+    "percentage": "1.50",
     "const": null,
-    "min_range": "1333",
+    "min_range": "1201",
     "max_range": "18500",
     "origin": 13,
     "transfer_type": "pickup_cash"
