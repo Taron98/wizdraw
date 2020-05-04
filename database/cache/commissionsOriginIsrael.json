@@ -1133,7 +1133,7 @@
     "transfer_type": "pickup_cash"
   },
   {
-    "id": 2103,
+    "id": 2132,
     "country": "ARMENIA",
     "currency": "ILS",
     "percentage": null,
@@ -1144,7 +1144,7 @@
     "transfer_type": "pickup_cash"
   },
   {
-    "id": 2104,
+    "id": 2133,
     "country": "ARMENIA",
     "currency": "ILS",
     "percentage": "1.50",
