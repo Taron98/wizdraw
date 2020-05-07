@@ -160,7 +160,8 @@ class UserController extends AbstractController
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName' => ($client->getLastName()) ?: '',
                 'didSetup' => ($client->isDidSetup()) ? : false,
-
+                'birth_place' => ($client->getBirthPlace()) ? : '',
+                'date_of_issue' => ($client->getBirthDateAttribute($client->getDateOfIssue())) ?: '',
             ],
         ]);
     }
