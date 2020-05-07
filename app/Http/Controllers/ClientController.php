@@ -274,11 +274,11 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @param NoParamRequest $request
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public  function setContactFields(NoParamRequest $request)
+    public  function setContactFields(\Request $request)
     {
         $user = $request->user();
         $client = $this->clientService->update($request->inputs(), $user->client->getId());
