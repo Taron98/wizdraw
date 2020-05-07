@@ -141,6 +141,10 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@changeName',
             ]);
 
+            Route::post('/contact-fields/', [
+                'as'   => 'client.contactfields',
+                'uses' => 'ClientController@setContactFields',
+            ]);
         });
 
         // Group

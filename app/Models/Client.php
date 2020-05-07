@@ -119,6 +119,8 @@ class Client extends AbstractModel implements AuthorizableContract
         'affiliate_id',
         'is_changed',
         'deleted_at',
+        'date_of_issue',
+        'birth_place'
     ];
 
     /**
