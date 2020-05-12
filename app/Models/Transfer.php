@@ -190,7 +190,7 @@ class Transfer extends AbstractModel implements AuthorizableContract
     public function getTransactionNumberAttribute()
     {
         if ($this->attributes['supplier'] === "Contact") {
-            $newTransactionId = str_replace('WF9', '97761', $this->attributes['transaction_number']);
+            $newTransactionId = str_replace('WF', '97761', $this->attributes['transaction_number']);
             return $newTransactionId;
         }
         if ($this->attributes['supplier'] === 'Muthoot Pickup') {
