@@ -33,11 +33,6 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'color'           => '#f7a54f',
             ],
             [
-                'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K,
-                'original_status' => 'WAIT FOR PROCESS(Obligo)',
-                'color'           => '#f7a54f',
-            ],
-            [
                 'status'          => TransferStatus::STATUS_WAIT_FOR_PROCESS,
                 'original_status' => TransferStatus::STATUS_WAIT_FOR_PROCESS,
                 'color'           => '',
@@ -86,6 +81,16 @@ class TransferStatusesTableSeeder extends AbstractTableSeeder
                 'status'          => TransferStatus::STATUS_COMPLETED,
                 'original_status' => 'CONFIRMED',
                 'color'           => '#6fca56',
+            ],
+            [
+                'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_CIRCLE_K,
+                'original_status' => 'WAIT FOR PROCESS(Obligo)',
+                'color'           => '#f7a54f',
+            ],
+            [
+                'status'          => TransferStatus::STATUS_PENDING_FOR_PAYMENT_AT_PAY_TO_AGENT,
+                'original_status' => 'WAIT FOR PROCESS(Obligo)',
+                'color'           => '#f7a54f',
             ],
             [
                 'status'          => TransferStatus::STATUS_WAIT,

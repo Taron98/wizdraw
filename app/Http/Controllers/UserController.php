@@ -113,6 +113,8 @@ class UserController extends AbstractController
         }
 
         //$this->userService->resetVerification($user);
+        $user = $this->userService->updateStatus($request->user());
+        $user['noPassword'] = $user->hasNoPassword();
 
         return $this->respond($user);
     }
@@ -138,6 +140,7 @@ class UserController extends AbstractController
                 'email' => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
                 'noPassword' => $user->hasNoPassword(),
+                'isPending' => $user->isPending()? : true,
             ],
             'client' => [
                 'id' => $client->getId(),
@@ -160,7 +163,8 @@ class UserController extends AbstractController
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName' => ($client->getLastName()) ?: '',
                 'didSetup' => ($client->isDidSetup()) ? : false,
-
+                'birth_place' => ($client->getBirthPlace()) ? : '',
+                'date_of_issue' => ($client->getBirthDateAttribute($client->getDateOfIssue())) ?: '',
             ],
         ]);
     }

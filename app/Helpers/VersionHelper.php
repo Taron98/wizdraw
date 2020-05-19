@@ -17,12 +17,10 @@ if (!function_exists('versionControl')) {
             if($version === '2.3') {
                 $currentVersion = config('app.version')['ios'];
             }
-            $serverCurrentVersion = explode('.', $currentVersion);
-            $userCurrentVersion = explode('.', $version);
             return [
                 'version' => $currentVersion,
                 'existsUpdate' => $currentVersion > $version,
-                'needsUpdate' => true
+                'skipUpdate' => false
             ];
         }
         $currentVersion = config('app.version')[$deviceType];
@@ -32,7 +30,7 @@ if (!function_exists('versionControl')) {
         return [
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
-            'skipUpdate' => ($version === '8.2.4' || $version === '2.8')
+            'skipUpdate' => false
         ];
     }
 }

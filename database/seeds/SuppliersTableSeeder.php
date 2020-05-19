@@ -27,8 +27,8 @@ class SuppliersTableSeeder  extends AbstractTableSeeder
                 'active' => '1',
             ],
             [
-                'supplier_name' => 'Royal',
-                'supplier_name_wfs' => 'Royal Pickup',
+                'supplier_name' => 'Muthoot',
+                'supplier_name_wfs' => 'Muthoot Pickup',
                 'country_id' => '54',
                 'active' => '1',
             ],
@@ -128,8 +128,12 @@ class SuppliersTableSeeder  extends AbstractTableSeeder
                 'country_id' => '3',
                 'active' => '1',
             ],
-
-
+            [
+                'supplier_name' => 'Intel',
+                'supplier_name_wfs' => 'Intel Express',
+                'country_id' => '112',
+                'active' => '1',
+            ],
 
 
         ];

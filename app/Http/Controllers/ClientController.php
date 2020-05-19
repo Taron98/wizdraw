@@ -272,4 +272,17 @@ class ClientController extends AbstractController
         $receiver = $this->clientService->update($inputs, $receiver->getId());
         return $this->respond($receiver);
     }
+
+    /**
+     * @param NoParamRequest $request
+     *
+     * @return JsonResponse
+     */
+    public  function setContactFields(NoParamRequest $request)
+    {
+        $user = $request->user();
+        $client = $this->clientService->update($request->all(), $user->client->getId());
+
+        return $this->respond($client);
+    }
 }
