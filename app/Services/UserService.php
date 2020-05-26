@@ -57,13 +57,25 @@ class UserService extends AbstractService
     /**
      * @param User $user
      *
+     * @return User
+     */
+    public function updateStatus(User $user)
+    {
+        $user->setIsPending(false);
+        $user->save();
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     *
      * @param string $password
      *
      * @return User
      */
     public function updatePassword(User $user, $password)
     {
-        $user->setIsPending(false);
+//        $user->setIsPending(false);
         $user->setPassword($password);
 
         //        $this->updateModel($user);

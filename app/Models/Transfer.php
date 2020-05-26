@@ -184,8 +184,21 @@ class Transfer extends AbstractModel implements AuthorizableContract
             // todo: change to the real thing
 //            $randomNumber = (pow(10, 8) + time() % pow(10, 8));
 //            $model->transactionNumber = 'WF9' . (string)$randomNumber;
-            $model->transactionNumber = getWfId();
+            $model->transactionNumber = getWfId($model->supplier);
         });
+    }
+    public function getTransactionNumberAttribute()
+    {
+        if ($this->attributes['supplier'] === "Contact") {
+            $newTransactionId = str_replace('WF', '97761', $this->attributes['transaction_number']);
+            return $newTransactionId;
+        }
+        if ($this->attributes['supplier'] === 'Muthoot Pickup') {
+            $prefix = strlen($this->attributes['transaction_number']) === 12 ? '84' : '840';
+            $newTransactionId = str_replace('WF', $prefix, $this->attributes['transaction_number']);
+            return $newTransactionId;
+        }
+         return $this->attributes['transaction_number'];
     }
 
     //<editor-fold desc="Relationships">

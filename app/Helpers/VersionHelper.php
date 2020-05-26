@@ -7,17 +7,30 @@ if (!function_exists('versionControl')) {
      *
      * @param string $version
      *
-     * @return bool
+     * @return array
      */
-    function versionControl($version)
+    function versionControl($deviceType, $version)
     {
-        $currentVersion = config('app.version');
+        if(is_null($version)) {
+            $version = $deviceType;
+            $currentVersion = config('app.version')['android'];
+            if($version === '2.3') {
+                $currentVersion = config('app.version')['ios'];
+            }
+            return [
+                'version' => $currentVersion,
+                'existsUpdate' => $currentVersion > $version,
+                'skipUpdate' => false
+            ];
+        }
+        $currentVersion = config('app.version')[$deviceType];
         $serverCurrentVersion = explode('.', $currentVersion);
         $userCurrentVersion = explode('.', $version);
-        if(intval($serverCurrentVersion[0]) <= intval($userCurrentVersion[0])){
-            return true;
-        }
-
-        return false;
+        //intval($serverCurrentVersion[1])> intval($userCurrentVersion[1])
+        return [
+            'version' => $currentVersion,
+            'existsUpdate' => $currentVersion > $version,
+            'skipUpdate' => false
+        ];
     }
 }

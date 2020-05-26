@@ -3,9 +3,12 @@
 namespace Wizdraw\Notifications;
 
 use Wizdraw\Notifications\Channels\PushExpoChannel;
+use Wizdraw\Notifications\Channels\FirebaseChannel;
 use Wizdraw\Notifications\Messages\PushExpoMessage;
+use Wizdraw\Notifications\Messages\PushFirebaseMessage;
 use Illuminate\Notifications\Notification;
 use Wizdraw\Models\ExpoToken;
+use Wizdraw\Models\FirebaseToken;
 use Wizdraw\Models\Transfer;
 
 
@@ -40,7 +43,7 @@ class TransferAborted extends Notification
      */
     public function via($notifiable)
     {
-        return [PushExpoChannel::class];
+        return [FirebaseChannel::class];
     }
 
 
@@ -49,7 +52,7 @@ class TransferAborted extends Notification
      *
      * @return PushExpoMessage|null
      */
-    public function toExpoPush($notifiable)
+    public function toFirebasePush($notifiable)
     {
         $countryStores = $this->stores($this->transfer->senderCountryId);
 
@@ -60,9 +63,9 @@ class TransferAborted extends Notification
         $device_id = $this->transfer->client->user->device_id;
         $client_id =  $this->transfer->client->user->client_id;
 
-        $expoToken = ExpoToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->expo_token;
+        $fcmToken = FirebaseToken::where(['device_id'=> $device_id, 'client_id'=> $client_id])->first()->fcm_token;
 
-        return (new PushExpoMessage())->setTo($expoToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
+        return (new PushFirebaseMessage())->setTo($fcmToken)->setTitle('Transfer Aborted')->setBody($content)->enableSound();
     }
 
     /**

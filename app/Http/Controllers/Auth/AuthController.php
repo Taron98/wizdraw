@@ -128,7 +128,14 @@ class AuthController extends AbstractController
         $phone = $request->only('phone')['phone'];
         $user = $this->userRepository->findByField('email', $request->only('email'))->first();
         $client = $this->clientService->findByPhone($phone);
-        if (($client != null && $client->user != null && $client->clientType == 'sender' || $user != null)) {
+        $isPending = 0;
+        if (isset($user) && !is_null($user)) {
+            $isPending = $user->isPending;
+        }  elseif (isset($client) && !is_null($client)) {
+            $isPending = $client->user->isPending;
+        }
+
+        if ((!is_null($user) || !is_null($client)) && !$isPending) {
             return $this->respondWithError('user_already_exists', Response::HTTP_BAD_REQUEST);
         }
 
@@ -141,9 +148,12 @@ class AuthController extends AbstractController
         if (!$client instanceof Client) {
             return $this->respondWithError('could_not_create_client');
         }
-
         /** @var User $user */
-        $user = $this->userRepository->createWithRelation($userAttrs, $client);
+        if(is_null($user)) {
+            $user = $this->userRepository->createWithRelation($userAttrs, $client);
+        } else {
+            $user = $this->userRepository->updateUser($userAttrs, $user);
+        }
         $client = $this->clientRepository->updateType('sender', $client);
         if (!$user) {
             return $this->respondWithError('could_not_create_user');

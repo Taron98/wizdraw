@@ -75,4 +75,15 @@ class UserRepository extends AbstractRepository
         return $this->updateModel($user);
     }
 
+    /**
+     * @param array $data
+     * @param User $user
+     * @return AbstractModel
+     */
+    public function updateUser(array $data, User $user) : AbstractModel
+    {
+        $user->fill($data);
+        return $this->updateModel($user);
+    }
+
 }

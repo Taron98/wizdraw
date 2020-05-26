@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Wizdraw\Http\Requests\NotificationsRequest;
 use Illuminate\Support\Facades\DB;
 use Wizdraw\Models\ExpoToken;
-
+use Wizdraw\Models\FirebaseToken;
 
 /**
  * Class NotificationsController
@@ -27,11 +27,11 @@ class NotificationsController extends AbstractController
     ): JsonResponse
     {
         $credentials = $request->all();
-        $expo = ExpoToken::where(['device_id' => $credentials['device_id'], 'client_id'=>$credentials['client_id']])->first();
-        if ($expo == null){
-            ExpoToken::create($credentials);
+        $fcm = FirebaseToken::where(['device_id' => $credentials['device_id'], 'client_id'=>$credentials['client_id']])->first();
+        if ($fcm == null){
+            FirebaseToken::create($credentials);
         }else{
-            $expo->update(['expo_token' => $credentials['expo_token']]);
+            $fcm->update(['fcm_token' => $credentials['fcm_token']]);
         }
         return $this->respond([
             'success' => true,

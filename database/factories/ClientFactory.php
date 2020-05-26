@@ -19,6 +19,8 @@ $factory->define(Wizdraw\Models\Client::class, function (Faker\Generator $faker)
         'default_country_id'  => $faker->randomNumber(),    // todo: update after using cache tables
         'resident_country_id' => $faker->randomNumber(),    // todo: update after using cache tables
         'city'                => $faker->city,
+        'birth_place'         => $faker->country,
+        'date_of_issue'       => $faker->dateTimeThisCentury,
         'address'             => $faker->streetAddress,
         'client_type'         => $faker->randomElement(['sender', 'receiver']),
         'did_setup'           => $faker->boolean,

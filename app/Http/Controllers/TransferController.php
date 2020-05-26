@@ -234,6 +234,7 @@ class TransferController extends AbstractController
         Log::info(json_encode(['Client info' => $client]));
         Log::info(json_encode(['Rate info' => $rate]));
         Log::info(json_encode(['Bank account' => $bankAccount]));
+        Log::info(json_encode(['inputs' => $inputs]));
         $transfer = $this->transferService->createTransfer($client, $rate, $bankAccount, $inputs);
         Log::info(json_encode(['Transfer data' => $transfer]));
 
@@ -472,6 +473,20 @@ class TransferController extends AbstractController
             return $this->respondWithError('limit_not_found', Response::HTTP_NOT_FOUND);
         }
         return $this->respond(['limit' => $limit]);
+    }
+
+    /**
+     * @param $defaultCountryId
+     *
+     * @return JsonResponse
+     */
+    public function getProvinces($defaultCountryId)
+    {
+        $provinces = $this->transferService->getProvinces($defaultCountryId);
+        if (is_null($provinces) || sizeof($provinces) === 0) {
+            return $this->respondWithError('provinces_not_found', Response::HTTP_NOT_FOUND);
+        }
+        return $this->respond(['provinces' => $provinces]);
     }
 
     /**

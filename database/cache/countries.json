@@ -12,7 +12,7 @@
   {
     "id": "112",
     "description": "ARMENIA",
-    "coin_id": "AMD",
+    "coin_id": "USD",
     "country_code_2": "AM",
     "country_code_3": "ARM",
     "phone_code": "374",
@@ -129,9 +129,8 @@
     "phone_code": "86",
     "is_active": 1,
     "timezone": 8,
-    "is_pickup": 1,
+    "is_pickup": 0,
     "is_deposit": 1
-
   },
   {
     "id": "89",

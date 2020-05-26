@@ -38,6 +38,8 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @property string $city
  * @property string $address
  * @property string $clientType
+ * @property string $birthPlace
+ * @property \Carbon\Carbon $dateOfIssue
  * @property boolean $didSetup
  * @property boolean $isApproved
  * @property integer $affiliateId
@@ -76,6 +78,8 @@ use Wizdraw\Services\Entities\FacebookUser;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDidSetup($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsApproved($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereAffiliateId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereDateOfIssue($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereBirthPlace($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereIsChanged($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Client whereUpdatedAt($value)
@@ -119,6 +123,8 @@ class Client extends AbstractModel implements AuthorizableContract
         'affiliate_id',
         'is_changed',
         'deleted_at',
+        'date_of_issue',
+        'birth_place'
     ];
 
     /**
@@ -735,4 +741,32 @@ class Client extends AbstractModel implements AuthorizableContract
     }
     //</editor-fold>
 
+    /**
+     * @return string
+     */
+    public function getDateOfIssue()
+    {
+        return Carbon::parse($this->dateOfIssue);
+    }
+
+    /**
+     * @param string $dateOfIssue
+     */
+    public function setDateOfIssue($dateOfIssue)
+    {
+        $this->dateOfIssue = $dateOfIssue;
+    }
+
+    public function getBirthPlace()
+    {
+        return $this->birthPlace;
+    }
+
+    /**
+     * @param integer $birthPlace
+     */
+    public function setBirthPlace($birthPlace)
+    {
+        $this->birthPlace = $birthPlace;
+    }
 }

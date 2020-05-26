@@ -1,11 +1,12 @@
 <?php
+use Illuminate\Support\Facades\Log;
 
 
 const PASSWORD = 'WiZ32#WIC';
 const USER = 'WFMobileWiz';
 
 if (!function_exists('getWfId')) {
-    function getWfId()
+    function getWfId($supplier)
     {
 
         // set post fields
@@ -13,12 +14,13 @@ if (!function_exists('getWfId')) {
             'username' => USER,
             'password' => PASSWORD,
             'method'   => 'getIdForWizdraw',
+            'supplier' => $supplier
         ];
 
         $ch = curl_init();
 
         /* local host */
-        curl_setopt($ch, CURLOPT_URL, env('WIC_WF_GENERATOR_URL'));
+        curl_setopt($ch, CURLOPT_URL, config('app.WIC_WF_GENERATOR_URL'));
 
         /* wic test env */
        // curl_setopt($ch, CURLOPT_URL,"52.21.225.207/transfers/new_wic_files/Server/initTransactionID.php");

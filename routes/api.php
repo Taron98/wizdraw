@@ -54,7 +54,7 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'UserController@device',
         ]);
 
-        Route::get('/device/{deviceId}/version/{versionId}', [
+        Route::get('/version/{deviceType}/{versionId?}', [
             'as'   => 'user.version',
             'uses' => 'UserController@version',
         ]);
@@ -141,6 +141,10 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'ClientController@changeName',
             ]);
 
+            Route::post('/contact-fields/', [
+                'as'   => 'client.contactfields',
+                'uses' => 'ClientController@setContactFields',
+            ]);
         });
 
         // Group
@@ -196,11 +200,6 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@list',
             ]);
 
-            Route::get('/{id}/', [
-                'as'   => 'country.show',
-                'uses' => 'CountryController@show',
-            ]);
-
             Route::get('/{id}/banks/', [
                 'as'   => 'country.banks',
                 'uses' => 'CountryController@banks',
@@ -211,10 +210,14 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'CountryController@branches',
             ]);
 
-
             Route::get('/use_qr_stores/{countryId}', [
                 'as'   => 'country.use_qr_stores',
                 'uses' => 'CountryController@use_qr_stores',
+            ]);
+
+            Route::get('/{id}/{receivingCurrency}', [
+                'as'   => 'country.show',
+                'uses' => 'CountryController@show',
             ]);
 
         });
@@ -284,6 +287,11 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/suppliers/{countryId}/', [
                 'as'   => 'transfer.suppliers',
                 'uses' => 'SupplierController@suppliers',
+            ]);
+
+            Route::get('/provinces/{countryId}/', [
+                'as'   => 'transfer.provinces',
+                'uses' => 'TransferController@getProvinces',
             ]);
 
             Route::group(['prefix' => 'wizdrawCard/'], function () {

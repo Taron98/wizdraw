@@ -19,12 +19,15 @@ return [
     | Application Version
     |--------------------------------------------------------------------------
     |
-    | This value determines the current version of the application's server,
+    | This values determines the current version of the application's server,
     | usage is when the user open the application, he sends his current version and
     | we check against this value if he must update his application or not.
     |
     */
-    'version' => '9.0.0',
+    'version' => array(
+        'ios' => '3.0',
+        'android' => '8.3.1'
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +174,8 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+
+    'WIC_WF_GENERATOR_URL' => env('WIC_WF_GENERATOR_URL'),
 
     'providers' => [
 

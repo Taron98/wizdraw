@@ -113,6 +113,8 @@ class UserController extends AbstractController
         }
 
         //$this->userService->resetVerification($user);
+        $user = $this->userService->updateStatus($request->user());
+        $user['noPassword'] = $user->hasNoPassword();
 
         return $this->respond($user);
     }
@@ -138,12 +140,13 @@ class UserController extends AbstractController
                 'email' => ($user->getEmail()) ?: '',
                 'facebookId' => ($user->getFacebookId()) ?: '',
                 'noPassword' => $user->hasNoPassword(),
+                'isPending' => $user->isPending()? : true,
             ],
             'client' => [
                 'id' => $client->getId(),
                 'identity_type_id' => ($client->identityType()) ?: '0',
                 'identity_number' => ($client->getIdentityNumber()) ?: '',
-                'identity_expire' => ($client->getBirthDateAttribute($client->getIdentityExpire())) ?: '',
+                'identity_expire' =>($client->getBirthDateAttribute($client->getIdentityExpire())) ?: '',
                 'birth_date' => ($client->getBirthDateAttribute($client->getBirthDate())) ?: '',
                 'gender' => ($client->getGender()) ?: '',
                 'phone' => ($client->getPhone()) ?: '',
@@ -160,7 +163,8 @@ class UserController extends AbstractController
                 'middleName' => ($client->getMiddleName()) ?: '',
                 'lastName' => ($client->getLastName()) ?: '',
                 'didSetup' => ($client->isDidSetup()) ? : false,
-
+                'birth_place' => ($client->getBirthPlace()) ? : '',
+                'date_of_issue' => ($client->getBirthDateAttribute($client->getDateOfIssue())) ?: '',
             ],
         ]);
     }
@@ -169,40 +173,14 @@ class UserController extends AbstractController
      * Check on device wizdraw application version
      * User details by device id route
      *
-     * @param string $deviceId
+     * @param string $deviceType - type of the user phone
      * @param string $versionId - version of the user current installed app
      *
      * @return JsonResponse
      */
-    public function version(string $deviceId, string $versionId): JsonResponse
+    public function version(string $deviceType, string $versionId = null): JsonResponse
     {
-        /** @var User $user */
-        $user = $this->userService->findByDeviceId($deviceId);
-
-        if (!versionControl($versionId)) {
-            return $this->respondWithError('version_out_of_date', Response::HTTP_VERSION_NOT_SUPPORTED);
-
-        }
-
-        if (is_null($user)) {
-            return $this->respondWithError('device_not_found', Response::HTTP_NOT_FOUND);
-        }
-
-        $client = $user->client;
-
-        return $this->respond([
-            'user' => [
-                'email' => ($user->getEmail()) ?: '',
-                'facebookId' => ($user->getFacebookId()) ?: '',
-                'noPassword' => $user->hasNoPassword(),
-            ],
-            'client' => [
-                'id' => $client->getId(),
-                'firstName' => ($client->getFirstName()) ?: '',
-                'middleName' => ($client->getMiddleName()) ?: '',
-                'lastName' => ($client->getLastName()) ?: '',
-            ],
-        ]);
+        return $this->respond(versionControl($deviceType, $versionId));
     }
 
 

@@ -91,7 +91,7 @@ class ClientController extends AbstractController
 
                     $resInputs = ['phone' => $phone];
 
-                    return $this->respondWithError('phone_already_used', Response::HTTP_BAD_REQUEST, $resInputs);
+                    return $this->respondWithError('Phone number already exists', Response::HTTP_BAD_REQUEST, $resInputs);
                 }
             }
         }
@@ -271,5 +271,18 @@ class ClientController extends AbstractController
         $inputs['is_changed'] = 1;
         $receiver = $this->clientService->update($inputs, $receiver->getId());
         return $this->respond($receiver);
+    }
+
+    /**
+     * @param NoParamRequest $request
+     *
+     * @return JsonResponse
+     */
+    public  function setContactFields(NoParamRequest $request)
+    {
+        $user = $request->user();
+        $client = $this->clientService->update($request->all(), $user->client->getId());
+
+        return $this->respond($client);
     }
 }

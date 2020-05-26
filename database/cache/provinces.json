@@ -1,0 +1,642 @@
+[
+  {
+    "id": "1",
+    "country_id": "55",
+    "name": "ANGIANG"
+  },
+  {
+    "id":"2",
+    "country_id": "55",
+    "name": "BA RIA - VUNG TAU"
+  },
+  {
+    "id": "3",
+    "country_id": "55",
+    "name": "BACGIANG"
+  },
+  {
+    "id": "4",
+    "country_id": "55",
+    "name": "BACKAN"
+  },
+  {
+    "id": "5",
+    "country_id": "55",
+    "name": "BACLIEU"
+  },
+  {
+    "id": "6",
+    "country_id": "55",
+    "name": "BACNINH"
+  },
+  {
+    "id": "7",
+    "country_id": "55",
+    "name": "BENTRE"
+  },
+  {
+    "id": "8",
+    "country_id": "55",
+    "name": "BINHDINH"
+  },
+  {
+    "id": "9",
+    "country_id": "55",
+    "name": "BINHDUONG"
+  },
+  {
+    "id": "10",
+    "country_id": "55",
+    "name": "BINHPHUOC"
+  },
+  {
+    "id": "11",
+    "country_id": "55",
+    "name": "BINHTHUAN"
+  },
+  {
+    "id": "12",
+    "country_id": "55",
+    "name": "CAMAU"
+  },
+  {
+    "id": "13",
+    "country_id": "55",
+    "name": "CANTHO"
+  },
+  {
+    "id": "14",
+    "country_id": "55",
+    "name": "CAOBANG"
+  },
+  {
+    "id": "15",
+    "country_id": "55",
+    "name": "DANANG"
+  },
+  {
+    "id": "16",
+    "country_id": "55",
+    "name": "DAKLAK"
+  },
+  {
+    "id": "17",
+    "country_id": "55",
+    "name": "DAKNONG"
+  },
+  {
+    "id": "18",
+    "country_id": "55",
+    "name": "DIENBIEN"
+  },
+  {
+    "id": "19",
+    "country_id": "55",
+    "name": "DONGNAI"
+  },
+  {
+    "id": "20",
+    "country_id": "55",
+    "name": "DONGTHAP"
+  },
+  {
+    "id": "21",
+    "country_id": "55",
+    "name": "GIALAI"
+  },
+  {
+    "id": "22",
+    "country_id": "55",
+    "name": "HAGIANG"
+  },
+  {
+    "id": "23",
+    "country_id": "55",
+    "name": "HANAM"
+  },
+  {
+    "id": "24",
+    "country_id": "55",
+    "name": "HANOI"
+  },
+  {
+    "id": "25",
+    "country_id": "55",
+    "name": "HATAY"
+  },
+  {
+    "id": "26",
+    "country_id": "55",
+    "name": "HATINH"
+  },
+  {
+    "id": "27",
+    "country_id": "55",
+    "name": "HAIDUONG"
+  },
+  {
+    "id": "28",
+    "country_id": "55",
+    "name": "HAIPHONG"
+  },
+  {
+    "id": "29",
+    "country_id": "55",
+    "name": "HAUGIANG"
+  },
+  {
+    "id": "30",
+    "country_id": "55",
+    "name": "HOABINH"
+  },
+  {
+    "id": "31",
+    "country_id": "55",
+    "name": "HUNGYEN"
+  },
+  {
+    "id": "32",
+    "country_id": "55",
+    "name": "KHANHHOA"
+  },
+  {
+    "id": "33",
+    "country_id": "55",
+    "name": "KIEN GIANG"
+  },
+  {
+    "id": "34",
+    "country_id": "55",
+    "name": "KONTUM"
+  },
+  {
+    "id": "35",
+    "country_id": "55",
+    "name": "LAICHAU"
+  },
+  {
+    "id": "36",
+    "country_id": "55",
+    "name": "LAMDONG"
+  },
+  {
+    "id": "37",
+    "country_id": "55",
+    "name": "LANGSON"
+  },
+  {
+    "id": "38",
+    "country_id": "55",
+    "name": "LAOCAI"
+  },
+  {
+    "id": "39",
+    "country_id": "55",
+    "name": "LONGAN"
+  },
+  {
+    "id": "40",
+    "country_id": "55",
+    "name": "NAMDINH"
+  },
+  {
+    "id": "41",
+    "country_id": "55",
+    "name": "NGHEAN"
+  },
+  {
+    "id": "42",
+    "country_id": "55",
+    "name": "NINHBINH"
+  },
+  {
+    "id": "43",
+    "country_id": "55",
+    "name": "NINHTHUAN"
+  },
+  {
+    "id": "44",
+    "country_id": "55",
+    "name": "PHUTHO"
+  },
+  {
+    "id": "45",
+    "country_id": "55",
+    "name": "PHUYEN"
+  },
+  {
+    "id": "46",
+    "country_id": "55",
+    "name": "QUANGBINH"
+  },
+  {
+    "id": "47",
+    "country_id": "55",
+    "name": "QUANGNAM"
+  },
+  {
+    "id": "48",
+    "country_id": "55",
+    "name": "QUANGNGAI"
+  },
+  {
+    "id": "49",
+    "country_id": "55",
+    "name": "QUANGNINH"
+  },
+  {
+    "id": "50",
+    "country_id": "55",
+    "name": "QUANGTRI"
+  },
+  {
+    "id": "51",
+    "country_id": "55",
+    "name": "SOCTRANG"
+  },
+  {
+    "id": "52",
+    "country_id": "55",
+    "name": "SONLA"
+  },
+  {
+    "id": "53",
+    "country_id": "55",
+    "name": "TAYNINH"
+  },
+  {
+    "id": "54",
+    "country_id": "55",
+    "name": "THAIBINH"
+  },
+  {
+    "id": "55",
+    "country_id": "55",
+    "name": "THAINGUYEN"
+  },
+  {
+    "id": "56",
+    "country_id": "55",
+    "name": "THANHHOA"
+  },
+  {
+    "id": "57",
+    "country_id": "55",
+    "name": "HUE"
+  },
+  {
+    "id": "58",
+    "country_id": "55",
+    "name": "TIENGIANG"
+  },
+  {
+    "id": "59",
+    "country_id": "55",
+    "name": "HCM"
+  },
+  {
+    "id": "60",
+    "country_id": "55",
+    "name": "TRAVINH"
+  },
+  {
+    "id": "61",
+    "country_id": "55",
+    "name": "TUYENQUANG"
+  },
+  {
+    "id": "62",
+    "country_id": "55",
+    "name": "VINHLONG"
+  },
+  {
+    "id": "63",
+    "country_id": "55",
+    "name": "VINHPHUC"
+  },
+  {
+    "id": "64",
+    "country_id": "55",
+    "name": "YENBAI"
+  },
+  {
+    "id": "65",
+    "country_id": "55",
+    "name": "ANGIANG"
+  },
+  {
+    "id": "66",
+    "country_id": "55",
+    "name": "BA RIA - VUNG TAU"
+  },
+  {
+    "id": "67",
+    "country_id": "55",
+    "name": "BACGIANG"
+  },
+  {
+    "id": "68",
+    "country_id": "55",
+    "name": "BACKAN"
+  },
+  {
+    "id": "69",
+    "country_id": "55",
+    "name": "BACLIEU"
+  },
+  {
+    "id": "70",
+    "country_id": "55",
+    "name": "BACNINH"
+  },
+  {
+    "id": "71",
+    "country_id": "55",
+    "name": "BENTRE"
+  },
+  {
+    "id": "72",
+    "country_id": "55",
+    "name": "BINHDINH"
+  },
+  {
+    "id": "73",
+    "country_id": "55",
+    "name": "BINHDUONG"
+  },
+  {
+    "id": "74",
+    "country_id": "55",
+    "name": "BINHPHUOC"
+  },
+  {
+    "id": "75",
+    "country_id": "55",
+    "name": "BINHTHUAN"
+  },
+  {
+    "id": "76",
+    "country_id": "55",
+    "name": "CAMAU"
+  },
+  {
+    "id": "77",
+    "country_id": "55",
+    "name": "CANTHO"
+  },
+  {
+    "id": "78",
+    "country_id": "55",
+    "name": "CAOBANG"
+  },
+  {
+    "id": "79",
+    "country_id": "55",
+    "name": "DANANG"
+  },
+  {
+    "id": "80",
+    "country_id": "55",
+    "name": "DAKLAK"
+  },
+  {
+    "id": "81",
+    "country_id": "55",
+    "name": "DAKNONG"
+  },
+  {
+    "id": "82",
+    "country_id": "55",
+    "name": "DIENBIEN"
+  },
+  {
+    "id": "83",
+    "country_id": "55",
+    "name": "DONGNAI"
+  },
+  {
+    "id": "84",
+    "country_id": "55",
+    "name": "DONGTHAP"
+  },
+  {
+    "id": "85",
+    "country_id": "55",
+    "name": "GIALAI"
+  },
+  {
+    "id": "86",
+    "country_id": "55",
+    "name": "HAGIANG"
+  },
+  {
+    "id": "87",
+    "country_id": "55",
+    "name": "HANAM"
+  },
+  {
+    "id": "88",
+    "country_id": "55",
+    "name": "HANOI"
+  },
+  {
+    "id": "89",
+    "country_id": "55",
+    "name": "HATAY"
+  },
+  {
+    "id": "90",
+    "country_id": "55",
+    "name": "HATINH"
+  },
+  {
+    "id": "91",
+    "country_id": "55",
+    "name": "HAIDUONG"
+  },
+  {
+    "id": "92",
+    "country_id": "55",
+    "name": "HAIPHONG"
+  },
+  {
+    "id": "93",
+    "country_id": "55",
+    "name": "HAUGIANG"
+  },
+  {
+    "id": "94",
+    "country_id": "55",
+    "name": "HOABINH"
+  },
+  {
+    "id": "95",
+    "country_id": "55",
+    "name": "HUNGYEN"
+  },
+  {
+    "id": "96",
+    "country_id": "55",
+    "name": "KHANHHOA"
+  },
+  {
+    "id": "97",
+    "country_id": "55",
+    "name": "KIEN GIANG"
+  },
+  {
+    "id": "98",
+    "country_id": "55",
+    "name": "KONTUM"
+  },
+  {
+    "id": "99",
+    "country_id": "55",
+    "name": "LAICHAU"
+  },
+  {
+    "id": "100",
+    "country_id": "55",
+    "name": "LAMDONG"
+  },
+  {
+    "id": "101",
+    "country_id": "55",
+    "name": "LANGSON"
+  },
+  {
+    "id": "102",
+    "country_id": "55",
+    "name": "LAOCAI"
+  },
+  {
+    "id": "103",
+    "country_id": "55",
+    "name": "LONGAN"
+  },
+  {
+    "id": "104",
+    "country_id": "55",
+    "name": "NAMDINH"
+  },
+  {
+    "id": "105",
+    "country_id": "55",
+    "name": "NGHEAN"
+  },
+  {
+    "id": "106",
+    "country_id": "55",
+    "name": "NINHBINH"
+  },
+  {
+    "id": "107",
+    "country_id": "55",
+    "name": "NINHTHUAN"
+  },
+  {
+    "id": "108",
+    "country_id": "55",
+    "name": "PHUTHO"
+  },
+  {
+    "id": "109",
+    "country_id": "55",
+    "name": "PHUYEN"
+  },
+  {
+    "id": "110",
+    "country_id": "55",
+    "name": "QUANGBINH"
+  },
+  {
+    "id": "111",
+    "country_id": "55",
+    "name": "QUANGNAM"
+  },
+  {
+    "id": "112",
+    "country_id": "55",
+    "name": "QUANGNGAI"
+  },
+  {
+    "id": "113",
+    "country_id": "55",
+    "name": "QUANGNINH"
+  },
+  {
+    "id": "114",
+    "country_id": "55",
+    "name": "QUANGTRI"
+  },
+  {
+    "id": "115",
+    "country_id": "55",
+    "name": "SOCTRANG"
+  },
+  {
+    "id": "116",
+    "country_id": "55",
+    "name": "SONLA"
+  },
+  {
+    "id": "117",
+    "country_id": "55",
+    "name": "TAYNINH"
+  },
+  {
+    "id": "118",
+    "country_id": "55",
+    "name": "THAIBINH"
+  },
+  {
+    "id": "119",
+    "country_id": "55",
+    "name": "THAINGUYEN"
+  },
+  {
+    "id": "120",
+    "country_id": "55",
+    "name": "THANHHOA"
+  },
+  {
+    "id": "121",
+    "country_id": "55",
+    "name": "HUE"
+  },
+  {
+    "id": "122",
+    "country_id": "55",
+    "name": "TIENGIANG"
+  },
+  {
+    "id": "123",
+    "country_id": "55",
+    "name": "HCM"
+  },
+  {
+    "id": "124",
+    "country_id": "55",
+    "name": "TRAVINH"
+  },
+  {
+    "id": "125",
+    "country_id": "55",
+    "name": "TUYENQUANG"
+  },
+  {
+    "id": "126",
+    "country_id": "55",
+    "name": "VINHLONG"
+  },
+  {
+    "id": "127",
+    "country_id": "55",
+    "name": "VINHPHUC"
+  },
+  {
+    "id": "128",
+    "country_id": "55",
+    "name": "YENBAI"
+  }
+]
