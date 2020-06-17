@@ -174,6 +174,17 @@ class CountryController extends AbstractController
     }
 
     /**
+     * Showing list of countries route
+     *
+     * @param NoParamRequest $request
+     *
+     * @return mixed
+     */
+    public function listDemo($origin)
+    {
+        return $this->countryCacheService->activeCountriesForOrigin($origin);
+    }
+    /**
      * Showing list of bank of the country route
      *
      * @param int $id

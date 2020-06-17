@@ -83,6 +83,10 @@ Route::group(['prefix' => 'v1/'], function () {
             'as'   => 'country.stores',
             'uses' => 'CountryController@stores',
         ]);
+        Route::get('/active/{countryId}', [
+            'as'   => 'country.listDemo',
+            'uses' => 'CountryController@listDemo',
+        ]);
 
     });
 
