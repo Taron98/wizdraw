@@ -90,6 +90,13 @@ Route::group(['prefix' => 'v1/'], function () {
 
     });
 
+    Route::group(['prefix' => 'transfer/'], function () {
+        Route::get('/suppliers/{countryId}/', [
+            'as' => 'transfer.suppliers',
+            'uses' => 'SupplierController@suppliers',
+        ]);
+    });
+
     Route::group(['middleware' => 'auth'], function () {
 
         // User
@@ -287,10 +294,6 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/usedPaymentAgency/', [
                 'as'   => 'transfer.usedPaymentAgency',
                 'uses' => 'TransferController@alreadyUsedPaymentAgency',
-            ]);
-            Route::get('/suppliers/{countryId}/', [
-                'as'   => 'transfer.suppliers',
-                'uses' => 'SupplierController@suppliers',
             ]);
 
             Route::get('/provinces/{countryId}/', [

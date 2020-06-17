@@ -176,7 +176,7 @@ class CountryController extends AbstractController
     /**
      * Showing list of countries route
      *
-     * @param NoParamRequest $request
+     * @param int $origin
      *
      * @return mixed
      */
