@@ -88,7 +88,7 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'CountryController@listDemo',
         ]);
 
-        Route::get('demo/{id}/{receivingCurrency}', [
+        Route::get('demo/{id}/{receivingCurrency}/{senderCountryId}', [
             'as'   => 'country.showDemo',
             'uses' => 'CountryController@showDemo',
         ]);

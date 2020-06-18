@@ -160,7 +160,7 @@ class CountryController extends AbstractController
         if ($receivingCurrency === 'USD') {
             $rate = $this->rateCacheService->rateForUsdRate();
         }else{
-            $this->rateCacheService->setKeyPrefix($request);
+            $this->rateCacheService->setKeyPrefixDemo($senderCountryId);
             $rate = $this->rateCacheService->find($country->getId());
         }
         $country->setRate($rate);
