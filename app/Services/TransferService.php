@@ -321,7 +321,7 @@ class TransferService extends AbstractService
      * @param $campaign
      * @return bool
      */
-    public function isEntitledForHkFirstFiveTransfersCampaign(Client $client, $campaign)
+    public function isEntitledForHkFirstFiveTransfersCampaign($clientCountryId, $campaign)
     {
         if (!$this->isEntitledForCampaign($campaign)) {
             return false;
@@ -331,7 +331,7 @@ class TransferService extends AbstractService
 //            ->getClientLastTransfersBetweenDates($client->transfers, 90, $campaign[0]->start_date, $campaign[0]->end_date);
 
 //        return ((sizeof($clientLastTransfersBetweenDates)) < 5 && ($client->defaultCountryId === 90)) ? true : false;
-        return $client->defaultCountryId === 90 ? true : false;
+        return $clientCountryId === 90 ? true : false;
     }
 
     /**

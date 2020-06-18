@@ -88,9 +88,9 @@ Route::group(['prefix' => 'v1/'], function () {
             'uses' => 'CountryController@listDemo',
         ]);
 
-        Route::get('/{id}/{receivingCurrency}', [
-            'as'   => 'country.show',
-            'uses' => 'CountryController@show',
+        Route::get('demo/{id}/{receivingCurrency}', [
+            'as'   => 'country.showDemo',
+            'uses' => 'CountryController@showDemo',
         ]);
 
     });
@@ -229,6 +229,11 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::get('/use_qr_stores/{countryId}', [
                 'as'   => 'country.use_qr_stores',
                 'uses' => 'CountryController@use_qr_stores',
+            ]);
+
+            Route::get('/{id}/{receivingCurrency}', [
+                'as'   => 'country.show',
+                'uses' => 'CountryController@show',
             ]);
 
         });
