@@ -100,6 +100,10 @@ Route::group(['prefix' => 'v1/'], function () {
             'as' => 'transfer.suppliers',
             'uses' => 'SupplierController@suppliers',
         ]);
+        Route::get('/limit/{countryId}/', [
+            'as'   => 'transfer.limit',
+            'uses' => 'TransferController@limit',
+        ]);
     });
 
     Route::group(['middleware' => 'auth'], function () {
@@ -289,11 +293,6 @@ Route::group(['prefix' => 'v1/'], function () {
             Route::post('/{transfer}/feedback/', [
                 'as'   => 'transfer.feedback',
                 'uses' => 'TransferController@feedback',
-            ]);
-
-            Route::get('/limit/{countryId}/', [
-                'as'   => 'transfer.limit',
-                'uses' => 'TransferController@limit',
             ]);
 
             Route::post('/usedPaymentAgency/', [
