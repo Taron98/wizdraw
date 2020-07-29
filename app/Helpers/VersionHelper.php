@@ -30,7 +30,7 @@ if (!function_exists('versionControl')) {
         return [
             'version' => $currentVersion,
             'existsUpdate' => $currentVersion > $version,
-            'skipUpdate' => false
+            'skipUpdate' => intval($serverCurrentVersion[1]) == intval($userCurrentVersion[1])
         ];
     }
 }
