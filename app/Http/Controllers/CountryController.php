@@ -123,7 +123,59 @@ class CountryController extends AbstractController
 
         //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
         if($this->transferService
-            ->isEntitledForHkFirstFiveTransfersCampaign($client, $this->campaignService->getCampaign(1)))
+            ->isEntitledForHkFirstFiveTransfersCampaign($client->defaultCountryId, $this->campaignService->getCampaign(1)))
+        {
+            $commissions = $this->campaignService->setNewCommission($commissions, true, 18);
+        }
+
+        $country->setCommissions($commissions);
+
+        return $country;
+    }
+
+    /**
+     * Showing a country route demo
+     *
+     * @param int $id
+     * @param string $receivingCurrency
+     *
+     * @param NoParamRequest $request
+     *
+     * @return mixed
+     */
+    public function showDemo(int $id, string $receivingCurrency, int $senderCountryId, NoParamRequest $request)
+    {
+        /** @var CountryCache $country */
+        $country = $this->countryCacheService->find($id);
+
+        if (is_null($country)) {
+
+            $resInputs = ['id' => $id];
+
+            return $this->respondWithError('country_not_found', Response::HTTP_NOT_FOUND, $resInputs);
+        }
+
+        /* get NIS rates if necessary for request made from israel application */
+//        $receivingCurrency = $request->input('currency');
+        if ($receivingCurrency === 'USD') {
+            $rate = $this->rateCacheService->rateForUsdRate();
+        }else{
+            $this->rateCacheService->setKeyPrefixDemo($senderCountryId);
+            $rate = $this->rateCacheService->find($country->getId());
+        }
+        $country->setRate($rate);
+
+        $commissions = $this->commissionCacheService->findByCountryId($country->getId(), 'ASC',
+            $senderCountryId);
+        if ($senderCountryId === 13) {
+            $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'), true);
+            $country->setWizdrawIlsBaseRate($wizdrawRate['wf_rate']);
+            $country->setWizdrawIlsExchangeRate($wizdrawRate['wf_exchange_rate']);
+        }
+
+        //check if the user is entitled for hk_first_five_transfers campaign (id '1' in the db), and change commission to 18 if it is
+        if($this->transferService
+            ->isEntitledForHkFirstFiveTransfersCampaign($senderCountryId, $this->campaignService->getCampaign(1)))
         {
             $commissions = $this->campaignService->setNewCommission($commissions, true, 18);
         }
@@ -173,6 +225,17 @@ class CountryController extends AbstractController
         }
     }
 
+    /**
+     * Showing list of countries route
+     *
+     * @param int $origin
+     *
+     * @return mixed
+     */
+    public function listDemo($origin)
+    {
+        return $this->countryCacheService->activeCountriesForOrigin($origin);
+    }
     /**
      * Showing list of bank of the country route
      *

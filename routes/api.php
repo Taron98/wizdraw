@@ -83,7 +83,27 @@ Route::group(['prefix' => 'v1/'], function () {
             'as'   => 'country.stores',
             'uses' => 'CountryController@stores',
         ]);
+        Route::get('/demo/active/{countryId}', [
+            'as'   => 'country.listDemo',
+            'uses' => 'CountryController@listDemo',
+        ]);
 
+        Route::get('demo/{id}/{receivingCurrency}/{senderCountryId}', [
+            'as'   => 'country.showDemo',
+            'uses' => 'CountryController@showDemo',
+        ]);
+
+    });
+
+    Route::group(['prefix' => 'transfer/'], function () {
+        Route::get('/suppliers/{countryId}/', [
+            'as' => 'transfer.suppliers',
+            'uses' => 'SupplierController@suppliers',
+        ]);
+        Route::get('/limit/{countryId}/', [
+            'as'   => 'transfer.limit',
+            'uses' => 'TransferController@limit',
+        ]);
     });
 
     Route::group(['middleware' => 'auth'], function () {
@@ -275,18 +295,9 @@ Route::group(['prefix' => 'v1/'], function () {
                 'uses' => 'TransferController@feedback',
             ]);
 
-            Route::get('/limit/{countryId}/', [
-                'as'   => 'transfer.limit',
-                'uses' => 'TransferController@limit',
-            ]);
-
             Route::post('/usedPaymentAgency/', [
                 'as'   => 'transfer.usedPaymentAgency',
                 'uses' => 'TransferController@alreadyUsedPaymentAgency',
-            ]);
-            Route::get('/suppliers/{countryId}/', [
-                'as'   => 'transfer.suppliers',
-                'uses' => 'SupplierController@suppliers',
             ]);
 
             Route::get('/provinces/{countryId}/', [
