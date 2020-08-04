@@ -301,9 +301,9 @@
     "country": "THAILAND",
     "currency": "ILS",
     "percentage": null,
-    "const": 37,
+    "const": 35,
     "min_range": "10",
-    "max_range": "4000",
+    "max_range": "3700",
     "origin": 13,
     "transfer_type": "deposit"
   },
@@ -313,7 +313,7 @@
     "currency": "ILS",
     "percentage": "1.10",
     "const": null,
-    "min_range": "4001",
+    "min_range": "3701",
     "max_range": "20000",
     "origin": 13,
     "transfer_type": "deposit"

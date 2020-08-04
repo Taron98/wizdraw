@@ -81,6 +81,19 @@ class RateCacheService extends AbstractCacheService
         }
     }
 
+    /**
+     * @param AbstractRequest $request
+     */
+    public function setKeyPrefixDemo($countryId)
+    {
+        if($countryId == 13){
+            $this->keyPrefix = 'rateNis';
+        }
+        elseif($countryId == 119){
+            $this->keyPrefix = 'rateTwd';
+        }
+    }
+
     public function rateForUsdRate()
     {
         $wizdrawRate = json_decode($this->redis->get('ilsUsdRate'));
