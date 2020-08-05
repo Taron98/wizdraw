@@ -25,8 +25,8 @@ return [
     |
     */
     'version' => array(
-        'ios' => '3.0',
-        'android' => '8.3.2'
+        'ios' => '3.1',
+        'android' => '8.3.3'
     ),
 
     /*
