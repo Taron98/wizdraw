@@ -176,6 +176,7 @@ return [
     */
 
     'WIC_WF_GENERATOR_URL' => env('WIC_WF_GENERATOR_URL'),
+    'WIC_INTERNAL_API_URI' => env('WIC_INTERNAL_API_URI'),
 
     'providers' => [
 
