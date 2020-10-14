@@ -97,7 +97,7 @@ class AuthController extends AbstractController
         }
 
         $user = $request->user();
-        if(isset($version)) {
+        if(isset($version['version'])) {
             $this->userRepository->updateUser($version, $user);
         }
         $hasGroup = $user->client->adminGroups->count() > 0;
