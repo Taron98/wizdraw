@@ -88,6 +88,7 @@ class AuthController extends AbstractController
     ): JsonResponse
     {
         $credentials = $request->only('email', 'password');
+        $version = $request->only('version');
 
         $token = $this->authenticate($credentials);
 
@@ -96,6 +97,9 @@ class AuthController extends AbstractController
         }
 
         $user = $request->user();
+        if(isset($version['version'])) {
+            $this->userRepository->updateUser($version, $user);
+        }
         $hasGroup = $user->client->adminGroups->count() > 0;
 
         // todo: relocation?
@@ -123,7 +127,7 @@ class AuthController extends AbstractController
         AuthSignupRequest $request
     ): JsonResponse
     {
-        $userAttrs = $request->only('email', 'deviceId');
+        $userAttrs = $request->only('email', 'deviceId', 'version');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
         $phone = $request->only('phone')['phone'];
         $user = $this->userRepository->findByField('email', $request->only('email'))->first();
@@ -132,7 +136,9 @@ class AuthController extends AbstractController
         if (isset($user) && !is_null($user)) {
             $isPending = $user->isPending;
         }  elseif (isset($client) && !is_null($client)) {
-            $isPending = $client->user->isPending;
+            if(isset($client->user)) {
+                $isPending = $client->user->isPending;
+            }
         }
 
         if ((!is_null($user) || !is_null($client)) && !$isPending) {

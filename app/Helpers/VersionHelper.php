@@ -21,7 +21,7 @@ if (!function_exists('versionControl')) {
         }
         return [
             'version' => $currentVersion,
-            'existsUpdate' => $currentVersion > $version,
+            'existsUpdate' => false,
             'skipUpdate' => $skipUpdate
         ];
     }
