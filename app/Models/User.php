@@ -87,7 +87,8 @@ class User extends AbstractModel implements
         'is_pending',
         'password_changed_at',
         'last_login_at',
-        'version'
+        'version',
+        'device_name'
     ];
 
     /**

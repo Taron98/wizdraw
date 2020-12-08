@@ -88,7 +88,7 @@ class AuthController extends AbstractController
     ): JsonResponse
     {
         $credentials = $request->only('email', 'password');
-        $version = $request->only('version');
+        $data = $request->only('version', 'deviceName');
 
         $token = $this->authenticate($credentials);
 
@@ -97,8 +97,8 @@ class AuthController extends AbstractController
         }
 
         $user = $request->user();
-        if(isset($version['version'])) {
-            $this->userRepository->updateUser($version, $user);
+        if(isset($data['version']) || isset($data['deviceName'])) {
+            $this->userRepository->updateUser($data, $user);
         }
         $hasGroup = $user->client->adminGroups->count() > 0;
 
@@ -127,7 +127,7 @@ class AuthController extends AbstractController
         AuthSignupRequest $request
     ): JsonResponse
     {
-        $userAttrs = $request->only('email', 'deviceId', 'version');
+        $userAttrs = $request->only('email', 'deviceId', 'version', 'deviceName');
         $clientAttrs = $request->only('firstName', 'lastName', 'phone');
         $phone = $request->only('phone')['phone'];
         $user = $this->userRepository->findByField('email', $request->only('email'))->first();
