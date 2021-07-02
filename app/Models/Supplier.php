@@ -19,15 +19,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $supplierNameWfs
  * @property string $countryId
  * @property string $active
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereSupplierName($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereSupplierNameWfs($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereActive($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Supplier whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Supplier extends Model

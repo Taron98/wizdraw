@@ -45,11 +45,9 @@ class TransferRepository extends AbstractRepository
     ) {
         /** @var Transfer $newTransfer */
         $newTransfer = $this->makeModel()->fill($attributes);
-
         $newTransfer->client()->associate($senderClient);
         $newTransfer->bankAccount()->associate($bankAccount);
         $newTransfer->status()->associate($status);
-
         if (!$newTransfer->save()) {
             return null;
         }

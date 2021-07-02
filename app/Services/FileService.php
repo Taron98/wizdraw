@@ -189,7 +189,16 @@ class FileService extends AbstractService
 
         return $file;
     }
-
+    public function getImageBase64($type,$transactionId)
+    {
+        $path = $this->getFilePath($type,$transactionId);
+        $fileBase64 = base64_encode($this->localFileSystem->get($path));
+        try {
+          return response()->json(['image' => $fileBase64]);
+        } catch (FileNotFoundException $e) {
+            return $e;
+        }
+    }
     /**
      * @param string $type
      * @param string $name
@@ -240,7 +249,7 @@ class FileService extends AbstractService
     {
         $filePath = convert_base64_to_jpeg($file);
         $fullFilePath = config('filesystems.disks.local.root') . '/' . $filePath;
-        $this->imageOptimizer->optimizeImage($fullFilePath);
+//        $this->imageOptimizer->optimizeImage($fullFilePath);
 
         return $this->localFileSystem->readAndDelete($filePath);
     }

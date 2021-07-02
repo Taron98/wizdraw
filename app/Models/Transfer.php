@@ -23,8 +23,11 @@ use Wizdraw\Services\TransferService;
  * @property integer $bankAccountId
  * @property integer $receiverCountryId
  * @property integer $senderCountryId
+ * @property string $cid
  * @property float $amount
  * @property float $commission
+ * @property float $ilsBaseRate
+ * @property float $ilsExchangeRate
  * @property float $rate
  * @property integer $statusId
  * @property integer $receiptId
@@ -34,7 +37,7 @@ use Wizdraw\Services\TransferService;
  * @property \Carbon\Carbon $createdAt
  * @property \Carbon\Carbon $updatedAt
  * @property \Carbon\Carbon $deletedAt
- * @property integer $ibmTransferId
+ * @property string $supplier
  * @property-read mixed $qrCodeUrl
  * @property-read \Wizdraw\Models\Client $client
  * @property-read \Wizdraw\Models\Client $receiverClient
@@ -56,8 +59,11 @@ use Wizdraw\Services\TransferService;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereBankAccountId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiverCountryId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSenderCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCid($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereAmount($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCommission($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereIlsBaseRate($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereIlsExchangeRate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereRate($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereStatusId($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereReceiptId($value)
@@ -67,7 +73,7 @@ use Wizdraw\Services\TransferService;
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereIbmTransferId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Wizdraw\Models\Transfer whereSupplier($value)
  * @mixin \Eloquent
  */
 class Transfer extends AbstractModel implements AuthorizableContract

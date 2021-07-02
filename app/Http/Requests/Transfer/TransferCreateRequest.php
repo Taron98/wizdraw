@@ -82,7 +82,6 @@ class TransferCreateRequest extends AbstractRequest
                 'receiver.state'      => 'required_without:deposit|min:2|max:120',
             ]);
         }
-
         return $rules;
 
 //        return [

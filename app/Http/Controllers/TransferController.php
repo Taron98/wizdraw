@@ -276,23 +276,22 @@ class TransferController extends AbstractController
      */
     public function addReceipt(TransferAddReceiptRequest $request, Transfer $transfer): JsonResponse
     {
-        $client = $request->user()->client;
+      //  $transfer = Transfer::where('id',$request->transfer)->first();
 
+        $client = $request->user()->client;
         if (!is_null($transfer->receipt)) {
             $resInputs = ['transfer' => $transfer];
 
             return $this->respondWithError('transfer_has_receipt', Response::HTTP_BAD_REQUEST, $resInputs);
         }
-
-        if ($client->cannot('addReceipt', $transfer)) {
+        if ($client->id !== $transfer->client_id) {
             $resInputs = ['client' => $client, 'transfer' => $transfer];
 
-            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDE, $resInputs);
+            return $this->respondWithError('transfer_not_owned', Response::HTTP_FORBIDDEN, $resInputs);
         }
 
         $inputs = $request->except('image');
         $receiptImage = $request->input('image');
-
         $receipt = $this->transferReceiptService->createReceipt($transfer->getTransactionNumber(),
             $receiptImage, $inputs);
 
@@ -304,8 +303,8 @@ class TransferController extends AbstractController
 
         $transfer = $this->transferService->addReceipt($transfer, $receipt);
 
-        $transfer->client->notify(new TransferSent($transfer));
-        $transfer->receiverClient->notify(new TransferReceived($transfer));
+        //$transfer->client->notify(new TransferSent($transfer));
+        //$transfer->receiverClient->notify(new TransferReceived($transfer));
 
         return $this->respond($transfer);
     }
@@ -528,3 +527,4 @@ class TransferController extends AbstractController
     }
 
 }
+

@@ -106,7 +106,7 @@ class QueueTestCommand extends Command
         }
 
         foreach ($groupedProvinces as $key => $groupedProvince) {
-            $redis->lpush(redis_key('provinces', $key), $groupedProvince);
+	 $redis->lpush(redis_key('provinces', $key), $groupedProvince);
         }
     }
 
